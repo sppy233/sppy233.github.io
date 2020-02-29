@@ -2,16 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.sppy.site/2020/02/29/diff-det/</loc>
+    
+    <lastmod>2020-02-29T12:16:02.299Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/02/29/marden-theorem/</loc>
+    
+    <lastmod>2020-02-29T12:09:47.294Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.sppy.site/2020/02/26/PSO-FEM/</loc>
     
-    <lastmod>2020-02-28T16:52:43.431Z</lastmod>
+    <lastmod>2020-02-29T10:03:27.825Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/02/29/matlab-boldmath/</loc>
+    
+    <lastmod>2020-02-29T09:20:50.781Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://www.sppy.site/2020/02/28/latex-superscript/</loc>
     
-    <lastmod>2020-02-28T16:48:04.556Z</lastmod>
+    <lastmod>2020-02-29T08:07:43.920Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/about/index.html</loc>
+    
+    <lastmod>2020-02-29T06:07:47.434Z</lastmod>
     
   </url>
   
@@ -19,13 +47,6 @@
     <loc>http://www.sppy.site/2020/02/28/figset/</loc>
     
     <lastmod>2020-02-28T16:47:28.725Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sppy.site/about/index.html</loc>
-    
-    <lastmod>2020-02-28T16:32:36.118Z</lastmod>
     
   </url>
   
