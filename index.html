@@ -222,7 +222,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-29 19:16:19 / 修改时间：20:09:47" itemprop="dateCreated datePublished" datetime="2020-02-29T19:16:19+08:00">2020-02-29</time>
+              <time title="创建时间：2020-02-29 19:16:19 / 修改时间：20:46:13" itemprop="dateCreated datePublished" datetime="2020-02-29T19:16:19+08:00">2020-02-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -494,7 +494,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-29 16:07:43" itemprop="dateModified" datetime="2020-02-29T16:07:43+08:00">2020-02-29</time>
+                <time title="修改时间：2020-02-29 20:46:54" itemprop="dateModified" datetime="2020-02-29T20:46:54+08:00">2020-02-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -531,7 +531,6 @@
 <p>实际上，这体现了<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding="application/x-tex">\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord text"><span class="mord textrm sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord text"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span>排版的内容与样式分离的特点，即可以根据内容动态调整。</p>
 <p>但是，几个公式出现在一起，上下标位置不一致，看上去就很难受<strong>Orz</strong></p>
 </blockquote>
-<p><img src="/images/latex_superscript.png" alt="" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/02/28/latex-superscript/#more" rel="contents">
@@ -911,9 +910,14 @@
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
