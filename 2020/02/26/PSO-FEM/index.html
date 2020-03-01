@@ -600,7 +600,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
       var url = decodeURI(visitors.getAttribute('id'));
       var title = visitors.getAttribute('data-flag-title');
 
-      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+	  Counter('get', `/classes/Counter?where=${encodeURIComponent(JSON.stringify({ url }))}&limit=1`)
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
@@ -635,7 +635,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
         return decodeURI(element.getAttribute('id'));
       });
 
-      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+	  Counter('get', `?where=${encodeURIComponent(JSON.stringify({ url: { '$in': entries } }))}`)
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length === 0) {
