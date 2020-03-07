@@ -1,5 +1,5 @@
+http://www.sppy.site/2020/03/07/Python-learning-notes01/
 http://www.sppy.site/2020/03/05/trans-material-constant/
 http://www.sppy.site/2020/03/05/points2circle/
 http://www.sppy.site/2020/03/04/arc-method/
 http://www.sppy.site/2020/03/03/css-shake/
-http://www.sppy.site/2020/03/02/live2d/
