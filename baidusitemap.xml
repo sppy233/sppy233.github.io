@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.sppy.site/2020/03/08/Python-learning-notes02/</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>http://www.sppy.site/2020/03/04/arc-method/</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
     <loc>http://www.sppy.site/2020/03/07/Python-learning-notes01/</loc>
     <lastmod>2020-03-07</lastmod>
   </url>  <url>
@@ -11,9 +17,6 @@
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>http://www.sppy.site/2020/03/05/trans-material-constant/</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>http://www.sppy.site/2020/03/04/arc-method/</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>http://www.sppy.site/2020/02/29/diff-det/</loc>
