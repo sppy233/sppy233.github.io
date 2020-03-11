@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.sppy.site/2020/03/10/appdesigner/</loc>
+    
+    <lastmod>2020-03-11T12:22:25.286Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/03/05/points2circle/</loc>
+    
+    <lastmod>2020-03-11T12:15:05.564Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/02/28/figset/</loc>
+    
+    <lastmod>2020-03-11T11:03:04.817Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/03/11/plot-cheatsheet/</loc>
+    
+    <lastmod>2020-03-11T07:25:11.808Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/02/29/marden-theorem/</loc>
+    
+    <lastmod>2020-03-08T10:27:22.306Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.sppy.site/2020/03/08/Python-learning-notes02/</loc>
     
     <lastmod>2020-03-08T09:08:27.038Z</lastmod>
@@ -19,13 +54,6 @@
     <loc>http://www.sppy.site/2020/03/07/Python-learning-notes01/</loc>
     
     <lastmod>2020-03-07T09:45:11.640Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sppy.site/2020/03/05/points2circle/</loc>
-    
-    <lastmod>2020-03-05T07:53:09.727Z</lastmod>
     
   </url>
   
@@ -72,23 +100,9 @@
   </url>
   
   <url>
-    <loc>http://www.sppy.site/2020/02/29/marden-theorem/</loc>
-    
-    <lastmod>2020-03-01T13:36:16.122Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.sppy.site/2020/02/29/matlab-boldmath/</loc>
     
     <lastmod>2020-03-01T06:01:31.574Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sppy.site/2020/02/28/figset/</loc>
-    
-    <lastmod>2020-02-29T14:50:36.591Z</lastmod>
     
   </url>
   
