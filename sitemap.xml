@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.sppy.site/2020/03/14/Python-learning-notes03/</loc>
+    
+    <lastmod>2020-03-14T14:30:45.986Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.sppy.site/2020/03/05/points2circle/</loc>
     
-    <lastmod>2020-03-11T15:18:40.710Z</lastmod>
+    <lastmod>2020-03-14T14:15:50.510Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/03/07/Python-learning-notes01/</loc>
+    
+    <lastmod>2020-03-14T08:36:55.691Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/03/08/Python-learning-notes02/</loc>
+    
+    <lastmod>2020-03-14T08:36:44.893Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/03/11/plot-cheatsheet/</loc>
+    
+    <lastmod>2020-03-12T04:07:31.101Z</lastmod>
     
   </url>
   
@@ -12,13 +40,6 @@
     <loc>http://www.sppy.site/2020/02/28/figset/</loc>
     
     <lastmod>2020-03-11T15:14:07.197Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sppy.site/2020/03/11/plot-cheatsheet/</loc>
-    
-    <lastmod>2020-03-11T12:53:27.156Z</lastmod>
     
   </url>
   
@@ -37,23 +58,9 @@
   </url>
   
   <url>
-    <loc>http://www.sppy.site/2020/03/08/Python-learning-notes02/</loc>
-    
-    <lastmod>2020-03-08T09:08:27.038Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.sppy.site/2020/03/04/arc-method/</loc>
     
     <lastmod>2020-03-08T06:40:09.084Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sppy.site/2020/03/07/Python-learning-notes01/</loc>
-    
-    <lastmod>2020-03-07T09:45:11.640Z</lastmod>
     
   </url>
   
