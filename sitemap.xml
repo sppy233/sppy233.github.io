@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.sppy.site/2020/03/14/Python-learning-notes03/</loc>
+    <loc>http://www.sppy.site/2020/03/14/Python-learning-notes04/</loc>
     
-    <lastmod>2020-03-14T14:30:45.986Z</lastmod>
+    <lastmod>2020-03-15T12:01:56.014Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://www.sppy.site/2020/03/05/points2circle/</loc>
     
-    <lastmod>2020-03-14T14:15:50.510Z</lastmod>
+    <lastmod>2020-03-15T07:08:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sppy.site/2020/03/14/Python-learning-notes03/</loc>
+    
+    <lastmod>2020-03-14T14:30:45.986Z</lastmod>
     
   </url>
   

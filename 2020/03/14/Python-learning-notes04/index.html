@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://www.sppy.site').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="资料：100 NumPy Exercises IDE：Spyder">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习笔记04">
+<meta property="og:url" content="http://www.sppy.site/2020/03/14/Python-learning-notes04/index.html">
+<meta property="og:site_name" content="Island">
+<meta property="og:description" content="资料：100 NumPy Exercises IDE：Spyder">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-14T08:20:06.000Z">
+<meta property="article:modified_time" content="2020-03-15T12:01:56.014Z">
+<meta property="article:author" content="Sppy">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.sppy.site/2020/03/14/Python-learning-notes04/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Python学习笔记04 | Island</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c05c629d868a316b7f99adc8242397c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Island</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">止于至善</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.sppy.site/2020/03/14/Python-learning-notes04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Sppy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Island">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Python学习笔记04
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-14 16:20:06" itemprop="dateCreated datePublished" datetime="2020-03-14T16:20:06+08:00">2020-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-15 20:01:56" itemprop="dateModified" datetime="2020-03-15T20:01:56+08:00">2020-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>资料：<a href="https://github.com/rougier/numpy-100" target="_blank" rel="noopener">100 NumPy Exercises</a></p>
+<p>IDE：<a href="https://www.spyder-ide.org/" target="_blank" rel="noopener">Spyder</a></p>
+</blockquote>
+<a id="more"></a>
+<h6 id="导入numpy"><a class="markdownIt-Anchor" href="#导入numpy"></a> 导入numpy</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+<h6 id="查询array所占内存"><a class="markdownIt-Anchor" href="#查询array所占内存"></a> 查询array所占内存</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z01 = np.zeros((<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">print(<span class="string">"%d bytes"</span> % (z01.size * z01.itemsize))</span><br></pre></td></tr></table></figure>
+<h6 id="矢量倒序"><a class="markdownIt-Anchor" href="#矢量倒序"></a> 矢量倒序</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z02 = np.arange(<span class="number">10</span>)</span><br><span class="line">z02 = z02[::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<h6 id="索引非零元素位置"><a class="markdownIt-Anchor" href="#索引非零元素位置"></a> 索引非零元素位置</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z03 = np.nonzero([<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">4</span>, <span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<h6 id="随机array的极值-平均值"><a class="markdownIt-Anchor" href="#随机array的极值-平均值"></a> 随机array的极值 &amp; 平均值</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">z04 = np.random.random((<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">Zmin, Zmax = z04.min(), z04.max()</span><br><span class="line">Zm = z04.mean()</span><br></pre></td></tr></table></figure>
+<h6 id="伪对角阵"><a class="markdownIt-Anchor" href="#伪对角阵"></a> 伪对角阵</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z05 = np.diag(<span class="number">1</span>+np.arange(<span class="number">4</span>), k = <span class="number">-1</span>)</span><br><span class="line">z06 = np.diag(<span class="number">1</span>+np.arange(<span class="number">4</span>), k = +<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h6 id="由元素存储位置得到其索引"><a class="markdownIt-Anchor" href="#由元素存储位置得到其索引"></a> 由元素存储位置得到其索引</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.unravel_index(<span class="number">9</span>, (<span class="number">7</span>, <span class="number">8</span>))</span><br><span class="line">np.unravel_index(<span class="number">99</span>, (<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>))  <span class="comment"># (D, R, C)</span></span><br></pre></td></tr></table></figure>
+<h6 id="伪正态分布的随机数"><a class="markdownIt-Anchor" href="#伪正态分布的随机数"></a> 伪正态分布的随机数</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z07 = np.random.random((<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">z08 = (z07 - np.mean(z07)) / (np.std(z07))  <span class="comment"># std: 标准差</span></span><br></pre></td></tr></table></figure>
+<h6 id="逻辑索引"><a class="markdownIt-Anchor" href="#逻辑索引"></a> 逻辑索引</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z09 = np.arange(<span class="number">10</span>)</span><br><span class="line">z09[(<span class="number">3</span> &lt; z09) &amp; (z09 &lt; <span class="number">8</span>)] *= <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<h6 id="sum-npsum"><a class="markdownIt-Anchor" href="#sum-npsum"></a> sum &amp; np.sum</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">z10 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">z11 = np.array(z10)</span><br><span class="line">sum(z10) == np.sum(z10)  <span class="comment"># True</span></span><br><span class="line">sum(z11) == np.sum(z11)  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">sum(z11, <span class="number">1</span>)  <span class="comment"># sum补充元素并求和, 7</span></span><br><span class="line">np.sum(z11, <span class="number">0</span>)  <span class="comment"># 等价于np.sum(z11, axis=0)</span></span><br><span class="line">sum(z11, <span class="number">-1</span>) == np.sum(z11, <span class="number">-1</span>)  <span class="comment"># False, 5!=6</span></span><br><span class="line"></span><br><span class="line">z12 = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">-1</span>, <span class="number">-2</span>, <span class="number">-3</span>]]</span><br><span class="line">z13 = np.array(z12)</span><br><span class="line">np.sum(z12, axis = <span class="number">0</span>)  <span class="comment"># array([0, 0, 0])</span></span><br><span class="line">np.sum(z12, axis = <span class="number">1</span>)  <span class="comment"># array([6, -6])</span></span><br><span class="line">sum(z12)  <span class="comment"># TypeError</span></span><br><span class="line">sum(z13)  <span class="comment"># array([0, 0, 0])</span></span><br><span class="line">sum(z13, <span class="number">5</span>)  <span class="comment"># array([5, 5, 5])</span></span><br></pre></td></tr></table></figure>
+<h6 id="闰年二月29天"><a class="markdownIt-Anchor" href="#闰年二月29天"></a> 闰年二月29天</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z14 = np.arange(<span class="string">'2020-02'</span>, <span class="string">'2020-03'</span>, dtype=<span class="string">'datetime64[D]'</span>)</span><br><span class="line">z14.size</span><br></pre></td></tr></table></figure>
+<h6 id="linspace"><a class="markdownIt-Anchor" href="#linspace"></a> linspace</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z15 = np.linspace(<span class="number">0</span>,<span class="number">1</span>,<span class="number">6</span>,endpoint=<span class="literal">False</span>)[<span class="number">1</span>:]</span><br></pre></td></tr></table></figure>
+<h6 id="查询最大值位置"><a class="markdownIt-Anchor" href="#查询最大值位置"></a> 查询最大值位置</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z16 = np.random.randn(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">z16[z16==z16.max()] = +<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h6 id="自定义dtype坐标存储"><a class="markdownIt-Anchor" href="#自定义dtype坐标存储"></a> 自定义dtype：坐标存储</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z17 = np.zeros((<span class="number">5</span>, <span class="number">5</span>), [(<span class="string">'x'</span>, float), (<span class="string">'y'</span>, float)])</span><br><span class="line">z17[<span class="string">'x'</span>], z17[<span class="string">'y'</span>] = np.meshgrid(np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>), np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+<h6 id="加减乘除运算的扩展"><a class="markdownIt-Anchor" href="#加减乘除运算的扩展"></a> 加减乘除运算的扩展</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">X = np.arange(<span class="number">3</span>)</span><br><span class="line">Y = X + <span class="number">0.5</span></span><br><span class="line">z18 = np.add.outer(X, Y)       <span class="comment"># z18[i,j] = X[i] + Y[j]</span></span><br><span class="line">z19 = np.subtract.outer(X, Y)  <span class="comment"># z19[i,j] = X[i] - Y[j]</span></span><br><span class="line">z20 = np.multiply.outer(X, Y)  <span class="comment"># z20[i,j] = X[i] * Y[j]</span></span><br><span class="line">z21 = np.divide.outer(X, Y)    <span class="comment"># z21[i,j] = X[i] / Y[j]</span></span><br></pre></td></tr></table></figure>
+<h6 id="若干点中距离最远-最近的两个点"><a class="markdownIt-Anchor" href="#若干点中距离最远-最近的两个点"></a> 若干点中距离最远 &amp; 最近的两个点</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy <span class="keyword">as</span> sp</span><br><span class="line"></span><br><span class="line">num = <span class="number">777</span></span><br><span class="line">P = np.random.random((num, <span class="number">3</span>))  <span class="comment"># 空间坐标</span></span><br><span class="line">D = sp.spatial.distance.cdist(P, P)</span><br><span class="line"></span><br><span class="line">index1 = D.argmax()</span><br><span class="line">imax1 = index1 // num + <span class="number">1</span>  <span class="comment"># 最远的点编号, 从1开始</span></span><br><span class="line">imax2 = index1 % num + <span class="number">1</span>   <span class="comment"># 最远的点编号, 从1开始</span></span><br><span class="line">temp = P[imax1 - <span class="number">1</span>, :] - P[imax2 - <span class="number">1</span>, :]</span><br><span class="line">print(np.sqrt(sum(temp * temp)) == D.max())  <span class="comment"># 验证</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">D[D==<span class="number">0</span>] = D.max()</span><br><span class="line">index2 = D.argmin()</span><br><span class="line">imin1 = index2 // num + <span class="number">1</span>  <span class="comment"># 最近的点编号, 从1开始</span></span><br><span class="line">imin2 = index2 % num + <span class="number">1</span>   <span class="comment"># 最近的点编号, 从1开始</span></span><br><span class="line">temp = P[imin1 - <span class="number">1</span>, :] - P[imin2 - <span class="number">1</span>, :]</span><br><span class="line">print(np.sqrt(sum(temp * temp)) == D.min())  <span class="comment"># 验证</span></span><br></pre></td></tr></table></figure>
+<h6 id="按第零列排序"><a class="markdownIt-Anchor" href="#按第零列排序"></a> 按第零列排序</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z22 = np.random.randint(<span class="number">0</span>, <span class="number">10</span>, (<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">z22[z22[:, <span class="number">0</span>].argsort()]</span><br></pre></td></tr></table></figure>
+<h6 id="交换array的两行"><a class="markdownIt-Anchor" href="#交换array的两行"></a> 交换array的两行</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z23 = np.arange(<span class="number">25</span>).reshape(<span class="number">5</span>, <span class="number">5</span>)</span><br><span class="line">z23[[<span class="number">0</span>, <span class="number">1</span>]] = z23[[<span class="number">1</span>, <span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
+<h6 id="时间复杂度"><a class="markdownIt-Anchor" href="#时间复杂度"></a> 时间复杂度</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">z24 = np.random.rand(int(<span class="number">5e7</span>))</span><br><span class="line">%timeit np.power(z24, <span class="number">3</span>)  <span class="comment"># 1.6 s</span></span><br><span class="line">%timeit z24 * z24 * z24  <span class="comment"># 208 ms</span></span><br><span class="line">%timeit np.einsum(<span class="string">'i,i,i-&gt;i'</span>, z24, z24, z24)  <span class="comment"># 220 ms</span></span><br></pre></td></tr></table></figure>
+<h6 id="einstein求和约定"><a class="markdownIt-Anchor" href="#einstein求和约定"></a> Einstein求和约定</h6>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A = np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, <span class="number">10</span>)</span><br><span class="line">B = np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">np.einsum(<span class="string">'i-&gt;'</span>, A)         <span class="comment"># np.sum(A)</span></span><br><span class="line">np.einsum(<span class="string">'i,i-&gt;i'</span>, A, B)   <span class="comment"># A * B</span></span><br><span class="line">np.einsum(<span class="string">'i,j-&gt;i'</span>, A, B)   <span class="comment"># A * np.sum(B)</span></span><br><span class="line">np.einsum(<span class="string">'i,i'</span>, A, B)      <span class="comment"># np.inner(A, B)</span></span><br><span class="line">np.einsum(<span class="string">'i,j-&gt;ij'</span>, A, B)  <span class="comment"># np.outer(A, B)</span></span><br></pre></td></tr></table></figure>
+<hr />
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/14/Python-learning-notes03/" rel="prev" title="Python学习笔记03">
+      <i class="fa fa-chevron-left"></i> Python学习笔记03
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#导入numpy"><span class="nav-number">1.</span> <span class="nav-text"> 导入numpy</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查询array所占内存"><span class="nav-number">2.</span> <span class="nav-text"> 查询array所占内存</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#矢量倒序"><span class="nav-number">3.</span> <span class="nav-text"> 矢量倒序</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#索引非零元素位置"><span class="nav-number">4.</span> <span class="nav-text"> 索引非零元素位置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#随机array的极值-平均值"><span class="nav-number">5.</span> <span class="nav-text"> 随机array的极值 &amp; 平均值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#伪对角阵"><span class="nav-number">6.</span> <span class="nav-text"> 伪对角阵</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#由元素存储位置得到其索引"><span class="nav-number">7.</span> <span class="nav-text"> 由元素存储位置得到其索引</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#伪正态分布的随机数"><span class="nav-number">8.</span> <span class="nav-text"> 伪正态分布的随机数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#逻辑索引"><span class="nav-number">9.</span> <span class="nav-text"> 逻辑索引</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#sum-npsum"><span class="nav-number">10.</span> <span class="nav-text"> sum &amp; np.sum</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#闰年二月29天"><span class="nav-number">11.</span> <span class="nav-text"> 闰年二月29天</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#linspace"><span class="nav-number">12.</span> <span class="nav-text"> linspace</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查询最大值位置"><span class="nav-number">13.</span> <span class="nav-text"> 查询最大值位置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#自定义dtype坐标存储"><span class="nav-number">14.</span> <span class="nav-text"> 自定义dtype：坐标存储</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#加减乘除运算的扩展"><span class="nav-number">15.</span> <span class="nav-text"> 加减乘除运算的扩展</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#若干点中距离最远-最近的两个点"><span class="nav-number">16.</span> <span class="nav-text"> 若干点中距离最远 &amp; 最近的两个点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#按第零列排序"><span class="nav-number">17.</span> <span class="nav-text"> 按第零列排序</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#交换array的两行"><span class="nav-number">18.</span> <span class="nav-text"> 交换array的两行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#时间复杂度"><span class="nav-number">19.</span> <span class="nav-text"> 时间复杂度</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#einstein求和约定"><span class="nav-number">20.</span> <span class="nav-text"> Einstein求和约定</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sppy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Sppy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/941415336" title="QQ → 941415336"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/941415336@qq.com" title="E-Mail → 941415336@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-university"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhangshuqiao.org/" title="https:&#x2F;&#x2F;zhangshuqiao.org&#x2F;" rel="noopener" target="_blank">Mimi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page&#x2F;" rel="noopener" target="_blank">Liam Huang</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cangshui.net/" title="https:&#x2F;&#x2F;cangshui.net&#x2F;" rel="noopener" target="_blank">Cangshui</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.itrhx.com/" title="https:&#x2F;&#x2F;www.itrhx.com&#x2F;" rel="noopener" target="_blank">TRHX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://qixinbo.info/" title="https:&#x2F;&#x2F;qixinbo.info&#x2F;" rel="noopener" target="_blank">XinBo Qi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://three-body.org/" title="https:&#x2F;&#x2F;three-body.org&#x2F;" rel="noopener" target="_blank">Three Body</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sppy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":-15,"vOffset":-30},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
