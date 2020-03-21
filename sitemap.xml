@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.sppy.site/2020/02/29/diff-det/</loc>
+    
+    <lastmod>2020-03-21T11:09:30.054Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.sppy.site/2020/03/20/2nd-order-linear-PDE/</loc>
     
-    <lastmod>2020-03-21T08:50:21.311Z</lastmod>
+    <lastmod>2020-03-21T11:08:48.216Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>http://www.sppy.site/2020/02/29/matlab-boldmath/</loc>
     
     <lastmod>2020-03-20T15:13:56.088Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sppy.site/2020/02/29/diff-det/</loc>
-    
-    <lastmod>2020-03-20T15:10:00.548Z</lastmod>
     
   </url>
   
