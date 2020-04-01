@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://www.sppy.site').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="沙堆模型（sandpile model）是根据一个简单的沙粒扩散规则来描述沙堆的累计和崩塌。当沙粒数量达到一定时，沙堆可呈现出明显的分形结构。除此之外，沙堆模型还包含很多有趣现象。  推荐阅读：The Amazing, Autotuning Sandpile、Sandgallery、Mommy Talk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沙堆模型">
+<meta property="og:url" content="http://www.sppy.site/2020/04/01/sandpile-model/index.html">
+<meta property="og:site_name" content="Island">
+<meta property="og:description" content="沙堆模型（sandpile model）是根据一个简单的沙粒扩散规则来描述沙堆的累计和崩塌。当沙粒数量达到一定时，沙堆可呈现出明显的分形结构。除此之外，沙堆模型还包含很多有趣现象。  推荐阅读：The Amazing, Autotuning Sandpile、Sandgallery、Mommy Talk">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/28/GAM4e0.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/28/GAMTFU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/28/GAq6qf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/28/GAqRIg.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/28/GAqsMt.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/28/GAqysP.png">
+<meta property="article:published_time" content="2020-04-01T04:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-01T04:05:18.531Z">
+<meta property="article:author" content="Sppy">
+<meta property="article:tag" content="分形">
+<meta property="article:tag" content="二八定律">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/03/28/GAM4e0.jpg">
+
+<link rel="canonical" href="http://www.sppy.site/2020/04/01/sandpile-model/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>沙堆模型 | Island</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c05c629d868a316b7f99adc8242397c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Island</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">止于至善</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.sppy.site/2020/04/01/sandpile-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Sppy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Island">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          沙堆模型
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-01 12:00:00 / 修改时间：12:05:18" itemprop="dateCreated datePublished" datetime="2020-04-01T12:00:00+08:00">2020-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>沙堆模型（sandpile model）是根据一个简单的沙粒扩散规则来描述沙堆的累计和崩塌。当沙粒数量达到一定时，沙堆可呈现出明显的分形结构。除此之外，沙堆模型还包含很多有趣现象。</p>
+<blockquote>
+<p>推荐阅读：<a href="http://nautil.us/issue/23/dominoes/the-amazing-autotuning-sandpile" target="_blank" rel="noopener">The Amazing, Autotuning Sandpile</a>、<a href="http://www.math.cmu.edu/~wes/sandgallery.html" target="_blank" rel="noopener">Sandgallery</a>、<a href="https://www.bilibili.com/video/BV1W7411C7iE/" target="_blank" rel="noopener">Mommy Talk</a></p>
+</blockquote>
+<a id="more"></a>
+<h2 id="规则"><a class="markdownIt-Anchor" href="#规则"></a> 规则</h2>
+<p>假设有一个无限大的正交网格，仅在某个固定格点处逐粒放沙。如下图所示，当某一格点中的沙粒的数量达到4时，这个格点发生崩塌，减去4颗沙粒，并将这4颗沙粒等分给上下左右的4个格点。</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mtable rowspacing="0.15999999999999992em" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mstyle mathcolor="red"><mn>4</mn></mstyle></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd></mtr></mtable></mstyle></mstyle></menclose><mspace width="1em"/><mo>⟹</mo><mspace width="1em"/><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mtable rowspacing="0.15999999999999992em" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mstyle mathcolor="red"><mn>1</mn></mstyle></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mstyle mathcolor="red"><mn>1</mn></mstyle></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mstyle mathcolor="red"><mn>1</mn></mstyle></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mstyle mathcolor="red"><mn>1</mn></mstyle></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd></mtr></mtable></mstyle></mstyle></menclose></mrow><annotation encoding="application/x-tex">\boxed{\begin{matrix}
+   0 &amp; 0 &amp; 0 \\
+   0 &amp; \textcolor{red}{4} &amp; 0 \\
+   0 &amp; 0 &amp; 0
+\end{matrix}} \quad\Longrightarrow\quad
+\boxed{\begin{matrix}
+   0 &amp; \textcolor{red}{1} &amp; 0 \\
+   \textcolor{red}{1} &amp; 0 &amp; \textcolor{red}{1} \\
+   0 &amp; \textcolor{red}{1} &amp; 0
+\end{matrix}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.28em;vertical-align:-1.8900000000000006em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3899999999999997em;"><span style="top:-6.28em;"><span class="pstrut" style="height:6.28em;"></span><span class="mord boxpad"><span class="mord"><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:red;">4</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span></span></span></span></span></span><span style="top:-4.39em;"><span class="pstrut" style="height:6.28em;"></span><span class="stretchy fbox" style="height:4.28em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.8900000000000006em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span></span><span class="base"><span class="strut" style="height:4.28em;vertical-align:-1.8900000000000006em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3899999999999997em;"><span style="top:-6.28em;"><span class="pstrut" style="height:6.28em;"></span><span class="mord boxpad"><span class="mord"><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:red;">1</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:red;">1</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:red;">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="color:red;">1</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span></span></span></span></span></span><span style="top:-4.39em;"><span class="pstrut" style="height:6.28em;"></span><span class="stretchy fbox" style="height:4.28em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.8900000000000006em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>按照上面的规则，沙堆模型会在不断地累计与崩塌之间逐渐扩大。</p>
+<h2 id="分形"><a class="markdownIt-Anchor" href="#分形"></a> 分形</h2>
+<h3 id="一百万粒沙"><a class="markdownIt-Anchor" href="#一百万粒沙"></a> 一百万粒沙</h3>
+<p>整个沙堆稳定后，格点中的沙粒数只有4个状态：3、2、1、0。将这四种状态分别用4种颜色代替，即：</p>
+<table><tr><td bgcolor=#F40000>三粒沙：亮红色，即RGB = #F40000 = [244,0,0]</td></tr></table>
+<table><tr><td bgcolor=#FF7F00>两粒沙：橘黄色，即RGB = #FF7F00 = [255,127,0]</td></tr></table>
+<table><tr><td bgcolor=#FFF200>一粒沙：亮黄色，即RGB = #FFF200 = [255,255,32]</td></tr></table>
+<table><tr><td bgcolor=#FFFFFF>零粒沙：纯白色，即RGB = #FFFFFF = [255,255,255]</td></tr></table>
+<p>当落下一百万粒沙（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">10^6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span>），沙堆累计的可视化过程如下</p>
+
+<div style="position: relative; width: 100%; height: 0;padding-bottom: 75%;"><iframe src="//player.bilibili.com/player.html?aid=497615670&bvid=BV18K411L7VU&cid=170712189&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div>
+
+<hr />
+<p>一百万粒沙的沙堆具有较明显的分形结构，沙堆效果如下</p>
+<img src="https://s1.ax1x.com/2020/03/28/GAM4e0.jpg" width="85%">
+<h3 id="十亿粒沙"><a class="markdownIt-Anchor" href="#十亿粒沙"></a> 十亿粒沙</h3>
+<p>当落下十亿粒沙（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">10^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span>），具有很明显的分形效果，沙堆效果如下</p>
+<img src="https://s1.ax1x.com/2020/03/28/GAMTFU.png" width="85%">
+<blockquote>
+<p>上图来自<a href="http://www.math.cmu.edu/~wes/sandgallery.html" target="_blank" rel="noopener">Sandgallery</a></p>
+</blockquote>
+<hr />
+<h2 id="分析"><a class="markdownIt-Anchor" href="#分析"></a> 分析</h2>
+<p>分析一百万粒沙累计过程的数据。</p>
+<h3 id="格点总数-沙粒总数"><a class="markdownIt-Anchor" href="#格点总数-沙粒总数"></a> 格点总数-沙粒总数</h3>
+<ul>
+<li>
+<p>格点总数：沙堆所占区域的总格点数（包括<strong>内部</strong>零沙粒格点，但不包括<strong>外部</strong>零沙粒格点）</p>
+<blockquote>
+<p>十亿粒沙的沙堆图中蓝色部分为<strong>外部</strong>零沙粒格点</p>
+</blockquote>
+</li>
+<li>
+<p>沙粒总数：沙堆中沙粒的总数量</p>
+</li>
+</ul>
+<p>例如下图中的沙粒总数为7，格点总数为5。</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mtable rowspacing="0.15999999999999992em" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>3</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd></mtr></mtable></mstyle></mstyle></menclose></mrow><annotation encoding="application/x-tex">\boxed{\begin{matrix}
+    &amp; 1 &amp;  \\
+   1 &amp; 3 &amp; 1 \\
+    &amp; 1 &amp; 
+\end{matrix}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.28em;vertical-align:-1.8900000000000006em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3899999999999997em;"><span style="top:-6.28em;"><span class="pstrut" style="height:6.28em;"></span><span class="mord boxpad"><span class="mord"><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span></span></span></span></span></span><span style="top:-4.39em;"><span class="pstrut" style="height:6.28em;"></span><span class="stretchy fbox" style="height:4.28em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.8900000000000006em;"><span></span></span></span></span></span></span></span></span></span></p>
+<img src="https://s1.ax1x.com/2020/03/28/GAq6qf.png" width="50%">
+<blockquote>
+<p>线性关系</p>
+</blockquote>
+<h3 id="单格平均沙粒数-沙粒总数"><a class="markdownIt-Anchor" href="#单格平均沙粒数-沙粒总数"></a> 单格平均沙粒数-沙粒总数</h3>
+<ul>
+<li>单格平均沙粒数：沙粒总数 / 格点总数</li>
+</ul>
+<img src="https://s1.ax1x.com/2020/03/28/GAqRIg.png" width="50%">
+<blockquote>
+<p>单格平均沙粒数稳定到2.30左右？</p>
+</blockquote>
+<h3 id="二八定律"><a class="markdownIt-Anchor" href="#二八定律"></a> 二八定律</h3>
+<p>沙堆的沙粒总数记为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span></span>，格点总数记为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>，格点中沙粒数为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 的格点共有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 个，于是</p>
+<ul>
+<li>沙粒数为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 的<strong>数量分布</strong>定义为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mi>k</mi><mi mathvariant="normal">/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">nk/M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span></span></li>
+<li>沙粒数为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 的<strong>格点分布</strong>定义为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mi mathvariant="normal">/</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">n/N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span></li>
+</ul>
+<img src="https://s1.ax1x.com/2020/03/28/GAqsMt.png" width="50%">
+<blockquote>
+<p>沙粒数为3的<strong>数量分布</strong>稳定到0.8左右？</p>
+</blockquote>
+<img src="https://s1.ax1x.com/2020/03/28/GAqysP.png" width="50%">
+<blockquote>
+<p>沙粒数为3的<strong>格点分布</strong>稳定到0.6左右？</p>
+</blockquote>
+<p><a href="https://baike.baidu.com/item/%E4%BA%8C%E5%85%AB%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">二八定律</a>是一个社会现象，其中一条是“20%的人掌握着80%的财富”。</p>
+<p>对于本文所计算的<strong>一百万粒沙</strong>，对应为“60%的<strong>格点</strong>掌握着80%的<strong>沙粒</strong>”。</p>
+<h2 id="程序"><a class="markdownIt-Anchor" href="#程序"></a> 程序</h2>
+<p>MATLAB程序：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 10^5颗沙粒的累计过程</span></span><br><span class="line"><span class="comment">% sandpile model</span></span><br><span class="line">clc;clear;close all;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 沙粒个数</span></span><br><span class="line">num1=<span class="number">10</span>^<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 初始化</span></span><br><span class="line">dis=<span class="number">10</span>^<span class="number">2</span>;<span class="comment">% 每dis颗沙粒保存一帧</span></span><br><span class="line">pt=<span class="number">25</span>;<span class="comment">% 字体大小</span></span><br><span class="line">L=<span class="number">1</span>;<span class="comment">% 正方形沙盘长度, 奇数格</span></span><br><span class="line">center=<span class="built_in">ceil</span>(L/<span class="number">2</span>);<span class="comment">% 沙盘中心坐标</span></span><br><span class="line">sand=<span class="built_in">zeros</span>(L,L);<span class="comment">% 初始化沙盘, 全置零</span></span><br><span class="line">color=[<span class="number">1.0000</span>,<span class="number">1.0000</span>,<span class="number">1.0000</span>; <span class="comment">% 纯白色</span></span><br><span class="line">       <span class="number">1.0000</span>,<span class="number">1.0000</span>,<span class="number">0.1250</span>; <span class="comment">% 亮黄色</span></span><br><span class="line">       <span class="number">1.0000</span>,<span class="number">0.5000</span>,<span class="number">0.0000</span>; <span class="comment">% 橘黄色</span></span><br><span class="line">       <span class="number">0.9583</span>,<span class="number">0.0000</span>,<span class="number">0.0000</span>];<span class="comment">% 亮红色</span></span><br><span class="line">index=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 每帧图片</span></span><br><span class="line">frames(num1/dis)=struct(<span class="string">'cdata'</span>,[],<span class="string">'colormap'</span>,[]);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 逐粒放沙</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:num1</span><br><span class="line">    sand(center,center)=sand(center,center)+<span class="number">1</span>;</span><br><span class="line">    [tempi,tempj]=<span class="built_in">find</span>(sand&gt;=<span class="number">4</span>);<span class="comment">% 大于3的位置</span></span><br><span class="line">    num2=<span class="built_in">length</span>(tempi);</span><br><span class="line">    <span class="keyword">while</span> num2&gt;<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:num2</span><br><span class="line">            </span><br><span class="line">           <span class="comment">%% 防止溢出</span></span><br><span class="line">            <span class="keyword">if</span> tempi(<span class="built_in">j</span>)==<span class="number">1</span> || tempi(<span class="built_in">j</span>)==L || tempj(<span class="built_in">j</span>)==<span class="number">1</span> || tempj(<span class="built_in">j</span>)==L</span><br><span class="line">                <span class="comment">% 四周加一圈零</span></span><br><span class="line">                sand=[         <span class="number">0</span>, <span class="built_in">zeros</span>(<span class="number">1</span>,L),          <span class="number">0</span>;</span><br><span class="line">                      <span class="built_in">zeros</span>(L,<span class="number">1</span>),       sand, <span class="built_in">zeros</span>(L,<span class="number">1</span>);</span><br><span class="line">                               <span class="number">0</span>, <span class="built_in">zeros</span>(<span class="number">1</span>,L),          <span class="number">0</span>];</span><br><span class="line">                L=L+<span class="number">2</span>;center=center+<span class="number">1</span>;</span><br><span class="line">                tempi=tempi+<span class="number">1</span>;tempj=tempj+<span class="number">1</span>; </span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            </span><br><span class="line">           <span class="comment">%% 沙堆崩塌</span></span><br><span class="line">            sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>))=sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>))<span class="number">-4</span>;</span><br><span class="line">            sand(tempi(<span class="built_in">j</span>)+<span class="number">1</span>,tempj(<span class="built_in">j</span>))=sand(tempi(<span class="built_in">j</span>)+<span class="number">1</span>,tempj(<span class="built_in">j</span>))+<span class="number">1</span>;</span><br><span class="line">            sand(tempi(<span class="built_in">j</span>)<span class="number">-1</span>,tempj(<span class="built_in">j</span>))=sand(tempi(<span class="built_in">j</span>)<span class="number">-1</span>,tempj(<span class="built_in">j</span>))+<span class="number">1</span>;</span><br><span class="line">            sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>)+<span class="number">1</span>)=sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>)+<span class="number">1</span>)+<span class="number">1</span>;</span><br><span class="line">            sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>)<span class="number">-1</span>)=sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>)<span class="number">-1</span>)+<span class="number">1</span>;</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        [tempi,tempj]=<span class="built_in">find</span>(sand&gt;=<span class="number">4</span>);<span class="comment">% 大于3的位置</span></span><br><span class="line">        num2=<span class="built_in">length</span>(tempi);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">mod</span>(<span class="built_in">i</span>,dis)==<span class="number">0</span></span><br><span class="line">        imshow(sand,[<span class="number">0</span>,<span class="number">3</span>],<span class="string">'Colormap'</span>,color);</span><br><span class="line">        figset([<span class="number">20</span>,<span class="number">20</span>,<span class="number">0.3</span>,<span class="number">0.02</span>],[<span class="number">0.9</span>,<span class="number">0.9</span>,<span class="number">0.05</span>,<span class="number">0.02</span>]);</span><br><span class="line">        </span><br><span class="line">        str1=<span class="string">'\bf&#123;Sandpile Model&#125;'</span>;h1=text(<span class="number">0</span>,<span class="number">0</span>,str1);</span><br><span class="line">        set(h1,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>,<span class="string">'HorizontalAlignment'</span>,<span class="string">'left'</span>);</span><br><span class="line">        set(h1,<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'fontsize'</span>,pt,<span class="string">'position'</span>,[<span class="number">0.03</span>,<span class="number">1.04</span>]);</span><br><span class="line">        </span><br><span class="line">        str2=[<span class="string">'ticks: '</span>,sprintf(<span class="string">'%d'</span>,<span class="built_in">i</span>)];h2=text(<span class="number">0</span>,<span class="number">0</span>,str2);</span><br><span class="line">        set(h2,<span class="string">'interpreter'</span>,<span class="string">'latex'</span>,<span class="string">'HorizontalAlignment'</span>,<span class="string">'right'</span>);</span><br><span class="line">        set(h2,<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'fontsize'</span>,pt,<span class="string">'position'</span>,[<span class="number">0.97</span>,<span class="number">1.04</span>]);</span><br><span class="line">        </span><br><span class="line">        drawnow;</span><br><span class="line">        frames(index)=getframe(gcf);</span><br><span class="line">        index=index+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 视频</span></span><br><span class="line">v=VideoWriter(<span class="string">'newfile.mp4'</span>,<span class="string">'MPEG-4'</span>);</span><br><span class="line">v.Quality=<span class="number">100</span>;v.FrameRate=<span class="number">30</span>;</span><br><span class="line">open(v);</span><br><span class="line">writeVideo(v,frames);</span><br><span class="line">close(v);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 设置图像尺寸与位置</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">figset</span><span class="params">(parameter1,parameter2)</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">%电脑屏幕尺寸</span></span><br><span class="line">    set(<span class="number">0</span>,<span class="string">'units'</span>,<span class="string">'centimeters'</span>)</span><br><span class="line">    cm_ss=get(<span class="number">0</span>,<span class="string">'screensize'</span>);</span><br><span class="line">    W=cm_ss(<span class="number">3</span>);<span class="comment">%电脑屏幕长度，单位cm</span></span><br><span class="line">    H=cm_ss(<span class="number">4</span>);<span class="comment">%电脑屏幕宽度，单位cm</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">%设置figure在screen中的比例位置与大小</span></span><br><span class="line">	temp1=[parameter1(<span class="number">3</span>),parameter1(<span class="number">4</span>),parameter1(<span class="number">1</span>)/W,parameter1(<span class="number">2</span>)/H];</span><br><span class="line">    set(gcf,<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,temp1);</span><br><span class="line">    <span class="keyword">if</span> nargin==<span class="number">2</span></span><br><span class="line">		<span class="comment">%设置axis在figure中的比例位置与大小</span></span><br><span class="line">		temp2=[parameter2(<span class="number">3</span>),parameter2(<span class="number">4</span>),parameter2(<span class="number">1</span>),parameter2(<span class="number">2</span>)];</span><br><span class="line">        set(gca,<span class="string">'position'</span>,temp2);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr />
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%88%86%E5%BD%A2/" rel="tag"># 分形</a>
+              <a href="/tags/%E4%BA%8C%E5%85%AB%E5%AE%9A%E5%BE%8B/" rel="tag"># 二八定律</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/26/N-dimension-probability/" rel="prev" title="高维概率问题">
+      <i class="fa fa-chevron-left"></i> 高维概率问题
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#规则"><span class="nav-number">1.</span> <span class="nav-text"> 规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分形"><span class="nav-number">2.</span> <span class="nav-text"> 分形</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一百万粒沙"><span class="nav-number">2.1.</span> <span class="nav-text"> 一百万粒沙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十亿粒沙"><span class="nav-number">2.2.</span> <span class="nav-text"> 十亿粒沙</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">3.</span> <span class="nav-text"> 分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格点总数-沙粒总数"><span class="nav-number">3.1.</span> <span class="nav-text"> 格点总数-沙粒总数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单格平均沙粒数-沙粒总数"><span class="nav-number">3.2.</span> <span class="nav-text"> 单格平均沙粒数-沙粒总数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二八定律"><span class="nav-number">3.3.</span> <span class="nav-text"> 二八定律</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序"><span class="nav-number">4.</span> <span class="nav-text"> 程序</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sppy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Sppy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/941415336" title="QQ → 941415336"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/941415336@qq.com" title="E-Mail → 941415336@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-university"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhangshuqiao.org/" title="https:&#x2F;&#x2F;zhangshuqiao.org&#x2F;" rel="noopener" target="_blank">Mimi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page&#x2F;" rel="noopener" target="_blank">Liam Huang</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cangshui.net/" title="https:&#x2F;&#x2F;cangshui.net&#x2F;" rel="noopener" target="_blank">Cangshui</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.itrhx.com/" title="https:&#x2F;&#x2F;www.itrhx.com&#x2F;" rel="noopener" target="_blank">TRHX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://qixinbo.info/" title="https:&#x2F;&#x2F;qixinbo.info&#x2F;" rel="noopener" target="_blank">XinBo Qi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://three-body.org/" title="https:&#x2F;&#x2F;three-body.org&#x2F;" rel="noopener" target="_blank">Three Body</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sppy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":-15,"vOffset":-30},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
