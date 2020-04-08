@@ -1,5 +1,5 @@
+http://www.sppy.site/2020/04/08/ABAQUS-stress-strain-measure/
 http://www.sppy.site/2020/04/01/sandpile-model/
 http://www.sppy.site/2020/03/26/N-dimension-probability/
 http://www.sppy.site/2020/03/20/2nd-order-linear-PDE/
 http://www.sppy.site/2020/03/18/schmid-factor/
-http://www.sppy.site/2020/03/14/Python-learning-notes04/
