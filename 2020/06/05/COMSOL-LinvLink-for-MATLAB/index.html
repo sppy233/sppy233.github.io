@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://www.sppy.site').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="COMSOL LinvLink for MATLAB 功能允许用户将 COMSOL Multiphysics 与 MATLAB 脚本环境联系起来，可以实现：  通过脚本设置模型 在模型设置中使用 MATLAB 函数 在 COMSOL Desktop 和 MATLAB 之间进行交互式建模 通过 MATLAB 控制语句调节程序流程 在 MATLAB 中分析结果 创建定制模型接口 ······">
+<meta property="og:type" content="article">
+<meta property="og:title" content="COMSOL LinvLink for MATLAB">
+<meta property="og:url" content="http://www.sppy.site/2020/06/05/COMSOL-LinvLink-for-MATLAB/index.html">
+<meta property="og:site_name" content="Island">
+<meta property="og:description" content="COMSOL LinvLink for MATLAB 功能允许用户将 COMSOL Multiphysics 与 MATLAB 脚本环境联系起来，可以实现：  通过脚本设置模型 在模型设置中使用 MATLAB 函数 在 COMSOL Desktop 和 MATLAB 之间进行交互式建模 通过 MATLAB 控制语句调节程序流程 在 MATLAB 中分析结果 创建定制模型接口 ······">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/05/tr56De.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/05/tr5yuD.png">
+<meta property="article:published_time" content="2020-06-05T04:00:00.000Z">
+<meta property="article:modified_time" content="2020-06-05T10:57:19.834Z">
+<meta property="article:author" content="Sppy">
+<meta property="article:tag" content="MATLAB">
+<meta property="article:tag" content="偏微分方程">
+<meta property="article:tag" content="COMSOL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/05/tr56De.png">
+
+<link rel="canonical" href="http://www.sppy.site/2020/06/05/COMSOL-LinvLink-for-MATLAB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>COMSOL LinvLink for MATLAB | Island</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c05c629d868a316b7f99adc8242397c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Island</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">止于至善</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.sppy.site/2020/06/05/COMSOL-LinvLink-for-MATLAB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Sppy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Island">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          COMSOL LinvLink for MATLAB
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-05 12:00:00 / 修改时间：18:57:19" itemprop="dateCreated datePublished" datetime="2020-06-05T12:00:00+08:00">2020-06-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mechanics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mechanics</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>COMSOL LinvLink for MATLAB 功能允许用户将 COMSOL Multiphysics 与 MATLAB 脚本环境联系起来，可以实现：</p>
+<ul>
+<li>通过脚本设置模型</li>
+<li>在模型设置中使用 MATLAB 函数</li>
+<li>在 COMSOL Desktop 和 MATLAB 之间进行交互式建模</li>
+<li>通过 MATLAB 控制语句调节程序流程</li>
+<li>在 MATLAB 中分析结果</li>
+<li>创建定制模型接口</li>
+<li>······</li>
+</ul>
+<a id="more"></a>
+<h2 id="启动"><a class="markdownIt-Anchor" href="#启动"></a> 启动</h2>
+<ul>
+<li>
+<p><strong>Windows</strong>：双击 COMSOL with MATLAB 图标，启动 COMSOL Multiphysics with MATLAB</p>
+<p>MATLAB 的桌面环境将与 COMSOL Multiphysics Server 同时打开，后者以命令窗口的形式显示在背景中</p>
+</li>
+<li>
+<p><strong>Mac OS X</strong>：前往 Applications &gt; COMSOL &gt; COMSOL with MATLAB</p>
+</li>
+<li>
+<p><strong>Linux</strong>：在 COMSOL 安装目录的 <code>bin</code> 文件夹中打开一个终端提示窗口，执行 <code>comsol</code> 命令：<code>comsol mphserver matlab</code></p>
+</li>
+</ul>
+<h2 id="使用"><a class="markdownIt-Anchor" href="#使用"></a> 使用</h2>
+<p>COMSOL LinvLink for MATLAB 是使用 MATLAB 命令来构建模型，即使用直接操作的是 COMSOL <strong>模型对象</strong>，而不是 COMSOL Desktop。</p>
+<p>一般有两种使用方法：</p>
+<ol>
+<li>
+<p>在 COMSOL Desktop 的图形化用户界面中完成建模，然后将模型另存为 M 文件，通过修改该文件来满足计算需求</p>
+<blockquote>
+<p>可设置全局变量，并封装为函数，在 MATLAB 中进行调用</p>
+<p>一定要在 COMSOL Desktop 中压缩历史记录，以删除建模过程中的无效操作</p>
+</blockquote>
+</li>
+<li>
+<p>直接编写 MATLAB 脚本进行建模、计算、分析</p>
+<blockquote>
+<p>学习曲线较高，不建议采用这种方法</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="api-命令"><a class="markdownIt-Anchor" href="#api-命令"></a> API 命令</h2>
+<blockquote>
+<p>这里仅展示部分常用 MATLAB 中的 API 命令</p>
+</blockquote>
+<ol>
+<li>
+<p><code>mphdoc</code> ：打开 COMSOL 帮助文档（缺省值）</p>
+<p><code>mphdoc(model)</code> ：打开节点模型的帮助文档</p>
+<p><code>mphdoc(model.geom,'WorkPlane')</code> ：打开几何特征 WorkPlane 的帮助文档</p>
+</li>
+<li>
+<p><code>mphlaunch</code> ：将正在运行的模型从 MATLAB 提示窗口连接到 COMSOL Desktop</p>
+</li>
+<li>
+<p><code>mphgeom(model)</code> ：在 MATLAB 图像窗口中显示当前对象的几何</p>
+</li>
+<li>
+<p><code>mphmesh(model)</code> ：在 MATLAB 图像窗口中显示当前对象的网格</p>
+</li>
+<li>
+<p><code>ModelUtil.showProgress(true)</code> ：显示求解和网格运算的进度条</p>
+</li>
+<li>
+<p><code>mphplot(model,'pg','rangenum',1)</code> ：在 MATLAB 图形中显示包含颜色条的绘图组</p>
+<p><code>rangenum</code> 对应于绘图组 <code>pg</code> 中的绘图类型序号</p>
+</li>
+<li>
+<p><code>mphsave(model,'&lt;path&gt;\busbar')</code>  ：将模型保存到 <code>&lt;path&gt;</code> 路径下的 <code>busbar</code> 文件中，默认的保存格式为 COMSOL 二进制格式，扩展名为 mph</p>
+<p><code>mphsave(model,'&lt;path&gt;\busbar.m')</code> ：将模型保存成 M 文件</p>
+</li>
+</ol>
+<h2 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例</h2>
+<p>采用<a href="http://sppy.site/2020/04/14/a-phase-field-model-for-damage/" target="_blank" rel="noopener">《相场损伤模型》</a>中的物理模型，即</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mo>−</mo><msup><mi>l</mi><mn>2</mn></msup><mi mathvariant="normal">Δ</mi><mi>d</mi><mo>=</mo><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mtext> </mtext><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow><mtext> </mtext><mi>V</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi mathvariant="normal">∇</mi><mi>d</mi><mo>⋅</mo><mi mathvariant="bold-italic">n</mi><mo>=</mo><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mtext> </mtext><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">n</mi></mrow><mtext> </mtext><mi mathvariant="normal">∂</mi><mi>V</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mo stretchy="false">(</mo><mi mathvariant="bold-italic">x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mtext> </mtext><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">n</mi></mrow><mtext> </mtext><mi mathvariant="normal">Γ</mi></mrow></mstyle></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">\begin{cases}
+d-l^2\Delta d=0&amp;~\mathrm{in}~V\\[5pt]
+\nabla d\cdot\boldsymbol{n}=0&amp;~\mathrm{on}~\partial V\\[5pt]
+d(\boldsymbol{x})=1&amp;~\mathrm{on}~\Gamma
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:5.400040000000001em;vertical-align:-2.45002em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.9500200000000003em;"><span style="top:-1.59999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎩</span></span></span><span style="top:-1.59999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-1.89999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-2.19999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-3.1500100000000004em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎨</span></span></span><span style="top:-4.30001em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-4.60001em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-4.90001em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-5.20002em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎧</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.45002em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.91em;"><span style="top:-4.91em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord">Δ</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span><span style="top:-2.97em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">∇</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol">n</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span><span style="top:-1.0300000000000002em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord boldsymbol">x</span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.4099999999999997em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.91em;"><span style="top:-4.91em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mspace nobreak"> </span><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">n</span></span><span class="mspace nobreak"> </span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span></span></span><span style="top:-2.97em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mspace nobreak"> </span><span class="mord"><span class="mord mathrm">o</span><span class="mord mathrm">n</span></span><span class="mspace nobreak"> </span><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span></span></span><span style="top:-1.0300000000000002em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mspace nobreak"> </span><span class="mord"><span class="mord mathrm">o</span><span class="mord mathrm">n</span></span><span class="mspace nobreak"> </span><span class="mord">Γ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.4099999999999997em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>对于边长为 2 的正方形（二维）求解域进行计算。</p>
+<p>在 COMSOL 中将特征长度参数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 、裂纹边的最大单元大小 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>l</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">l_e</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 设为全局变量，并在派生值中定义能量耗散函数</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">Γ</mi><mi>l</mi></msub><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mi>l</mi></mrow></mfrac><msub><mo>∫</mo><mi>V</mi></msub><mo fence="false">(</mo><msup><mi>d</mi><mn>2</mn></msup><mo>+</mo><msup><mi>l</mi><mn>2</mn></msup><mi mathvariant="normal">∇</mi><mi>d</mi><mo>⋅</mo><mi mathvariant="normal">∇</mi><mi>d</mi><mo fence="false">)</mo><mi mathvariant="normal">d</mi><mi>v</mi></mrow><annotation encoding="application/x-tex">\Gamma_l(d)=\frac{1}{2l}\int_{V}\big(d^2+l^2\nabla d\cdot\nabla d\big)\mathrm{d}v
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">Γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">d</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.27195em;vertical-align:-0.9119499999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right:0.44445em;position:relative;top:-0.0011249999999999316em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.433619em;"><span style="top:-1.7880500000000001em;margin-left:-0.44445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.22222em;">V</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9119499999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord">∇</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.20001em;vertical-align:-0.35001em;"></span><span class="mord">∇</span><span class="mord mathdefault">d</span><span class="mord"><span class="delimsizing size1">)</span></span><span class="mord"><span class="mord mathrm">d</span></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span></span></p>
+<p>完成建模等设置后，将模型另存为 M 文件，并进一步将其修改为函数 <code>PFD_PDE(L,EL)</code> ，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 输入</span></span><br><span class="line"><span class="comment">% L  : 特征尺度参数, 如 0.25</span></span><br><span class="line"><span class="comment">% EL : 裂纹处最大单元尺寸, 如 0.05</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[GAMMA, MODEL]</span> = <span class="title">PFD_PDE</span><span class="params">(L,EL)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 导入COMSOL库</span></span><br><span class="line">import com.comsol.model.*</span><br><span class="line">import com.comsol.model.util.*</span><br><span class="line"></span><br><span class="line"><span class="comment">% 创建模型</span></span><br><span class="line">model = ModelUtil.create(<span class="string">'Model'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 指定模型的路径, 名称, 坐标系</span></span><br><span class="line">model.modelPath(pwd);<span class="comment">% 使用当前路径</span></span><br><span class="line">model.label(<span class="string">'PDE_phase_field_damage_2D_TEST.mph'</span>);</span><br><span class="line">model.baseSystem(<span class="string">'none'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置全局参数'L', 'EL'</span></span><br><span class="line">model.param.set(<span class="string">'L'</span>, num2str(L), <span class="string">'Characteristic length'</span>);</span><br><span class="line">model.param.set(<span class="string">'EL'</span>,num2str(EL),<span class="string">'Crack unit size'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 创建组件'geom1'</span></span><br><span class="line">model.component.create(<span class="string">'comp1'</span>, <span class="built_in">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 定义组件中几何体的个数</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom.create(<span class="string">'geom1'</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 定义组件的网格'mesh1'</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh.create(<span class="string">'mesh1'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 创建几何体中的正方形'sq1'</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom(<span class="string">'geom1'</span>).create(<span class="string">'sq1'</span>, <span class="string">'Square'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom(<span class="string">'geom1'</span>).feature(<span class="string">'sq1'</span>).set(<span class="string">'pos'</span>, [<span class="number">0</span> <span class="number">0</span>]);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom(<span class="string">'geom1'</span>).feature(<span class="string">'sq1'</span>).set(<span class="string">'base'</span>, <span class="string">'center'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom(<span class="string">'geom1'</span>).feature(<span class="string">'sq1'</span>).set(<span class="string">'size'</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 创建几何体中的线段'ls1'</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom(<span class="string">'geom1'</span>).create(<span class="string">'ls1'</span>, <span class="string">'LineSegment'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom(<span class="string">'geom1'</span>).feature(<span class="string">'ls1'</span>).set(<span class="string">'specify1'</span>, <span class="string">'coord'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom(<span class="string">'geom1'</span>).feature(<span class="string">'ls1'</span>).set(<span class="string">'coord1'</span>, [<span class="number">-1</span> <span class="number">0</span>]);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom(<span class="string">'geom1'</span>).feature(<span class="string">'ls1'</span>).set(<span class="string">'specify2'</span>, <span class="string">'coord'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).geom(<span class="string">'geom1'</span>).run;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 对组件添加物理场, 即系数型偏微分方程'c'</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics.create(<span class="string">'c'</span>, <span class="string">'CoefficientFormPDE'</span>, <span class="string">'geom1'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置物理场的名称'd', 变量'd'</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).field(<span class="string">'dimensionless'</span>).field(<span class="string">'d'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).field(<span class="string">'dimensionless'</span>).component(&#123;<span class="string">'d'</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置物理场中的狄氏条件, 即用狄氏条件描述裂纹</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).create(<span class="string">'dir1'</span>, <span class="string">'DirichletBoundary'</span>, <span class="number">1</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).feature(<span class="string">'dir1'</span>).selection.set(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置裂纹边处的网格</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).create(<span class="string">'edg1'</span>, <span class="string">'Edge'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).feature(<span class="string">'edg1'</span>).selection.set(<span class="number">4</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).feature(<span class="string">'edg1'</span>).create(<span class="string">'size1'</span>, <span class="string">'Size'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 网格'mesh1'采用自由三角形划分</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).create(<span class="string">'ftri1'</span>, <span class="string">'FreeTri'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置可视化区域范围</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).view(<span class="string">'view1'</span>).axis.set(<span class="string">'xmin'</span>, <span class="number">-1.7</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).view(<span class="string">'view1'</span>).axis.set(<span class="string">'xmax'</span>, <span class="number">1.7</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).view(<span class="string">'view1'</span>).axis.set(<span class="string">'ymin'</span>, <span class="number">-1.2</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).view(<span class="string">'view1'</span>).axis.set(<span class="string">'ymax'</span>, <span class="number">1.2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置系数型偏微分方程中的参数</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).prop(<span class="string">'Units'</span>).set(<span class="string">'CustomSourceTermUnit'</span>, <span class="number">1</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).feature(<span class="string">'cfeq1'</span>).set(<span class="string">'c'</span>, &#123;<span class="string">'L^2'</span> <span class="string">'0'</span> <span class="string">'0'</span> <span class="string">'L^2'</span>&#125;);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).feature(<span class="string">'cfeq1'</span>).set(<span class="string">'a'</span>, <span class="number">1</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).feature(<span class="string">'cfeq1'</span>).set(<span class="string">'f'</span>, <span class="number">0</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).feature(<span class="string">'cfeq1'</span>).set(<span class="string">'da'</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置裂纹处狄氏条件的值, 即令该处d=1</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).physics(<span class="string">'c'</span>).feature(<span class="string">'dir1'</span>).set(<span class="string">'r'</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 网格剖分: 非裂纹处, 最大单位大小为'3*EL', 最大单元增长率为1.1</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).feature(<span class="string">'size'</span>).set(<span class="string">'custom'</span>, <span class="string">'on'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).feature(<span class="string">'size'</span>).set(<span class="string">'hmax'</span>, <span class="string">'3*EL'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).feature(<span class="string">'size'</span>).set(<span class="string">'hgrad'</span>, <span class="number">1.1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 网格剖分: 裂纹处, 并将最大单位大小设置为'EL' (需要激活设置, 即'hmaxactive')</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).feature(<span class="string">'edg1'</span>).feature(<span class="string">'size1'</span>).set(<span class="string">'hauto'</span>, <span class="number">3</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).feature(<span class="string">'edg1'</span>).feature(<span class="string">'size1'</span>).set(<span class="string">'custom'</span>, <span class="string">'on'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).feature(<span class="string">'edg1'</span>).feature(<span class="string">'size1'</span>).set(<span class="string">'hmax'</span>, <span class="string">'EL'</span>);</span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).feature(<span class="string">'edg1'</span>).feature(<span class="string">'size1'</span>).set(<span class="string">'hmaxactive'</span>, <span class="built_in">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 生成网格'mesh1'</span></span><br><span class="line">model.component(<span class="string">'comp1'</span>).mesh(<span class="string">'mesh1'</span>).run;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 创建稳态分析'std1'</span></span><br><span class="line">model.study.create(<span class="string">'std1'</span>);</span><br><span class="line">model.study(<span class="string">'std1'</span>).create(<span class="string">'stat'</span>, <span class="string">'Stationary'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 配置求解器, 采用默认参数</span></span><br><span class="line">model.sol.create(<span class="string">'sol1'</span>);</span><br><span class="line">model.sol(<span class="string">'sol1'</span>).study(<span class="string">'std1'</span>);</span><br><span class="line">model.sol(<span class="string">'sol1'</span>).attach(<span class="string">'std1'</span>);</span><br><span class="line">model.sol(<span class="string">'sol1'</span>).create(<span class="string">'st1'</span>, <span class="string">'StudyStep'</span>);</span><br><span class="line">model.sol(<span class="string">'sol1'</span>).create(<span class="string">'v1'</span>, <span class="string">'Variables'</span>);</span><br><span class="line">model.sol(<span class="string">'sol1'</span>).create(<span class="string">'s1'</span>, <span class="string">'Stationary'</span>);</span><br><span class="line">model.sol(<span class="string">'sol1'</span>).feature(<span class="string">'s1'</span>).create(<span class="string">'fc1'</span>, <span class="string">'FullyCoupled'</span>);</span><br><span class="line">model.sol(<span class="string">'sol1'</span>).feature(<span class="string">'s1'</span>).feature.remove(<span class="string">'fcDef'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 创建派生值'int1', 即表面积分Gamma</span></span><br><span class="line">model.result.numerical.create(<span class="string">'int1'</span>, <span class="string">'IntSurface'</span>);</span><br><span class="line">model.result.numerical(<span class="string">'int1'</span>).selection.all;</span><br><span class="line">model.result.numerical(<span class="string">'int1'</span>).set(<span class="string">'probetag'</span>, <span class="string">'none'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 创建二维绘图组'pg1', 表面数据'surf1'</span></span><br><span class="line">model.result.create(<span class="string">'pg1'</span>, <span class="string">'PlotGroup2D'</span>);</span><br><span class="line">model.result(<span class="string">'pg1'</span>).create(<span class="string">'surf1'</span>, <span class="string">'Surface'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 关联研究与求解器</span></span><br><span class="line">model.sol(<span class="string">'sol1'</span>).attach(<span class="string">'std1'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 运行模型, 得到计算结果</span></span><br><span class="line">model.sol(<span class="string">'sol1'</span>).runAll;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置表面积分Gamma</span></span><br><span class="line">model.result.numerical(<span class="string">'int1'</span>).label(<span class="string">'int_Gamma'</span>);</span><br><span class="line">model.result.numerical(<span class="string">'int1'</span>).set(<span class="string">'expr'</span>, &#123;<span class="string">'(d^2+L^2*(dx^2+dy^2))/2/L'</span>&#125;);</span><br><span class="line">model.result.numerical(<span class="string">'int1'</span>).set(<span class="string">'descr'</span>, &#123;<span class="string">'Gamma'</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 设置表面绘制</span></span><br><span class="line">model.result(<span class="string">'pg1'</span>).feature(<span class="string">'surf1'</span>).set(<span class="string">'resolution'</span>, <span class="string">'normal'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 创建表格, 用于存储表面积分Gamma</span></span><br><span class="line">model.result.<span class="built_in">table</span>.create(<span class="string">'tbl1'</span>, <span class="string">'Table'</span>);</span><br><span class="line">model.result.<span class="built_in">table</span>(<span class="string">'tbl1'</span>).comments(<span class="string">'int_Gamma &#123;int1&#125; ((d^2+L^2*(dx^2+dy^2))/2/L)'</span>);</span><br><span class="line">model.result.numerical(<span class="string">'int1'</span>).set(<span class="string">'table'</span>, <span class="string">'tbl1'</span>);</span><br><span class="line">model.result.numerical(<span class="string">'int1'</span>).setResult;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出</span></span><br><span class="line">temp = mphtable(model,<span class="string">'tbl1'</span>);</span><br><span class="line">GAMMA = temp.data;<span class="comment">% 能量耗散函数</span></span><br><span class="line">MODEL = model;<span class="comment">% 模型对象</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>在函数 <code>PFD_PDE(L,EL)</code> 的基础上，可以做出更多的扩展计算。</p>
+<hr />
+<h3 id="计算绘图"><a class="markdownIt-Anchor" href="#计算绘图"></a> 计算绘图</h3>
+<p>给定 <code>L</code> 和 <code>EL</code> 后可调用函数 <code>PFD_PDE(L,EL)</code> ，计算得到模型对象的句柄 <code>MODEL</code> 。进一步利用 API 命令 <code>mphmesh</code> 和 <code>mphplot</code> 得到网格和相场云图，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">clc;clear;close;</span><br><span class="line"></span><br><span class="line">set(<span class="number">0</span>,<span class="string">'units'</span>,<span class="string">'centimeters'</span>)</span><br><span class="line">cm_ss=get(<span class="number">0</span>,<span class="string">'screensize'</span>);</span><br><span class="line">W=cm_ss(<span class="number">3</span>);H=cm_ss(<span class="number">4</span>);<span class="comment">% 屏幕尺寸</span></span><br><span class="line">fw=<span class="number">25</span>;fh=<span class="number">12</span>;<span class="comment">% 图片尺寸</span></span><br><span class="line"></span><br><span class="line">[<span class="built_in">gamma</span>, model] = PFD_PDE(<span class="number">0.25</span>,<span class="number">0.05</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">set(gcf,<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[(W-fw)/<span class="number">2</span>/W,(H-fh)/<span class="number">2</span>/H,fw/W,fh/H]);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>);mphmesh(model);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);mphplot(model,<span class="string">'pg1'</span>);</span><br></pre></td></tr></table></figure>
+<p>上述代码运行结果如下：</p>
+<img src="https://s1.ax1x.com/2020/06/05/tr56De.png" width="95%">
+<h3 id="封装调用"><a class="markdownIt-Anchor" href="#封装调用"></a> 封装调用</h3>
+<p>给定 <code>EL</code> 并遍历 <code>L</code> ，调用函数 <code>PFD_PDE(L,EL)</code> ，可得特征长度参数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 与能量耗散函数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">Γ</mi><mi>l</mi></msub></mrow><annotation encoding="application/x-tex">\Gamma_l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord">Γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 的数值映射表，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">clc;clear;close;</span><br><span class="line"></span><br><span class="line">num=<span class="number">20</span>;</span><br><span class="line">L=<span class="built_in">linspace</span>(<span class="number">0.05</span>,<span class="number">1</span>,num);</span><br><span class="line"><span class="built_in">gamma</span>=<span class="built_in">zeros</span>(<span class="number">1</span>,num);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:num</span><br><span class="line">    [<span class="built_in">gamma</span>(<span class="built_in">i</span>),~] = PFD_PDE(L(<span class="built_in">i</span>),<span class="number">0.05</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">pt=<span class="number">15</span>;</span><br><span class="line"><span class="built_in">plot</span>(L,<span class="built_in">gamma</span>,<span class="string">'linewidth'</span>,<span class="number">1.5</span>,<span class="string">'LineStyle'</span>,<span class="string">'-'</span>,<span class="string">'Color'</span>,[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]);</span><br><span class="line">box on;grid on;xlim([<span class="number">0</span>,<span class="number">1.05</span>]);</span><br><span class="line">set(gca,<span class="string">'fontsize'</span>,pt,<span class="string">'ticklabelinterpreter'</span>,<span class="string">'latex'</span>);</span><br><span class="line">xlabel(<span class="string">'Length  $l$'</span>,<span class="string">'FontSize'</span>,pt,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);</span><br><span class="line">ylabel(<span class="string">'Energy  $\Gamma_l$'</span>,<span class="string">'FontSize'</span>,pt,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);</span><br></pre></td></tr></table></figure>
+<p>上述代码运行结果如下：</p>
+<img src="https://s1.ax1x.com/2020/06/05/tr5yuD.png" width="65%">
+<p>显然函数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">Γ</mi><mi>l</mi></msub><mo stretchy="false">(</mo><mi>l</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma_l(l)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">Γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mclose">)</span></span></span></span> 在 0.6 附近存在一个局部极大值，于是可调用 MATLAB 中的粒子群优化函数进行求解，代码如下：</p>
+<blockquote>
+<p>优化函数 <code>fmincon</code> 需要目标函数的导数信息（给定解析导函数 或 求数值导数），而这种基于有限元计算得到数值，其连续性不佳，导致函数 <code>fmincon</code> 无法得到较好的优化结果</p>
+<p>粒子群优化函数 <code>particleswarm</code> 则不需要目标函数的导数信息，以随机地形式寻找全局最优</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">clc;clear;close;</span><br><span class="line"></span><br><span class="line">fun = @(x) -PFD_PDE(x,<span class="number">0.05</span>);</span><br><span class="line"></span><br><span class="line">options = optimoptions(<span class="string">'particleswarm'</span>,<span class="string">'SwarmSize'</span>,<span class="number">5</span>,...</span><br><span class="line">                       <span class="string">'FunctionTolerance'</span>,<span class="number">1e-2</span>,<span class="string">'MaxIterations'</span>,<span class="number">50</span>);</span><br><span class="line">Lmin = particleswarm(fun,<span class="number">1</span>,<span class="number">0.4</span>,<span class="number">0.8</span>,options);<span class="comment">% PFD_PDE(0.6396,0.05)=1.2316</span></span><br></pre></td></tr></table></figure>
+<p>上述代码运行结果得到：<code>Lmin = 0.6396</code></p>
+<h3 id="更多应用"><a class="markdownIt-Anchor" href="#更多应用"></a> 更多应用</h3>
+<ul>
+<li>用于 Simulink 仿真</li>
+<li>利用 MATLAB Guide 或者 App Designer 制作 GUI</li>
+<li>······</li>
+</ul>
+<hr />
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MATLAB/" rel="tag"># MATLAB</a>
+              <a href="/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" rel="tag"># 偏微分方程</a>
+              <a href="/tags/COMSOL/" rel="tag"># COMSOL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/04/COMSOL-PDE-interface/" rel="prev" title="COMSOL偏微分方程接口">
+      <i class="fa fa-chevron-left"></i> COMSOL偏微分方程接口
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">1.</span> <span class="nav-text"> 启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text"> 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#api-命令"><span class="nav-number">3.</span> <span class="nav-text"> API 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">4.</span> <span class="nav-text"> 示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算绘图"><span class="nav-number">4.1.</span> <span class="nav-text"> 计算绘图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装调用"><span class="nav-number">4.2.</span> <span class="nav-text"> 封装调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更多应用"><span class="nav-number">4.3.</span> <span class="nav-text"> 更多应用</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sppy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Sppy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/941415336" title="QQ → 941415336"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/941415336@qq.com" title="E-Mail → 941415336@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-university"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhangshuqiao.org/" title="https:&#x2F;&#x2F;zhangshuqiao.org&#x2F;" rel="noopener" target="_blank">Mimi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page&#x2F;" rel="noopener" target="_blank">Liam Huang</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cangshui.net/" title="https:&#x2F;&#x2F;cangshui.net&#x2F;" rel="noopener" target="_blank">Cangshui</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.itrhx.com/" title="https:&#x2F;&#x2F;www.itrhx.com&#x2F;" rel="noopener" target="_blank">TRHX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://qixinbo.info/" title="https:&#x2F;&#x2F;qixinbo.info&#x2F;" rel="noopener" target="_blank">XinBo Qi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://three-body.org/" title="https:&#x2F;&#x2F;three-body.org&#x2F;" rel="noopener" target="_blank">Three Body</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sppy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":-15,"vOffset":-30},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
