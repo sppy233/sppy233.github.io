@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.sppy.site/2020/04/14/a-phase-field-model-for-damage/</loc>
+    
+    <lastmod>2020-07-01T09:05:28.998Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.sppy.site/2020/06/20/S-N-curve-fitting/</loc>
     
     <lastmod>2020-06-20T02:23:54.002Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>http://www.sppy.site/2020/05/07/calissons-proof/</loc>
     
     <lastmod>2020-05-07T11:53:02.207Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sppy.site/2020/04/14/a-phase-field-model-for-damage/</loc>
-    
-    <lastmod>2020-04-16T07:17:17.422Z</lastmod>
     
   </url>
   

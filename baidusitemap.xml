@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.sppy.site/2020/04/14/a-phase-field-model-for-damage/</loc>
+    <lastmod>2020-07-01</lastmod>
+  </url>  <url>
     <loc>http://www.sppy.site/2020/06/20/S-N-curve-fitting/</loc>
     <lastmod>2020-06-20</lastmod>
   </url>  <url>
@@ -12,9 +15,6 @@
   </url>  <url>
     <loc>http://www.sppy.site/2020/05/07/calissons-proof/</loc>
     <lastmod>2020-05-07</lastmod>
-  </url>  <url>
-    <loc>http://www.sppy.site/2020/04/14/a-phase-field-model-for-damage/</loc>
-    <lastmod>2020-04-16</lastmod>
   </url>  <url>
     <loc>http://www.sppy.site/2020/04/12/strain-energy-density/</loc>
     <lastmod>2020-04-15</lastmod>
