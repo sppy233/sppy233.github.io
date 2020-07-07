@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://www.sppy.site').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="手写数字识别：深度学习领域的 Hello World ！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于卷积神经网络的手写数字识别App">
+<meta property="og:url" content="http://www.sppy.site/2020/07/07/CNN-Script-Classification/index.html">
+<meta property="og:site_name" content="Island">
+<meta property="og:description" content="手写数字识别：深度学习领域的 Hello World ！">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-07T12:00:00.000Z">
+<meta property="article:modified_time" content="2020-07-07T13:21:31.623Z">
+<meta property="article:author" content="Sppy">
+<meta property="article:tag" content="MATLAB Appdesigner">
+<meta property="article:tag" content="卷积神经网络">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.sppy.site/2020/07/07/CNN-Script-Classification/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>基于卷积神经网络的手写数字识别App | Island</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c05c629d868a316b7f99adc8242397c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Island</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">止于至善</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-favorite">
+
+    <a href="/favorite/" rel="section"><i class="fa fa-fw fa-bookmark"></i>收藏</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.sppy.site/2020/07/07/CNN-Script-Classification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Sppy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Island">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          基于卷积神经网络的手写数字识别App
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-07 20:00:00 / 修改时间：21:21:31" itemprop="dateCreated datePublished" datetime="2020-07-07T20:00:00+08:00">2020-07-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>手写数字识别：深度学习领域的 <strong>Hello World</strong> ！</p>
+<a id="more"></a>
+<p>按照“<strong>数据准备-算法开发-系统部署</strong>”的工作流程展开，这里首先给出最终效果：</p>
+
+<div style="position: relative; width: 100%; height: 0;padding-bottom: 75%;"><iframe src="//player.bilibili.com/player.html?aid=926322657&bvid=BV1gT4y1E72F&cid=209799763&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div>
+
+<hr />
+<h2 id="数据准备"><a class="markdownIt-Anchor" href="#数据准备"></a> 数据准备</h2>
+<p><a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">MNIST 数据集</a>是机器学习领域的一个经典数据集，包含 60000 张训练图像和 10000 张测试图像，由美国国家标准与技术研究院(National Institute of Standards and Technology，即 MNIST 中 的 NIST)在20世纪80年代收集得到。</p>
+<p>从<a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener" title="MNIST">MNIST 网站</a>提供四个下载文件，解压后得到：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">train-images.idx3-ubyte  <span class="comment">% 60000张图片</span></span><br><span class="line">train-labels.idx1-ubyte  <span class="comment">% 60000个标签</span></span><br><span class="line">t10k-images.idx3-ubyte   <span class="comment">% 10000张图片</span></span><br><span class="line">t10k-labels.idx1-ubyte   <span class="comment">% 10000个标签</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>文本选用<code>t10k</code>中的10000张图片来训练神经网络</p>
+<p>路径<code>fullfile(matlabroot,'toolbox','nnet','nndemos','nndatasets','DigitDataset')</code>下，MATLAB也提供了10000张训练图片，不过图片存在随机的旋转角度</p>
+</blockquote>
+<p>提取上面的二进制文件中图片，并进行分类：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 需在 t10k 文件目录下运行</span></span><br><span class="line">str1=<span class="string">'t10k-images.idx3-ubyte'</span>;<span class="comment">% 10000张图片</span></span><br><span class="line">str2=<span class="string">'t10k-labels.idx1-ubyte'</span>;<span class="comment">% 10000个标签</span></span><br><span class="line">fid1=fopen(str1);fid2=fopen(str2);</span><br><span class="line">images=fread(fid1);images=images(<span class="number">17</span>:<span class="keyword">end</span>);</span><br><span class="line">labels=fread(fid2);labels=labels(<span class="number">9</span>:<span class="keyword">end</span>);</span><br><span class="line">fclose(fid1);fclose(fid2);</span><br><span class="line"></span><br><span class="line">workdir=pwd;<span class="comment">% 当前工作路径</span></span><br><span class="line">mkdir(<span class="string">'DigitDataset'</span>);<span class="comment">% 在当前目录下创建存放图片的文件夹</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">0</span>:<span class="number">9</span></span><br><span class="line">    <span class="comment">% 在DigitDataset文件夹下创建10个子文件夹, 用于分类存放图片</span></span><br><span class="line">    mkdir([<span class="string">'DigitDataset\',num2str(i)]);</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">num=length(labels);</span></span><br><span class="line"><span class="string">data=cell(num,2);% [图片数字, 像素矩阵]</span></span><br><span class="line"><span class="string">tab1=zeros(1,10);</span></span><br><span class="line"><span class="string">for i=1:num</span></span><br><span class="line"><span class="string">    data&#123;i,1&#125;=labels(i);</span></span><br><span class="line"><span class="string">    data&#123;i,2&#125;=reshape(images(784*i-783:784*i),[28,28])'</span>;</span><br><span class="line">    index=data&#123;<span class="built_in">i</span>,<span class="number">1</span>&#125;;</span><br><span class="line">    tab1(index+<span class="number">1</span>)=tab1(index+<span class="number">1</span>)+<span class="number">1</span>;</span><br><span class="line">    str3=[workdir,<span class="string">'\',num2str(index),'</span>\image', ...</span><br><span class="line">          sprintf(<span class="string">'%04d'</span>,tab1(index+<span class="number">1</span>)),<span class="string">'.png'</span>];</span><br><span class="line">    imwrite(data&#123;<span class="built_in">i</span>,<span class="number">2</span>&#125;,str3);<span class="comment">% 按标签存入对应文件夹</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="算法开发"><a class="markdownIt-Anchor" href="#算法开发"></a> 算法开发</h2>
+<p>MATLAB的Deep Learning Toolbox提供了一个实现深度神经网络的框架。</p>
+<p>卷积神经网络（Convolutional Neural Network）是一种适用于视觉任务的深度神经网络架构。</p>
+<p>这里给出一个15层的卷积神经网络：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 准备训练数据</span></span><br><span class="line">imds=imageDatastore([pwd,<span class="string">'\DigitDataset'</span>], ...</span><br><span class="line"><span class="string">'IncludeSubfolders'</span>,<span class="built_in">true</span>,<span class="string">'LabelSource'</span>,<span class="string">'foldernames'</span>);<span class="comment">% 按子文件夹分类录入</span></span><br><span class="line">numTrainFiles=<span class="number">800</span>;<span class="comment">% 每类800张图片用于训练, 共8000张</span></span><br><span class="line">[imdsTrain,imdsValidation]=splitEachLabel(imds,numTrainFiles,<span class="string">'randomize'</span>);<span class="comment">% 随机分类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 神经网络连接</span></span><br><span class="line">layers=[                                   <span class="comment">% 共15层</span></span><br><span class="line">imageInputLayer([<span class="number">28</span> <span class="number">28</span> <span class="number">1</span>])                 <span class="comment">% 输入层</span></span><br><span class="line">convolution2dLayer(<span class="number">3</span>,<span class="number">8</span>,<span class="string">'Padding'</span>,<span class="string">'same'</span>)   <span class="comment">% 卷积层</span></span><br><span class="line">batchNormalizationLayer                    <span class="comment">% 批量归一化层</span></span><br><span class="line">reluLayer                                  <span class="comment">% 激活函数层</span></span><br><span class="line">maxPooling2dLayer(<span class="number">2</span>,<span class="string">'Stride'</span>,<span class="number">2</span>)            <span class="comment">% 池化层</span></span><br><span class="line">convolution2dLayer(<span class="number">3</span>,<span class="number">16</span>,<span class="string">'Padding'</span>,<span class="string">'same'</span>)  <span class="comment">% 卷积层</span></span><br><span class="line">batchNormalizationLayer                    <span class="comment">% 批量归一化层</span></span><br><span class="line">reluLayer                                  <span class="comment">% 激活函数层</span></span><br><span class="line">maxPooling2dLayer(<span class="number">2</span>,<span class="string">'Stride'</span>,<span class="number">2</span>)            <span class="comment">% 池化层</span></span><br><span class="line">convolution2dLayer(<span class="number">3</span>,<span class="number">32</span>,<span class="string">'Padding'</span>,<span class="string">'same'</span>)  <span class="comment">% 卷积层</span></span><br><span class="line">batchNormalizationLayer                    <span class="comment">% 批量归一化层</span></span><br><span class="line">reluLayer                                  <span class="comment">% 激活函数层</span></span><br><span class="line">fullyConnectedLayer(<span class="number">10</span>)                    <span class="comment">% 全连接层</span></span><br><span class="line">softmaxLayer                               <span class="comment">% softmax分类器</span></span><br><span class="line">classificationLayer];                      <span class="comment">% 分类器</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 训练设置</span></span><br><span class="line">options=trainingOptions(<span class="string">'sgdm'</span>, ...</span><br><span class="line"><span class="string">'InitialLearnRate'</span>,<span class="number">0.01</span>, ...</span><br><span class="line"><span class="string">'MaxEpochs'</span>,<span class="number">10</span>, ...</span><br><span class="line"><span class="string">'Shuffle'</span>,<span class="string">'every-epoch'</span>, ...</span><br><span class="line"><span class="string">'ValidationData'</span>,imdsValidation, ...</span><br><span class="line"><span class="string">'ValidationFrequency'</span>,<span class="number">30</span>, ...</span><br><span class="line"><span class="string">'Verbose'</span>,<span class="built_in">false</span>, ...</span><br><span class="line"><span class="string">'Plots'</span>,<span class="string">'training-progress'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 开始训练</span></span><br><span class="line">CNN_Script_Classification=trainNetwork(imdsTrain,layers,options);</span><br></pre></td></tr></table></figure>
+<p>保存训练完毕的卷积神经网络：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save input_CNN.mat CNN_Script_Classification;</span><br></pre></td></tr></table></figure>
+<p>卷积神经网络的调用方式：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">load input_CNN.mat CNN_Script_Classification;</span><br><span class="line">z0=imread([pwd,<span class="string">'\MNIST DATABASE\DigitDataset\1e4\8\image0123.png'</span>]);</span><br><span class="line">z1=double(z0)+rands(<span class="number">28</span>,<span class="number">28</span>)*<span class="number">40</span>;<span class="comment">% 加入噪声</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);imshow(z0,[<span class="number">0</span>,<span class="number">255</span>]);<span class="built_in">figure</span>(<span class="number">2</span>);imshow(z1,[<span class="number">0</span>,<span class="number">255</span>]);</span><br><span class="line">classify(CNN_Script_Classification,z1)</span><br></pre></td></tr></table></figure>
+<h2 id="系统部署"><a class="markdownIt-Anchor" href="#系统部署"></a> 系统部署</h2>
+<p>将训练好的卷积神经网络部署到 MATLAB App。前面视频中的App主要有三个功能：</p>
+<ol>
+<li>利用鼠标完成手写输入</li>
+<li>对手写输入的图片进行预处理</li>
+<li>对预处理后的图片进行识别</li>
+</ol>
+<p>卷积神经网络对应第3点，即完成图片识别，下面给出第1、2点的程序。</p>
+<h3 id="利用鼠标完成手写输入"><a class="markdownIt-Anchor" href="#利用鼠标完成手写输入"></a> 利用鼠标完成手写输入</h3>
+<p>参考<a href="https://www.cnblogs.com/xfzhang/archive/2010/12/27/1918393.html" target="_blank" rel="noopener">博客园</a>中的程序，并按照我的需求进行修改：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% https://www.cnblogs.com/xfzhang/archive/2010/12/27/1918393.html</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">MouseDraw_app</span><span class="params">(action)</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">global</span> InitialX InitialY FigHandle</span><br><span class="line">imSize = <span class="number">200</span>;</span><br><span class="line"><span class="keyword">if</span> nargin == <span class="number">0</span></span><br><span class="line">    action = <span class="string">'start'</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(action)</span><br><span class="line">    <span class="comment">%%开启图形视窗</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'start'</span></span><br><span class="line">        index = <span class="number">0</span>;InputImage = <span class="built_in">ones</span>(imSize);</span><br><span class="line">        save(<span class="string">'input.mat'</span>,<span class="string">'index'</span>,<span class="string">'InputImage'</span>);</span><br><span class="line">        FigHandle = <span class="built_in">figure</span>(<span class="string">'WindowButtonDownFcn'</span>,<span class="string">'MouseDraw_app down;'</span>);</span><br><span class="line">        </span><br><span class="line">        set(<span class="number">0</span>,<span class="string">'units'</span>,<span class="string">'centimeters'</span>)</span><br><span class="line">        cm_ss=get(<span class="number">0</span>,<span class="string">'screensize'</span>);</span><br><span class="line">        W=cm_ss(<span class="number">3</span>);H=cm_ss(<span class="number">4</span>);L=<span class="number">10</span>;</span><br><span class="line">        set(gcf,<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,...</span><br><span class="line">            [(W-L)/<span class="number">2</span>/W,(H-L)/<span class="number">2</span>/H,L/W,L/H]);</span><br><span class="line">        set(gca,<span class="string">'XTick'</span>,<span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">0</span>),<span class="string">'YTick'</span>,<span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">0</span>));</span><br><span class="line">        axis([<span class="number">1</span> imSize <span class="number">1</span> imSize]);<span class="comment">% 设定图轴范围</span></span><br><span class="line">        axis on;grid off;box on;</span><br><span class="line">        title(<span class="string">'\rm&#123;鼠标左键&#125;\bf&#123;输入&#125;         \rm&#123;鼠标右键&#125;\bf&#123;确认&#125;'</span>,...</span><br><span class="line">              <span class="string">'FontSize'</span>,<span class="number">14</span>);</span><br><span class="line">        dlmwrite(<span class="string">'IXT.txt'</span>, <span class="number">-10</span>, <span class="string">'delimiter'</span>, <span class="string">'\t'</span>, <span class="string">'precision'</span>, <span class="number">6</span>);</span><br><span class="line">        dlmwrite(<span class="string">'IYT.txt'</span>, <span class="number">-10</span>, <span class="string">'delimiter'</span>, <span class="string">'\t'</span>, <span class="string">'precision'</span>, <span class="number">6</span>);</span><br><span class="line">        </span><br><span class="line">    <span class="comment">%%滑鼠按钮被按下时的反应指令</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'down'</span></span><br><span class="line">        <span class="keyword">if</span> strcmp(get(FigHandle, <span class="string">'SelectionType'</span>), <span class="string">'normal'</span>) <span class="comment">% 如果是左键</span></span><br><span class="line">            set(FigHandle,<span class="string">'pointer'</span>,<span class="string">'hand'</span>);</span><br><span class="line">            CurPiont = get(gca, <span class="string">'CurrentPoint'</span>);</span><br><span class="line">            InitialX = CurPiont(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">            InitialY = CurPiont(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">            dlmwrite(<span class="string">'IXT.txt'</span>, InitialX, <span class="string">'-append'</span>, ...</span><br><span class="line">                <span class="string">'delimiter'</span>, <span class="string">'\t'</span>, <span class="string">'precision'</span>, <span class="number">6</span>);</span><br><span class="line">            dlmwrite(<span class="string">'IYT.txt'</span>, InitialY, <span class="string">'-append'</span>, ...</span><br><span class="line">                <span class="string">'delimiter'</span>, <span class="string">'\t'</span>, <span class="string">'precision'</span>, <span class="number">6</span>);</span><br><span class="line">            <span class="comment">% 设定滑鼠移动时的反应指令为「MouseDraw_app move」</span></span><br><span class="line">            set(gcf, <span class="string">'WindowButtonMotionFcn'</span>, <span class="string">'MouseDraw_app move;'</span>);</span><br><span class="line">            set(gcf, <span class="string">'WindowButtonUpFcn'</span>, <span class="string">'MouseDraw_app up;'</span>);</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(get(FigHandle, <span class="string">'SelectionType'</span>), <span class="string">'alt'</span>) <span class="comment">% 如果是右键</span></span><br><span class="line">            set(FigHandle, <span class="string">'Pointer'</span>, <span class="string">'arrow'</span>);</span><br><span class="line">            set(FigHandle, <span class="string">'WindowButtonMotionFcn'</span>, <span class="string">''</span>);</span><br><span class="line">            set(FigHandle, <span class="string">'WindowButtonUpFcn'</span>, <span class="string">''</span>);</span><br><span class="line">            close(FigHandle);</span><br><span class="line">            ImageX = importdata(<span class="string">'IXT.txt'</span>);</span><br><span class="line">            ImageY = importdata(<span class="string">'IYT.txt'</span>);</span><br><span class="line">            InputImage = <span class="built_in">ones</span>(imSize);</span><br><span class="line">            roundX = <span class="built_in">round</span>(ImageX);</span><br><span class="line">            roundY = <span class="built_in">round</span>(ImageY);</span><br><span class="line">            <span class="keyword">for</span> k = <span class="number">1</span>:<span class="built_in">size</span>(ImageX,<span class="number">1</span>)</span><br><span class="line">                <span class="keyword">if</span> <span class="number">0</span>&lt;roundX(k) &amp;&amp; roundX(k)&lt;imSize &amp;&amp; ...</span><br><span class="line">                        <span class="number">0</span>&lt;roundY(k) &amp;&amp; roundY(k)&lt;imSize</span><br><span class="line">                    InputImage(roundX(k)<span class="number">-1</span>:roundX(k)+<span class="number">2</span>,...</span><br><span class="line">                        roundY(k)<span class="number">-1</span>:roundY(k)+<span class="number">2</span>) = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            InputImage = imrotate(InputImage,<span class="number">90</span>);<span class="comment">% 图像旋转90</span></span><br><span class="line">            index = <span class="number">1</span>;</span><br><span class="line">            save(<span class="string">'input.mat'</span>,<span class="string">'index'</span>,<span class="string">'InputImage'</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment">%%滑鼠移动时的反应指令</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'move'</span></span><br><span class="line">        CurPiont = get(gca, <span class="string">'CurrentPoint'</span>);</span><br><span class="line">        X = CurPiont(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">        Y = CurPiont(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">        <span class="comment">% 当鼠标移动较快时, 不会出现离散点</span></span><br><span class="line">        <span class="comment">% 利用y=kx+b直线方程实现</span></span><br><span class="line">        x_gap = <span class="number">0.1</span>;<span class="comment">% 定义x方向增量</span></span><br><span class="line">        y_gap = <span class="number">0.1</span>;<span class="comment">% 定义y方向增量</span></span><br><span class="line">        <span class="keyword">if</span> X &gt; InitialX</span><br><span class="line">            step_x = x_gap;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            step_x = -x_gap;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">if</span> Y &gt; InitialY</span><br><span class="line">            step_y = y_gap;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            step_y = -y_gap;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="comment">% 定义x, y的变化范围和步长</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(X-InitialX) &lt; <span class="number">0.01</span> <span class="comment">% 线平行于y轴, 即斜率不存在时</span></span><br><span class="line">            iy = InitialY:step_y:Y;</span><br><span class="line">            ix = X.*<span class="built_in">ones</span>(<span class="number">1</span>,<span class="built_in">size</span>(iy,<span class="number">2</span>));</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            ix = InitialX:step_x:X ;    <span class="comment">% 定义x的变化范围和步长</span></span><br><span class="line">            <span class="comment">% 当斜率存在, 即k = (Y-InitialY)/(X-InitialX) ~= 0</span></span><br><span class="line">            iy = (Y-InitialY)/(X-InitialX).*(ix-InitialX)+InitialY;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        ImageX = [ix, X];</span><br><span class="line">        ImageY = <span class="built_in">cat</span>(<span class="number">2</span>, iy, Y);</span><br><span class="line">        line(ImageX,ImageY, <span class="string">'marker'</span>, <span class="string">'.'</span>, <span class="string">'markerSize'</span>,<span class="number">28</span>, ...</span><br><span class="line">            <span class="string">'LineStyle'</span>, <span class="string">'-'</span>, <span class="string">'LineWidth'</span>, <span class="number">4</span>, <span class="string">'Color'</span>, <span class="string">'Blue'</span>);</span><br><span class="line">        dlmwrite(<span class="string">'IXT.txt'</span>, ImageX, <span class="string">'-append'</span>, ...</span><br><span class="line">            <span class="string">'delimiter'</span>, <span class="string">'\t'</span>, <span class="string">'precision'</span>, <span class="number">6</span>);</span><br><span class="line">        dlmwrite(<span class="string">'IYT.txt'</span>, ImageY, <span class="string">'-append'</span>, ...</span><br><span class="line">            <span class="string">'delimiter'</span>, <span class="string">'\t'</span>, <span class="string">'precision'</span>, <span class="number">6</span>);</span><br><span class="line">        InitialX = X;<span class="comment">% 记住当前点坐标</span></span><br><span class="line">        InitialY = Y;<span class="comment">% 记住当前点坐标</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment">%%滑鼠按钮被释放时的反应指令</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'up'</span></span><br><span class="line">        set(gcf, <span class="string">'WindowButtonMotionFcn'</span>, <span class="string">''</span>);<span class="comment">% 清除滑鼠移动时的反应指令</span></span><br><span class="line">        set(gcf, <span class="string">'WindowButtonUpFcn'</span>, <span class="string">''</span>);<span class="comment">% 清除滑鼠按钮被释放时的反应指令</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="对手写输入的图片进行预处理"><a class="markdownIt-Anchor" href="#对手写输入的图片进行预处理"></a> 对手写输入的图片进行预处理</h3>
+<p>程序<code>MouseDraw_app</code>将得到手写数字保存到矩阵<code>InputImage</code>中，再将该矩阵保存到<code>input.mat</code>文件中。卷积神经网络<code>CNN_Script_Classification</code>的输入为<code>28x28</code>的矩阵，需要将<code>InputImage</code>作进一步地处理。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% 锁定图片中数字区域, 并降低分辨率</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% INPUT</span></span><br><span class="line"><span class="comment">% InputImage  :  - 矩阵 200 x 200, 手写输入</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% OUTPUT</span></span><br><span class="line"><span class="comment">% image200    ： - 矩阵 200 x 200, 锁定后的数字, 用于APP中预处理展示</span></span><br><span class="line"><span class="comment">% image28     ： - 矩阵  28 x 28 , </span></span><br><span class="line"><span class="comment">%                  将image200中数字加粗, 并降低分辨率, 作为神经网络输入</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[image28,image200]</span>=<span class="title">high2low</span><span class="params">(InputImage)</span></span></span><br><span class="line"></span><br><span class="line">num=<span class="number">28</span>;<span class="comment">% 目标分辨率: num1 * num1</span></span><br><span class="line">[num2,~]=<span class="built_in">size</span>(InputImage);</span><br><span class="line">num3=<span class="number">2</span>;<span class="comment">% 加粗偏移量</span></span><br><span class="line"></span><br><span class="line">stats=regionprops(<span class="string">'table'</span>,<span class="number">1</span>-InputImage,<span class="string">'BoundingBox'</span>);<span class="comment">% 数字边界</span></span><br><span class="line">bbox=<span class="built_in">floor</span>(stats.BoundingBox);</span><br><span class="line"></span><br><span class="line">r=bbox(<span class="number">2</span>);dr=bbox(<span class="number">4</span>);ddr=<span class="built_in">floor</span>(dr/<span class="number">3</span>);<span class="comment">% 行</span></span><br><span class="line">c=bbox(<span class="number">1</span>);dc=bbox(<span class="number">3</span>);ddc=<span class="built_in">floor</span>(dc/<span class="number">2</span>);<span class="comment">% 列</span></span><br><span class="line"></span><br><span class="line">temp0=<span class="built_in">ones</span>(dr+<span class="number">2</span>*ddr,dc+<span class="number">2</span>*ddc);</span><br><span class="line">temp0(ddr+<span class="number">1</span>:dr+ddr,ddc+<span class="number">1</span>:dc+ddc)=InputImage(r+<span class="number">1</span>:r+dr,c+<span class="number">1</span>:c+dc);</span><br><span class="line"></span><br><span class="line">image200=imresize(temp0,[<span class="number">200</span>,<span class="number">200</span>]);</span><br><span class="line"></span><br><span class="line">temp1=<span class="built_in">ones</span>(num2);</span><br><span class="line">temp1(num3+<span class="number">1</span>:<span class="keyword">end</span>,num3+<span class="number">1</span>:<span class="keyword">end</span>)=image200(<span class="number">1</span>:<span class="keyword">end</span>-num3,<span class="number">1</span>:<span class="keyword">end</span>-num3);</span><br><span class="line"></span><br><span class="line">temp2=<span class="built_in">ones</span>(num2);</span><br><span class="line">temp2(<span class="number">1</span>:<span class="keyword">end</span>-num3,<span class="number">1</span>:<span class="keyword">end</span>-num3)=image200(num3+<span class="number">1</span>:<span class="keyword">end</span>,num3+<span class="number">1</span>:<span class="keyword">end</span>);</span><br><span class="line"></span><br><span class="line">temp3=<span class="built_in">ones</span>(num2);</span><br><span class="line">temp3(num3+<span class="number">1</span>:<span class="keyword">end</span>,<span class="number">1</span>:<span class="keyword">end</span>-num3)=image200(<span class="number">1</span>:<span class="keyword">end</span>-num3,num3+<span class="number">1</span>:<span class="keyword">end</span>);</span><br><span class="line"></span><br><span class="line">temp4=<span class="built_in">ones</span>(num2);</span><br><span class="line">temp4(<span class="number">1</span>:<span class="keyword">end</span>-num3,num3+<span class="number">1</span>:<span class="keyword">end</span>)=image200(num3+<span class="number">1</span>:<span class="keyword">end</span>,<span class="number">1</span>:<span class="keyword">end</span>-num3);</span><br><span class="line"></span><br><span class="line">a=<span class="built_in">min</span>(temp1,temp2);b=<span class="built_in">min</span>(temp3,temp4);temp=<span class="built_in">min</span>(a,b);<span class="comment">% 偏移加粗</span></span><br><span class="line"></span><br><span class="line">image28=imresize(temp,[num,num]);</span><br><span class="line">image28(image28&lt;<span class="number">0.65</span>)=<span class="number">0</span>;</span><br><span class="line">image28(image28&gt;<span class="number">0.80</span>)=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr />
+<p>在App Designer中，根据：</p>
+<ul>
+<li>手写输入函数<code>MouseDraw_app</code></li>
+<li>图片预处理函数<code>high2low</code></li>
+<li>卷积神经网络<code>CNN_Script_Classification</code></li>
+</ul>
+<p>完成App设计，并部署到MATLAB中。</p>
+<hr />
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MATLAB-Appdesigner/" rel="tag"># MATLAB Appdesigner</a>
+              <a href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag"># 卷积神经网络</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/07/mobius/" rel="prev" title="莫比乌斯环的可视化">
+      <i class="fa fa-chevron-left"></i> 莫比乌斯环的可视化
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据准备"><span class="nav-number">1.</span> <span class="nav-text"> 数据准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法开发"><span class="nav-number">2.</span> <span class="nav-text"> 算法开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统部署"><span class="nav-number">3.</span> <span class="nav-text"> 系统部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用鼠标完成手写输入"><span class="nav-number">3.1.</span> <span class="nav-text"> 利用鼠标完成手写输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对手写输入的图片进行预处理"><span class="nav-number">3.2.</span> <span class="nav-text"> 对手写输入的图片进行预处理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sppy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Sppy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/941415336" title="QQ → 941415336"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/941415336@qq.com" title="E-Mail → 941415336@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-university"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhangshuqiao.org/" title="https:&#x2F;&#x2F;zhangshuqiao.org&#x2F;" rel="noopener" target="_blank">Mimi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page&#x2F;" rel="noopener" target="_blank">Liam Huang</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cangshui.net/" title="https:&#x2F;&#x2F;cangshui.net&#x2F;" rel="noopener" target="_blank">Cangshui</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.itrhx.com/" title="https:&#x2F;&#x2F;www.itrhx.com&#x2F;" rel="noopener" target="_blank">TRHX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://qixinbo.info/" title="https:&#x2F;&#x2F;qixinbo.info&#x2F;" rel="noopener" target="_blank">XinBo Qi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://three-body.org/" title="https:&#x2F;&#x2F;three-body.org&#x2F;" rel="noopener" target="_blank">Three Body</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sppy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":-15,"vOffset":-30},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
