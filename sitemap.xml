@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.sppy.site/about/index.html</loc>
+    
+    <lastmod>2020-07-11T04:26:02.508Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.sppy.site/2020/07/07/CNN-Script-Classification/</loc>
     
     <lastmod>2020-07-08T04:50:59.232Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>http://www.sppy.site/2020/06/04/COMSOL-PDE-interface/</loc>
     
     <lastmod>2020-06-04T05:53:44.099Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sppy.site/about/index.html</loc>
-    
-    <lastmod>2020-05-31T07:01:32.947Z</lastmod>
     
   </url>
   
