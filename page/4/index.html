@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -54,12 +54,7 @@
 <meta property="og:site_name" content="Island">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Sppy">
-<meta property="article:tag" content="matlab">
-<meta property="article:tag" content=" latex">
-<meta property="article:tag" content=" abaqus">
-<meta property="article:tag" content=" fem">
-<meta property="article:tag" content=" fortran">
-<meta property="article:tag" content=" umat">
+<meta property="article:tag" content="matlab, latex, abaqus, fem, fortran, umat">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://www.sppy.site/page/4/">
@@ -262,7 +257,7 @@
       
           <p>写作高质量的学术文章时，个人认为首先要<strong>好看</strong>。</p>
 <blockquote>
-<p>有人说，内容重于形式。好吧，我承认<s>你是对的</s>。</p>
+<p>有人说，内容重于形式。好吧，我承认<del>你是对的</del>。</p>
 </blockquote>
           <!--noindex-->
             <div class="post-button">
@@ -346,7 +341,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+          <h2 id="前言">前言</h2>
 <p>商业有限元软件允许用户定义本构关系，例如<strong>ABAQUS</strong>可以通过<strong>U</strong>ser<strong>MAT</strong>erial（UMAT）子程序引入复杂的本构关系。复杂本构中的参数往往无法与实验结果建立一一对应的关系，解决参数标定的基本思想是用有限元计算结果去不断逼近实验结果，这会引出两个子问题：</p>
           <!--noindex-->
             <div class="post-button">
@@ -520,7 +515,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Sppy</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
@@ -579,8 +574,53 @@
 
   
       
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+<script type="text/x-mathjax-config">
 
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 

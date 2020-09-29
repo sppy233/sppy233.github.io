@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="资料：廖雪峰Python教程 IDE：Spyder">
+  <meta name="description" content="资料：廖雪峰Python教程 IDE：Spyder">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python学习笔记01">
 <meta property="og:url" content="http://www.sppy.site/2020/03/07/Python-learning-notes01/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="资料：廖雪峰Python教程 IDE：Spyder">
+<meta property="og:description" content="资料：廖雪峰Python教程 IDE：Spyder">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-07T04:00:00.000Z">
 <meta property="article:modified_time" content="2020-03-14T08:36:55.691Z">
@@ -259,134 +259,98 @@
 
       
         <blockquote>
-<p>资料：<a href="https://www.liaoxuefeng.com/wiki/1016959663602400" target="_blank" rel="noopener">廖雪峰Python教程</a></p>
-<p>IDE：<a href="https://www.spyder-ide.org/" target="_blank" rel="noopener">Spyder</a></p>
+<p>资料：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1016959663602400">廖雪峰Python教程</a></p>
+<p>IDE：<a target="_blank" rel="noopener" href="https://www.spyder-ide.org/">Spyder</a></p>
 </blockquote>
 <a id="more"></a>
-<h4 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h4>
-<ol>
-<li>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover><mo><mtext>列表</mtext></mo><mrow><mi mathvariant="normal">l</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">t</mi></mrow></mover></mrow><annotation encoding="application/x-tex">\stackrel{\mathrm{list}}{\text{列表}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.469438em;vertical-align:0em;"></span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.469438em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">列表</span></span></span></span></span><span style="top:-3.88333em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">l</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">s</span><span class="mord mathrm mtight">t</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = [<span class="string">'Apple'</span>, <span class="number">123</span>, <span class="literal">True</span>]  <span class="comment"># 元素数据类型不同</span></span><br><span class="line">s = [<span class="string">'python'</span>, <span class="string">'java'</span>, [<span class="string">'asp'</span>, <span class="string">'php'</span>], <span class="string">'scheme'</span>]  <span class="comment"># list嵌套list</span></span><br></pre></td></tr></table></figure>
+<h4 id="数据类型">数据类型</h4>
+<ol type="1">
+<li><p><span class="math inline">\(\stackrel{\mathrm{list}}{\text{列表}}\)</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = [<span class="string">&#x27;Apple&#x27;</span>, <span class="number">123</span>, <span class="literal">True</span>]  <span class="comment"># 元素数据类型不同</span></span><br><span class="line">s = [<span class="string">&#x27;python&#x27;</span>, <span class="string">&#x27;java&#x27;</span>, [<span class="string">&#x27;asp&#x27;</span>, <span class="string">&#x27;php&#x27;</span>], <span class="string">&#x27;scheme&#x27;</span>]  <span class="comment"># list嵌套list</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>list中元素可变</p>
-</blockquote>
-</li>
-<li>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover><mo><mtext>元组</mtext></mo><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">p</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi></mrow></mover></mrow><annotation encoding="application/x-tex">\stackrel{\mathrm{tuple}}{\text{元组}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.516546em;vertical-align:0em;"></span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.516546em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">元组</span></span></span></span></span><span style="top:-3.930438em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">t</span><span class="mord mathrm mtight">u</span><span class="mord mathrm mtight">p</span><span class="mord mathrm mtight">l</span><span class="mord mathrm mtight">e</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t = ()  <span class="comment"># 空tuple</span></span><br><span class="line">t = (<span class="number">1</span>,)  <span class="comment"># 只有1个元素的tuple</span></span><br><span class="line">t = (<span class="string">'a'</span>, <span class="string">'b'</span>, [<span class="string">'A'</span>, <span class="string">'B'</span>])  <span class="comment"># tuple嵌套list</span></span><br></pre></td></tr></table></figure>
+</blockquote></li>
+<li><p><span class="math inline">\(\stackrel{\mathrm{tuple}}{\text{元组}}\)</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t = ()  <span class="comment"># 空tuple</span></span><br><span class="line">t = (<span class="number">1</span>,)  <span class="comment"># 只有1个元素的tuple</span></span><br><span class="line">t = (<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, [<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>])  <span class="comment"># tuple嵌套list</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>tuple中元素不可变</p>
-</blockquote>
-</li>
-<li>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover><mo><mtext>字典</mtext></mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">t</mi></mrow></mover></mrow><annotation encoding="application/x-tex">\stackrel{\mathrm{dict}}{\text{字典}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.469438em;vertical-align:0em;"></span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.469438em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">字典</span></span></span></span></span><span style="top:-3.88333em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">c</span><span class="mord mathrm mtight">t</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">'Michael'</span>: <span class="number">95</span>, <span class="string">'Bob'</span>: <span class="number">75</span>, <span class="string">'Tracy'</span>: <span class="number">85</span>&#125;  <span class="comment"># 键-值(key-value)对应</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover><mo><mtext>集合</mtext></mo><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">t</mi></mrow></mover></mrow><annotation encoding="application/x-tex">\stackrel{\mathrm{set}}{\text{集合}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.413886em;vertical-align:0em;"></span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.413886em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">集合</span></span></span></span></span><span style="top:-3.88333em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">s</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">t</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+</blockquote></li>
+<li><p><span class="math inline">\(\stackrel{\mathrm{dict}}{\text{字典}}\)</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;Michael&#x27;</span>: <span class="number">95</span>, <span class="string">&#x27;Bob&#x27;</span>: <span class="number">75</span>, <span class="string">&#x27;Tracy&#x27;</span>: <span class="number">85</span>&#125;  <span class="comment"># 键-值(key-value)对应</span></span><br></pre></td></tr></table></figure></li>
+<li><p><span class="math inline">\(\stackrel{\mathrm{set}}{\text{集合}}\)</span></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1 = set([<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>])  <span class="comment"># 由list创建set</span></span><br><span class="line">s2 = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>&#125;  <span class="comment"># set只有key, 没有value</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>set中元素无序</p>
-</blockquote>
-</li>
+</blockquote></li>
 </ol>
-<h4 id="函数的参数"><a class="markdownIt-Anchor" href="#函数的参数"></a> 函数的参数</h4>
+<h4 id="函数的参数">函数的参数</h4>
 <p>函数的参数包括：必选参数、默认参数、可变参数、关键字参数等</p>
 <p>以 默认参数 + 可变参数 为例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">product</span><span class="params">(x1=None, *x2)</span>:</span>  <span class="comment"># x1为默认参数, x2为可变参数</span></span><br><span class="line">    <span class="keyword">if</span> x1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="comment"># if not x1:</span></span><br><span class="line">        <span class="keyword">raise</span> TypeError(<span class="string">'请输入参数'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        y = x1</span><br><span class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> x2:</span><br><span class="line">            y *= t</span><br><span class="line">        <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> product(<span class="number">5</span>) != <span class="number">5</span>:</span><br><span class="line">    print(<span class="string">'测试失败!'</span>)</span><br><span class="line"><span class="keyword">elif</span> product(<span class="number">5</span>, <span class="number">6</span>) != <span class="number">30</span>:</span><br><span class="line">    print(<span class="string">'测试失败!'</span>)</span><br><span class="line"><span class="keyword">elif</span> product(<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>) != <span class="number">210</span>:</span><br><span class="line">    print(<span class="string">'测试失败!'</span>)</span><br><span class="line"><span class="keyword">elif</span> product(<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">9</span>) != <span class="number">1890</span>:</span><br><span class="line">    print(<span class="string">'测试失败!'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        product()</span><br><span class="line">        print(<span class="string">'测试失败!'</span>)</span><br><span class="line">    <span class="keyword">except</span> TypeError:</span><br><span class="line">        print(<span class="string">'测试成功!'</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="切片"><a class="markdownIt-Anchor" href="#切片"></a> 切片</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">product</span>(<span class="params">x1=None, *x2</span>):</span>  <span class="comment"># x1为默认参数, x2为可变参数</span></span><br><span class="line">    <span class="keyword">if</span> x1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="comment"># if not x1:</span></span><br><span class="line">        <span class="keyword">raise</span> TypeError(<span class="string">&#x27;请输入参数&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        y = x1</span><br><span class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> x2:</span><br><span class="line">            y *= t</span><br><span class="line">        <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> product(<span class="number">5</span>) != <span class="number">5</span>:</span><br><span class="line">    print(<span class="string">&#x27;测试失败!&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> product(<span class="number">5</span>, <span class="number">6</span>) != <span class="number">30</span>:</span><br><span class="line">    print(<span class="string">&#x27;测试失败!&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> product(<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>) != <span class="number">210</span>:</span><br><span class="line">    print(<span class="string">&#x27;测试失败!&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> product(<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">9</span>) != <span class="number">1890</span>:</span><br><span class="line">    print(<span class="string">&#x27;测试失败!&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        product()</span><br><span class="line">        print(<span class="string">&#x27;测试失败!&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> TypeError:</span><br><span class="line">        print(<span class="string">&#x27;测试成功!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="切片">切片</h4>
 <p><strong>Slice</strong></p>
 <p>原则：左闭右开</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">L = list(range(<span class="number">100</span>))  <span class="comment"># 第0个 -&gt; 第99个, [0, 1, 2, 3, ..., 99], 100个数</span></span><br><span class="line"></span><br><span class="line">L[:<span class="number">5</span>]  <span class="comment"># 前5个数, 第0个 -&gt; 第4个, [0, 1, 2, 3, 4]</span></span><br><span class="line">L[<span class="number">-5</span>:]  <span class="comment"># 后5个数, 第95个 -&gt; 第99个, [95, 96, 97, 98, 99]</span></span><br><span class="line"></span><br><span class="line">L[<span class="number">5</span>:<span class="number">10</span>]  <span class="comment"># 第5个 -&gt; 第9个, [5, 6, 7, 8, 9]</span></span><br><span class="line">L[<span class="number">-5</span>:<span class="number">-1</span>]  <span class="comment"># 第95个 -&gt; 第98个, [95, 96, 97, 98]</span></span><br><span class="line"></span><br><span class="line">L[:<span class="number">10</span>:<span class="number">2</span>]  <span class="comment"># 前10个数, 每两个取一个, [0, 2, 4, 6, 8]</span></span><br><span class="line">L[::<span class="number">5</span>]  <span class="comment"># 所有数, 每5个取一个</span></span><br></pre></td></tr></table></figure>
-<h4 id="抽象迭代"><a class="markdownIt-Anchor" href="#抽象迭代"></a> 抽象迭代</h4>
-<ol>
-<li>
-<p>Python的<code>for</code>循环抽象程度要高于C的<code>for</code>循环</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>, <span class="string">'c'</span>: <span class="number">3</span>&#125;</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> d:</span><br><span class="line">    print(key)</span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> d.values():</span><br><span class="line">    print(value)</span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> d.items():</span><br><span class="line">    print(k, <span class="string">'='</span>, v)</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>通过<code>collections</code>模块的<code>Iterable</code>类型判断能否迭代</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Iterable</span><br><span class="line">isinstance(<span class="string">'abc'</span>, Iterable)  <span class="comment"># str可迭代, True</span></span><br><span class="line">isinstance([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], Iterable)  <span class="comment"># list可迭代, True</span></span><br><span class="line">isinstance(<span class="number">123</span>, Iterable)  <span class="comment"># 整数不可迭代, False</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>Python内置的<code>enumerate</code>函数可以把一个list变成索引-元素对</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, value <span class="keyword">in</span> enumerate([<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>]):</span><br><span class="line">    print(i, value)</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>同时引用两个变量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> [(<span class="number">1</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">4</span>), (<span class="number">3</span>, <span class="number">9</span>)]:</span><br><span class="line">    print(x, y)</span><br></pre></td></tr></table></figure>
-</li>
+<h4 id="抽象迭代">抽象迭代</h4>
+<ol type="1">
+<li><p>Python的<code>for</code>循环抽象程度要高于C的<code>for</code>循环</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>&#125;</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> d:</span><br><span class="line">    print(key)</span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> d.values():</span><br><span class="line">    print(value)</span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> d.items():</span><br><span class="line">    print(k, <span class="string">&#x27;=&#x27;</span>, v)</span><br></pre></td></tr></table></figure></li>
+<li><p>通过<code>collections</code>模块的<code>Iterable</code>类型判断能否迭代</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Iterable</span><br><span class="line">isinstance(<span class="string">&#x27;abc&#x27;</span>, Iterable)  <span class="comment"># str可迭代, True</span></span><br><span class="line">isinstance([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], Iterable)  <span class="comment"># list可迭代, True</span></span><br><span class="line">isinstance(<span class="number">123</span>, Iterable)  <span class="comment"># 整数不可迭代, False</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Python内置的<code>enumerate</code>函数可以把一个list变成索引-元素对</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, value <span class="keyword">in</span> enumerate([<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]):</span><br><span class="line">    print(i, value)</span><br></pre></td></tr></table></figure></li>
+<li><p>同时引用两个变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> [(<span class="number">1</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">4</span>), (<span class="number">3</span>, <span class="number">9</span>)]:</span><br><span class="line">    print(x, y)</span><br></pre></td></tr></table></figure></li>
 </ol>
-<h4 id="列表生成式"><a class="markdownIt-Anchor" href="#列表生成式"></a> 列表生成式</h4>
+<h4 id="列表生成式">列表生成式</h4>
 <p><strong>List Comprehensions</strong></p>
-<ol>
-<li>
-<p>基本用法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list(range(<span class="number">1</span>, <span class="number">11</span>))  <span class="comment"># [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>循环赋值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">    L.append(x * x)  <span class="comment"># [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>循环简记</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x * x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>)]  <span class="comment"># [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>循环嵌套</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[m + n <span class="keyword">for</span> m <span class="keyword">in</span> <span class="string">'ABC'</span> <span class="keyword">for</span> n <span class="keyword">in</span> <span class="string">'XYZ'</span>]  <span class="comment"># 全排列</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>循环 + 判断</p>
+<ol type="1">
+<li><p>基本用法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list(range(<span class="number">1</span>, <span class="number">11</span>))  <span class="comment"># [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>循环赋值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">    L.append(x * x)  <span class="comment"># [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>循环简记</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x * x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>)]  <span class="comment"># [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>循环嵌套</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[m + n <span class="keyword">for</span> m <span class="keyword">in</span> <span class="string">&#x27;ABC&#x27;</span> <span class="keyword">for</span> n <span class="keyword">in</span> <span class="string">&#x27;XYZ&#x27;</span>]  <span class="comment"># 全排列</span></span><br></pre></td></tr></table></figure></li>
+<li><p>循环 + 判断</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">5</span>) <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]  <span class="comment"># [2, 4]</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>for</code>后面的<code>if</code>是过滤条件，不能有<code>else</code></p>
-</blockquote>
-</li>
-<li>
-<p>判断 + 循环</p>
+</blockquote></li>
+<li><p>判断 + 循环</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">else</span> -x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">5</span>)]  <span class="comment"># [-1, 2, -3, 4]</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>for</code>前面的<code>if ... else</code>是表达式，必须有<code>else</code></p>
-</blockquote>
-</li>
+</blockquote></li>
 </ol>
-<h4 id="高阶函数"><a class="markdownIt-Anchor" href="#高阶函数"></a> 高阶函数</h4>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover><mo><mtext>高阶</mtext></mo><mrow><mi mathvariant="normal">h</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">g</mi><mi mathvariant="normal">h</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi><mo>−</mo><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi></mrow></mover><mtext> </mtext><mover><mo><mtext>函数</mtext></mo><mrow><mi mathvariant="normal">f</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">n</mi></mrow></mover></mrow><annotation encoding="application/x-tex">\stackrel{\mathrm{higher-order}}{\text{高阶}}~\stackrel{\mathrm{function}}{\text{函数}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.516546em;vertical-align:0em;"></span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.516546em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">高阶</span></span></span></span></span><span style="top:-3.930438em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">h</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">g</span><span class="mord mathrm mtight">h</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">r</span><span class="mbin mtight">−</span><span class="mord mathrm mtight">o</span><span class="mord mathrm mtight">r</span><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">r</span></span></span></span></span></span></span></span></span></span><span class="mspace nobreak"> </span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.469438em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">函数</span></span></span></span></span><span style="top:-3.88333em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.07778em;">f</span><span class="mord mathrm mtight">u</span><span class="mord mathrm mtight">n</span><span class="mord mathrm mtight">c</span><span class="mord mathrm mtight">t</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">o</span><span class="mord mathrm mtight">n</span></span></span></span></span></span></span></span></span></span></span></span></span>：一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数。</p>
-<h5 id="mapreduce"><a class="markdownIt-Anchor" href="#mapreduce"></a> map/reduce</h5>
-<ol>
-<li>
-<p><code>map</code> 一般抽象</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line">list(map(f, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))  <span class="comment"># 抽象f, [1, 4, 9, 16, 25]</span></span><br><span class="line">list(map(str, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))  <span class="comment"># 抽象str, ['1', '2', '3', '4', '5']</span></span><br></pre></td></tr></table></figure>
+<h4 id="高阶函数">高阶函数</h4>
+<p><span class="math inline">\(\stackrel{\mathrm{higher-order}}{\text{高阶}}~\stackrel{\mathrm{function}}{\text{函数}}\)</span>：一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数。</p>
+<h5 id="mapreduce">map/reduce</h5>
+<ol type="1">
+<li><p><code>map</code> 一般抽象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line">list(map(f, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))  <span class="comment"># 抽象f, [1, 4, 9, 16, 25]</span></span><br><span class="line">list(map(str, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))  <span class="comment"># 抽象str, [&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;]</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>MATLAB里的<code>arrayfun</code>或<code>.</code>运算与<code>map</code>的功能类似</p>
-</blockquote>
-</li>
-<li>
-<p><code>reduce</code> 企业级抽象</p>
+</blockquote></li>
+<li><p><code>reduce</code> 企业级抽象</p>
 <p>把一个函数作用在一个序列<code>[x1, x2, x3, ...]</code>上，这个函数必须接收两个参数，<code>reduce</code>把结果继续和序列的下一个元素做累积计算</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)  <span class="comment"># 四个元素的伪代码</span></span><br></pre></td></tr></table></figure>
 <p>例如，将序列<code>[6, 3, 2, 4]</code>变换成整数<code>6324</code>：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * <span class="number">10</span> + y</span><br><span class="line"></span><br><span class="line">reduce(fn, [<span class="number">6</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>])</span><br><span class="line">reduce(fn, [<span class="number">2</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">4</span>])  <span class="comment"># 再多点</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x * <span class="number">10</span> + y</span><br><span class="line"></span><br><span class="line">reduce(fn, [<span class="number">6</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>])</span><br><span class="line">reduce(fn, [<span class="number">2</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">4</span>])  <span class="comment"># 再多点</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<h5 id="filter"><a class="markdownIt-Anchor" href="#filter"></a> filter</h5>
+<h5 id="filter">filter</h5>
 <p><code>filter</code>把传入的函数依次作用于每个元素，然后根据返回值是<code>True</code>还是<code>False</code>决定保留还是丢弃该元素。</p>
 <p>例如，删掉偶数，只保留奇数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_odd</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> n % <span class="number">2</span> == <span class="number">1</span></span><br><span class="line"></span><br><span class="line">list(filter(is_odd, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">15</span>]))  <span class="comment"># [1, 5, 9, 15]</span></span><br></pre></td></tr></table></figure>
-<h5 id="sorted"><a class="markdownIt-Anchor" href="#sorted"></a> sorted</h5>
-<ol>
-<li>
-<p>Python内置的<code>sorted</code>函数就可以对list进行排序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted([<span class="number">36</span>, <span class="number">5</span>, <span class="number">-12</span>, <span class="number">9</span>, <span class="number">-21</span>])  <span class="comment"># [-21, -12, 5, 9, 36]</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>接收一个<code>key</code>函数来实现自定义排序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted([<span class="number">36</span>, <span class="number">5</span>, <span class="number">-12</span>, <span class="number">9</span>, <span class="number">-21</span>], key=abs)  <span class="comment"># [5, 9, -12, -21, 36]</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_odd</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> n % <span class="number">2</span> == <span class="number">1</span></span><br><span class="line"></span><br><span class="line">list(filter(is_odd, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">15</span>]))  <span class="comment"># [1, 5, 9, 15]</span></span><br></pre></td></tr></table></figure>
+<h5 id="sorted">sorted</h5>
+<ol type="1">
+<li><p>Python内置的<code>sorted</code>函数就可以对list进行排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted([<span class="number">36</span>, <span class="number">5</span>, <span class="number">-12</span>, <span class="number">9</span>, <span class="number">-21</span>])  <span class="comment"># [-21, -12, 5, 9, 36]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>接收一个<code>key</code>函数来实现自定义排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted([<span class="number">36</span>, <span class="number">5</span>, <span class="number">-12</span>, <span class="number">9</span>, <span class="number">-21</span>], key=abs)  <span class="comment"># [5, 9, -12, -21, 36]</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<h4 id="匿名函数"><a class="markdownIt-Anchor" href="#匿名函数"></a> 匿名函数</h4>
+<h4 id="匿名函数">匿名函数</h4>
 <p>格式</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x, y: x * x + y</span><br><span class="line">f(<span class="number">5</span>, <span class="number">5</span>)  <span class="comment"># 30</span></span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -394,15 +358,15 @@
 <p>MATLAB中的匿名函数：<code>f=@(x,y) x^2+y</code></p>
 </blockquote>
 <p>等价于</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * x + y</span><br></pre></td></tr></table></figure>
-<h4 id="偏函数"><a class="markdownIt-Anchor" href="#偏函数"></a> 偏函数</h4>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover><mo><mtext>偏</mtext></mo><mrow><mi mathvariant="normal">p</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></mover><mtext> </mtext><mover><mo><mtext>函数</mtext></mo><mrow><mi mathvariant="normal">f</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">n</mi></mrow></mover></mrow><annotation encoding="application/x-tex">\stackrel{\mathrm{partial}}{\text{偏}}~\stackrel{\mathrm{function}}{\text{函数}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.516546em;vertical-align:0em;"></span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.516546em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">偏</span></span></span></span></span><span style="top:-3.930438em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">p</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">r</span><span class="mord mathrm mtight">t</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">l</span></span></span></span></span></span></span></span></span></span><span class="mspace nobreak"> </span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.469438em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">函数</span></span></span></span></span><span style="top:-3.88333em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.07778em;">f</span><span class="mord mathrm mtight">u</span><span class="mord mathrm mtight">n</span><span class="mord mathrm mtight">c</span><span class="mord mathrm mtight">t</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">o</span><span class="mord mathrm mtight">n</span></span></span></span></span></span></span></span></span></span></span></span></span>：是通过设定参数的默认值，可以降低函数调用的难度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x * x + y</span><br></pre></td></tr></table></figure>
+<h4 id="偏函数">偏函数</h4>
+<p><span class="math inline">\(\stackrel{\mathrm{partial}}{\text{偏}}~\stackrel{\mathrm{function}}{\text{函数}}\)</span>：是通过设定参数的默认值，可以降低函数调用的难度。</p>
 <p><code>int()</code>函数提供额外的<code>base</code>参数（默认值为<code>10</code>），如果传入<code>base</code>参数，就可以做N进制的转换：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int(<span class="string">'6324'</span>, base=<span class="number">8</span>)  <span class="comment"># 3284为10进制结果</span></span><br><span class="line">int(<span class="string">'6324'</span>, base=<span class="number">16</span>)  <span class="comment"># 25380为16进制结果</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int(<span class="string">&#x27;6324&#x27;</span>, base=<span class="number">8</span>)  <span class="comment"># 3284为10进制结果</span></span><br><span class="line">int(<span class="string">&#x27;6324&#x27;</span>, base=<span class="number">16</span>)  <span class="comment"># 25380为16进制结果</span></span><br></pre></td></tr></table></figure>
 <p>可以定义一个<code>int8()</code>的函数，默认把<code>base=8</code>传进去：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">int8</span><span class="params">(x, base=<span class="number">8</span>)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> int(x, base)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">int8</span>(<span class="params">x, base=<span class="number">8</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> int(x, base)</span><br></pre></td></tr></table></figure>
 <p>利用<code>functools.partial</code>创建一个偏函数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line">int8 = functools.partial(int, base=<span class="number">8</span>)</span><br><span class="line">int8(<span class="string">'6324'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line">int8 = functools.partial(int, base=<span class="number">8</span>)</span><br><span class="line">int8(<span class="string">&#x27;6324&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <hr />
 
     </div>
@@ -488,7 +452,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text"> 数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数的参数"><span class="nav-number">2.</span> <span class="nav-text"> 函数的参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切片"><span class="nav-number">3.</span> <span class="nav-text"> 切片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象迭代"><span class="nav-number">4.</span> <span class="nav-text"> 抽象迭代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表生成式"><span class="nav-number">5.</span> <span class="nav-text"> 列表生成式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高阶函数"><span class="nav-number">6.</span> <span class="nav-text"> 高阶函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mapreduce"><span class="nav-number">6.1.</span> <span class="nav-text"> map&#x2F;reduce</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#filter"><span class="nav-number">6.2.</span> <span class="nav-text"> filter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sorted"><span class="nav-number">6.3.</span> <span class="nav-text"> sorted</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匿名函数"><span class="nav-number">7.</span> <span class="nav-text"> 匿名函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#偏函数"><span class="nav-number">8.</span> <span class="nav-text"> 偏函数</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">函数的参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%87%E7%89%87"><span class="nav-number">3.</span> <span class="nav-text">切片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E8%BF%AD%E4%BB%A3"><span class="nav-number">4.</span> <span class="nav-text">抽象迭代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E7%94%9F%E6%88%90%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">列表生成式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">高阶函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mapreduce"><span class="nav-number">6.1.</span> <span class="nav-text">map&#x2F;reduce</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#filter"><span class="nav-number">6.2.</span> <span class="nav-text">filter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sorted"><span class="nav-number">6.3.</span> <span class="nav-text">sorted</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">匿名函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%81%8F%E5%87%BD%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">偏函数</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -582,7 +546,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Sppy</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
@@ -641,8 +605,53 @@
 
   
       
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+<script type="text/x-mathjax-config">
 
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 

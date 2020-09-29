@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="资料：廖雪峰Python教程 IDE：Spyder">
+  <meta name="description" content="资料：廖雪峰Python教程 IDE：Spyder">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python学习笔记02">
 <meta property="og:url" content="http://www.sppy.site/2020/03/08/Python-learning-notes02/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="资料：廖雪峰Python教程 IDE：Spyder">
+<meta property="og:description" content="资料：廖雪峰Python教程 IDE：Spyder">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-08T04:00:00.000Z">
 <meta property="article:modified_time" content="2020-03-14T08:36:44.893Z">
@@ -259,129 +259,109 @@
 
       
         <blockquote>
-<p>资料：<a href="https://www.liaoxuefeng.com/wiki/1016959663602400" target="_blank" rel="noopener">廖雪峰Python教程</a></p>
-<p>IDE：<a href="https://www.spyder-ide.org/" target="_blank" rel="noopener">Spyder</a></p>
+<p>资料：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1016959663602400">廖雪峰Python教程</a></p>
+<p>IDE：<a target="_blank" rel="noopener" href="https://www.spyder-ide.org/">Spyder</a></p>
 </blockquote>
 <a id="more"></a>
-<h4 id="类和实例"><a class="markdownIt-Anchor" href="#类和实例"></a> 类和实例</h4>
-<ol>
-<li>
-<p><code>class</code>后的<code>Student</code>是类：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_score</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'%s: %s'</span> % (self.name, self.score))</span><br></pre></td></tr></table></figure>
+<h4 id="类和实例">类和实例</h4>
+<ol type="1">
+<li><p><code>class</code>后的<code>Student</code>是类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params">object</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, score</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_score</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;%s: %s&#x27;</span> % (self.name, self.score))</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>__init__</code>为类初始化了两个属性：<code>name</code>和<code>score</code></p>
 <p><code>print_score</code>为类定义了一个方法</p>
 <p><code>self</code>为创建的实例本身，MATLAB定义类时使用的<code>obj</code>与<code>self</code>的功能类似</p>
-</blockquote>
-</li>
-<li>
-<p>变量<code>bart</code>是指向<code>Student</code>的一个实例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bart = Student(<span class="string">'Bart Simpson'</span>, <span class="number">59</span>)</span><br><span class="line">bart.print_score()</span><br></pre></td></tr></table></figure>
-</li>
+</blockquote></li>
+<li><p>变量<code>bart</code>是指向<code>Student</code>的一个实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bart = Student(<span class="string">&#x27;Bart Simpson&#x27;</span>, <span class="number">59</span>)</span><br><span class="line">bart.print_score()</span><br></pre></td></tr></table></figure></li>
 </ol>
-<h4 id="限制访问"><a class="markdownIt-Anchor" href="#限制访问"></a> 限制访问</h4>
-<ol>
-<li>
-<p>实例的变量名如果以<code>__</code>开头，就变成了一个私有变量（private）:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, score)</span>:</span></span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__score = score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_score</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'%s: %s'</span> % (self.__name, self.__score))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_name</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__name</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><code>__name</code>和<code>__score</code>为私有变量，外部无法访问，但可通过<code>_Student__name</code>来访问<code>__name</code>变量：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bart = Student(<span class="string">'Bart Simpson'</span>, <span class="number">59</span>)  <span class="comment"># 构造实例</span></span><br><span class="line">bart.__name  <span class="comment"># 报错: AttributeError</span></span><br><span class="line">bart._Student__name  <span class="comment"># 不建议使用</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>错误做法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bart.__name = <span class="string">'New Name'</span></span><br><span class="line">bart.__name  <span class="comment"># 输出'New Name'</span></span><br></pre></td></tr></table></figure>
+<h4 id="限制访问">限制访问</h4>
+<ol type="1">
+<li><p>实例的变量名如果以<code>__</code>开头，就变成了一个私有变量（private）:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params">object</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, score</span>):</span></span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__score = score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_score</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;%s: %s&#x27;</span> % (self.__name, self.__score))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_name</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.__name</span><br></pre></td></tr></table></figure></li>
+<li><p><code>__name</code>和<code>__score</code>为私有变量，外部无法访问，但可通过<code>_Student__name</code>来访问<code>__name</code>变量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bart = Student(<span class="string">&#x27;Bart Simpson&#x27;</span>, <span class="number">59</span>)  <span class="comment"># 构造实例</span></span><br><span class="line">bart.__name  <span class="comment"># 报错: AttributeError</span></span><br><span class="line">bart._Student__name  <span class="comment"># 不建议使用</span></span><br></pre></td></tr></table></figure></li>
+<li><p>错误做法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bart.__name = <span class="string">&#x27;New Name&#x27;</span></span><br><span class="line">bart.__name  <span class="comment"># 输出&#x27;New Name&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>内部的<code>__name</code>变量已经被Python解释器自动改成了<code>_Student__name</code>，而外部代码给<code>bart</code>新增了一个<code>__name</code>变量。用<code>get_name</code>检验：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bart.get_name() <span class="comment"># get_name()内部返回self.__name</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bart.get_name() <span class="comment"># get_name()内部返回self.__name</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<h4 id="继承和多态"><a class="markdownIt-Anchor" href="#继承和多态"></a> 继承和多态</h4>
-<ol>
-<li>
-<p>定义一个class的时候，可以从某个现有的class继承，新的class称为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover><mo><mtext>子类</mtext></mo><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">s</mi></mrow></mover></mrow><annotation encoding="application/x-tex">\stackrel{\mathrm{Subclass}}{\text{子类}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.469438em;vertical-align:0em;"></span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.469438em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">子类</span></span></span></span></span><span style="top:-3.88333em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">S</span><span class="mord mathrm mtight">u</span><span class="mord mathrm mtight">b</span><span class="mord mathrm mtight">c</span><span class="mord mathrm mtight">l</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">s</span><span class="mord mathrm mtight">s</span></span></span></span></span></span></span></span></span></span></span></span></span>，而被继承的class称为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover><mo><mtext>父类</mtext></mo><mrow><mi mathvariant="normal">B</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">e</mi><mtext> </mtext><mi mathvariant="normal">c</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">s</mi></mrow></mover></mrow><annotation encoding="application/x-tex">\stackrel{\mathrm{Base~class}}{\text{父类}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.469438em;vertical-align:0em;"></span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.469438em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">父类</span></span></span></span></span><span style="top:-3.88333em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">B</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">s</span><span class="mord mathrm mtight">e</span><span class="mspace nobreak mtight"><span class="mtight"> </span></span><span class="mord mathrm mtight">c</span><span class="mord mathrm mtight">l</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">s</span><span class="mord mathrm mtight">s</span></span></span></span></span></span></span></span></span></span></span></span></span>或<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover><mo><mtext>超类</mtext></mo><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">p</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi><mtext> </mtext><mi mathvariant="normal">c</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">s</mi></mrow></mover></mrow><annotation encoding="application/x-tex">\stackrel{\mathrm{Super~class}}{\text{超类}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.516546em;vertical-align:0em;"></span><span class="mrel"><span class="mop op-limits"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.516546em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord text"><span class="mord cjk_fallback">超类</span></span></span></span></span><span style="top:-3.930438em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">S</span><span class="mord mathrm mtight">u</span><span class="mord mathrm mtight">p</span><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight">r</span><span class="mspace nobreak mtight"><span class="mtight"> </span></span><span class="mord mathrm mtight">c</span><span class="mord mathrm mtight">l</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">s</span><span class="mord mathrm mtight">s</span></span></span></span></span></span></span></span></span></span></span></span></span>：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Animal is running...'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Animal is eating...'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Animal)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Dog is eating...'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dog = Dog()</span><br><span class="line">dog.run()  <span class="comment"># Animal is running...</span></span><br><span class="line">dog.eat()  <span class="comment"># Dog is eating...</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>我们定义的数据类型和Python自带的数据类型，比如str、list、dict没什么两样：</p>
+<h4 id="继承和多态">继承和多态</h4>
+<ol type="1">
+<li><p>定义一个class的时候，可以从某个现有的class继承，新的class称为<span class="math inline">\(\stackrel{\mathrm{Subclass}}{\text{子类}}\)</span>，而被继承的class称为<span class="math inline">\(\stackrel{\mathrm{Base~class}}{\text{父类}}\)</span>或<span class="math inline">\(\stackrel{\mathrm{Super~class}}{\text{超类}}\)</span>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;Animal is running...&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;Animal is eating...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Animal</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;Dog is eating...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dog = Dog()</span><br><span class="line">dog.run()  <span class="comment"># Animal is running...</span></span><br><span class="line">dog.eat()  <span class="comment"># Dog is eating...</span></span><br></pre></td></tr></table></figure></li>
+<li><p>我们定义的数据类型和Python自带的数据类型，比如str、list、dict没什么两样：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = list() <span class="comment"># a是list类型</span></span><br><span class="line">b = Animal() <span class="comment"># b是Animal类型</span></span><br><span class="line">c = Dog() <span class="comment"># c是Dog类型</span></span><br></pre></td></tr></table></figure>
 <p>可用<code>isinstance()</code>判断变量类型:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">isinstance(a, list)  <span class="comment"># True</span></span><br><span class="line">isinstance(b, Animal)  <span class="comment"># True</span></span><br><span class="line">isinstance(c, Dog)  <span class="comment"># True</span></span><br><span class="line">isinstance(c, Animal)  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">isinstance(a, list)  <span class="comment"># True</span></span><br><span class="line">isinstance(b, Animal)  <span class="comment"># True</span></span><br><span class="line">isinstance(c, Dog)  <span class="comment"># True</span></span><br><span class="line">isinstance(c, Animal)  <span class="comment"># True</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<h4 id="获取对象信息"><a class="markdownIt-Anchor" href="#获取对象信息"></a> 获取对象信息</h4>
-<ol>
-<li>
-<p><code>type()</code>：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">type(<span class="number">123</span>)  <span class="comment"># &lt;class 'int'&gt;</span></span><br><span class="line">type(<span class="number">123</span>)==int  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">type(<span class="string">'str'</span>)  <span class="comment"># &lt;class 'str'&gt;</span></span><br><span class="line">type(<span class="string">'abc'</span>)==str  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">type(abs)  <span class="comment"># &lt;class 'builtin_function_or_method'&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="获取对象信息">获取对象信息</h4>
+<ol type="1">
+<li><p><code>type()</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">type(<span class="number">123</span>)  <span class="comment"># &lt;class &#x27;int&#x27;&gt;</span></span><br><span class="line">type(<span class="number">123</span>)==int  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">type(<span class="string">&#x27;str&#x27;</span>)  <span class="comment"># &lt;class &#x27;str&#x27;&gt;</span></span><br><span class="line">type(<span class="string">&#x27;abc&#x27;</span>)==str  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">type(abs)  <span class="comment"># &lt;class &#x27;builtin_function_or_method&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
 <p>使用<code>types</code>模块判断是否为函数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> types</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">type(fn)==types.FunctionType  <span class="comment"># True</span></span><br><span class="line">type(abs)==types.BuiltinFunctionType  <span class="comment"># True</span></span><br><span class="line">type(<span class="keyword">lambda</span> x: x)==types.LambdaType  <span class="comment"># True</span></span><br><span class="line">type((x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>)))==types.GeneratorType  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><code>isinstance()</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> types</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">type(fn)==types.FunctionType  <span class="comment"># True</span></span><br><span class="line">type(abs)==types.BuiltinFunctionType  <span class="comment"># True</span></span><br><span class="line">type(<span class="keyword">lambda</span> x: x)==types.LambdaType  <span class="comment"># True</span></span><br><span class="line">type((x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>)))==types.GeneratorType  <span class="comment"># True</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>isinstance()</code>：</p>
 <p><strong>继承和多态</strong>中已有示例。补充判断一个变量是否是某些类型中的一种：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">isinstance([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], (list, tuple))  <span class="comment"># True</span></span><br><span class="line">isinstance((<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), (list, tuple))  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><code>dir()</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">isinstance([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], (list, tuple))  <span class="comment"># True</span></span><br><span class="line">isinstance((<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), (list, tuple))  <span class="comment"># True</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>dir()</code>：</p>
 <p>返回一个包含字符串的list，获得对象的所有属性和方法。</p>
 <p><code>getattr()</code>、<code>setattr()</code>以及<code>hasattr()</code>，可以直接操作一个对象的状态：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.x = <span class="number">9</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">power</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.x * self.x</span><br><span class="line"></span><br><span class="line">obj = MyObject()</span><br><span class="line">hasattr(obj, <span class="string">'x'</span>)  <span class="comment"># 有属性'x'吗?</span></span><br><span class="line">setattr(obj, <span class="string">'y'</span>, <span class="number">19</span>)  <span class="comment"># 设置一个属性'y'</span></span><br><span class="line">getattr(obj, <span class="string">'y'</span>)  <span class="comment"># 获取属性'y'</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.x = <span class="number">9</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">power</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.x * self.x</span><br><span class="line"></span><br><span class="line">obj = MyObject()</span><br><span class="line">hasattr(obj, <span class="string">&#x27;x&#x27;</span>)  <span class="comment"># 有属性&#x27;x&#x27;吗?</span></span><br><span class="line">setattr(obj, <span class="string">&#x27;y&#x27;</span>, <span class="number">19</span>)  <span class="comment"># 设置一个属性&#x27;y&#x27;</span></span><br><span class="line">getattr(obj, <span class="string">&#x27;y&#x27;</span>)  <span class="comment"># 获取属性&#x27;y&#x27;</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<h4 id="实例属性和类属性"><a class="markdownIt-Anchor" href="#实例属性和类属性"></a> 实例属性和类属性</h4>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    NAME = <span class="string">'STUDENT'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">s = Student(<span class="string">'Bob'</span>)  <span class="comment"># 实例属性</span></span><br><span class="line">s.score = <span class="number">90</span>  <span class="comment"># 添加实例属性</span></span><br><span class="line">s.name  <span class="comment"># 实例属性</span></span><br><span class="line">s.NAME  <span class="comment"># 类属性</span></span><br></pre></td></tr></table></figure>
-<h4 id="错误处理"><a class="markdownIt-Anchor" href="#错误处理"></a> 错误处理</h4>
+<h4 id="实例属性和类属性">实例属性和类属性</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params">object</span>):</span></span><br><span class="line">    NAME = <span class="string">&#x27;STUDENT&#x27;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">s = Student(<span class="string">&#x27;Bob&#x27;</span>)  <span class="comment"># 实例属性</span></span><br><span class="line">s.score = <span class="number">90</span>  <span class="comment"># 添加实例属性</span></span><br><span class="line">s.name  <span class="comment"># 实例属性</span></span><br><span class="line">s.NAME  <span class="comment"># 类属性</span></span><br></pre></td></tr></table></figure>
+<h4 id="错误处理">错误处理</h4>
 <p>Python内置了<code>try...except...finally...</code>的错误处理机制：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    x = float(input(<span class="string">'输入第一个数: '</span>))</span><br><span class="line">    y = float(input(<span class="string">'输入第二个数: '</span>))</span><br><span class="line">    print(x / y)</span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError:</span><br><span class="line">    print(<span class="string">'分母不等为0!'</span>)</span><br><span class="line"><span class="keyword">except</span> ValueError:</span><br><span class="line">    print(<span class="string">'输入应为数!'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'没问题'</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    print(x, y)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    x = float(input(<span class="string">&#x27;输入第一个数: &#x27;</span>))</span><br><span class="line">    y = float(input(<span class="string">&#x27;输入第二个数: &#x27;</span>))</span><br><span class="line">    print(x / y)</span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError:</span><br><span class="line">    print(<span class="string">&#x27;分母不等为0!&#x27;</span>)</span><br><span class="line"><span class="keyword">except</span> ValueError:</span><br><span class="line">    print(<span class="string">&#x27;输入应为数!&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&#x27;没问题&#x27;</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    print(x, y)</span><br></pre></td></tr></table></figure>
 <p>常见错误类：</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:center">类名</th>
-<th style="text-align:center">描述</th>
+<tr class="header">
+<th style="text-align: center;">类名</th>
+<th style="text-align: center;">描述</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">Exception</td>
-<td style="text-align:center">几乎所有错误类都是从它派生而来的</td>
+<tr class="odd">
+<td style="text-align: center;">Exception</td>
+<td style="text-align: center;">几乎所有错误类都是从它派生而来的</td>
 </tr>
-<tr>
-<td style="text-align:center">OSError</td>
-<td style="text-align:center">操作系统不能执行指定的任务（如打开文件）时引发</td>
+<tr class="even">
+<td style="text-align: center;">OSError</td>
+<td style="text-align: center;">操作系统不能执行指定的任务（如打开文件）时引发</td>
 </tr>
-<tr>
-<td style="text-align:center">IndexError</td>
-<td style="text-align:center">使用序列中不存在的索引时引发</td>
+<tr class="odd">
+<td style="text-align: center;">IndexError</td>
+<td style="text-align: center;">使用序列中不存在的索引时引发</td>
 </tr>
-<tr>
-<td style="text-align:center">KeyError</td>
-<td style="text-align:center">使用映射中不存在的键值时引发</td>
+<tr class="even">
+<td style="text-align: center;">KeyError</td>
+<td style="text-align: center;">使用映射中不存在的键值时引发</td>
 </tr>
-<tr>
-<td style="text-align:center">NameError</td>
-<td style="text-align:center">找不到变量时引发</td>
+<tr class="odd">
+<td style="text-align: center;">NameError</td>
+<td style="text-align: center;">找不到变量时引发</td>
 </tr>
-<tr>
-<td style="text-align:center">SyntaxError</td>
-<td style="text-align:center">代码不正确时引发</td>
+<tr class="even">
+<td style="text-align: center;">SyntaxError</td>
+<td style="text-align: center;">代码不正确时引发</td>
 </tr>
-<tr>
-<td style="text-align:center">TypeError</td>
-<td style="text-align:center">将内置操作或函数用于类型不正确的对象时引发</td>
+<tr class="odd">
+<td style="text-align: center;">TypeError</td>
+<td style="text-align: center;">将内置操作或函数用于类型不正确的对象时引发</td>
 </tr>
-<tr>
-<td style="text-align:center">ValueError</td>
-<td style="text-align:center">将内置操作或函数用于值不正确的对象时引发</td>
+<tr class="even">
+<td style="text-align: center;">ValueError</td>
+<td style="text-align: center;">将内置操作或函数用于值不正确的对象时引发</td>
 </tr>
-<tr>
-<td style="text-align:center">ZeroDivisionError</td>
-<td style="text-align:center">在除法或求模运算的第二个参数为零时引发</td>
+<tr class="odd">
+<td style="text-align: center;">ZeroDivisionError</td>
+<td style="text-align: center;">在除法或求模运算的第二个参数为零时引发</td>
 </tr>
 </tbody>
 </table>
-<p>更多错误详见：<a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy" target="_blank" rel="noopener">Exception hierarchy</a></p>
+<p>更多错误详见：<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">Exception hierarchy</a></p>
 <hr />
 
     </div>
@@ -467,7 +447,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类和实例"><span class="nav-number">1.</span> <span class="nav-text"> 类和实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限制访问"><span class="nav-number">2.</span> <span class="nav-text"> 限制访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承和多态"><span class="nav-number">3.</span> <span class="nav-text"> 继承和多态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取对象信息"><span class="nav-number">4.</span> <span class="nav-text"> 获取对象信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例属性和类属性"><span class="nav-number">5.</span> <span class="nav-text"> 实例属性和类属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误处理"><span class="nav-number">6.</span> <span class="nav-text"> 错误处理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%92%8C%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">类和实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E8%AE%BF%E9%97%AE"><span class="nav-number">2.</span> <span class="nav-text">限制访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81"><span class="nav-number">3.</span> <span class="nav-text">继承和多态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E4%BF%A1%E6%81%AF"><span class="nav-number">4.</span> <span class="nav-text">获取对象信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7%E5%92%8C%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">实例属性和类属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">错误处理</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -561,7 +541,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Sppy</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
@@ -620,8 +600,53 @@
 
   
       
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+<script type="text/x-mathjax-config">
 
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
