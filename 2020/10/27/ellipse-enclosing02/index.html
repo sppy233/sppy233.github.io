@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://www.sppy.site').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="问题解答  给定点集 \(\mathcal{P}&#x3D;\{P_1,P_2,\cdots,P_n\}\) ，求包围该点集的最小椭圆 \(\mathcal{E}\) 。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="点集的最小外包围椭圆02">
+<meta property="og:url" content="http://www.sppy.site/2020/10/27/ellipse-enclosing02/index.html">
+<meta property="og:site_name" content="Island">
+<meta property="og:description" content="问题解答  给定点集 \(\mathcal{P}&#x3D;\{P_1,P_2,\cdots,P_n\}\) ，求包围该点集的最小椭圆 \(\mathcal{E}\) 。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-27T03:30:00.000Z">
+<meta property="article:modified_time" content="2020-10-27T06:15:04.605Z">
+<meta property="article:author" content="Sppy">
+<meta property="article:tag" content="matlab, latex, abaqus, fem, fortran, umat">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.sppy.site/2020/10/27/ellipse-enclosing02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>点集的最小外包围椭圆02 | Island</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c05c629d868a316b7f99adc8242397c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Island</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">止于至善</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-favorite">
+
+    <a href="/favorite/" rel="section"><i class="fa fa-fw fa-bookmark"></i>收藏</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.sppy.site/2020/10/27/ellipse-enclosing02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Sppy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Island">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          点集的最小外包围椭圆02
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-10-27 11:30:00 / 修改时间：14:15:04" itemprop="dateCreated datePublished" datetime="2020-10-27T11:30:00+08:00">2020-10-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>问题解答</p>
+</blockquote>
+<p>给定点集 <span class="math inline">\(\mathcal{P}=\{P_1,P_2,\cdots,P_n\}\)</span> ，求包围该点集的<strong>最小椭圆</strong> <span class="math inline">\(\mathcal{E}\)</span> 。</p>
+<a id="more"></a>
+<h2 id="椭圆大小">椭圆大小</h2>
+<blockquote>
+<p>给定椭圆的半轴 <span class="math inline">\(a\)</span> 、<span class="math inline">\(b\)</span> ，如何定义椭圆的大小？</p>
+</blockquote>
+<ul>
+<li>面积：<span class="math inline">\(\mathrm{Area}(\mathcal{E})=\pi ab\)</span></li>
+<li>周长：<span class="math inline">\(\mathrm{Perimeter}(\mathcal{E})=\int_0^{2\pi} \sqrt{(a\sin t)^2+(b\cos t)^2}~\mathrm{d}t\)</span></li>
+</ul>
+<p>对于周长 <span class="math inline">\(\mathrm{Perimeter}(\mathcal{E})\)</span> 没有一个简单的初等函数表达形式，故采用面积 <span class="math inline">\(\mathrm{Area}(\mathcal{E})\)</span> 来定义椭圆大小。</p>
+<h2 id="问题建模">问题建模</h2>
+<h3 id="数学抽象">数学抽象</h3>
+<p>将二次曲线形式的椭圆方程 <span class="math display">\[
+Ax^2+Bxy+Cy^2+Dx+Ey+F=0
+\]</span> 变换为中心形式，即 <span class="math display">\[
+A(x-x_0)^2+B(x-x_0)(y-y_0)+C(y-y_0)^2=f
+\]</span> 其中 <span class="math display">\[
+x_0=\frac{2CD-BE}{B^2-4AC}\qquad y_0=\frac{2AE-BD}{B^2-4AC}
+\]</span></p>
+<p><span class="math display">\[
+f=-F+Ax_0^2+Bx_0y_0+Cy_0^2
+\]</span></p>
+<p>将中心形式方程记为二次型，即 <span class="math display">\[
+\underbrace{\begin{bmatrix} x-x_0 \\ y-y_0 \end{bmatrix}^{\mathrm{T}}}_{\vec{\boldsymbol{x}}^{\mathrm{T}}}\cdot
+\underbrace{\begin{bmatrix} A/f&amp;B/2f \\ B/2f&amp;C/f \end{bmatrix}}_{M}\cdot\underbrace{\begin{bmatrix} x-x_0 \\ y-y_0 \end{bmatrix}}_{\vec{\boldsymbol{x}}}=1
+\]</span> 对于实对称矩阵 <span class="math inline">\(M\)</span> ，存在正交矩阵 <span class="math inline">\(Q\)</span> ，使得 <span class="math display">\[
+Q\cdot M \cdot Q^{\mathrm{T}}=\begin{bmatrix} \lambda_1&amp;0 \\ 0&amp;\lambda_2 \end{bmatrix}
+\]</span> 若 <span class="math inline">\(\det(Q)=1\)</span> （逆时针旋转为正），则有 <span class="math display">\[
+a^2=1/\lambda_1 \qquad b^2=1/\lambda_2
+\]</span> 于是有 <span class="math display">\[
+\mathrm{Area}(\mathcal{E})=\pi ab=\pi\sqrt{\frac{1}{\lambda_1\lambda_2}}=\pi\sqrt{\frac{1}{\det(M)}}
+\]</span> 即当 <span class="math inline">\(\det(M)\)</span> 取最大值时，椭圆面积最小。</p>
+<h3 id="优化建模">优化建模</h3>
+<p>中心形式方程中有六个未知数，可将其中的 <span class="math inline">\(f\)</span> 作为归一化量，则设计变量为 <span class="math inline">\((A,B,C,x_0,y_0)\)</span> 。</p>
+<blockquote>
+<p><span class="math inline">\(A(x-x_0)^2+B(x-x_0)(y-y_0)+C(y-y_0)^2=f\)</span> ，可令 <span class="math inline">\(f\)</span> 为常数</p>
+</blockquote>
+<p>显然，矩阵 <span class="math inline">\(M\)</span> 的两个特征值均需大于零，考虑到 <span class="math display">\[
+\lambda_1\lambda_2=\frac{4AC-B^2}{4f^2}\qquad \lambda_1+\lambda_2=\frac{A+C}{f}
+\]</span> 于是有 <span class="math display">\[
+4AC-B^2&gt;0\qquad (A+C)f&gt;0
+\]</span> 显然，<span class="math inline">\(A\)</span> 、<span class="math inline">\(C\)</span> 、<span class="math inline">\(f\)</span> 同号。</p>
+<p>考虑到点集 <span class="math inline">\(\mathcal{P}=\{P_1,P_2,\cdots,P_n\}\)</span> 在椭圆 <span class="math inline">\(\mathcal{E}\)</span> 内，则有 <span class="math display">\[
+A(x_i-x_0)^2+B(x_i-x_0)(y_i-y_0)+C(y_i-y_0)^2\le f
+\]</span> 其中，<span class="math inline">\((x_i,y_i)\)</span> 为第 <span class="math inline">\(i\)</span> 个点的坐标。</p>
+<p>综上，该优化问题为 <span class="math display">\[
+\begin{array}{l}
+\min.\quad f(A,B,C,x_0,y_0)=\left.\displaystyle\frac{4f^2}{4AC-B^2}\right|_{f=\mathrm{positive~constant}}\\[8pt]
+\mathrm{st}.\quad
+\left\{\begin{array}{l}
+   4AC-B^2&gt;0 \\[5pt]
+   A&gt;0 \\[5pt]
+   C&gt;0 \\[5pt]
+   A(x_i-x_0)^2+B(x_i-x_0)(y_i-y_0)+C(y_i-y_0)^2\le f\quad(i=1,2,\cdots,n)
+\end{array}\right.
+\end{array}
+\]</span></p>
+<h2 id="计算程序">计算程序</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">clc;clear;close all;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 测试数据1</span></span><br><span class="line"><span class="comment">% num=200;</span></span><br><span class="line"><span class="comment">% x=rands(num,1)+linspace(0.1,10,num)&#x27;;</span></span><br><span class="line"><span class="comment">% y=rands(num,1).^2+log(linspace(0.1,10,num)&#x27;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 测试数据2</span></span><br><span class="line">x=[<span class="number">223.733951757250</span>;<span class="number">223.833697394539</span>;<span class="number">223.922646689227</span>;<span class="number">224.000880733819</span>;<span class="number">224.068653128016</span>;<span class="number">224.126560116489</span>;<span class="number">224.175758538324</span>;<span class="number">224.218011319415</span>;<span class="number">224.255507049715</span>;<span class="number">224.290675342302</span>;<span class="number">224.325918591334</span>;<span class="number">224.363330300223</span>;<span class="number">224.404466422983</span>;<span class="number">224.450246806729</span>;<span class="number">224.500957932443</span>;<span class="number">224.556301903270</span>;<span class="number">224.615524985632</span>;<span class="number">224.677605425843</span>;<span class="number">224.741422264585</span>;<span class="number">224.805988686164</span>;<span class="number">224.870575758886</span>;<span class="number">224.934764214239</span>;<span class="number">224.998380690226</span>;<span class="number">225.061302970145</span>;<span class="number">225.123319187764</span>;<span class="number">225.184191802578</span>;<span class="number">225.243817794490</span>;<span class="number">225.302337803345</span>;<span class="number">225.360151644602</span>;<span class="number">225.417790413442</span>;<span class="number">225.475722830957</span>;<span class="number">225.534133810977</span>;<span class="number">225.592763498866</span>;<span class="number">225.650850136415</span>;<span class="number">225.707023708177</span>;<span class="number">225.759312918096</span>;<span class="number">225.805404309633</span>;<span class="number">225.842980260142</span>;<span class="number">225.869996170339</span>;<span class="number">225.884908318228</span>;<span class="number">225.886947516890</span>;<span class="number">225.876285457031</span>;<span class="number">225.854018753504</span>;<span class="number">225.822035246754</span>;<span class="number">225.782821832544</span>;<span class="number">225.739089830514</span>;<span class="number">225.693366113721</span>;<span class="number">225.647709389771</span>;<span class="number">225.603574628860</span>;<span class="number">225.561705513734</span>;<span class="number">225.522053111182</span>;<span class="number">225.483911443817</span>;<span class="number">225.446270952057</span>;<span class="number">225.408209109314</span>;<span class="number">225.369169027461</span>;<span class="number">225.329118808556</span>;<span class="number">225.288598511188</span>;<span class="number">225.248680210334</span>;<span class="number">225.210782721995</span>;<span class="number">225.176329939259</span>;<span class="number">225.146539635617</span>;<span class="number">225.122471772716</span>;<span class="number">225.105199250200</span>;<span class="number">225.095934153070</span>;<span class="number">225.096067492676</span>;<span class="number">225.107113972238</span>;<span class="number">225.130443716057</span>;<span class="number">225.166890953114</span>;<span class="number">225.216465475091</span>;<span class="number">225.278273671757</span>;<span class="number">225.350668760968</span>;<span class="number">225.431453487920</span>;<span class="number">225.517896617177</span>;<span class="number">225.606815061359</span>;<span class="number">225.694759078130</span>;<span class="number">225.778159155728</span>;<span class="number">225.853657752780</span>;<span class="number">225.918602553822</span>;<span class="number">225.971363271951</span>;<span class="number">226.011414507445</span>;<span class="number">226.039215868141</span>;<span class="number">226.055901535522</span>;<span class="number">226.063036419289</span>;<span class="number">226.062544979761</span>;<span class="number">226.056624371470</span>;<span class="number">226.047441112180</span>;<span class="number">226.036908177029</span>;<span class="number">226.026633747980</span>;<span class="number">226.017891953112</span>;<span class="number">226.011584773485</span>;<span class="number">226.008157919702</span>;<span class="number">226.007514307594</span>;<span class="number">226.009016391487</span>;<span class="number">226.011711597181</span>;<span class="number">226.014693060596</span>;<span class="number">226.017420673647</span>;<span class="number">226.019921200759</span>;<span class="number">226.022680352064</span>;<span class="number">226.026353630374</span>;<span class="number">226.031642200878</span>;<span class="number">226.039257260013</span>;<span class="number">226.049736809320</span>;<span class="number">226.063332528479</span>;<span class="number">226.080044342181</span>;<span class="number">226.099683758408</span>;<span class="number">226.122004996791</span>;<span class="number">226.146925201504</span>;<span class="number">226.174710616286</span>;<span class="number">226.205985989252</span>;<span class="number">226.241557869553</span>;<span class="number">226.282025878988</span>;<span class="number">226.327438532043</span>;<span class="number">226.377242317162</span>;<span class="number">226.430345121498</span>;<span class="number">226.485262494219</span>;<span class="number">226.540401902539</span>;<span class="number">226.594277719489</span>;<span class="number">226.645628227577</span>;<span class="number">226.693616615330</span>;<span class="number">226.737807541775</span>;<span class="number">226.778080810533</span>;<span class="number">226.814649132657</span>;<span class="number">226.848098778648</span>;<span class="number">226.879309894412</span>;<span class="number">226.909309796824</span>;<span class="number">226.939184897437</span>;<span class="number">226.969976400198</span>;<span class="number">227.002679994746</span>;<span class="number">227.038389691321</span>;<span class="number">227.078362523234</span>;<span class="number">227.123829188786</span>;<span class="number">227.175794506171</span>;<span class="number">227.234943923084</span>;<span class="number">227.301484197341</span>;<span class="number">227.375006842603</span>;<span class="number">227.454474216806</span>;<span class="number">227.538354507998</span>;<span class="number">227.624772408166</span>;<span class="number">227.711799127999</span>;<span class="number">227.797821986571</span>;<span class="number">227.881759489701</span>;<span class="number">227.963241620317</span>;<span class="number">228.042626107807</span>;<span class="number">228.120722387549</span>;<span class="number">228.198441377807</span>;<span class="number">228.276455592957</span>;<span class="number">228.354980045987</span>;<span class="number">228.433675886679</span>;<span class="number">228.511657716428</span>;<span class="number">228.587727201068</span>;<span class="number">228.660657519266</span>;<span class="number">228.729289362715</span>;<span class="number">228.792486292443</span>;<span class="number">228.849147992902</span>;<span class="number">228.898386595429</span>;<span class="number">228.939774908702</span>;<span class="number">228.973426618427</span>;<span class="number">228.999861816890</span>;<span class="number">229.019827828428</span>;<span class="number">229.034145256230</span>;<span class="number">229.043706952390</span>;<span class="number">229.049646156479</span>;<span class="number">229.053416189673</span>;<span class="number">229.056750845093</span>;<span class="number">229.061610040660</span>;<span class="number">229.070190652075</span>;<span class="number">229.084815640852</span>;<span class="number">229.107643564561</span>;<span class="number">229.140298281372</span>;<span class="number">229.183513607371</span>;<span class="number">229.236949820189</span>;<span class="number">229.299254420218</span>;<span class="number">229.368240381822</span>;<span class="number">229.441184183142</span>;<span class="number">229.515225130230</span>;<span class="number">229.587820681930</span>;<span class="number">229.656935247980</span>;<span class="number">229.720925310027</span>;<span class="number">229.778486226739</span>;<span class="number">229.828786427130</span>;<span class="number">229.871460766725</span>;<span class="number">229.906430867921</span>;<span class="number">229.933869552015</span>;<span class="number">229.954237736006</span>;<span class="number">229.968190174056</span>;<span class="number">229.976429988024</span>;<span class="number">229.979558088383</span>;<span class="number">229.978027894463</span>;<span class="number">229.972268000650</span>;<span class="number">229.962772994561</span>;<span class="number">229.950019070323</span>;<span class="number">229.934353821778</span>;<span class="number">229.915894485670</span>;<span class="number">229.894504909283</span>;<span class="number">229.869911452167</span>;<span class="number">229.841845764500</span>;<span class="number">229.810158875628</span>;<span class="number">229.774992319968</span>;<span class="number">229.736836303536</span>;<span class="number">229.696449647228</span>;<span class="number">229.654769210775</span>;<span class="number">229.612857298103</span>;<span class="number">229.571668517161</span>;<span class="number">229.531663113146</span>;<span class="number">229.492562239760</span>;<span class="number">229.453423134291</span>;<span class="number">229.412888999365</span>;<span class="number">229.369411012489</span>;<span class="number">229.321453947529</span>;<span class="number">229.267699911206</span>;<span class="number">229.207343853741</span>;<span class="number">229.140361142994</span>;<span class="number">229.067587824171</span>;<span class="number">228.990491867326</span>;<span class="number">228.910918730048</span>;<span class="number">228.830814043544</span>;<span class="number">228.751848934085</span>;<span class="number">228.675131779455</span>;<span class="number">228.601231834357</span>;<span class="number">228.530386383324</span>;<span class="number">228.462725196508</span>;<span class="number">228.398289205354</span>;<span class="number">228.336856740784</span>;<span class="number">228.277833972044</span>;<span class="number">228.220386048036</span>;<span class="number">228.163747854214</span>;<span class="number">228.107503988828</span>;<span class="number">228.051725936565</span>;<span class="number">227.997067476431</span>;<span class="number">227.944711218602</span>;<span class="number">227.896030857659</span>;<span class="number">227.852093937700</span>;<span class="number">227.813236162533</span>;<span class="number">227.778909428099</span>;<span class="number">227.747824041007</span>;<span class="number">227.718185750697</span>;<span class="number">227.687941644250</span>;<span class="number">227.655132281530</span>;<span class="number">227.618343178388</span>;<span class="number">227.576940357431</span>;<span class="number">227.531099558532</span>;<span class="number">227.481680569457</span>;<span class="number">227.430048321957</span>;<span class="number">227.377801152558</span>;<span class="number">227.326590043391</span>;<span class="number">227.278088097508</span>;<span class="number">227.233822485975</span>;<span class="number">227.194928823853</span>;<span class="number">227.162011989237</span>;<span class="number">227.135044467314</span>;<span class="number">227.113385417182</span>;<span class="number">227.096019609365</span>;<span class="number">227.081939634223</span>;<span class="number">227.070430083512</span>;<span class="number">227.061137724592</span>;<span class="number">227.054043317376</span>;<span class="number">227.049385761250</span>;<span class="number">227.047556996408</span>;<span class="number">227.048945774543</span>;<span class="number">227.053633837800</span>;<span class="number">227.061223906704</span>;<span class="number">227.070985402491</span>;<span class="number">227.082172170768</span>;<span class="number">227.094193955669</span>;<span class="number">227.106501193714</span>;<span class="number">227.118319215879</span>;<span class="number">227.128458470810</span>;<span class="number">227.135257382120</span>;<span class="number">227.136622999962</span>;<span class="number">227.130171668375</span>;<span class="number">227.113407860108</span>;<span class="number">227.084078171916</span>;<span class="number">227.040671881653</span>;<span class="number">226.982675707136</span>;<span class="number">226.910523342888</span>;<span class="number">226.825443094448</span>;<span class="number">226.729357384043</span>;<span class="number">226.624793911211</span>;<span class="number">226.514743888006</span>;<span class="number">226.402461298158</span>;<span class="number">226.291158484369</span>;<span class="number">226.183777632105</span>;<span class="number">226.082886361490</span>;<span class="number">225.990595364466</span>;<span class="number">225.908422104094</span>;<span class="number">225.837113303390</span>;<span class="number">225.776630802889</span>;<span class="number">225.726277648946</span>;<span class="number">225.684869139300</span>;<span class="number">225.651014328905</span>;<span class="number">225.623420448135</span>;<span class="number">225.601193474491</span>;<span class="number">225.583940518838</span>;<span class="number">225.571580351099</span>;<span class="number">225.564085948839</span>;<span class="number">225.561288533707</span>;<span class="number">225.562710030863</span>;<span class="number">225.567498426293</span>;<span class="number">225.574514601934</span>;<span class="number">225.582467431579</span>;<span class="number">225.590122966365</span>;<span class="number">225.596594410301</span>;<span class="number">225.601603978839</span>;<span class="number">225.605606065942</span>;<span class="number">225.609747340686</span>;<span class="number">225.615705230363</span>;<span class="number">225.625496821392</span>;<span class="number">225.641236177881</span>;<span class="number">225.664811797126</span>;<span class="number">225.697712308718</span>;<span class="number">225.740951772221</span>;<span class="number">225.794982419428</span>;<span class="number">225.859641138390</span>;<span class="number">225.934182968855</span>;<span class="number">226.017292185793</span>;<span class="number">226.107124699310</span>;<span class="number">226.201440408999</span>;<span class="number">226.297852371059</span>;<span class="number">226.394089133090</span>;<span class="number">226.488173693553</span>;<span class="number">226.578561697237</span>;<span class="number">226.664200124716</span>;<span class="number">226.744425869261</span>;<span class="number">226.818882752056</span>;<span class="number">226.887533596128</span>;<span class="number">226.950706351811</span>;<span class="number">227.009082884588</span>;<span class="number">227.063700274818</span>;<span class="number">227.116047166713</span>;<span class="number">227.168118558718</span>;<span class="number">227.222381103607</span>;<span class="number">227.281669434780</span>;<span class="number">227.348984535901</span>;<span class="number">227.427047696040</span>;<span class="number">227.517936199133</span>;<span class="number">227.622919992535</span>;<span class="number">227.742449152700</span>;<span class="number">227.876283426094</span>;<span class="number">228.023556366069</span>;<span class="number">228.182810486380</span>;<span class="number">228.352033167788</span>;<span class="number">228.528734965340</span>;<span class="number">228.710125555104</span>;<span class="number">228.893339833403</span>;<span class="number">229.075623936998</span>;<span class="number">229.254503559596</span>;<span class="number">229.427941263094</span>;<span class="number">229.594489438819</span>;<span class="number">229.753489557472</span>;<span class="number">229.905242763539</span>;<span class="number">230.050991645143</span>;<span class="number">230.192722350278</span>;<span class="number">230.332758399343</span>;<span class="number">230.473209403382</span>;<span class="number">230.615390176122</span>;<span class="number">230.759505281311</span>;<span class="number">230.904759975625</span>;<span class="number">231.049794633994</span>;<span class="number">231.193040303728</span>;<span class="number">231.332842191959</span>;<span class="number">231.467503581034</span>;<span class="number">231.595435710618</span>;<span class="number">231.715407310618</span>;<span class="number">231.826653034394</span>;<span class="number">231.928730519882</span>;<span class="number">232.021274796909</span>;<span class="number">232.103840851391</span>;<span class="number">232.175789600995</span>;<span class="number">232.236190553921</span>;<span class="number">232.283968599539</span>;<span class="number">232.318272384955</span>;<span class="number">232.338735738386</span>;<span class="number">232.345660197826</span>;<span class="number">232.340005585847</span>;<span class="number">232.323126934259</span>;<span class="number">232.296400966296</span>;<span class="number">232.261017142323</span>;<span class="number">232.217904195576</span>;<span class="number">232.167772572329</span>;<span class="number">232.111216633142</span>;<span class="number">232.048789406754</span>;<span class="number">231.981076544546</span>;<span class="number">231.908663394859</span>;<span class="number">231.831968926939</span>;<span class="number">231.751136727983</span>;<span class="number">231.666093850211</span>;<span class="number">231.576780183650</span>;<span class="number">231.483421886108</span>;<span class="number">231.386663773525</span>;<span class="number">231.287541894097</span>;<span class="number">231.187392334862</span>;<span class="number">231.087736456938</span>;<span class="number">230.990145824909</span>;<span class="number">230.896088528141</span>;<span class="number">230.806792674954</span>;<span class="number">230.723216675763</span>;<span class="number">230.646103021989</span>;<span class="number">230.575991955534</span>;<span class="number">230.513208247802</span>;<span class="number">230.457867174616</span>];</span><br><span class="line">y=[<span class="number">180.289972476265</span>;<span class="number">180.196048742147</span>;<span class="number">180.114716168600</span>;<span class="number">180.044466597916</span>;<span class="number">180.006363729235</span>;<span class="number">180.031817484419</span>;<span class="number">180.125947980568</span>;<span class="number">180.264228370686</span>;<span class="number">180.416872681925</span>;<span class="number">180.577383440085</span>;<span class="number">180.762058535872</span>;<span class="number">180.976884095101</span>;<span class="number">181.206312000315</span>;<span class="number">181.429666519698</span>;<span class="number">181.633218264244</span>;<span class="number">181.805088461248</span>;<span class="number">181.917839123211</span>;<span class="number">181.948521244181</span>;<span class="number">181.902935462524</span>;<span class="number">181.809280615995</span>;<span class="number">181.698184993815</span>;<span class="number">181.577499887323</span>;<span class="number">181.454734293544</span>;<span class="number">181.341775930352</span>;<span class="number">181.238485278407</span>;<span class="number">181.135390806543</span>;<span class="number">181.041317194308</span>;<span class="number">181.001633357398</span>;<span class="number">181.057126172561</span>;<span class="number">181.204266006952</span>;<span class="number">181.405210690630</span>;<span class="number">181.617033883637</span>;<span class="number">181.802169265020</span>;<span class="number">181.947489571552</span>;<span class="number">182.060564574977</span>;<span class="number">182.155575500750</span>;<span class="number">182.246510674000</span>;<span class="number">182.335203945430</span>;<span class="number">182.417141232252</span>;<span class="number">182.498687549105</span>;<span class="number">182.592511620757</span>;<span class="number">182.704304691228</span>;<span class="number">182.829660042803</span>;<span class="number">182.967458057996</span>;<span class="number">183.108321556881</span>;<span class="number">183.225322425552</span>;<span class="number">183.291324538000</span>;<span class="number">183.293375248557</span>;<span class="number">183.227088433275</span>;<span class="number">183.108884257125</span>;<span class="number">182.982145043986</span>;<span class="number">182.889128720386</span>;<span class="number">182.841948528203</span>;<span class="number">182.820619023027</span>;<span class="number">182.780858363398</span>;<span class="number">182.675025525329</span>;<span class="number">182.478978849246</span>;<span class="number">182.204621471133</span>;<span class="number">181.890026356829</span>;<span class="number">181.572219362603</span>;<span class="number">181.266677320809</span>;<span class="number">180.973560553881</span>;<span class="number">180.676892589488</span>;<span class="number">180.347435496973</span>;<span class="number">179.984798948364</span>;<span class="number">179.623157293021</span>;<span class="number">179.304030791561</span>;<span class="number">179.056812057495</span>;<span class="number">178.872383387039</span>;<span class="number">178.710373688259</span>;<span class="number">178.534909186992</span>;<span class="number">178.329367716727</span>;<span class="number">178.085793678957</span>;<span class="number">177.817401892107</span>;<span class="number">177.555284771341</span>;<span class="number">177.326011473298</span>;<span class="number">177.136718068777</span>;<span class="number">176.983315000873</span>;<span class="number">176.862709400993</span>;<span class="number">176.770958669989</span>;<span class="number">176.713296989531</span>;<span class="number">176.701428664527</span>;<span class="number">176.730326385211</span>;<span class="number">176.766110221241</span>;<span class="number">176.775373753847</span>;<span class="number">176.756279354368</span>;<span class="number">176.726443222924</span>;<span class="number">176.707442918982</span>;<span class="number">176.701754596945</span>;<span class="number">176.685261177978</span>;<span class="number">176.641209810908</span>;<span class="number">176.588197019187</span>;<span class="number">176.562908611991</span>;<span class="number">176.593800864981</span>;<span class="number">176.680017902426</span>;<span class="number">176.787894904577</span>;<span class="number">176.861820021953</span>;<span class="number">176.859016771957</span>;<span class="number">176.779886419473</span>;<span class="number">176.668679870896</span>;<span class="number">176.582498413615</span>;<span class="number">176.550880385350</span>;<span class="number">176.566940468033</span>;<span class="number">176.609663021482</span>;<span class="number">176.664105368119</span>;<span class="number">176.740851960237</span>;<span class="number">176.858238410749</span>;<span class="number">177.012272378052</span>;<span class="number">177.185118364549</span>;<span class="number">177.354906434292</span>;<span class="number">177.496720710654</span>;<span class="number">177.582100850191</span>;<span class="number">177.592055274358</span>;<span class="number">177.528609070487</span>;<span class="number">177.411828682268</span>;<span class="number">177.269445810050</span>;<span class="number">177.132543194869</span>;<span class="number">177.029971556275</span>;<span class="number">176.971861219269</span>;<span class="number">176.940899505576</span>;<span class="number">176.906125412001</span>;<span class="number">176.855045749763</span>;<span class="number">176.793313610037</span>;<span class="number">176.715999117486</span>;<span class="number">176.619131473749</span>;<span class="number">176.514153005477</span>;<span class="number">176.420669935444</span>;<span class="number">176.374659468370</span>;<span class="number">176.417513255830</span>;<span class="number">176.571173510706</span>;<span class="number">176.818495866668</span>;<span class="number">177.117154674418</span>;<span class="number">177.417661774084</span>;<span class="number">177.681338508602</span>;<span class="number">177.889416880404</span>;<span class="number">178.028494741404</span>;<span class="number">178.088588089335</span>;<span class="number">178.068003658624</span>;<span class="number">177.980672318779</span>;<span class="number">177.852763757722</span>;<span class="number">177.711329343884</span>;<span class="number">177.587187522713</span>;<span class="number">177.507113868030</span>;<span class="number">177.476229646265</span>;<span class="number">177.467825468310</span>;<span class="number">177.445558045833</span>;<span class="number">177.397096173508</span>;<span class="number">177.361506411956</span>;<span class="number">177.398367550213</span>;<span class="number">177.535858633858</span>;<span class="number">177.751995072910</span>;<span class="number">177.990557734470</span>;<span class="number">178.184860549441</span>;<span class="number">178.309590556037</span>;<span class="number">178.388271469373</span>;<span class="number">178.448713607346</span>;<span class="number">178.497091384492</span>;<span class="number">178.521465726107</span>;<span class="number">178.531808942208</span>;<span class="number">178.563517023506</span>;<span class="number">178.633454165941</span>;<span class="number">178.715649714847</span>;<span class="number">178.771796373782</span>;<span class="number">178.777482998855</span>;<span class="number">178.734522579575</span>;<span class="number">178.664539344669</span>;<span class="number">178.588947523339</span>;<span class="number">178.522972202048</span>;<span class="number">178.478387092782</span>;<span class="number">178.445229143261</span>;<span class="number">178.397103771833</span>;<span class="number">178.308066097158</span>;<span class="number">178.178272542621</span>;<span class="number">178.044743547293</span>;<span class="number">177.945905474730</span>;<span class="number">177.880087796530</span>;<span class="number">177.819710224495</span>;<span class="number">177.742859223059</span>;<span class="number">177.637169954420</span>;<span class="number">177.518051690515</span>;<span class="number">177.426180490204</span>;<span class="number">177.388664833646</span>;<span class="number">177.391399163537</span>;<span class="number">177.397596385443</span>;<span class="number">177.374754952853</span>;<span class="number">177.310599487747</span>;<span class="number">177.216663306695</span>;<span class="number">177.117005524187</span>;<span class="number">177.034029530484</span>;<span class="number">176.979656029190</span>;<span class="number">176.955586067052</span>;<span class="number">176.960804482922</span>;<span class="number">176.984280556233</span>;<span class="number">176.995684329962</span>;<span class="number">176.970500019430</span>;<span class="number">176.902142700151</span>;<span class="number">176.809392316904</span>;<span class="number">176.716199703676</span>;<span class="number">176.647998990209</span>;<span class="number">176.628361783559</span>;<span class="number">176.646179455922</span>;<span class="number">176.643997465823</span>;<span class="number">176.566433443344</span>;<span class="number">176.417147416045</span>;<span class="number">176.249163995164</span>;<span class="number">176.114460007695</span>;<span class="number">176.031697824242</span>;<span class="number">175.997873154392</span>;<span class="number">175.988909900962</span>;<span class="number">175.969469607014</span>;<span class="number">175.923277868258</span>;<span class="number">175.844596596478</span>;<span class="number">175.728363323825</span>;<span class="number">175.599637567648</span>;<span class="number">175.489242514426</span>;<span class="number">175.416048735336</span>;<span class="number">175.381214907169</span>;<span class="number">175.370756989949</span>;<span class="number">175.379142110819</span>;<span class="number">175.408316159340</span>;<span class="number">175.467989888729</span>;<span class="number">175.573257827783</span>;<span class="number">175.732069922745</span>;<span class="number">175.926889750385</span>;<span class="number">176.120531439873</span>;<span class="number">176.284550908838</span>;<span class="number">176.425412974882</span>;<span class="number">176.574499693495</span>;<span class="number">176.757822162899</span>;<span class="number">176.978903586157</span>;<span class="number">177.223818433790</span>;<span class="number">177.467430593816</span>;<span class="number">177.687742372733</span>;<span class="number">177.866412080019</span>;<span class="number">177.996913284291</span>;<span class="number">178.087326720465</span>;<span class="number">178.156821403363</span>;<span class="number">178.241889668877</span>;<span class="number">178.360606821834</span>;<span class="number">178.474463867790</span>;<span class="number">178.528820392076</span>;<span class="number">178.505415858363</span>;<span class="number">178.442288654457</span>;<span class="number">178.414890271990</span>;<span class="number">178.493313841187</span>;<span class="number">178.689516517102</span>;<span class="number">178.951167366023</span>;<span class="number">179.203748771592</span>;<span class="number">179.390329089739</span>;<span class="number">179.484915142127</span>;<span class="number">179.491840331014</span>;<span class="number">179.433717833152</span>;<span class="number">179.340124826610</span>;<span class="number">179.254312828203</span>;<span class="number">179.212942274302</span>;<span class="number">179.210252213689</span>;<span class="number">179.211358844566</span>;<span class="number">179.190428662303</span>;<span class="number">179.155829573481</span>;<span class="number">179.133721925550</span>;<span class="number">179.136809966746</span>;<span class="number">179.153495782434</span>;<span class="number">179.159397333397</span>;<span class="number">179.136607242882</span>;<span class="number">179.083324304631</span>;<span class="number">179.024245482540</span>;<span class="number">178.995891359340</span>;<span class="number">179.013863671189</span>;<span class="number">179.056484230680</span>;<span class="number">179.087370930580</span>;<span class="number">179.086224493187</span>;<span class="number">179.056635331020</span>;<span class="number">179.014033362466</span>;<span class="number">178.968974241884</span>;<span class="number">178.927367602767</span>;<span class="number">178.894696021603</span>;<span class="number">178.868614045041</span>;<span class="number">178.831450398091</span>;<span class="number">178.750040150321</span>;<span class="number">178.601676203235</span>;<span class="number">178.409314403855</span>;<span class="number">178.240198679880</span>;<span class="number">178.152970587316</span>;<span class="number">178.149393028381</span>;<span class="number">178.186422758724</span>;<span class="number">178.218329864245</span>;<span class="number">178.219549169349</span>;<span class="number">178.190702115925</span>;<span class="number">178.151299423732</span>;<span class="number">178.111445640704</span>;<span class="number">178.069492647051</span>;<span class="number">178.024964225997</span>;<span class="number">177.969548411878</span>;<span class="number">177.890414875868</span>;<span class="number">177.783450144686</span>;<span class="number">177.651553302176</span>;<span class="number">177.501459758012</span>;<span class="number">177.358551056986</span>;<span class="number">177.254462968358</span>;<span class="number">177.187107576967</span>;<span class="number">177.131361187863</span>;<span class="number">177.072958814456</span>;<span class="number">177.005624296614</span>;<span class="number">176.928396058867</span>;<span class="number">176.856133288486</span>;<span class="number">176.802417289714</span>;<span class="number">176.762423250781</span>;<span class="number">176.717512003379</span>;<span class="number">176.653592557103</span>;<span class="number">176.586208464905</span>;<span class="number">176.549161395599</span>;<span class="number">176.559556811027</span>;<span class="number">176.611767034099</span>;<span class="number">176.692656403438</span>;<span class="number">176.784653053205</span>;<span class="number">176.860834727666</span>;<span class="number">176.886088274379</span>;<span class="number">176.839381750981</span>;<span class="number">176.725692034611</span>;<span class="number">176.576422165604</span>;<span class="number">176.445385308093</span>;<span class="number">176.371893720576</span>;<span class="number">176.340405830777</span>;<span class="number">176.300485937048</span>;<span class="number">176.223185242108</span>;<span class="number">176.123781088080</span>;<span class="number">176.032726276575</span>;<span class="number">175.958404237847</span>;<span class="number">175.877835569349</span>;<span class="number">175.772739373532</span>;<span class="number">175.659820353178</span>;<span class="number">175.580752233158</span>;<span class="number">175.556058000790</span>;<span class="number">175.574919194929</span>;<span class="number">175.604950719178</span>;<span class="number">175.612805119819</span>;<span class="number">175.578376132032</span>;<span class="number">175.502710050379</span>;<span class="number">175.397554979516</span>;<span class="number">175.254010413446</span>;<span class="number">175.067176006944</span>;<span class="number">174.862647928136</span>;<span class="number">174.669568394029</span>;<span class="number">174.501548918035</span>;<span class="number">174.362229038517</span>;<span class="number">174.243603503007</span>;<span class="number">174.124196245564</span>;<span class="number">173.978451920879</span>;<span class="number">173.786404900040</span>;<span class="number">173.559783720828</span>;<span class="number">173.330391911988</span>;<span class="number">173.118038587822</span>;<span class="number">172.918983378373</span>;<span class="number">172.713385684213</span>;<span class="number">172.482566111024</span>;<span class="number">172.232590402993</span>;<span class="number">172.001871595166</span>;<span class="number">171.823067337026</span>;<span class="number">171.690062945107</span>;<span class="number">171.568736078599</span>;<span class="number">171.425980522500</span>;<span class="number">171.248215437744</span>;<span class="number">171.043607632452</span>;<span class="number">170.835820447708</span>;<span class="number">170.641914968891</span>;<span class="number">170.459961173763</span>;<span class="number">170.278504573848</span>;<span class="number">170.096656901441</span>;<span class="number">169.925401634431</span>;<span class="number">169.768259226781</span>;<span class="number">169.610909460862</span>;<span class="number">169.449715432420</span>;<span class="number">169.307487286433</span>;<span class="number">169.210678068030</span>;<span class="number">169.168300805093</span>;<span class="number">169.172377745919</span>;<span class="number">169.218399580258</span>;<span class="number">169.295702901012</span>;<span class="number">169.383889733577</span>;<span class="number">169.460846703873</span>;<span class="number">169.504268825835</span>;<span class="number">169.489905382838</span>;<span class="number">169.406702280679</span>;<span class="number">169.275232006574</span>;<span class="number">169.142605383731</span>;<span class="number">169.044146817926</span>;<span class="number">168.981890302176</span>;<span class="number">168.933018655287</span>;<span class="number">168.874984226944</span>;<span class="number">168.809199639279</span>;<span class="number">168.769593202301</span>;<span class="number">168.781951914775</span>;<span class="number">168.828340056933</span>;<span class="number">168.872131268802</span>;<span class="number">168.885985394425</span>;<span class="number">168.854311290532</span>;<span class="number">168.785059170979</span>;<span class="number">168.713576183789</span>;<span class="number">168.678384234613</span>;<span class="number">168.695618691259</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">% 求凸包</span></span><br><span class="line">[k,av]=convhull(x,y);p=[x(k,:),y(k,:)];</span><br><span class="line"></span><br><span class="line"><span class="comment">% 最小外包圆</span></span><br><span class="line">fun1=@(x) x(<span class="number">3</span>);<span class="comment">% fun=r^2, x=[xc,yc,r^2]</span></span><br><span class="line">nonlcon1=@(x) mycon1(x,p);</span><br><span class="line">out1=fmincon(fun1,[<span class="built_in">mean</span>(p),av/<span class="built_in">pi</span>],[],[],[],[],....</span><br><span class="line">    [-<span class="built_in">inf</span>,-<span class="built_in">inf</span>,<span class="number">0</span>],[<span class="built_in">inf</span>,<span class="built_in">inf</span>,<span class="built_in">inf</span>],nonlcon1);</span><br><span class="line"></span><br><span class="line">pc1=out1(<span class="number">1</span>:<span class="number">2</span>);r1=<span class="built_in">sqrt</span>(out1(<span class="number">3</span>));theta=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">200</span>);</span><br><span class="line">x1=pc1(<span class="number">1</span>)+r1*<span class="built_in">cos</span>(theta);</span><br><span class="line">y1=pc1(<span class="number">2</span>)+r1*<span class="built_in">sin</span>(theta);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 最小外包椭圆</span></span><br><span class="line">f=<span class="number">10</span>;<span class="comment">% 归一化系数, 影响数值计算结果</span></span><br><span class="line">fun2=@(x) <span class="number">4</span>*f^<span class="number">2</span>/(<span class="number">4</span>*x(<span class="number">1</span>)*x(<span class="number">3</span>)-x(<span class="number">2</span>)^<span class="number">2</span>);<span class="comment">% x=[A,B,C,x0,y0]</span></span><br><span class="line">nonlcon2=@(x) mycon2(x,p,f);</span><br><span class="line">Ast=<span class="built_in">zeros</span>(<span class="number">5</span>);Ast(<span class="number">1</span>,<span class="number">1</span>)=<span class="number">-1</span>;Ast(<span class="number">3</span>,<span class="number">3</span>)=<span class="number">-1</span>;bst=<span class="built_in">zeros</span>(<span class="number">5</span>,<span class="number">1</span>);</span><br><span class="line">out2=fmincon(fun2,[f/r1^<span class="number">2</span>,<span class="number">0</span>,f/r1^<span class="number">2</span>,pc1],Ast,bst,[],[],....</span><br><span class="line">    [<span class="number">0</span>,-<span class="built_in">inf</span>,<span class="number">0</span>,-<span class="built_in">inf</span>,-<span class="built_in">inf</span>],[<span class="built_in">inf</span>,<span class="built_in">inf</span>,<span class="built_in">inf</span>,<span class="built_in">inf</span>,<span class="built_in">inf</span>],nonlcon2);</span><br><span class="line"></span><br><span class="line">pc2=out2(<span class="number">4</span>:<span class="number">5</span>);</span><br><span class="line">matA=[out2(<span class="number">1</span>),out2(<span class="number">2</span>)/<span class="number">2</span>;out2(<span class="number">2</span>)/<span class="number">2</span>,out2(<span class="number">3</span>)]/f;</span><br><span class="line">[V,D]=eig(matA);</span><br><span class="line"><span class="keyword">if</span> V(<span class="number">1</span>)*V(<span class="number">4</span>) &lt; <span class="number">0</span></span><br><span class="line">    D=<span class="built_in">diag</span>([D(<span class="number">4</span>),D(<span class="number">1</span>)]);</span><br><span class="line">    V=[V(:,<span class="number">2</span>),V(:,<span class="number">1</span>)];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">a=<span class="built_in">sqrt</span>(<span class="number">1</span>/<span class="built_in">abs</span>(D(<span class="number">1</span>)));b=<span class="built_in">sqrt</span>(<span class="number">1</span>/<span class="built_in">abs</span>(D(<span class="number">4</span>)));</span><br><span class="line"><span class="comment">% phi21=acos(V(1));</span></span><br><span class="line"><span class="comment">% phi22=acot((out2(1)-out2(3))/out2(2))/2;</span></span><br><span class="line">temp=pc2&#x27;+V*[a*<span class="built_in">cos</span>(theta);b*<span class="built_in">sin</span>(theta)];</span><br><span class="line">x2=temp(<span class="number">1</span>,:);</span><br><span class="line">y2=temp(<span class="number">2</span>,:);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 绘图</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);<span class="built_in">hold</span> on;box on;axis equal;grid off;</span><br><span class="line"><span class="built_in">plot</span>(x1,y1,<span class="string">&#x27;--k&#x27;</span>,<span class="string">&#x27;linewidth&#x27;</span>,<span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(x2,y2,<span class="string">&#x27;-k&#x27;</span>,<span class="string">&#x27;linewidth&#x27;</span>,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;ob&#x27;</span>,<span class="string">&#x27;MarkerFaceColor&#x27;</span>,[<span class="number">0</span> <span class="number">0</span> <span class="number">1</span>],<span class="string">&#x27;MarkerSize&#x27;</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 圆的非线性约束方程</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[c,ceq]</span>=<span class="title">mycon1</span><span class="params">(x,k)</span></span></span><br><span class="line">    c=(k(:,<span class="number">1</span>)-x(<span class="number">1</span>)).^<span class="number">2</span>+(k(:,<span class="number">2</span>)-x(<span class="number">2</span>)).^<span class="number">2</span>-x(<span class="number">3</span>);</span><br><span class="line">    ceq=[];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 椭圆的非线性约束方程</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[c,ceq]</span>=<span class="title">mycon2</span><span class="params">(x,k,f)</span></span></span><br><span class="line">    c=[x(<span class="number">1</span>)*(k(:,<span class="number">1</span>)-x(<span class="number">4</span>)).^<span class="number">2</span>+x(<span class="number">2</span>)*(k(:,<span class="number">1</span>)-x(<span class="number">4</span>)).*(k(:,<span class="number">2</span>)-x(<span class="number">5</span>))+x(<span class="number">3</span>)*(k(:,<span class="number">2</span>)-x(<span class="number">5</span>)).^<span class="number">2</span>-f;</span><br><span class="line">       x(<span class="number">2</span>)^<span class="number">2</span><span class="number">-4</span>*x(<span class="number">1</span>)*x(<span class="number">3</span>)];</span><br><span class="line">    ceq=[];</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr />
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/27/ellipse-enclosing01/" rel="prev" title="点集的最小外包围椭圆01">
+      <i class="fa fa-chevron-left"></i> 点集的最小外包围椭圆01
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A4%AD%E5%9C%86%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.</span> <span class="nav-text">椭圆大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%BB%BA%E6%A8%A1"><span class="nav-number">2.</span> <span class="nav-text">问题建模</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E6%8A%BD%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text">数学抽象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%BB%BA%E6%A8%A1"><span class="nav-number">2.2.</span> <span class="nav-text">优化建模</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">计算程序</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sppy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Sppy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/941415336" title="QQ → 941415336"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/941415336@qq.com" title="E-Mail → 941415336@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-university"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhangshuqiao.org/" title="https:&#x2F;&#x2F;zhangshuqiao.org&#x2F;" rel="noopener" target="_blank">Mimi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page&#x2F;" rel="noopener" target="_blank">Liam Huang</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cangshui.net/" title="https:&#x2F;&#x2F;cangshui.net&#x2F;" rel="noopener" target="_blank">Cangshui</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.itrhx.com/" title="https:&#x2F;&#x2F;www.itrhx.com&#x2F;" rel="noopener" target="_blank">TRHX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://qixinbo.info/" title="https:&#x2F;&#x2F;qixinbo.info&#x2F;" rel="noopener" target="_blank">XinBo Qi</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://three-body.org/" title="https:&#x2F;&#x2F;three-body.org&#x2F;" rel="noopener" target="_blank">Three Body</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sppy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":-15,"vOffset":-30},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
