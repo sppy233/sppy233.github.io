@@ -59,7 +59,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2020/04/15/JCtsTe.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/04/15/JPiqcq.png">
 <meta property="article:published_time" content="2020-04-14T04:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-28T08:18:16.607Z">
+<meta property="article:modified_time" content="2020-10-28T08:29:26.781Z">
 <meta property="article:author" content="Sppy">
 <meta property="article:tag" content="变分法">
 <meta property="article:tag" content="相场">
@@ -239,7 +239,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-28 16:18:16" itemprop="dateModified" datetime="2020-10-28T16:18:16+08:00">2020-10-28</time>
+                <time title="修改时间：2020-10-28 16:29:26" itemprop="dateModified" datetime="2020-10-28T16:29:26+08:00">2020-10-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,342 +266,497 @@
       
         <p>基于相场法的损伤模型主要用于研究<strong>裂纹的扩展演化</strong>问题。</p>
 <a id="more"></a>
-<h2 id="裂纹的扩散拓扑"><a href="#裂纹的扩散拓扑" class="headerlink" title="裂纹的扩散拓扑"></a>裂纹的扩散拓扑</h2><p>图1 尖锐裂纹与扩散拓扑裂纹：</p>
+<h2 id="裂纹的扩散拓扑">裂纹的扩散拓扑</h2>
+<p>图1 尖锐裂纹与扩散拓扑裂纹：</p>
 <p><img src="https://s1.ax1x.com/2020/04/15/JCt6FH.png" width="60%"></p>
 <p>图2 尖锐裂纹与扩散裂纹模型：</p>
 <p><img src="https://s1.ax1x.com/2020/04/15/JCtsTe.png"></p>
-<p>尖锐裂纹可以采用一个辅助的场变量 $d$ 来描述，即</p>
-<script type="math/tex; mode=display">
+<p>尖锐裂纹可以采用一个辅助的场变量 <span class="math inline">\(d\)</span> 来描述，即</p>
+<p><span class="math display">\[
 \tag{1}
 d(x)=\begin{cases}
-1&x=0\\[5pt]
-0&x\neq0
-\end{cases}</script><p>显然，$d=0$ 对应未断裂状态，$d=1$ 则对应完全断裂状态。将这个辅助场变量 $d(x)$ 称为<strong>裂纹相场</strong>。裂纹相场与连续损伤力学相关，因为连续损伤力学中的标量损伤度 $d$ 在宏观层面上描述了微裂纹和微孔洞的均匀化发展。为了改善式(1)中相场的非连续性，可以采用指数模型，即</p>
-<script type="math/tex; mode=display">
+1&amp;x=0\\[5pt]
+0&amp;x\neq0
+\end{cases}
+\]</span></p>
+<p>显然，<span class="math inline">\(d=0\)</span> 对应未断裂状态，<span class="math inline">\(d=1\)</span> 则对应完全断裂状态。将这个辅助场变量 <span class="math inline">\(d(x)\)</span> 称为<strong>裂纹相场</strong>。裂纹相场与连续损伤力学相关，因为连续损伤力学中的标量损伤度 <span class="math inline">\(d\)</span> 在宏观层面上描述了微裂纹和微孔洞的均匀化发展。为了改善式(1)中相场的非连续性，可以采用指数模型，即</p>
+<p><span class="math display">\[
 \tag{2a}
-d(x)=\mathrm{e}^{-|x|/l}</script><script type="math/tex; mode=display">
+d(x)=\mathrm{e}^{-|x|/l}
+\]</span></p>
+<p><span class="math display">\[
 \tag{2b}
-d(0)=1~,~d(\pm\infty)=0</script><p>式(2)即表示了裂纹的扩散拓扑（正则化），其函数图像如图2(b)所示。裂纹的扩散拓扑程度由长度尺度参数 $l$ 控制，当 $l\to 0$ 时，式(2)等价于式(1)。</p>
-<h3 id="能量耗散密度函数"><a href="#能量耗散密度函数" class="headerlink" title="能量耗散密度函数"></a>能量耗散密度函数</h3><p>考虑如下的齐次微分方程</p>
-<script type="math/tex; mode=display">
+d(0)=1~,~d(\pm\infty)=0
+\]</span></p>
+<p>式(2)即表示了裂纹的扩散拓扑（正则化），其函数图像如图2(b)所示。裂纹的扩散拓扑程度由长度尺度参数 <span class="math inline">\(l\)</span> 控制，当 <span class="math inline">\(l\to 0\)</span> 时，式(2)等价于式(1)。</p>
+<h3 id="能量耗散密度函数">能量耗散密度函数</h3>
+<p>考虑如下的齐次微分方程</p>
+<p><span class="math display">\[
 \tag{3}
-d(x)-l^2d''(x)=0</script><p>注意到式(2)是上式的一个解，而该微分方程是下面变分问题的<a target="_blank" rel="noopener" href="http://sppy.site/2020/04/13/variational-method/" title="泛函与变分基础">欧拉方程</a></p>
-<script type="math/tex; mode=display">
+d(x)-l^2d&#39;&#39;(x)=0
+\]</span></p>
+<p>注意到式(2)是上式的一个解，而该微分方程是下面变分问题的<a target="_blank" rel="noopener" href="http://sppy.site/2020/04/13/variational-method/" title="泛函与变分基础">欧拉方程</a></p>
+<p><span class="math display">\[
 \tag{4}
-\min_{d(x)} ~I(d)=\frac{1}{2}\int_{V}\big(d^2+l^2d'^2\big)\mathrm{d}v</script><blockquote>
+\min_{d(x)} ~I(d)=\frac{1}{2}\int_{V}\big(d^2+l^2d&#39;^2\big)\mathrm{d}v
+\]</span></p>
+<blockquote>
 <p>这里引入泛函的目的有两个：1、定义能量耗散密度函数，2、推导裂纹相场的控制方程</p>
 </blockquote>
-<p>令 $\mathrm{d}v=\Gamma\mathrm{d}x$ ，于是有</p>
-<script type="math/tex; mode=display">
+<p>令 <span class="math inline">\(\mathrm{d}v=\Gamma\mathrm{d}x\)</span> ，于是有</p>
+<p><span class="math display">\[
 \tag{5}
-I(d=\mathrm{e}^{-|x|/l})=\Gamma\int_{-\infty}^{+\infty}\mathrm{e}^{-2|x|/l}\mathrm{d}x=l\Gamma\int_0^{+\infty}\mathrm{e}^{-2x/l}\mathrm{d}(-2x/l)=l\Gamma</script><p>由此引入能量耗散函数 $\Gamma_l$ 与能量耗散密度函数 $\gamma$</p>
-<script type="math/tex; mode=display">
+I(d=\mathrm{e}^{-|x|/l})=\Gamma\int_{-\infty}^{+\infty}\mathrm{e}^{-2|x|/l}\mathrm{d}x=l\Gamma\int_0^{+\infty}\mathrm{e}^{-2x/l}\mathrm{d}(-2x/l)=l\Gamma
+\]</span></p>
+<p>由此引入能量耗散函数 <span class="math inline">\(\Gamma_l\)</span> 与能量耗散密度函数 <span class="math inline">\(\gamma\)</span></p>
+<p><span class="math display">\[
 \tag{6a}
-\Gamma_l(d)=\frac{1}{l}I(d)=\int_{V}\gamma~\mathrm{d}v</script><script type="math/tex; mode=display">
+\Gamma_l(d)=\frac{1}{l}I(d)=\int_{V}\gamma~\mathrm{d}v
+\]</span></p>
+<p><span class="math display">\[
 \tag{6b}
-\gamma(d)=\frac{1}{2l}\big(d^2+l^2d'^2\big)</script><p>能量耗散函数 $\Gamma_l$ 是关于裂纹相场 $d(x)$ 的泛函。将式(6)中的一维形式推广到多维，即</p>
-<script type="math/tex; mode=display">
+\gamma(d)=\frac{1}{2l}\big(d^2+l^2d&#39;^2\big)
+\]</span></p>
+<p>能量耗散函数 <span class="math inline">\(\Gamma_l\)</span> 是关于裂纹相场 <span class="math inline">\(d(x)\)</span> 的泛函。将式(6)中的一维形式推广到多维，即</p>
+<p><span class="math display">\[
 \tag{7a}
-\Gamma_l(d,\nabla d)=\int_{V}\gamma~\mathrm{d}v</script><script type="math/tex; mode=display">
+\Gamma_l(d,\nabla d)=\int_{V}\gamma~\mathrm{d}v
+\]</span></p>
+<p><span class="math display">\[
 \tag{7b}
-\gamma(d,\nabla d)=\frac{1}{2l}\big(d^2+l^2\nabla d\cdot\nabla d\big)</script><p>此时裂纹相场 $d(\boldsymbol{x})$ 是关于空间位置坐标 $\boldsymbol{x}$ 的函数。</p>
-<h3 id="裂纹相场的控制方程"><a href="#裂纹相场的控制方程" class="headerlink" title="裂纹相场的控制方程"></a>裂纹相场的控制方程</h3><p>求式(7)中能量耗散函数的变分问题，即</p>
-<script type="math/tex; mode=display">
+\gamma(d,\nabla d)=\frac{1}{2l}\big(d^2+l^2\nabla d\cdot\nabla d\big)
+\]</span></p>
+<p>此时裂纹相场 <span class="math inline">\(d(\boldsymbol{x})\)</span> 是关于空间位置坐标 <span class="math inline">\(\boldsymbol{x}\)</span> 的函数。</p>
+<h3 id="裂纹相场的控制方程">裂纹相场的控制方程</h3>
+<p>求式(7)中能量耗散函数的变分问题，即</p>
+<p><span class="math display">\[
 \tag{8}
-\min_{d(\boldsymbol{x})} ~\Gamma_l(d)=\frac{1}{2l}\int_{V}\big(d^2+l^2\nabla d\cdot\nabla d\big)\mathrm{d}v</script><p>取能量耗散函数的变分，即</p>
-<script type="math/tex; mode=display">
+\min_{d(\boldsymbol{x})} ~\Gamma_l(d)=\frac{1}{2l}\int_{V}\big(d^2+l^2\nabla d\cdot\nabla d\big)\mathrm{d}v
+\]</span></p>
+<p>取能量耗散函数的变分，即</p>
+<p><span class="math display">\[
 \tag{9}
 \begin{aligned}
-\delta\Gamma_l(d,\nabla d)&=\int_V\bigg(\frac{\partial\gamma}{\partial d}\delta d+\frac{\partial\gamma}{\partial\nabla d}\cdot\delta\nabla d\bigg)\mathrm{d}v\\[8pt]
-&=\frac{1}{l}\int_{V}\big[d\delta d+l^2\underbrace{\nabla d}_{u}\cdot\underbrace{\delta\nabla d}_{v'}\big]\mathrm{d}v\\[1pt]
-&=\frac{1}{l}\bigg[\int_Vd\delta d\mathrm{d}v+\underbrace{l^2\nabla d\cdot\boldsymbol{n}\delta d\bigg|_{\partial V}-\int_Vl^2\overbrace{\nabla\cdot(\nabla d)}^{\nabla^2d=\Delta d}\delta d\mathrm{d}v}_{\text{分部积分}}\bigg]\\[1pt]
-&=\frac{1}{l}\int_V(d-l^2\Delta d)\delta d\mathrm{d}v+l\nabla d\cdot\boldsymbol{n}\delta d\bigg|_{\partial V}
-\end{aligned}</script><blockquote>
-<p>分部积分公式：$\displaystyle\int uv’\mathrm{d}x=uv-\int u’v\mathrm{d}x$</p>
-<p>导数的变分等于变分的导数：$\delta\nabla d=\nabla\delta d$</p>
+\delta\Gamma_l(d,\nabla d)&amp;=\int_V\bigg(\frac{\partial\gamma}{\partial d}\delta d+\frac{\partial\gamma}{\partial\nabla d}\cdot\delta\nabla d\bigg)\mathrm{d}v\\[8pt]
+&amp;=\frac{1}{l}\int_{V}\big[d\delta d+l^2\underbrace{\nabla d}_{u}\cdot\underbrace{\delta\nabla d}_{v&#39;}\big]\mathrm{d}v\\[1pt]
+&amp;=\frac{1}{l}\bigg[\int_Vd\delta d\mathrm{d}v+\underbrace{l^2\nabla d\cdot\boldsymbol{n}\delta d\bigg|_{\partial V}-\int_Vl^2\overbrace{\nabla\cdot(\nabla d)}^{\nabla^2d=\Delta d}\delta d\mathrm{d}v}_{\text{分部积分}}\bigg]\\[1pt]
+&amp;=\frac{1}{l}\int_V(d-l^2\Delta d)\delta d\mathrm{d}v+l\nabla d\cdot\boldsymbol{n}\delta d\bigg|_{\partial V}
+\end{aligned}
+\]</span></p>
+<blockquote>
+<p>分部积分公式：<span class="math inline">\(\displaystyle\int uv&#39;\mathrm{d}x=uv-\int u&#39;v\mathrm{d}x\)</span></p>
+<p>导数的变分等于变分的导数：<span class="math inline">\(\delta\nabla d=\nabla\delta d\)</span></p>
 </blockquote>
-<p>显然变分 $\delta\Gamma_l=0$ 的充分条件为</p>
+<p>显然变分 <span class="math inline">\(\delta\Gamma_l=0\)</span> 的充分条件为</p>
 <blockquote>
 <p>是否为必要条件？<strong>我不知道</strong></p>
 </blockquote>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{10}
 \begin{cases}
-d-l^2\Delta d=0&~\mathrm{in}~V\\[5pt]
-\nabla d\cdot\boldsymbol{n}=0&~\mathrm{on}~\partial V
-\end{cases}</script><p>式中，$\boldsymbol{n}$ 为自然边界 $\partial V$ 的外法线矢量。同时裂纹相场还需满足强制边界条件</p>
-<script type="math/tex; mode=display">
+d-l^2\Delta d=0&amp;~\mathrm{in}~V\\[5pt]
+\nabla d\cdot\boldsymbol{n}=0&amp;~\mathrm{on}~\partial V
+\end{cases}
+\]</span></p>
+<p>式中，<span class="math inline">\(\boldsymbol{n}\)</span> 为自然边界 <span class="math inline">\(\partial V\)</span> 的外法线矢量。同时裂纹相场还需满足强制边界条件</p>
+<p><span class="math display">\[
 \tag{11}
-d(\boldsymbol{x})=1\quad\mathrm{on}~\Gamma</script><p>式中，$\Gamma$ 表示一维的开裂点、二维的裂纹线、三维的裂纹面。</p>
+d(\boldsymbol{x})=1\quad\mathrm{on}~\Gamma
+\]</span></p>
+<p>式中，<span class="math inline">\(\Gamma\)</span> 表示一维的开裂点、二维的裂纹线、三维的裂纹面。</p>
 <p>综上，裂纹相场的控制方程为</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{12}
 \begin{cases}
-d-l^2\Delta d=0&~\mathrm{in}~V\\[5pt]
-\nabla d\cdot\boldsymbol{n}=0&~\mathrm{on}~\partial V\\[5pt]
-d(\boldsymbol{x})=1&~\mathrm{on}~\Gamma
-\end{cases}</script><p>实际上，式(12)给定了<strong>椭圆型</strong>的偏微分方程、Neumann边界条件以及Dirichlet边界条件，该控制方程描述了裂纹相场的<strong>定常状态</strong>。</p>
+d-l^2\Delta d=0&amp;~\mathrm{in}~V\\[5pt]
+\nabla d\cdot\boldsymbol{n}=0&amp;~\mathrm{on}~\partial V\\[5pt]
+d(\boldsymbol{x})=1&amp;~\mathrm{on}~\Gamma
+\end{cases}
+\]</span></p>
+<p>实际上，式(12)给定了<strong>椭圆型</strong>的偏微分方程、Neumann边界条件以及Dirichlet边界条件，该控制方程描述了裂纹相场的<strong>定常状态</strong>。</p>
 <p>MATLAB的<code>pdetool</code>工具箱支持求解<strong>二维</strong>的椭圆型、抛物型、双曲型以及特征值模式的偏微分方程，求解方法为<strong>有限元法</strong>。在<code>pdetool</code>工具箱中椭圆型偏微分方程定义为</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{13}
-au-c\Delta u=f</script><p>按照式(12)，令 $a=1/l^2$、$c=1$、$f=0$ 即可。图3展示了求解域为 $2\times2$ 的正方形，裂纹长度为 $1$，长度尺度参数 $l=0.25$ 的相场解。</p>
+au-c\Delta u=f
+\]</span></p>
+<p>按照式(12)，令 <span class="math inline">\(a=1/l^2\)</span>、<span class="math inline">\(c=1\)</span>、<span class="math inline">\(f=0\)</span> 即可。图3展示了求解域为 <span class="math inline">\(2\times2\)</span> 的正方形，裂纹长度为 <span class="math inline">\(1\)</span>，长度尺度参数 <span class="math inline">\(l=0.25\)</span> 的相场解。</p>
 <p>图3 裂纹相场：</p>
 <p><img src="https://s1.ax1x.com/2020/04/15/JPiqcq.png" width="60%"></p>
 <p>由<code>pdetool</code>工具箱生成的代码如下：</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pde_phase_field_damage_line</span></span></span><br><span class="line">[fig,ax]=pdeinit;</span><br><span class="line">pdetool(<span class="string">&#x27;appl_cb&#x27;</span>,<span class="number">1</span>);set(ax,<span class="string">&#x27;DataAspectRatio&#x27;</span>,[<span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]);</span><br><span class="line">set(ax,<span class="string">&#x27;PlotBoxAspectRatio&#x27;</span>,[<span class="number">730.45</span> <span class="number">486</span> <span class="number">486</span>]);</span><br><span class="line">set(ax,<span class="string">&#x27;XLimMode&#x27;</span>,<span class="string">&#x27;auto&#x27;</span>);set(ax,<span class="string">&#x27;YLim&#x27;</span>,[<span class="number">-1</span> <span class="number">1</span>]);</span><br><span class="line">set(ax,<span class="string">&#x27;XTickMode&#x27;</span>,<span class="string">&#x27;auto&#x27;</span>);set(ax,<span class="string">&#x27;YTickMode&#x27;</span>,<span class="string">&#x27;auto&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% Geometry description:</span></span><br><span class="line">pderect([<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">-1</span>],<span class="string">&#x27;R1&#x27;</span>);pderect([<span class="number">-1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0.001</span>],<span class="string">&#x27;R2&#x27;</span>);</span><br><span class="line">pderect([<span class="number">-1</span> <span class="number">0</span> <span class="number">-0.0010000000000000009</span> <span class="number">-1</span>],<span class="string">&#x27;R3&#x27;</span>);</span><br><span class="line">set(findobj(get(fig,<span class="string">&#x27;Children&#x27;</span>),<span class="string">&#x27;Tag&#x27;</span>,<span class="string">&#x27;PDEEval&#x27;</span>),<span class="string">&#x27;String&#x27;</span>,<span class="string">&#x27;R1+R2+R3&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">% Boundary conditions:</span></span><br><span class="line">pdetool(<span class="string">&#x27;changemode&#x27;</span>,<span class="number">0</span>)</span><br><span class="line">pdesetbd(<span class="number">12</span>,<span class="string">&#x27;neu&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;0&#x27;</span>);pdesetbd(<span class="number">11</span>,<span class="string">&#x27;neu&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">pdesetbd(<span class="number">10</span>,<span class="string">&#x27;neu&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;0&#x27;</span>);pdesetbd(<span class="number">9</span>,<span class="string">&#x27;neu&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">pdesetbd(<span class="number">7</span>,<span class="string">&#x27;dir&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;1&#x27;</span>);pdesetbd(<span class="number">5</span>,<span class="string">&#x27;neu&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">pdesetbd(<span class="number">4</span>,<span class="string">&#x27;neu&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;0&#x27;</span>);pdesetbd(<span class="number">3</span>,<span class="string">&#x27;dir&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">pdesetbd(<span class="number">2</span>,<span class="string">&#x27;dir&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;1&#x27;</span>);pdesetbd(<span class="number">1</span>,<span class="string">&#x27;neu&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% Mesh generation:</span></span><br><span class="line">setappdata(fig,<span class="string">&#x27;Hgrad&#x27;</span>,<span class="number">1.3</span>);</span><br><span class="line">setappdata(fig,<span class="string">&#x27;refinemethod&#x27;</span>,<span class="string">&#x27;regular&#x27;</span>);</span><br><span class="line">setappdata(fig,<span class="string">&#x27;jiggle&#x27;</span>,char(<span class="string">&#x27;on&#x27;</span>,<span class="string">&#x27;mean&#x27;</span>,<span class="string">&#x27;&#x27;</span>));</span><br><span class="line">setappdata(fig,<span class="string">&#x27;MesherVersion&#x27;</span>,<span class="string">&#x27;preR2013a&#x27;</span>);</span><br><span class="line">pdetool(<span class="string">&#x27;initmesh&#x27;</span>);pdetool(<span class="string">&#x27;refine&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% PDE coefficients:</span></span><br><span class="line">pdeseteq(<span class="number">1</span>,<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;16&#x27;</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;0:10&#x27;</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;[0 100]&#x27;</span>);</span><br><span class="line">setappdata(fig,<span class="string">&#x27;currparam&#x27;</span>,[<span class="string">&#x27;1.0&#x27;</span>;<span class="string">&#x27;10 &#x27;</span>;<span class="string">&#x27;0  &#x27;</span>;<span class="string">&#x27;1.0&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">% Solve parameters:</span></span><br><span class="line">setappdata(fig,<span class="string">&#x27;solveparam&#x27;</span>,char(<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;6570&#x27;</span>,<span class="string">&#x27;10&#x27;</span>,<span class="string">&#x27;pdeadworst&#x27;</span>,...</span><br><span class="line"><span class="string">&#x27;0.5&#x27;</span>,<span class="string">&#x27;longest&#x27;</span>,<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;1E-4&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;fixed&#x27;</span>,<span class="string">&#x27;Inf&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">% Plotflags and user data strings:</span></span><br><span class="line">setappdata(fig,<span class="string">&#x27;plotflags&#x27;</span>,[<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">7</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span>]);</span><br><span class="line">setappdata(fig,<span class="string">&#x27;colstring&#x27;</span>,<span class="string">&#x27;&#x27;</span>);setappdata(fig,<span class="string">&#x27;arrowstring&#x27;</span>,<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">setappdata(fig,<span class="string">&#x27;deformstring&#x27;</span>,<span class="string">&#x27;&#x27;</span>);setappdata(fig,<span class="string">&#x27;heightstring&#x27;</span>,<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% Solve PDE:</span></span><br><span class="line">pdetool(<span class="string">&#x27;solve&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="裂纹扩展的变分原理"><a href="#裂纹扩展的变分原理" class="headerlink" title="裂纹扩展的变分原理"></a>裂纹扩展的变分原理</h2><p>考虑由裂纹相场引起的能量耗散，构造<strong>总势能泛函</strong>，当泛函的变分为零时，泛函取得极值，此时连续体处于平衡状态，即<strong>最小势能原理</strong>。</p>
+<hr />
+<h2 id="裂纹扩展的变分原理">裂纹扩展的变分原理</h2>
+<p>考虑由裂纹相场引起的能量耗散，构造<strong>总势能泛函</strong>，当泛函的变分为零时，泛函取得极值，此时连续体处于平衡状态，即<strong>最小势能原理</strong>。</p>
 <p>连续体的总势能由应变能、动能、耗散势能、载荷势能组成，即</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{14}
-\underbrace{\Pi(\boldsymbol{u},\dot{\boldsymbol{u}},\boldsymbol{\varepsilon},d,\nabla d)}_{\text{总势能}}=\underbrace{E(\boldsymbol{\varepsilon},d)}_{\text{应变能}}+\underbrace{D(d,\nabla d)}_{\text{耗散势能}}+\underbrace{K(\dot{\boldsymbol{u}})}_{\text{动能}}-\underbrace{W(\boldsymbol{u})}_{\text{载荷势能}}</script><p>于是总势能的变分为</p>
-<script type="math/tex; mode=display">
+\underbrace{\Pi(\boldsymbol{u},\dot{\boldsymbol{u}},\boldsymbol{\varepsilon},d,\nabla d)}_{\text{总势能}}=\underbrace{E(\boldsymbol{\varepsilon},d)}_{\text{应变能}}+\underbrace{D(d,\nabla d)}_{\text{耗散势能}}+\underbrace{K(\dot{\boldsymbol{u}})}_{\text{动能}}-\underbrace{W(\boldsymbol{u})}_{\text{载荷势能}}
+\]</span></p>
+<p>于是总势能的变分为</p>
+<p><span class="math display">\[
 \tag{15}
-\delta\Pi=\delta E+\delta D+\delta K-\delta W=0</script><h3 id="应变能的变分"><a href="#应变能的变分" class="headerlink" title="应变能的变分"></a>应变能的变分</h3><p>对于没有裂纹（损伤）的各向同性线弹性材料，其应变能密度为</p>
-<script type="math/tex; mode=display">
+\delta\Pi=\delta E+\delta D+\delta K-\delta W=0
+\]</span></p>
+<h3 id="应变能的变分">应变能的变分</h3>
+<p>对于没有裂纹（损伤）的各向同性线弹性材料，其应变能密度为</p>
+<p><span class="math display">\[
 \tag{16}
-\psi(\boldsymbol{\varepsilon})=\mu\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}+\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon})</script><p>其应力为</p>
-<script type="math/tex; mode=display">
+\psi(\boldsymbol{\varepsilon})=\mu\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}+\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon})
+\]</span></p>
+<p>其应力为</p>
+<p><span class="math display">\[
 \tag{17}
-\boldsymbol{\sigma}=\frac{\partial \psi(\boldsymbol{\varepsilon})}{\partial \boldsymbol{\varepsilon}}=2\mu\boldsymbol{\varepsilon}+\lambda\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{I}</script><blockquote>
-<p>式(17)的证明较为容易，将式(16)展开后再对 $\varepsilon_{ij}$ 求导即可</p>
+\boldsymbol{\sigma}=\frac{\partial \psi(\boldsymbol{\varepsilon})}{\partial \boldsymbol{\varepsilon}}=2\mu\boldsymbol{\varepsilon}+\lambda\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{I}
+\]</span></p>
+<blockquote>
+<p>式(17)的证明较为容易，将式(16)展开后再对 <span class="math inline">\(\varepsilon_{ij}\)</span> 求导即可</p>
 </blockquote>
 <p>由于裂纹的存在，必然导致材料力学性能的退化，于是可以定义退化后的应变能密度</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{18a}
-\tilde{\psi}(\boldsymbol{\varepsilon},d)=\big[g(d)+k\big]\psi^+(\boldsymbol{\varepsilon})+\psi^-(\boldsymbol{\varepsilon})</script><p>式中，$g(d)$ 为退化函数，需满足 $g(0)=1$ 、$g(1)=0$ ；$k$ 为正的小量，其作用为防止 $d=1$ 时能量的完全退化导致刚度矩阵奇异；$\psi^+(\boldsymbol{\varepsilon})$ 、$\psi^-(\boldsymbol{\varepsilon})$ 分别表示由拉伸、压缩主导的应变能密度，且需要满足下式</p>
-<script type="math/tex; mode=display">
+\tilde{\psi}(\boldsymbol{\varepsilon},d)=\big[g(d)+k\big]\psi^+(\boldsymbol{\varepsilon})+\psi^-(\boldsymbol{\varepsilon})
+\]</span></p>
+<p>式中，<span class="math inline">\(g(d)\)</span> 为退化函数，需满足 <span class="math inline">\(g(0)=1\)</span> 、<span class="math inline">\(g(1)=0\)</span> ；<span class="math inline">\(k\)</span> 为正的小量，其作用为防止 <span class="math inline">\(d=1\)</span> 时能量的完全退化导致刚度矩阵奇异；<span class="math inline">\(\psi^+(\boldsymbol{\varepsilon})\)</span> 、<span class="math inline">\(\psi^-(\boldsymbol{\varepsilon})\)</span> 分别表示由拉伸、压缩主导的应变能密度，且需要满足下式</p>
+<p><span class="math display">\[
 \tag{18b}
-\psi(\boldsymbol{\varepsilon})=\psi^+(\boldsymbol{\varepsilon})+\psi^-(\boldsymbol{\varepsilon})</script><p>式(18a)表明仅考虑拉伸引起的损伤（裂纹开裂），这也反映了各向异性的性能退化。退化函数的选取，以及应变能密度的拉伸、压缩分解将在后续进行讨论。</p>
-<p>将式(18a)在求解域 $V$ 上积分，可得连续体的应变能</p>
-<script type="math/tex; mode=display">
+\psi(\boldsymbol{\varepsilon})=\psi^+(\boldsymbol{\varepsilon})+\psi^-(\boldsymbol{\varepsilon})
+\]</span></p>
+<p>式(18a)表明仅考虑拉伸引起的损伤（裂纹开裂），这也反映了各向异性的性能退化。退化函数的选取，以及应变能密度的拉伸、压缩分解将在后续进行讨论。</p>
+<p>将式(18a)在求解域 <span class="math inline">\(V\)</span> 上积分，可得连续体的应变能</p>
+<p><span class="math display">\[
 \tag{19}
-E(\boldsymbol{\varepsilon},d)=\int_V\tilde{\psi}(\boldsymbol{\varepsilon},d)\mathrm{d}v</script><p>于是应变能的变分为</p>
-<script type="math/tex; mode=display">
+E(\boldsymbol{\varepsilon},d)=\int_V\tilde{\psi}(\boldsymbol{\varepsilon},d)\mathrm{d}v
+\]</span></p>
+<p>于是应变能的变分为</p>
+<p><span class="math display">\[
 \tag{20}
 \begin{aligned}
-\delta E(\boldsymbol{\varepsilon},d)&=\int_V\bigg(\frac{\partial \tilde{\psi}}{\partial \boldsymbol{\varepsilon}}:\delta\boldsymbol{\varepsilon}+\frac{\partial \tilde{\psi}}{\partial d}\delta d\bigg)\mathrm{d}v\\[8pt]
-&=\int_V\Big\{\big[g(d)+k\big]\partial_\boldsymbol{\varepsilon}\psi^++\partial_\boldsymbol{\varepsilon}\psi^-\Big\}:\delta\boldsymbol{\varepsilon}\mathrm{d}v+\int_Vg'(d)\psi^+\delta d\mathrm{d}v
-\end{aligned}</script><h3 id="耗散势的变分"><a href="#耗散势的变分" class="headerlink" title="耗散势的变分"></a>耗散势的变分</h3><p>耗散势通过对耗散势密度函数在求解域 $V$ 上积分得到，即</p>
-<script type="math/tex; mode=display">
+\delta E(\boldsymbol{\varepsilon},d)&amp;=\int_V\bigg(\frac{\partial \tilde{\psi}}{\partial \boldsymbol{\varepsilon}}:\delta\boldsymbol{\varepsilon}+\frac{\partial \tilde{\psi}}{\partial d}\delta d\bigg)\mathrm{d}v\\[8pt]
+&amp;=\int_V\Big\{\big[g(d)+k\big]\partial_\boldsymbol{\varepsilon}\psi^++\partial_\boldsymbol{\varepsilon}\psi^-\Big\}:\delta\boldsymbol{\varepsilon}\mathrm{d}v+\int_Vg&#39;(d)\psi^+\delta d\mathrm{d}v
+\end{aligned}
+\]</span></p>
+<h3 id="耗散势的变分">耗散势的变分</h3>
+<p>耗散势通过对耗散势密度函数在求解域 <span class="math inline">\(V\)</span> 上积分得到，即</p>
+<p><span class="math display">\[
 \tag{21a}
-D(d,\nabla d)=\int_V\varphi(d,\nabla d)\mathrm{d}v</script><p>式中，耗散势密度函数的定义为</p>
-<script type="math/tex; mode=display">
+D(d,\nabla d)=\int_V\varphi(d,\nabla d)\mathrm{d}v
+\]</span></p>
+<p>式中，耗散势密度函数的定义为</p>
+<p><span class="math display">\[
 \tag{21b}
-\varphi(d,\nabla d)=g_c\gamma(d,\nabla d)</script><p>式中，$g_c$ 为材料参数（为了统一量纲）。于是由式(7)可得</p>
-<script type="math/tex; mode=display">
+\varphi(d,\nabla d)=g_c\gamma(d,\nabla d)
+\]</span></p>
+<p>式中，<span class="math inline">\(g_c\)</span> 为材料参数（为了统一量纲）。于是由式(7)可得</p>
+<p><span class="math display">\[
 \tag{22}
-D(d,\nabla d)=g_c\Gamma_l(d,\nabla d)</script><p>于是根据式(9)可得</p>
-<script type="math/tex; mode=display">
+D(d,\nabla d)=g_c\Gamma_l(d,\nabla d)
+\]</span></p>
+<p>于是根据式(9)可得</p>
+<p><span class="math display">\[
 \tag{23}
-\delta D(d,\nabla d)=g_c\delta\Gamma_l(d,\nabla d)=\frac{g_c}{l}\int_V(d-l^2\Delta d)\delta d\mathrm{d}v+g_cl\nabla d\cdot\boldsymbol{n}\delta d\bigg|_{\partial V}</script><h3 id="动能与载荷势能的变分"><a href="#动能与载荷势能的变分" class="headerlink" title="动能与载荷势能的变分"></a>动能与载荷势能的变分</h3><p>动能的定义</p>
-<script type="math/tex; mode=display">
+\delta D(d,\nabla d)=g_c\delta\Gamma_l(d,\nabla d)=\frac{g_c}{l}\int_V(d-l^2\Delta d)\delta d\mathrm{d}v+g_cl\nabla d\cdot\boldsymbol{n}\delta d\bigg|_{\partial V}
+\]</span></p>
+<h3 id="动能与载荷势能的变分">动能与载荷势能的变分</h3>
+<p>动能的定义</p>
+<p><span class="math display">\[
 \tag{24a}
-K(\dot{\boldsymbol{u}})=\int_V\frac{1}{2}\rho\dot{\boldsymbol{u}}\cdot\dot{\boldsymbol{u}}\mathrm{d}v</script><p>载荷势能的定义</p>
-<script type="math/tex; mode=display">
+K(\dot{\boldsymbol{u}})=\int_V\frac{1}{2}\rho\dot{\boldsymbol{u}}\cdot\dot{\boldsymbol{u}}\mathrm{d}v
+\]</span></p>
+<p>载荷势能的定义</p>
+<p><span class="math display">\[
 \tag{24b}
-W(\boldsymbol{u})=\int_V \boldsymbol{b}\cdot\boldsymbol{u}\mathrm{d}v+\oint_{\partial V}\boldsymbol{t}\cdot\boldsymbol{u}\mathrm{d}s</script><blockquote>
+W(\boldsymbol{u})=\int_V \boldsymbol{b}\cdot\boldsymbol{u}\mathrm{d}v+\oint_{\partial V}\boldsymbol{t}\cdot\boldsymbol{u}\mathrm{d}s
+\]</span></p>
+<blockquote>
 <p>载荷势能并不等于载荷所作的功</p>
 </blockquote>
 <p>在<a target="_blank" rel="noopener" href="http://sppy.site/2020/04/12/strain-energy-density/" title="详细推导">《弹性体的应变能密度》</a>中给出动能与载荷势能的变分，即</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{25a}
-\delta K=\int_V\rho\ddot{\boldsymbol{u}}\cdot\delta\boldsymbol{u}\mathrm{d}v</script><script type="math/tex; mode=display">
+\delta K=\int_V\rho\ddot{\boldsymbol{u}}\cdot\delta\boldsymbol{u}\mathrm{d}v
+\]</span></p>
+<p><span class="math display">\[
 \tag{25b}
-\delta W=\int_V(\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b})\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\boldsymbol{\sigma}:\delta\boldsymbol{\varepsilon}\mathrm{d}v</script><hr>
-<h3 id="耦合方程"><a href="#耦合方程" class="headerlink" title="耦合方程"></a>耦合方程</h3><p>于是由将式(20)、(23)、(25)代入式(15)可得总势能变分</p>
-<script type="math/tex; mode=display">
+\delta W=\int_V(\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b})\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\boldsymbol{\sigma}:\delta\boldsymbol{\varepsilon}\mathrm{d}v
+\]</span></p>
+<hr />
+<h3 id="耦合方程">耦合方程</h3>
+<p>于是由将式(20)、(23)、(25)代入式(15)可得总势能变分</p>
+<p><span class="math display">\[
 \tag{26}
 \begin{aligned}
-\delta\Pi=&~\delta E+\delta D+\delta K-\delta W\\[5pt]
-=&~\int_V(\rho\ddot{\boldsymbol{u}}-\nabla\cdot\boldsymbol{\sigma}-\boldsymbol{b})\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\Big[\frac{g_c}{l}(d-l^2\Delta d)+g'(d)\psi^+\Big]\delta d\mathrm{d}v+~\\[8pt]
-&~\int_V\Big\{\big[g(d)+k\big]\partial_\boldsymbol{\varepsilon}\psi^++\partial_\boldsymbol{\varepsilon}\psi^--\boldsymbol{\sigma}\Big\}:\delta\boldsymbol{\varepsilon}\mathrm{d}v+g_cl\nabla d\cdot\boldsymbol{n}\delta d\bigg|_{\partial V}=0
-\end{aligned}</script><p>显然变分 $\delta\Pi=0$ 的充分条件为</p>
-<script type="math/tex; mode=display">
+\delta\Pi=&amp;~\delta E+\delta D+\delta K-\delta W\\[5pt]
+=&amp;~\int_V(\rho\ddot{\boldsymbol{u}}-\nabla\cdot\boldsymbol{\sigma}-\boldsymbol{b})\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\Big[\frac{g_c}{l}(d-l^2\Delta d)+g&#39;(d)\psi^+\Big]\delta d\mathrm{d}v+~\\[8pt]
+&amp;~\int_V\Big\{\big[g(d)+k\big]\partial_\boldsymbol{\varepsilon}\psi^++\partial_\boldsymbol{\varepsilon}\psi^--\boldsymbol{\sigma}\Big\}:\delta\boldsymbol{\varepsilon}\mathrm{d}v+g_cl\nabla d\cdot\boldsymbol{n}\delta d\bigg|_{\partial V}=0
+\end{aligned}
+\]</span></p>
+<p>显然变分 <span class="math inline">\(\delta\Pi=0\)</span> 的充分条件为</p>
+<p><span class="math display">\[
 \tag{27}
 \begin{cases}
 \nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}=\rho\ddot{\boldsymbol{u}}\\[5pt]
-\displaystyle\frac{g_c}{l}(d-l^2\Delta d)=-g'(d)\psi^+\\[5pt]
+\displaystyle\frac{g_c}{l}(d-l^2\Delta d)=-g&#39;(d)\psi^+\\[5pt]
 \boldsymbol{\sigma}=\big[g(d)+k\big]\partial_\boldsymbol{\varepsilon}\psi^++\partial_\boldsymbol{\varepsilon}\psi^-
-\end{cases}</script><p>为了体现损伤的不可逆性，即 $\dot{d}\ge0$，引入能量历史最大函数</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<p>为了体现损伤的不可逆性，即 <span class="math inline">\(\dot{d}\ge0\)</span>，引入能量历史最大函数</p>
+<p><span class="math display">\[
 \tag{28}
-\mathcal{H}(\boldsymbol{\varepsilon})=\max_{t\in[0,t_\mathrm{f}]}\psi^+(\boldsymbol{\varepsilon};t)</script><blockquote>
-<p>耗散势变分 $\delta D\ge0$，仅需 $-g’(d)\psi^+\ge0$ 即可，而 $\psi^+$ 肯定是不小于零</p>
-<p>所以引入 $\mathcal{H}(\boldsymbol{\varepsilon})$，不是很懂</p>
+\mathcal{H}(\boldsymbol{\varepsilon})=\max_{t\in[0,t_\mathrm{f}]}\psi^+(\boldsymbol{\varepsilon};t)
+\]</span></p>
+<blockquote>
+<p>耗散势变分 <span class="math inline">\(\delta D\ge0\)</span>，仅需 <span class="math inline">\(-g&#39;(d)\psi^+\ge0\)</span> 即可，而 <span class="math inline">\(\psi^+\)</span> 肯定是不小于零</p>
+<p>所以引入 <span class="math inline">\(\mathcal{H}(\boldsymbol{\varepsilon})\)</span>，不是很懂</p>
 </blockquote>
 <p>于是，将式(27)改写为</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{29a}
 \begin{cases}
 \nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}=\rho\ddot{\boldsymbol{u}}\\[5pt]
-\displaystyle\frac{g_c}{l}(d-l^2\Delta d)=-g'(d)\mathcal{H}\\[5pt]
+\displaystyle\frac{g_c}{l}(d-l^2\Delta d)=-g&#39;(d)\mathcal{H}\\[5pt]
 \boldsymbol{\sigma}=\big[g(d)+k\big]\partial_\boldsymbol{\varepsilon}\psi^++\partial_\boldsymbol{\varepsilon}\psi^-
-\end{cases}</script><p>式(29a)是<strong>耦合的平衡方程与裂纹相场方程</strong>。相应的自然边界条件为</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<p>式(29a)是<strong>耦合的平衡方程与裂纹相场方程</strong>。相应的自然边界条件为</p>
+<p><span class="math display">\[
 \tag{29b}
 \begin{cases}
-\boldsymbol{n}\cdot\boldsymbol{\sigma}=\boldsymbol{t}&~\mathrm{on}~\partial V\\[5pt]
-\nabla d\cdot\boldsymbol{n}=0&~\mathrm{on}~\partial V
-\end{cases}</script><blockquote>
-<p>式(25b)的推导过程中使用了应力边界条件 $\boldsymbol{n}\cdot\boldsymbol{\sigma}=\boldsymbol{t}$</p>
+\boldsymbol{n}\cdot\boldsymbol{\sigma}=\boldsymbol{t}&amp;~\mathrm{on}~\partial V\\[5pt]
+\nabla d\cdot\boldsymbol{n}=0&amp;~\mathrm{on}~\partial V
+\end{cases}
+\]</span></p>
+<blockquote>
+<p>式(25b)的推导过程中使用了应力边界条件 <span class="math inline">\(\boldsymbol{n}\cdot\boldsymbol{\sigma}=\boldsymbol{t}\)</span></p>
 </blockquote>
-<h2 id="应变能密度的退化"><a href="#应变能密度的退化" class="headerlink" title="应变能密度的退化"></a>应变能密度的退化</h2><p>这里具体讨论式(18a)中的退化函数 $g(d)$ 以及拉伸、压缩应变能密度 $\psi^+(\boldsymbol{\varepsilon})$ 、$\psi^-(\boldsymbol{\varepsilon})$ 。</p>
-<h3 id="退化函数"><a href="#退化函数" class="headerlink" title="退化函数"></a>退化函数</h3><p>退化函数 $g(d)$ 首先需满足</p>
-<script type="math/tex; mode=display">
+<h2 id="应变能密度的退化">应变能密度的退化</h2>
+<p>这里具体讨论式(18a)中的退化函数 <span class="math inline">\(g(d)\)</span> 以及拉伸、压缩应变能密度 <span class="math inline">\(\psi^+(\boldsymbol{\varepsilon})\)</span> 、<span class="math inline">\(\psi^-(\boldsymbol{\varepsilon})\)</span> 。</p>
+<h3 id="退化函数">退化函数</h3>
+<p>退化函数 <span class="math inline">\(g(d)\)</span> 首先需满足</p>
+<p><span class="math display">\[
 \tag{30a}
 \begin{cases}
 g(0)=1\\[5pt]
 g(1)=0
-\end{cases}</script><p>这两种情况分别对应<strong>无裂纹时</strong>应变能<strong>没有退化</strong>、<strong>开裂时</strong>拉伸应变能<strong>完全退化</strong>。</p>
-<p>考虑到式(27)或式(29b)中的第二个式子，当 $d=1$ 时，为了保证弹性驱动力 $\partial_d\tilde{\psi}=g’(d)\psi^+$ 收敛到一个有限值<a href="#refer-anchor-1"><sup>1</sup></a>，于是令</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<p>这两种情况分别对应<strong>无裂纹时</strong>应变能<strong>没有退化</strong>、<strong>开裂时</strong>拉伸应变能<strong>完全退化</strong>。</p>
+<p>考虑到式(27)或式(29b)中的第二个式子，当 <span class="math inline">\(d=1\)</span> 时，为了保证弹性驱动力 <span class="math inline">\(\partial_d\tilde{\psi}=g&#39;(d)\psi^+\)</span> 收敛到一个有限值<a href="#refer-anchor-1"><sup>1</sup></a>，于是令</p>
+<p><span class="math display">\[
 \tag{30b}
-g'(1)=0</script><blockquote>
+g&#39;(1)=0
+\]</span></p>
+<blockquote>
 <p>文献[<a href="#refer-anchor-1">1</a>]里这样解释的，我是没看懂</p>
 </blockquote>
 <p>于是在式(30)的条件下选取退化函数，例如</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{31}
-g(d)=(1-d)^2</script><h3 id="应变能密度的拉压分解"><a href="#应变能密度的拉压分解" class="headerlink" title="应变能密度的拉压分解"></a>应变能密度的拉压分解</h3><p>首先定义两个算符</p>
-<script type="math/tex; mode=display">
+g(d)=(1-d)^2
+\]</span></p>
+<h3 id="应变能密度的拉压分解">应变能密度的拉压分解</h3>
+<p>首先定义两个算符</p>
+<p><span class="math display">\[
 \tag{32}
 \begin{cases}
 \langle x\rangle_+=(x+|x|)/2\\[5pt]
 \langle x\rangle_-=(x-|x|)/2
-\end{cases}</script><p>为了方便展示，再将应变能密度函数给出</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<p>为了方便展示，再将应变能密度函数给出</p>
+<p><span class="math display">\[
 \tag*{[16]}
-\psi(\boldsymbol{\varepsilon})=\mu\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}+\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon})</script><hr>
-<h4 id="分解形式1"><a href="#分解形式1" class="headerlink" title="分解形式1"></a>分解形式1</h4><p>文献[<a href="#refer-anchor-2">2</a>]中将应变张量 $\boldsymbol{\varepsilon}$ 进行谱分解，即</p>
-<script type="math/tex; mode=display">
+\psi(\boldsymbol{\varepsilon})=\mu\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}+\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon})
+\]</span></p>
+<hr />
+<h4 id="分解形式1">分解形式1</h4>
+<p>文献[<a href="#refer-anchor-2">2</a>]中将应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> 进行谱分解，即</p>
+<p><span class="math display">\[
 \tag{33a}
-\boldsymbol{\varepsilon}=\sum_{i=1}^3 \varepsilon_i\boldsymbol{n}_i\otimes\boldsymbol{n}_i</script><p>式中，$\varepsilon_i$、$\boldsymbol{n}_i$ 分别为应变张量 $\boldsymbol{\varepsilon}$ 的第 $i$ 个主应变、主方向，且 $|\boldsymbol{n}_i|=1$ 。特别地，令 $\boldsymbol{n}_i$ 均为列向量，记 $\boldsymbol{Q}=[\boldsymbol{n}_1,\boldsymbol{n}_2,\boldsymbol{n}_3]$ ，则有</p>
-<script type="math/tex; mode=display">
+\boldsymbol{\varepsilon}=\sum_{i=1}^3 \varepsilon_i\boldsymbol{n}_i\otimes\boldsymbol{n}_i
+\]</span></p>
+<p>式中，<span class="math inline">\(\varepsilon_i\)</span>、<span class="math inline">\(\boldsymbol{n}_i\)</span> 分别为应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> 的第 <span class="math inline">\(i\)</span> 个主应变、主方向，且 <span class="math inline">\(\|\boldsymbol{n}_i\|=1\)</span> 。特别地，令 <span class="math inline">\(\boldsymbol{n}_i\)</span> 均为列向量，记 <span class="math inline">\(\boldsymbol{Q}=[\boldsymbol{n}_1,\boldsymbol{n}_2,\boldsymbol{n}_3]\)</span> ，则有</p>
+<p><span class="math display">\[
 \tag{33b}
-\mathrm{diag}([\varepsilon_1,\varepsilon_2,\varepsilon_3])=\boldsymbol{Q}^\mathrm{T}\cdot\boldsymbol{\varepsilon}\cdot\boldsymbol{Q}</script><blockquote>
+\mathrm{diag}([\varepsilon_1,\varepsilon_2,\varepsilon_3])=\boldsymbol{Q}^\mathrm{T}\cdot\boldsymbol{\varepsilon}\cdot\boldsymbol{Q}
+\]</span></p>
+<blockquote>
 <p>实对称矩阵的谱分解性质</p>
 </blockquote>
-<p>式中，$\mathrm{diag}([\varepsilon_1,\varepsilon_2,\varepsilon_3])$ 表示主对角线元素为 $[\varepsilon_1,\varepsilon_2,\varepsilon_3]$ 的对角阵。事实上 $\boldsymbol{Q}$ 为<a target="_blank" rel="noopener" href="http://sppy.site/2020/03/01/transformation-of-elastic-matrix/" title="全局坐标系与局部坐标系下弹性矩阵的变换">正交矩阵</a>，式(33b)表示应变张量 $\boldsymbol{\varepsilon}$ 经正交矩阵 $\boldsymbol{Q}$ 旋转后得到主应变微体。</p>
-<p>于是，在谱分解的基础上定义拉伸应变张量 $\boldsymbol{\varepsilon}^+$ 与压缩应变张量 $\boldsymbol{\varepsilon}^-$</p>
-<script type="math/tex; mode=display">
+<p>式中，<span class="math inline">\(\mathrm{diag}([\varepsilon_1,\varepsilon_2,\varepsilon_3])\)</span> 表示主对角线元素为 <span class="math inline">\([\varepsilon_1,\varepsilon_2,\varepsilon_3]\)</span> 的对角阵。事实上 <span class="math inline">\(\boldsymbol{Q}\)</span> 为<a target="_blank" rel="noopener" href="http://sppy.site/2020/03/01/transformation-of-elastic-matrix/" title="全局坐标系与局部坐标系下弹性矩阵的变换">正交矩阵</a>，式(33b)表示应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> 经正交矩阵 <span class="math inline">\(\boldsymbol{Q}\)</span> 旋转后得到主应变微体。</p>
+<p>于是，在谱分解的基础上定义拉伸应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}^+\)</span> 与压缩应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}^-\)</span></p>
+<p><span class="math display">\[
 \tag{34}
 \begin{cases}
 \boldsymbol{\varepsilon}^+=\sum_{i=1}^3 \langle\varepsilon_i\rangle_+\boldsymbol{n}_i\otimes\boldsymbol{n}_i\\[5pt]
 \boldsymbol{\varepsilon}^-=\sum_{i=1}^3 \langle\varepsilon_i\rangle_-\boldsymbol{n}_i\otimes\boldsymbol{n}_i
-\end{cases}</script><p>显然，对于式(34)所定义拉伸、压缩应变张量，恒有 $\boldsymbol{\varepsilon}=\boldsymbol{\varepsilon}^++\boldsymbol{\varepsilon}^-$ 。</p>
+\end{cases}
+\]</span></p>
+<p>显然，对于式(34)所定义拉伸、压缩应变张量，恒有 <span class="math inline">\(\boldsymbol{\varepsilon}=\boldsymbol{\varepsilon}^++\boldsymbol{\varepsilon}^-\)</span> 。</p>
 <p>进一步可以定义拉伸、压缩应变能密度</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{35}
 \begin{cases}
 \psi^+(\boldsymbol{\varepsilon})=\mu\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^++\displaystyle\frac{1}{2}\lambda\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle^2_+\\[5pt]
 \psi^-(\boldsymbol{\varepsilon})=\mu\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-+\displaystyle\frac{1}{2}\lambda\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle^2_-
-\end{cases}</script><h5 id="证明1"><a href="#证明1" class="headerlink" title="证明1"></a>证明1</h5><p>还需证明式(35)满足式(18b)。不难证明</p>
-<script type="math/tex; mode=display">
-\mathrm{tr}^2(\boldsymbol{\varepsilon})=\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle^2_++\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle^2_-</script><p>因此还需证明</p>
-<script type="math/tex; mode=display">
-\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}=\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^++\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-</script><p>这里先证明两个子结论：令一阶张量 $\boldsymbol{m}$、$\boldsymbol{n}$ 满足 $|\boldsymbol{m}|=|\boldsymbol{n}|=1$ ，且 $\boldsymbol{m}\cdot\boldsymbol{n}=0$ ，于是有</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<h5 id="证明1">证明1</h5>
+<p>还需证明式(35)满足式(18b)。不难证明</p>
+<p><span class="math display">\[
+\mathrm{tr}^2(\boldsymbol{\varepsilon})=\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle^2_++\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle^2_-
+\]</span></p>
+<p>因此还需证明</p>
+<p><span class="math display">\[
+\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}=\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^++\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-
+\]</span></p>
+<p>这里先证明两个子结论：令一阶张量 <span class="math inline">\(\boldsymbol{m}\)</span>、<span class="math inline">\(\boldsymbol{n}\)</span> 满足 <span class="math inline">\(\|\boldsymbol{m}\|=\|\boldsymbol{n}\|=1\)</span> ，且 <span class="math inline">\(\boldsymbol{m}\cdot\boldsymbol{n}=0\)</span> ，于是有</p>
+<p><span class="math display">\[
 \tag{36a}
-(\boldsymbol{n}\otimes\boldsymbol{n}):(\boldsymbol{n}\otimes\boldsymbol{n})=n_in_jn_in_j=\sum_i\Big[n_i^2\big(\sum_jn_j^2\big)\Big]=1</script><script type="math/tex; mode=display">
+(\boldsymbol{n}\otimes\boldsymbol{n}):(\boldsymbol{n}\otimes\boldsymbol{n})=n_in_jn_in_j=\sum_i\Big[n_i^2\big(\sum_jn_j^2\big)\Big]=1
+\]</span></p>
+<p><span class="math display">\[
 \tag{36b}
-(\boldsymbol{n}\otimes\boldsymbol{n}):(\boldsymbol{m}\otimes\boldsymbol{m})=n_in_jm_im_j=\sum_i\Big[n_im_i\big(\sum_jn_jm_j\big)\Big]=0</script><p>于是根据式(36)，可得</p>
-<script type="math/tex; mode=display">
+(\boldsymbol{n}\otimes\boldsymbol{n}):(\boldsymbol{m}\otimes\boldsymbol{m})=n_in_jm_im_j=\sum_i\Big[n_im_i\big(\sum_jn_jm_j\big)\Big]=0
+\]</span></p>
+<p>于是根据式(36)，可得</p>
+<p><span class="math display">\[
 \tag{37a}
-\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}=\Big(\sum_{i=1}^3 \varepsilon_i\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big):\Big(\sum_{i=1}^3 \varepsilon_i\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big)=\sum_{i=1}^3\varepsilon_i^2</script><script type="math/tex; mode=display">
+\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}=\Big(\sum_{i=1}^3 \varepsilon_i\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big):\Big(\sum_{i=1}^3 \varepsilon_i\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big)=\sum_{i=1}^3\varepsilon_i^2
+\]</span></p>
+<p><span class="math display">\[
 \tag{37b}
-\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^+=\Big(\sum_{i=1}^3 \langle\varepsilon_i\rangle_+\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big):\Big(\sum_{i=1}^3 \langle\varepsilon_i\rangle_+\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big)=\sum_{i=1}^3\langle\varepsilon_i\rangle_+^2</script><script type="math/tex; mode=display">
+\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^+=\Big(\sum_{i=1}^3 \langle\varepsilon_i\rangle_+\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big):\Big(\sum_{i=1}^3 \langle\varepsilon_i\rangle_+\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big)=\sum_{i=1}^3\langle\varepsilon_i\rangle_+^2
+\]</span></p>
+<p><span class="math display">\[
 \tag{37c}
-\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-=\Big(\sum_{i=1}^3 \langle\varepsilon_i\rangle_-\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big):\Big(\sum_{i=1}^3 \langle\varepsilon_i\rangle_-\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big)=\sum_{i=1}^3\langle\varepsilon_i\rangle_-^2</script><p>进一步可得</p>
-<script type="math/tex; mode=display">
+\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-=\Big(\sum_{i=1}^3 \langle\varepsilon_i\rangle_-\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big):\Big(\sum_{i=1}^3 \langle\varepsilon_i\rangle_-\boldsymbol{n}_i\otimes\boldsymbol{n}_i\Big)=\sum_{i=1}^3\langle\varepsilon_i\rangle_-^2
+\]</span></p>
+<p>进一步可得</p>
+<p><span class="math display">\[
 \tag{38}
-\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^++\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-=\sum_{i=1}^3\varepsilon_i^2</script><p>由式(37a)、(38)即可证明 $\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}=\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^++\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-$ 。</p>
+\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^++\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-=\sum_{i=1}^3\varepsilon_i^2
+\]</span></p>
+<p>由式(37a)、(38)即可证明 <span class="math inline">\(\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}=\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^++\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-\)</span> 。</p>
 <p>综上，由式(35)所定义的拉伸、压缩应变能密度满足式(18b)。</p>
 <blockquote>
-<p>需要注意，直接将式(34)所定义的拉伸、压缩应变 $\boldsymbol{\varepsilon}^+$、$\boldsymbol{\varepsilon}^-$ 代入式(16)，令</p>
-<script type="math/tex; mode=display">
+<p>需要注意，直接将式(34)所定义的拉伸、压缩应变 <span class="math inline">\(\boldsymbol{\varepsilon}^+\)</span>、<span class="math inline">\(\boldsymbol{\varepsilon}^-\)</span> 代入式(16)，令 <span class="math display">\[
 \begin{cases}
 \psi^+=\psi(\boldsymbol{\varepsilon}^+)=\mu\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^++\displaystyle\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon}^+)\\[5pt]
 \psi^-=\psi(\boldsymbol{\varepsilon}^-)=\mu\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-+\displaystyle\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon}^-)
-\end{cases}</script><p>这显然不能满足式(18b)。</p>
+\end{cases}
+\]</span> 这显然不能满足式(18b)。</p>
 </blockquote>
-<h5 id="偏导数1"><a href="#偏导数1" class="headerlink" title="偏导数1"></a>偏导数1</h5><p>由式(27)或式(29b)中的第三个式子可知，还需 $\psi^+$、$\psi^-$ 对 $\boldsymbol{\varepsilon}$ 的偏导数 $\partial<em>\boldsymbol{\varepsilon}\psi^+$、$\partial</em>\boldsymbol{\varepsilon}\psi^-$ 。于是由式(35)可得</p>
-<script type="math/tex; mode=display">
+<h5 id="偏导数1">偏导数1</h5>
+<p>由式(27)或式(29b)中的第三个式子可知，还需 <span class="math inline">\(\psi^+\)</span>、<span class="math inline">\(\psi^-\)</span> 对 <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> 的偏导数 <span class="math inline">\(\partial_\boldsymbol{\varepsilon}\psi^+\)</span> 、<span class="math inline">\(\partial_\boldsymbol{\varepsilon}\psi^-\)</span> 。于是由式(35)可得</p>
+<p><span class="math display">\[
 \tag{39}
 \begin{cases}
 \partial_\boldsymbol{\varepsilon}\psi^+=2\mu\boldsymbol{\varepsilon}^++\lambda\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle_+\boldsymbol{I}\\[5pt]
 \partial_\boldsymbol{\varepsilon}\psi^-=2\mu\boldsymbol{\varepsilon}^-+\lambda\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle_-\boldsymbol{I}
-\end{cases}</script><blockquote>
+\end{cases}
+\]</span></p>
+<blockquote>
 <p>这个不知道怎么证明</p>
 </blockquote>
-<hr>
-<h4 id="分解形式2"><a href="#分解形式2" class="headerlink" title="分解形式2"></a>分解形式2</h4><p>文献[<a href="#refer-anchor-1">1</a>]中采用主应变形式的应变能密度，即</p>
-<script type="math/tex; mode=display">
+<hr />
+<h4 id="分解形式2">分解形式2</h4>
+<p>文献[<a href="#refer-anchor-1">1</a>]中采用主应变形式的应变能密度，即</p>
+<p><span class="math display">\[
 \tag{40}
-\psi(\varepsilon_1,\varepsilon_2,\varepsilon_3)=\mu(\varepsilon_1^2+\varepsilon_2^2+\varepsilon_3^2)+\frac{1}{2}\lambda(\varepsilon_1+\varepsilon_2+\varepsilon_3)^2</script><p>相应的拉伸、压缩应变能密度定义为</p>
-<script type="math/tex; mode=display">
+\psi(\varepsilon_1,\varepsilon_2,\varepsilon_3)=\mu(\varepsilon_1^2+\varepsilon_2^2+\varepsilon_3^2)+\frac{1}{2}\lambda(\varepsilon_1+\varepsilon_2+\varepsilon_3)^2
+\]</span></p>
+<p>相应的拉伸、压缩应变能密度定义为</p>
+<p><span class="math display">\[
 \tag{41}
-\psi^\pm=\mu(\langle\varepsilon_1\rangle_\pm^2+\langle\varepsilon_2\rangle_\pm^2+\langle\varepsilon_3\rangle_\pm^2)+\frac{1}{2}\lambda\langle\varepsilon_1+\varepsilon_2+\varepsilon_3\rangle_\pm^2</script><blockquote>
+\psi^\pm=\mu(\langle\varepsilon_1\rangle_\pm^2+\langle\varepsilon_2\rangle_\pm^2+\langle\varepsilon_3\rangle_\pm^2)+\frac{1}{2}\lambda\langle\varepsilon_1+\varepsilon_2+\varepsilon_3\rangle_\pm^2
+\]</span></p>
+<blockquote>
 <p>事实上，分解形式2与分解形式1是一致的</p>
 </blockquote>
-<h5 id="证明2"><a href="#证明2" class="headerlink" title="证明2"></a>证明2</h5><p>由式(41)所定义的拉伸、压缩应变能密度，显然满足式(18b)。</p>
-<h5 id="偏导数2"><a href="#偏导数2" class="headerlink" title="偏导数2"></a>偏导数2</h5><script type="math/tex; mode=display">
+<h5 id="证明2">证明2</h5>
+<p>由式(41)所定义的拉伸、压缩应变能密度，显然满足式(18b)。</p>
+<h5 id="偏导数2">偏导数2</h5>
+<p><span class="math display">\[
 \tag{42}
-\partial_\boldsymbol{\varepsilon}\psi^\pm=2\mu\sum_{i=1}^3 \langle\varepsilon_i\rangle_\pm\boldsymbol{n}_i\otimes\boldsymbol{n}_i+\lambda\langle\varepsilon_1+\varepsilon_2+\varepsilon_3\rangle_\pm\boldsymbol{I}</script><hr>
-<h4 id="分解形式3"><a href="#分解形式3" class="headerlink" title="分解形式3"></a>分解形式3</h4><p>文献[<a href="#refer-anchor-3">3</a>]中将应变张量 $\boldsymbol{\varepsilon}$ 分解为球形部分和偏斜部分，即</p>
-<script type="math/tex; mode=display">
+\partial_\boldsymbol{\varepsilon}\psi^\pm=2\mu\sum_{i=1}^3 \langle\varepsilon_i\rangle_\pm\boldsymbol{n}_i\otimes\boldsymbol{n}_i+\lambda\langle\varepsilon_1+\varepsilon_2+\varepsilon_3\rangle_\pm\boldsymbol{I}
+\]</span></p>
+<hr />
+<h4 id="分解形式3">分解形式3</h4>
+<p>文献[<a href="#refer-anchor-3">3</a>]中将应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> 分解为球形部分和偏斜部分，即</p>
+<p><span class="math display">\[
 \tag{43}
 \begin{cases}
 \boldsymbol{\varepsilon}_\mathrm{v}=\displaystyle\frac{1}{3}\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{I}\\[5pt]
 \boldsymbol{\varepsilon}_\mathrm{d}=\boldsymbol{\varepsilon}-\boldsymbol{\varepsilon}_\mathrm{v}
-\end{cases}</script><p>于是，在上述分解的基础上定义拉伸应变张量 $\boldsymbol{\varepsilon}^+$ 与压缩应变张量 $\boldsymbol{\varepsilon}^-$</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<p>于是，在上述分解的基础上定义拉伸应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}^+\)</span> 与压缩应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}^-\)</span></p>
+<p><span class="math display">\[
 \tag{44}
 \begin{cases}
 \boldsymbol{\varepsilon}^+=\boldsymbol{\varepsilon}^+_\mathrm{v}+\boldsymbol{\varepsilon}_\mathrm{d}\\[5pt]
 \boldsymbol{\varepsilon}^-=\boldsymbol{\varepsilon}^-_\mathrm{v}
-\end{cases}</script><p>式中，$\boldsymbol{\varepsilon}^+<em>\mathrm{v}=\displaystyle\frac{1}{3}\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle</em>+\boldsymbol{I}<del>,</del>\boldsymbol{\varepsilon}^-<em>\mathrm{v}=\frac{1}{3}\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle</em>-\boldsymbol{I}$ 。直接将式(44)所定义的拉伸、压缩应变 $\boldsymbol{\varepsilon}^+$、$\boldsymbol{\varepsilon}^-$ 代入式(16)，令</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<p>式中，<span class="math inline">\(\boldsymbol{\varepsilon}^+_\mathrm{v}=\displaystyle\frac{1}{3}\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle_+\boldsymbol{I}~~,~~\boldsymbol{\varepsilon}^-_\mathrm{v}=\frac{1}{3}\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle_-\boldsymbol{I}\)</span> 。直接将式(44)所定义的拉伸、压缩应变 <span class="math inline">\(\boldsymbol{\varepsilon}^+\)</span>、<span class="math inline">\(\boldsymbol{\varepsilon}^-\)</span> 代入式(16)，令</p>
+<p><span class="math display">\[
 \tag{45}
 \begin{cases}
 \psi^+=\psi(\boldsymbol{\varepsilon}^+)=\mu\boldsymbol{\varepsilon}^+:\boldsymbol{\varepsilon}^++\displaystyle\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon}^+)\\[5pt]
 \psi^-=\psi(\boldsymbol{\varepsilon}^-)=\mu\boldsymbol{\varepsilon}^-:\boldsymbol{\varepsilon}^-+\displaystyle\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon}^-)
-\end{cases}</script><h5 id="证明3"><a href="#证明3" class="headerlink" title="证明3"></a>证明3</h5><p>当 $\mathrm{tr}(\boldsymbol{\varepsilon})&gt;0$ 时，$\boldsymbol{\varepsilon}^+=\boldsymbol{\varepsilon}$，$\boldsymbol{\varepsilon}^-=\boldsymbol{0}$ 。于是 $\psi^+=\psi(\boldsymbol{\varepsilon})$，$\psi^-=0$，显然满足式(18b)。</p>
-<p>当 $\mathrm{tr}(\boldsymbol{\varepsilon})&lt;0$ 时，$\boldsymbol{\varepsilon}^+=\boldsymbol{\varepsilon}<em>\mathrm{d}$，$\boldsymbol{\varepsilon}^-=\boldsymbol{\varepsilon}</em>\mathrm{v}$。于是 $\psi^+=\psi(\boldsymbol{\varepsilon}<em>\mathrm{d})$，$\psi^-=\psi(\boldsymbol{\varepsilon}</em>\mathrm{v})$ 。</p>
-<p>在<a target="_blank" rel="noopener" href="http://sppy.site/2020/04/12/strain-energy-density/" title="详细推导">《弹性体的应变能密度》</a>中给出畸变能密度 $\psi<em>\mathrm{d}$ 与体积改变能密度 $\psi</em>\mathrm{v}$</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<h5 id="证明3">证明3</h5>
+<p>当 <span class="math inline">\(\mathrm{tr}(\boldsymbol{\varepsilon})&gt;0\)</span> 时，<span class="math inline">\(\boldsymbol{\varepsilon}^+=\boldsymbol{\varepsilon}\)</span>，<span class="math inline">\(\boldsymbol{\varepsilon}^-=\boldsymbol{0}\)</span> 。于是 <span class="math inline">\(\psi^+=\psi(\boldsymbol{\varepsilon})\)</span>，<span class="math inline">\(\psi^-=0\)</span>，显然满足式(18b)。</p>
+<p>当 <span class="math inline">\(\mathrm{tr}(\boldsymbol{\varepsilon})&lt;0\)</span> 时，<span class="math inline">\(\boldsymbol{\varepsilon}^+=\boldsymbol{\varepsilon}_\mathrm{d}\)</span>，<span class="math inline">\(\boldsymbol{\varepsilon}^-=\boldsymbol{\varepsilon}_\mathrm{v}\)</span>。于是 <span class="math inline">\(\psi^+=\psi(\boldsymbol{\varepsilon}_\mathrm{d})\)</span>，<span class="math inline">\(\psi^-=\psi(\boldsymbol{\varepsilon}_\mathrm{v})\)</span> 。</p>
+<p>在<a target="_blank" rel="noopener" href="http://sppy.site/2020/04/12/strain-energy-density/" title="详细推导">《弹性体的应变能密度》</a>中给出畸变能密度 <span class="math inline">\(\psi_\mathrm{d}\)</span> 与体积改变能密度 <span class="math inline">\(\psi_\mathrm{v}\)</span></p>
+<p><span class="math display">\[
 \tag{46}
 \begin{cases}
 \psi_\mathrm{d}=\psi(\boldsymbol{\varepsilon}_\mathrm{d})=\mu\big[\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}-\displaystyle\frac{1}{3}\mathrm{tr}^2(\boldsymbol{\varepsilon})\big]\\[5pt]
 \psi_\mathrm{v}=\psi(\boldsymbol{\varepsilon}_\mathrm{v})=\displaystyle\frac{1}{6}(2\mu+3\lambda)\mathrm{tr}^2(\boldsymbol{\varepsilon})
-\end{cases}</script><p>且 $\psi<em>\mathrm{d}+\psi</em>\mathrm{v}=\psi$，于是满足式(18b)。</p>
+\end{cases}
+\]</span></p>
+<p>且 <span class="math inline">\(\psi_\mathrm{d}+\psi_\mathrm{v}=\psi\)</span>，于是满足式(18b)。</p>
 <p>综上，由式(45)所定义的拉伸、压缩应变能密度满足式(18b)。</p>
-<h5 id="偏导数3"><a href="#偏导数3" class="headerlink" title="偏导数3"></a>偏导数3</h5><p>$\psi<em>\mathrm{d}$、$\psi</em>\mathrm{v}$ 对 $\boldsymbol{\varepsilon}$ 的偏导数 $\partial<em>\boldsymbol{\varepsilon}\psi</em>\mathrm{d}$、$\partial<em>\boldsymbol{\varepsilon}\psi</em>\mathrm{v}$</p>
-<script type="math/tex; mode=display">
+<h5 id="偏导数3">偏导数3</h5>
+<p><span class="math inline">\(\psi_\mathrm{d}\)</span>、<span class="math inline">\(\psi_\mathrm{v}\)</span> 对 <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> 的偏导数 <span class="math inline">\(\partial_\boldsymbol{\varepsilon}\psi_\mathrm{d}\)</span>、<span class="math inline">\(\partial_\boldsymbol{\varepsilon}\psi_\mathrm{v}\)</span></p>
+<p><span class="math display">\[
 \tag{47}
 \begin{cases}
 \partial_\boldsymbol{\varepsilon}\psi_\mathrm{d}=\mu\big[2\boldsymbol{\varepsilon}-\displaystyle\frac{2}{3}\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{I}\big]=2\mu\boldsymbol{\varepsilon}_\mathrm{d}\\[5pt]
 \partial_\boldsymbol{\varepsilon}\psi_\mathrm{v}=\displaystyle\frac{1}{3}(2\mu+3\lambda)\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{I}=(2\mu+3\lambda)\boldsymbol{\varepsilon}_\mathrm{v}
-\end{cases}</script><p>于是有</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<p>于是有</p>
+<p><span class="math display">\[
 \tag{48}
 \begin{cases}
 \partial_\boldsymbol{\varepsilon}\psi^+=\displaystyle\frac{1}{3}(2\mu+3\lambda)\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle_+\boldsymbol{I}+2\mu\boldsymbol{\varepsilon}_\mathrm{d}\\[5pt]
 \partial_\boldsymbol{\varepsilon}\psi^-=\displaystyle\frac{1}{3}(2\mu+3\lambda)\langle\mathrm{tr}(\boldsymbol{\varepsilon})\rangle_-\boldsymbol{I}
-\end{cases}</script><hr>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><div id="refer-anchor-1"></div></p>
+\end{cases}
+\]</span></p>
+<hr />
+<h2 id="参考文献">参考文献</h2>
+<div id="refer-anchor-1">
+
+</div>
 <ul>
 <li>[1] Miehe C , Welschinger F , Hofacker M . Thermodynamically consistent phase-field models of fracture: Variational principles and multi-field FE implementations[J]. International Journal for Numerical Methods in Engineering, 2010, 83(10):1273-1311.</li>
 </ul>
-<p><div id="refer-anchor-2"></div></p>
+<div id="refer-anchor-2">
+
+</div>
 <ul>
 <li>[2] Hofacker M , Miehe C . <a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007/s10704-012-9753-8">Continuum phase field modeling of dynamic fracture: variational principles and staggered FE implementation</a>[J]. International Journal of Fracture, 2012, 178(1-2):p.113-129.</li>
 </ul>
-<p><div id="refer-anchor-3"></div></p>
+<div id="refer-anchor-3">
+
+</div>
 <ul>
 <li>[3] Amor H , Marigo J J , Maurini C . <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0022509609000659">Regularized formulation of the variational brittle fracture with unilateral contact: Numerical experiments</a>[J]. Journal of the Mechanics &amp; Physics of Solids, 2009, 57(8):1209-1229.</li>
 </ul>
-<hr>
+<hr />
 
     </div>
 
