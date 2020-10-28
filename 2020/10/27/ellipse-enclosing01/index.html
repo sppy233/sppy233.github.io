@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="背景理论，主要摘自https:&#x2F;&#x2F;www.cs.cornell.edu&#x2F;cv&#x2F;OtherPdf&#x2F;Ellipse.pdf  给定点集 \(\mathcal{P}&#x3D;\{P_1,P_2,\cdots,P_n\}\) ，求包围该点集的最小椭圆 \(\mathcal{E}\) 。">
+  <meta name="description" content="背景理论，主要摘自https:&#x2F;&#x2F;www.cs.cornell.edu&#x2F;cv&#x2F;OtherPdf&#x2F;Ellipse.pdf  给定点集 $\mathcal{P}&#x3D;{P_1,P_2,\cdots,P_n}$ ，求包围该点集的最小椭圆 $\mathcal{E}$ 。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="点集的最小外包围椭圆01">
 <meta property="og:url" content="http://www.sppy.site/2020/10/27/ellipse-enclosing01/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="背景理论，主要摘自https:&#x2F;&#x2F;www.cs.cornell.edu&#x2F;cv&#x2F;OtherPdf&#x2F;Ellipse.pdf  给定点集 \(\mathcal{P}&#x3D;\{P_1,P_2,\cdots,P_n\}\) ，求包围该点集的最小椭圆 \(\mathcal{E}\) 。">
+<meta property="og:description" content="背景理论，主要摘自https:&#x2F;&#x2F;www.cs.cornell.edu&#x2F;cv&#x2F;OtherPdf&#x2F;Ellipse.pdf  给定点集 $\mathcal{P}&#x3D;{P_1,P_2,\cdots,P_n}$ ，求包围该点集的最小椭圆 $\mathcal{E}$ 。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-10-27T03:00:00.000Z">
 <meta property="article:modified_time" content="2020-10-27T05:38:51.695Z">
@@ -255,39 +255,30 @@
         <blockquote>
 <p>背景理论，主要摘自<a target="_blank" rel="noopener" href="https://www.cs.cornell.edu/cv/OtherPdf/Ellipse.pdf">https://www.cs.cornell.edu/cv/OtherPdf/Ellipse.pdf</a></p>
 </blockquote>
-<p>给定点集 <span class="math inline">\(\mathcal{P}=\{P_1,P_2,\cdots,P_n\}\)</span> ，求包围该点集的<strong>最小椭圆</strong> <span class="math inline">\(\mathcal{E}\)</span> 。</p>
+<p>给定点集 $\mathcal{P}={P_1,P_2,\cdots,P_n}$ ，求包围该点集的<strong>最小椭圆</strong> $\mathcal{E}$ 。</p>
 <a id="more"></a>
-<h2 id="椭圆定义">椭圆定义</h2>
-<h3 id="二次曲线">二次曲线</h3>
-<p>一般方程 <span class="math display">\[
-Ax^2+Bxy+Cy^2+Dx+Ey+F=0
-\]</span> 对于椭圆需满足 <span class="math display">\[
-B^2-4AC&lt;0
-\]</span> 避免退化需满足 <span class="math display">\[
-\frac{D^2}{4A}+\frac{E^2}{4C}-F&gt;0
-\]</span></p>
-<h3 id="参数方程">参数方程</h3>
-<p>矩阵形式 <span class="math display">\[
+<h2 id="椭圆定义"><a href="#椭圆定义" class="headerlink" title="椭圆定义"></a>椭圆定义</h2><h3 id="二次曲线"><a href="#二次曲线" class="headerlink" title="二次曲线"></a>二次曲线</h3><p>一般方程</p>
+<script type="math/tex; mode=display">
+Ax^2+Bxy+Cy^2+Dx+Ey+F=0</script><p>对于椭圆需满足</p>
+<script type="math/tex; mode=display">
+B^2-4AC<0</script><p>避免退化需满足</p>
+<script type="math/tex; mode=display">
+\frac{D^2}{4A}+\frac{E^2}{4C}-F>0</script><h3 id="参数方程"><a href="#参数方程" class="headerlink" title="参数方程"></a>参数方程</h3><p>矩阵形式</p>
+<script type="math/tex; mode=display">
 \begin{bmatrix} x(t) \\ y(t) \end{bmatrix}=
 \begin{bmatrix} h \\ k \end{bmatrix}+
-\left[\begin{array}{lr} \cos(\tau)&amp;-\sin(\tau) \\ \sin(\tau)&amp;\cos(\tau) \end{array}\right]\cdot
-\begin{bmatrix} a\cos(t) \\ b\sin(t) \end{bmatrix}
-\]</span> 其中，<span class="math inline">\((h,k)\)</span> 为椭圆中心，<span class="math inline">\(\tau\)</span> 为逆时针旋转角度，<span class="math inline">\(0 \le t \le 2\pi\)</span> 。</p>
-<h3 id="焦点形式">焦点形式</h3>
-<p>给定焦点 <span class="math inline">\(F_1=(\alpha_1,\beta_1)\)</span> 、<span class="math inline">\(F_2=(\alpha_2,\beta_2)\)</span> 以及绳长 <span class="math inline">\(s\)</span> ，则有 <span class="math display">\[
-\sqrt{(x-\alpha_1)^2+(y-\beta_1)^2}+\sqrt{(x-\alpha_2)^2+(y-\beta_2)^2}=s
-\]</span></p>
-<h2 id="转换关系">转换关系</h2>
-<h3 id="二次曲线-参数方程">二次曲线 ⇒ 参数方程</h3>
-<p>定义矩阵 <span class="math display">\[
-M_0=\begin{bmatrix} F&amp;D/2&amp;E/2 \\ D/2&amp;A&amp;B/2 \\ E/2&amp;B/2&amp;C \end{bmatrix}\qquad
-M=\begin{bmatrix} A&amp;B/2 \\ B/2&amp;C \end{bmatrix}
-\]</span> 则有 <span class="math display">\[
-\begin{array}{lc} a=\sqrt{-\det(M_0)/(\det(M)\lambda_1)} &amp; b=\sqrt{-\det(M_0)/(\det(M)\lambda_2)}\\[5pt] h=(BE-2CD)/(4AC-B^2) &amp; k=(BD-2AE)/(4AC-B^2)\\[5pt] \tau=\mathrm{arccot}((A-C)/B)/2 &amp;  \end{array}
-\]</span></p>
-<p>其中，<span class="math inline">\(\lambda_1\)</span> 、<span class="math inline">\(\lambda_2\)</span> 为矩阵 <span class="math inline">\(M\)</span> 的特征值，且满足 <span class="math inline">\(|{\lambda_1}-A| \le |{\lambda_1}-C|\)</span> ，<span class="math inline">\(|{\lambda_2}-C| \le |{\lambda_2}-A|\)</span> 。</p>
-<h3 id="参数方程-二次曲线">参数方程 ⇒ 二次曲线</h3>
-<p>记 <span class="math inline">\(c=\cos(\tau)\)</span> 、<span class="math inline">\(s=\sin(\tau)\)</span> ，则有 <span class="math display">\[
+\left[\begin{array}{lr} \cos(\tau)&-\sin(\tau) \\ \sin(\tau)&\cos(\tau) \end{array}\right]\cdot
+\begin{bmatrix} a\cos(t) \\ b\sin(t) \end{bmatrix}</script><p>其中，$(h,k)$ 为椭圆中心，$\tau$ 为逆时针旋转角度，$0 \le t \le 2\pi$ 。</p>
+<h3 id="焦点形式"><a href="#焦点形式" class="headerlink" title="焦点形式"></a>焦点形式</h3><p>给定焦点 $F_1=(\alpha_1,\beta_1)$ 、$F_2=(\alpha_2,\beta_2)$ 以及绳长 $s$ ，则有</p>
+<script type="math/tex; mode=display">
+\sqrt{(x-\alpha_1)^2+(y-\beta_1)^2}+\sqrt{(x-\alpha_2)^2+(y-\beta_2)^2}=s</script><h2 id="转换关系"><a href="#转换关系" class="headerlink" title="转换关系"></a>转换关系</h2><h3 id="二次曲线-⇒-参数方程"><a href="#二次曲线-⇒-参数方程" class="headerlink" title="二次曲线 ⇒ 参数方程"></a>二次曲线 ⇒ 参数方程</h3><p>定义矩阵</p>
+<script type="math/tex; mode=display">
+M_0=\begin{bmatrix} F&D/2&E/2 \\ D/2&A&B/2 \\ E/2&B/2&C \end{bmatrix}\qquad
+M=\begin{bmatrix} A&B/2 \\ B/2&C \end{bmatrix}</script><p>则有</p>
+<script type="math/tex; mode=display">
+\begin{array}{lc} a=\sqrt{-\det(M_0)/(\det(M)\lambda_1)} & b=\sqrt{-\det(M_0)/(\det(M)\lambda_2)}\\[5pt] h=(BE-2CD)/(4AC-B^2) & k=(BD-2AE)/(4AC-B^2)\\[5pt] \tau=\mathrm{arccot}((A-C)/B)/2 &  \end{array}</script><p>其中，$\lambda_1$ 、$\lambda_2$ 为矩阵 $M$ 的特征值，且满足 $|{\lambda_1}-A| \le |{\lambda_1}-C|$ ，$|{\lambda_2}-C| \le |{\lambda_2}-A|$ 。</p>
+<h3 id="参数方程-⇒-二次曲线"><a href="#参数方程-⇒-二次曲线" class="headerlink" title="参数方程 ⇒ 二次曲线"></a>参数方程 ⇒ 二次曲线</h3><p>记 $c=\cos(\tau)$ 、$s=\sin(\tau)$ ，则有</p>
+<script type="math/tex; mode=display">
 \begin{array}{l}
    A=(bc)^2+(as)^2 \\[5pt]
    B=-2cs(a^2-b^2) \\[5pt]
@@ -295,26 +286,18 @@ M=\begin{bmatrix} A&amp;B/2 \\ B/2&amp;C \end{bmatrix}
    D=-2Ah-kB \\[5pt]
    E=-2Ck-hB \\[5pt]
    F=-(ab)^2+Ah^2+Bhk+Ck^2
-\end{array}
-\]</span></p>
-<h3 id="参数方程-焦点形式">参数方程 ⇒ 焦点形式</h3>
-<p>记 <span class="math inline">\(c=\sqrt{a^2-b^2}\)</span> ，则有 <span class="math display">\[
-s=2a
-\]</span></p>
-<p><span class="math display">\[
-F_1=(h-\cos(\tau)c~,~k-\sin(\tau)c)\qquad F_2=(h+\cos(\tau)c~,~k+\sin(\tau)c)
-\]</span></p>
-<h3 id="焦点形式-参数方程">焦点形式 ⇒ 参数方程</h3>
-<p>记 <span class="math inline">\(F_1=(\alpha_1,\beta_1)\)</span> 、<span class="math inline">\(F_2=(\alpha_2,\beta_2)\)</span> ，则有 <span class="math display">\[
-\begin{array}{l}  
+\end{array}</script><h3 id="参数方程-⇒-焦点形式"><a href="#参数方程-⇒-焦点形式" class="headerlink" title="参数方程 ⇒ 焦点形式"></a>参数方程 ⇒ 焦点形式</h3><p>记 $c=\sqrt{a^2-b^2}$ ，则有</p>
+<script type="math/tex; mode=display">
+s=2a</script><script type="math/tex; mode=display">
+F_1=(h-\cos(\tau)c~,~k-\sin(\tau)c)\qquad F_2=(h+\cos(\tau)c~,~k+\sin(\tau)c)</script><h3 id="焦点形式-⇒-参数方程"><a href="#焦点形式-⇒-参数方程" class="headerlink" title="焦点形式 ⇒ 参数方程"></a>焦点形式 ⇒ 参数方程</h3><p>记 $F_1=(\alpha_1,\beta_1)$ 、$F_2=(\alpha_2,\beta_2)$ ，则有</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}  
 a=s/2 \\[5pt]
 b=\sqrt{s^2-[(\alpha_1-\alpha_2)^2+(\beta_1-\beta_2)^2]}~/~2 \\[5pt]
 h=(\alpha_1+\alpha_2)/2 \\[5pt]
 k=(\beta_1+\beta_2)/2 \\[5pt]
 \tau=\arctan((\beta_1-\beta_2)/(\alpha_1-\alpha_2))
-\end{array}
-\]</span></p>
-<hr />
+\end{array}</script><hr>
 
     </div>
 
@@ -396,7 +379,7 @@ k=(\beta_1+\beta_2)/2 \\[5pt]
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A4%AD%E5%9C%86%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">椭圆定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%9B%B2%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">二次曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">参数方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%84%A6%E7%82%B9%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">焦点形式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">转换关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%9B%B2%E7%BA%BF-%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">二次曲线 ⇒ 参数方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B-%E4%BA%8C%E6%AC%A1%E6%9B%B2%E7%BA%BF"><span class="nav-number">2.2.</span> <span class="nav-text">参数方程 ⇒ 二次曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B-%E7%84%A6%E7%82%B9%E5%BD%A2%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">参数方程 ⇒ 焦点形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%84%A6%E7%82%B9%E5%BD%A2%E5%BC%8F-%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B"><span class="nav-number">2.4.</span> <span class="nav-text">焦点形式 ⇒ 参数方程</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A4%AD%E5%9C%86%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">椭圆定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%9B%B2%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">二次曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">参数方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%84%A6%E7%82%B9%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">焦点形式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">转换关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%9B%B2%E7%BA%BF-%E2%87%92-%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">二次曲线 ⇒ 参数方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B-%E2%87%92-%E4%BA%8C%E6%AC%A1%E6%9B%B2%E7%BA%BF"><span class="nav-number">2.2.</span> <span class="nav-text">参数方程 ⇒ 二次曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B-%E2%87%92-%E7%84%A6%E7%82%B9%E5%BD%A2%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">参数方程 ⇒ 焦点形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%84%A6%E7%82%B9%E5%BD%A2%E5%BC%8F-%E2%87%92-%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B"><span class="nav-number">2.4.</span> <span class="nav-text">焦点形式 ⇒ 参数方程</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="变换矩阵\(~\boldsymbol{Q}\) 将全局坐标系\(~O-\boldsymbol{e}_1\boldsymbol{e}_2\boldsymbol{e}_3~\)与局部坐标系\(~o-\boldsymbol{n}_1\boldsymbol{n}_2\boldsymbol{n}_3\)的单位正交基矢量均记为列阵形式，即 \[ \tag{1a} \boldsymbol{e} &#x3D; [\b">
+  <meta name="description" content="变换矩阵$~\boldsymbol{Q}$将全局坐标系$~O-\boldsymbol{e}_1\boldsymbol{e}_2\boldsymbol{e}_3~$与局部坐标系$~o-\boldsymbol{n}_1\boldsymbol{n}_2\boldsymbol{n}_3$的单位正交基矢量均记为列阵形式，即  \tag{1a} \boldsymbol{e} &#x3D; [\boldsymbol{e}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="全局坐标系与局部坐标系下弹性矩阵的变换">
 <meta property="og:url" content="http://www.sppy.site/2020/03/01/transformation-of-elastic-matrix/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="变换矩阵\(~\boldsymbol{Q}\) 将全局坐标系\(~O-\boldsymbol{e}_1\boldsymbol{e}_2\boldsymbol{e}_3~\)与局部坐标系\(~o-\boldsymbol{n}_1\boldsymbol{n}_2\boldsymbol{n}_3\)的单位正交基矢量均记为列阵形式，即 \[ \tag{1a} \boldsymbol{e} &#x3D; [\b">
+<meta property="og:description" content="变换矩阵$~\boldsymbol{Q}$将全局坐标系$~O-\boldsymbol{e}_1\boldsymbol{e}_2\boldsymbol{e}_3~$与局部坐标系$~o-\boldsymbol{n}_1\boldsymbol{n}_2\boldsymbol{n}_3$的单位正交基矢量均记为列阵形式，即  \tag{1a} \boldsymbol{e} &#x3D; [\boldsymbol{e}">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-01T08:05:03.000Z">
 <meta property="article:modified_time" content="2020-03-20T15:14:22.509Z">
@@ -260,189 +260,154 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="变换矩阵boldsymbolq">变换矩阵<span class="math inline">\(~\boldsymbol{Q}\)</span></h2>
-<p>将全局坐标系<span class="math inline">\(~O-\boldsymbol{e}_1\boldsymbol{e}_2\boldsymbol{e}_3~\)</span>与局部坐标系<span class="math inline">\(~o-\boldsymbol{n}_1\boldsymbol{n}_2\boldsymbol{n}_3\)</span>的单位正交基矢量均记为列阵形式，即 <span class="math display">\[
+        <h2 id="变换矩阵-boldsymbol-Q"><a href="#变换矩阵-boldsymbol-Q" class="headerlink" title="变换矩阵$~\boldsymbol{Q}$"></a>变换矩阵$~\boldsymbol{Q}$</h2><p>将全局坐标系$~O-\boldsymbol{e}_1\boldsymbol{e}_2\boldsymbol{e}_3~$与局部坐标系$~o-\boldsymbol{n}_1\boldsymbol{n}_2\boldsymbol{n}_3$的单位正交基矢量均记为列阵形式，即</p>
+<script type="math/tex; mode=display">
 \tag{1a}
-\boldsymbol{e} = [\boldsymbol{e}_1~,~\boldsymbol{e}_2~,~\boldsymbol{e}_3]^\mathrm{T}
-\]</span> <span class="math display">\[
+\boldsymbol{e} = [\boldsymbol{e}_1~,~\boldsymbol{e}_2~,~\boldsymbol{e}_3]^\mathrm{T}</script><script type="math/tex; mode=display">
 \tag{1b}
-\boldsymbol{n} = [\boldsymbol{n}_1~,~\boldsymbol{n}_2~,~\boldsymbol{n}_3]^\mathrm{T}
-\]</span></p>
-<p>于是，可以通过两个坐标系的正交基矢量来定义变换矩阵<span class="math inline">\(~\boldsymbol{Q}\)</span>，即 <span class="math display">\[
+\boldsymbol{n} = [\boldsymbol{n}_1~,~\boldsymbol{n}_2~,~\boldsymbol{n}_3]^\mathrm{T}</script><p>于是，可以通过两个坐标系的正交基矢量来定义变换矩阵$~\boldsymbol{Q}$，即</p>
+<script type="math/tex; mode=display">
 \tag{2a}
-\boldsymbol{e} = \boldsymbol{Q} \cdot \boldsymbol{n}
-\]</span> <span class="math display">\[
+\boldsymbol{e} = \boldsymbol{Q} \cdot \boldsymbol{n}</script><script type="math/tex; mode=display">
 \tag{2b}
-\boldsymbol{e}_i = Q_{ij} \boldsymbol{n}_{j}
-\]</span></p>
-<p>根据变换矩阵<span class="math inline">\(~\boldsymbol{Q}\)</span>，可以定义固体力学中常用的一阶、二阶以及四阶张量的变换格式。</p>
+\boldsymbol{e}_i = Q_{ij} \boldsymbol{n}_{j}</script><p>根据变换矩阵$~\boldsymbol{Q}$，可以定义固体力学中常用的一阶、二阶以及四阶张量的变换格式。</p>
 <a id="more"></a>
-<h3 id="一阶张量的变换">一阶张量的变换</h3>
-<p>一阶张量<span class="math inline">\(~\boldsymbol{a}~\)</span>在全局坐标系、局部坐标系下的分量分别为<span class="math inline">\(~a_i\)</span>、<span class="math inline">\(\tilde{a}_i\)</span>，将两者构成的列阵分别记为<span class="math inline">\(~\{a\}\)</span>、<span class="math inline">\(\{\tilde{a}\}\)</span>，则有 <span class="math display">\[
+<h3 id="一阶张量的变换"><a href="#一阶张量的变换" class="headerlink" title="一阶张量的变换"></a>一阶张量的变换</h3><p>一阶张量$~\boldsymbol{a}~$在全局坐标系、局部坐标系下的分量分别为$~a_i$、$\tilde{a}_i$，将两者构成的列阵分别记为$~{a}$、${\tilde{a}}$，则有</p>
+<script type="math/tex; mode=display">
 \tag{3a}
-\{a\} = \boldsymbol{Q} \cdot \{\tilde{a}\}
-\]</span> <span class="math display">\[
+\{a\} = \boldsymbol{Q} \cdot \{\tilde{a}\}</script><script type="math/tex; mode=display">
 \tag{3b}
-a_i   = \tilde{a}_j Q_{ij}
-\]</span></p>
-<h3 id="二阶张量的变换">二阶张量的变换</h3>
-<p>二阶张量<span class="math inline">\(~\boldsymbol{F}~\)</span>在全局坐标系、局部坐标系下的分量分别为<span class="math inline">\(~F_{ij}\)</span>、<span class="math inline">\(\tilde{F}_{ij}\)</span>，将两者构成的矩阵分别记为<span class="math inline">\(~\big[F\big]\)</span>、<span class="math inline">\(\big[\tilde{F}\big]\)</span>，则有 <span class="math display">\[
+a_i   = \tilde{a}_j Q_{ij}</script><h3 id="二阶张量的变换"><a href="#二阶张量的变换" class="headerlink" title="二阶张量的变换"></a>二阶张量的变换</h3><p>二阶张量$~\boldsymbol{F}~$在全局坐标系、局部坐标系下的分量分别为$~F<em>{ij}$、$\tilde{F}</em>{ij}$，将两者构成的矩阵分别记为$~\big[F\big]$、$\big[\tilde{F}\big]$，则有</p>
+<script type="math/tex; mode=display">
 \tag{4a}
-\big[F\big] = \boldsymbol{Q} \cdot \big[\tilde{F}\big] \cdot \boldsymbol{Q}^\mathrm{T}
-\]</span> <span class="math display">\[
+\big[F\big] = \boldsymbol{Q} \cdot \big[\tilde{F}\big] \cdot \boldsymbol{Q}^\mathrm{T}</script><script type="math/tex; mode=display">
 \tag{4b}
-F_{ij} = \tilde{F}_{mn} Q_{im} Q_{jn} 
-\]</span></p>
-<h3 id="四阶张量的变换">四阶张量的变换</h3>
-<p>四阶张量<span class="math inline">\(~\boldsymbol{\mathcal{C}}~\)</span>在全局坐标系、局部坐标系下的分量分别为<span class="math inline">\(~\mathcal{C}_{ijkl}\)</span>、<span class="math inline">\(\tilde{\mathcal{C}}_{ijkl}\)</span>，则有 <span class="math display">\[
+F_{ij} = \tilde{F}_{mn} Q_{im} Q_{jn}</script><h3 id="四阶张量的变换"><a href="#四阶张量的变换" class="headerlink" title="四阶张量的变换"></a>四阶张量的变换</h3><p>四阶张量$~\boldsymbol{\mathcal{C}}~$在全局坐标系、局部坐标系下的分量分别为$~\mathcal{C}<em>{ijkl}$、$\tilde{\mathcal{C}}</em>{ijkl}$，则有</p>
+<script type="math/tex; mode=display">
 \tag{5}
-\mathcal{C}_{ijkl} = \tilde{\mathcal{C}}_{mnpq} Q_{im} Q_{jn} Q_{kp} Q_{lq}
-\]</span></p>
-<h2 id="弹性矩阵的变换">弹性矩阵的变换</h2>
-<p>线弹性体的广义胡克定律如下 <span class="math display">\[
+\mathcal{C}_{ijkl} = \tilde{\mathcal{C}}_{mnpq} Q_{im} Q_{jn} Q_{kp} Q_{lq}</script><h2 id="弹性矩阵的变换"><a href="#弹性矩阵的变换" class="headerlink" title="弹性矩阵的变换"></a>弹性矩阵的变换</h2><p>线弹性体的广义胡克定律如下</p>
+<script type="math/tex; mode=display">
 \tag{6}
-\boldsymbol{\sigma} = \boldsymbol{\mathcal{C}} : \boldsymbol{\varepsilon}
-\]</span></p>
-<p>式中，<span class="math inline">\(\boldsymbol{\mathcal{C}}~\)</span>为四阶弹性张量，<span class="math inline">\(\boldsymbol{\sigma}\)</span>、<span class="math inline">\(\boldsymbol{\varepsilon}~\)</span>分别为二阶应力张量、二阶应变张量。</p>
-<p>考虑到应力、应变张量的对称性，可将式<span class="math inline">\((6)\)</span>简化为 <span class="math display">\[
+\boldsymbol{\sigma} = \boldsymbol{\mathcal{C}} : \boldsymbol{\varepsilon}</script><p>式中，$\boldsymbol{\mathcal{C}}~$为四阶弹性张量，$\boldsymbol{\sigma}$、$\boldsymbol{\varepsilon}~$分别为二阶应力张量、二阶应变张量。</p>
+<p>考虑到应力、应变张量的对称性，可将式$(6)$简化为</p>
+<script type="math/tex; mode=display">
 \tag{7}
-\boldsymbol{\sigma} = \boldsymbol{C} \cdot \boldsymbol{\varepsilon}
-\]</span></p>
-<p>式中，<span class="math inline">\(\boldsymbol{C}~\)</span>为二阶弹性张量，<span class="math inline">\(\boldsymbol{\sigma}\)</span>、<span class="math inline">\(\boldsymbol{\varepsilon}~\)</span>分别为一阶应力张量、一阶应变张量。</p>
-<p>按照<strong>ABAQUS</strong>中的存储顺序，将一阶应力张量<span class="math inline">\(~\boldsymbol{\sigma}\)</span>、一阶应变张量<span class="math inline">\(~\boldsymbol{\varepsilon}~\)</span>记为列阵形式，即 <span class="math display">\[
+\boldsymbol{\sigma} = \boldsymbol{C} \cdot \boldsymbol{\varepsilon}</script><p>式中，$\boldsymbol{C}~$为二阶弹性张量，$\boldsymbol{\sigma}$、$\boldsymbol{\varepsilon}~$分别为一阶应力张量、一阶应变张量。</p>
+<p>按照<strong>ABAQUS</strong>中的存储顺序，将一阶应力张量$~\boldsymbol{\sigma}$、一阶应变张量$~\boldsymbol{\varepsilon}~$记为列阵形式，即</p>
+<script type="math/tex; mode=display">
 \tag{8a}
-\{\sigma\} = \big[\sigma_{11}~,~\sigma_{22}~,~\sigma_{33}~,~\sigma_{12}~,~\sigma_{13}~,~\sigma_{23}\big]^\mathrm{T}
-\]</span> <span class="math display">\[
+\{\sigma\} = \big[\sigma_{11}~,~\sigma_{22}~,~\sigma_{33}~,~\sigma_{12}~,~\sigma_{13}~,~\sigma_{23}\big]^\mathrm{T}</script><script type="math/tex; mode=display">
 \tag{8b}
-\{\varepsilon\} = \big[\varepsilon_{11}~,~\varepsilon_{22}~,~\varepsilon_{33}~,~2\varepsilon_{12}~,~2\varepsilon_{13}~,~2\varepsilon_{23}\big]^\mathrm{T}
-\]</span></p>
-<blockquote>
-<p>需要注意，列阵<span class="math inline">\(~\{\varepsilon\}~\)</span>中采用的是工程剪应变，而非张量剪应变</p>
+\{\varepsilon\} = \big[\varepsilon_{11}~,~\varepsilon_{22}~,~\varepsilon_{33}~,~2\varepsilon_{12}~,~2\varepsilon_{13}~,~2\varepsilon_{23}\big]^\mathrm{T}</script><blockquote>
+<p>需要注意，列阵$~{\varepsilon}~$中采用的是工程剪应变，而非张量剪应变</p>
 </blockquote>
-<hr />
-<p>二阶应力张量<span class="math inline">\(~\boldsymbol{\sigma}~\)</span>在全局坐标系、局部坐标系下的分量分别为<span class="math inline">\(~\sigma_{ij}\)</span>、<span class="math inline">\(\tilde{\sigma}_{ij}\)</span>，将两者构成的矩阵分别记为<span class="math inline">\(~\big[\sigma\big]\)</span>、<span class="math inline">\(\big[\tilde{\sigma}\big]\)</span>，则有 <span class="math display">\[
+<hr>
+<p>二阶应力张量$~\boldsymbol{\sigma}~$在全局坐标系、局部坐标系下的分量分别为$~\sigma<em>{ij}$、$\tilde{\sigma}</em>{ij}$，将两者构成的矩阵分别记为$~\big[\sigma\big]$、$\big[\tilde{\sigma}\big]$，则有</p>
+<script type="math/tex; mode=display">
 \tag{9}
-\big[\sigma\big] = \boldsymbol{Q} \cdot \big[\tilde{\sigma}\big] \cdot \boldsymbol{Q}^\mathrm{T}
-\]</span></p>
-<p>将正交变换矩阵<span class="math inline">\(~\boldsymbol{Q}~\)</span>的分量代入式<span class="math inline">\((9)\)</span>，按照式<span class="math inline">\((8)\)</span>的简记形式，整理可得 <span class="math display">\[
+\big[\sigma\big] = \boldsymbol{Q} \cdot \big[\tilde{\sigma}\big] \cdot \boldsymbol{Q}^\mathrm{T}</script><p>将正交变换矩阵$~\boldsymbol{Q}~$的分量代入式$(9)$，按照式$(8)$的简记形式，整理可得</p>
+<script type="math/tex; mode=display">
 \tag{10a}
-\{\sigma\} =  \boldsymbol{T}_{\sigma} \cdot \{\tilde{\sigma}\}
-\]</span> <span class="math display">\[
+\{\sigma\} =  \boldsymbol{T}_{\sigma} \cdot \{\tilde{\sigma}\}</script><script type="math/tex; mode=display">
 \tag{10b}
 \boldsymbol{T}_{\sigma} = \left[
     \begin{array}{cc}
-    ~\boldsymbol{T}_1~ &amp; 2\boldsymbol{T}_2 \\
-    ~\boldsymbol{T}_3~ &amp;  \boldsymbol{T}_4
-    \end{array}\right]_{6\times6}
-\]</span></p>
-<p>式中，<span class="math inline">\(\{\tilde{\sigma}\}~\)</span>与<span class="math inline">\(~\{\sigma\}~\)</span>的形式一致，且 <span class="math display">\[
+    ~\boldsymbol{T}_1~ & 2\boldsymbol{T}_2 \\
+    ~\boldsymbol{T}_3~ &  \boldsymbol{T}_4
+    \end{array}\right]_{6\times6}</script><p>式中，${\tilde{\sigma}}~$与$~{\sigma}~$的形式一致，且</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-    \boldsymbol{T}_1 &amp; = \begin{bmatrix}
-    Q_{11}^2 &amp; Q_{12}^2 &amp; Q_{13}^2 \\
-    Q_{21}^2 &amp; Q_{22}^2 &amp; Q_{23}^2 \\
-    Q_{31}^2 &amp; Q_{32}^2 &amp; Q_{33}^2 \end{bmatrix} \\[3pt]
-    \boldsymbol{T}_2 &amp; = \begin{bmatrix}
-    Q_{11}Q_{12} &amp; Q_{11}Q_{13} &amp; Q_{12}Q_{13} \\
-    Q_{21}Q_{22} &amp; Q_{21}Q_{23} &amp; Q_{22}Q_{23} \\
-    Q_{31}Q_{32} &amp; Q_{31}Q_{33} &amp; Q_{32}Q_{33} \end{bmatrix} \\[3pt]
-    \boldsymbol{T}_3 &amp; = \begin{bmatrix}
-    Q_{11}Q_{21} &amp; Q_{12}Q_{22} &amp; Q_{13}Q_{23} \\
-    Q_{11}Q_{31} &amp; Q_{12}Q_{32} &amp; Q_{13}Q_{33} \\
-    Q_{21}Q_{31} &amp; Q_{22}Q_{32} &amp; Q_{23}Q_{33} \end{bmatrix} \\[3pt]
-    \boldsymbol{T}_4 &amp; = \begin{bmatrix}
-    Q_{11}Q_{22}+Q_{12}Q_{21} &amp; Q_{11}Q_{23}+Q_{13}Q_{21} &amp; Q_{12}Q_{23}+Q_{13}Q_{22} \\
-    Q_{11}Q_{32}+Q_{12}Q_{31} &amp; Q_{11}Q_{33}+Q_{13}Q_{31} &amp; Q_{12}Q_{33}+Q_{13}Q_{32} \\
-    Q_{21}Q_{32}+Q_{22}Q_{31} &amp; Q_{21}Q_{33}+Q_{23}Q_{31} &amp; Q_{22}Q_{33}+Q_{23}Q_{32} \end{bmatrix}
-\end{aligned}
-\]</span></p>
-<blockquote>
+    \boldsymbol{T}_1 & = \begin{bmatrix}
+    Q_{11}^2 & Q_{12}^2 & Q_{13}^2 \\
+    Q_{21}^2 & Q_{22}^2 & Q_{23}^2 \\
+    Q_{31}^2 & Q_{32}^2 & Q_{33}^2 \end{bmatrix} \\[3pt]
+    \boldsymbol{T}_2 & = \begin{bmatrix}
+    Q_{11}Q_{12} & Q_{11}Q_{13} & Q_{12}Q_{13} \\
+    Q_{21}Q_{22} & Q_{21}Q_{23} & Q_{22}Q_{23} \\
+    Q_{31}Q_{32} & Q_{31}Q_{33} & Q_{32}Q_{33} \end{bmatrix} \\[3pt]
+    \boldsymbol{T}_3 & = \begin{bmatrix}
+    Q_{11}Q_{21} & Q_{12}Q_{22} & Q_{13}Q_{23} \\
+    Q_{11}Q_{31} & Q_{12}Q_{32} & Q_{13}Q_{33} \\
+    Q_{21}Q_{31} & Q_{22}Q_{32} & Q_{23}Q_{33} \end{bmatrix} \\[3pt]
+    \boldsymbol{T}_4 & = \begin{bmatrix}
+    Q_{11}Q_{22}+Q_{12}Q_{21} & Q_{11}Q_{23}+Q_{13}Q_{21} & Q_{12}Q_{23}+Q_{13}Q_{22} \\
+    Q_{11}Q_{32}+Q_{12}Q_{31} & Q_{11}Q_{33}+Q_{13}Q_{31} & Q_{12}Q_{33}+Q_{13}Q_{32} \\
+    Q_{21}Q_{32}+Q_{22}Q_{31} & Q_{21}Q_{33}+Q_{23}Q_{31} & Q_{22}Q_{33}+Q_{23}Q_{32} \end{bmatrix}
+\end{aligned}</script><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="http://book.ucdrs.superlib.net/views/specific/2929/bookDetail.jsp?dxNumber=000012818683&amp;d=84F8450FBD7C913585C7E7FE52EE9D75&amp;fenlei=1806030101">《复合材料力学（第2版）》</a>266页也给出了列阵<span class="math inline">\(~\{\sigma\}~\)</span>、<span class="math inline">\(\{\tilde{\sigma}\}~\)</span>之间的变换矩阵，不过其并不等于<span class="math inline">\(~\boldsymbol{T}_{\sigma}\)</span>，因为该书中列阵采用的存储顺序为<span class="math inline">\(~\big[\sigma_{11}~,~\sigma_{22}~,~\sigma_{33}~,~\sigma_{23}~,~\sigma_{13}~,~\sigma_{12}\big]^\mathrm{T}\)</span>。</li>
-<li>将式<span class="math inline">\((9)\)</span>展开推导<span class="math inline">\(~\boldsymbol{T}_{\sigma}~\)</span>的具体表达式较为繁琐，建议采用支持符号运算的<strong>MATLAB</strong>、<strong>Mathematicsa</strong>等软件来辅助推导。</li>
+<li><a target="_blank" rel="noopener" href="http://book.ucdrs.superlib.net/views/specific/2929/bookDetail.jsp?dxNumber=000012818683&amp;d=84F8450FBD7C913585C7E7FE52EE9D75&amp;fenlei=1806030101">《复合材料力学（第2版）》</a>266页也给出了列阵$~{\sigma}~$、${\tilde{\sigma}}~$之间的变换矩阵，不过其并不等于$~\boldsymbol{T}<em>{\sigma}$，因为该书中列阵采用的存储顺序为$~\big[\sigma</em>{11}~,~\sigma<em>{22}~,~\sigma</em>{33}~,~\sigma<em>{23}~,~\sigma</em>{13}~,~\sigma_{12}\big]^\mathrm{T}$。</li>
+<li>将式$(9)$展开推导$~\boldsymbol{T}_{\sigma}~$的具体表达式较为繁琐，建议采用支持符号运算的<strong>MATLAB</strong>、<strong>Mathematicsa</strong>等软件来辅助推导。</li>
 </ul>
 </blockquote>
-<hr />
-<p>同样地，对于二阶应变张量<span class="math inline">\(~\boldsymbol{\varepsilon}\)</span>，考虑其不同坐标系下的分量形式，可得 <span class="math display">\[
+<hr>
+<p>同样地，对于二阶应变张量$~\boldsymbol{\varepsilon}$，考虑其不同坐标系下的分量形式，可得</p>
+<script type="math/tex; mode=display">
 \tag{11a}
-\{\varepsilon\} =  \boldsymbol{T}_{\varepsilon} \cdot \{\tilde{\varepsilon}\}
-\]</span> <span class="math display">\[
+\{\varepsilon\} =  \boldsymbol{T}_{\varepsilon} \cdot \{\tilde{\varepsilon}\}</script><script type="math/tex; mode=display">
 \tag{11b}
 \boldsymbol{T}_{\varepsilon} = \left[\begin{array}{cc}
-     \boldsymbol{T}_1 &amp; ~\boldsymbol{T}_2~ \\
-    2\boldsymbol{T}_3 &amp; ~\boldsymbol{T}_4~
-    \end{array}\right]_{6\times6}
-\]</span></p>
-<p>式中，<span class="math inline">\(\{\tilde{\varepsilon}\}~\)</span>与<span class="math inline">\(~\{\varepsilon\}~\)</span>的形式一致，且<span class="math inline">\(~\boldsymbol{T}_1\)</span>、<span class="math inline">\(\boldsymbol{T}_2\)</span>、<span class="math inline">\(\boldsymbol{T}_2\)</span>、<span class="math inline">\(\boldsymbol{T}_4~\)</span>与式<span class="math inline">\((10\mathrm{b})\)</span>中定义一致。</p>
+     \boldsymbol{T}_1 & ~\boldsymbol{T}_2~ \\
+    2\boldsymbol{T}_3 & ~\boldsymbol{T}_4~
+    \end{array}\right]_{6\times6}</script><p>式中，${\tilde{\varepsilon}}~$与$~{\varepsilon}~$的形式一致，且$~\boldsymbol{T}_1$、$\boldsymbol{T}_2$、$\boldsymbol{T}_2$、$\boldsymbol{T}_4~$与式$(10\mathrm{b})$中定义一致。</p>
 <blockquote>
-<p>正是由于式<span class="math inline">\((8\mathrm{b})\)</span>中列阵<span class="math inline">\(~\{\varepsilon\}~\)</span>采用了工程剪应变，故<span class="math inline">\(~\boldsymbol{T}_{\varepsilon} \neq \boldsymbol{T}_{\sigma}\)</span>。</p>
+<p>正是由于式$(8\mathrm{b})$中列阵$~{\varepsilon}~$采用了工程剪应变，故$~\boldsymbol{T}<em>{\varepsilon} \neq \boldsymbol{T}</em>{\sigma}$。</p>
 </blockquote>
-<hr />
-<p>考虑不同坐标系下的胡克定律形式，由式<span class="math inline">\((7)\)</span>可得 <span class="math display">\[
+<hr>
+<p>考虑不同坐标系下的胡克定律形式，由式$(7)$可得</p>
+<script type="math/tex; mode=display">
 \tag{12a}
-\{\sigma\} = \boldsymbol{C} \cdot \{\varepsilon\}
-\]</span> <span class="math display">\[
+\{\sigma\} = \boldsymbol{C} \cdot \{\varepsilon\}</script><script type="math/tex; mode=display">
 \tag{12b}
-\{\tilde{\sigma}\} = \tilde{\boldsymbol{C}} \cdot \{\tilde{\varepsilon}\}
-\]</span></p>
-<p>将式<span class="math inline">\((10)\)</span>、<span class="math inline">\((11)\)</span>代入式<span class="math inline">\((12)\)</span>可得 <span class="math display">\[
+\{\tilde{\sigma}\} = \tilde{\boldsymbol{C}} \cdot \{\tilde{\varepsilon}\}</script><p>将式$(10)$、$(11)$代入式$(12)$可得</p>
+<script type="math/tex; mode=display">
 \tag{13a}
-\boldsymbol{C} = \boldsymbol{T}_{\sigma} \cdot \tilde{\boldsymbol{C}} \cdot \boldsymbol{T}_{\varepsilon}^{-1}
-\]</span> <span class="math display">\[
+\boldsymbol{C} = \boldsymbol{T}_{\sigma} \cdot \tilde{\boldsymbol{C}} \cdot \boldsymbol{T}_{\varepsilon}^{-1}</script><script type="math/tex; mode=display">
 \tag{13b}
-\tilde{\boldsymbol{C}} = \boldsymbol{T}_{\sigma}^{-1} \cdot \boldsymbol{C} \cdot \boldsymbol{T}_{\varepsilon}
-\]</span></p>
-<p>关于矩阵<span class="math inline">\(~\boldsymbol{T}_{\sigma}\)</span>、<span class="math inline">\(\boldsymbol{T}_{\varepsilon}\)</span>，具有如下性质 <span class="math display">\[
+\tilde{\boldsymbol{C}} = \boldsymbol{T}_{\sigma}^{-1} \cdot \boldsymbol{C} \cdot \boldsymbol{T}_{\varepsilon}</script><p>关于矩阵$~\boldsymbol{T}<em>{\sigma}$、$\boldsymbol{T}</em>{\varepsilon}$，具有如下性质</p>
+<script type="math/tex; mode=display">
 \tag{14a}
-\boldsymbol{T}_{\sigma}^\mathrm{T} = \boldsymbol{T}_{\varepsilon}^{-1}
-\]</span> <span class="math display">\[
+\boldsymbol{T}_{\sigma}^\mathrm{T} = \boldsymbol{T}_{\varepsilon}^{-1}</script><script type="math/tex; mode=display">
 \tag{14b}
-\boldsymbol{T}_{\varepsilon}^\mathrm{T} = \boldsymbol{T}_{\sigma}^{-1}
-\]</span> <span class="math display">\[
+\boldsymbol{T}_{\varepsilon}^\mathrm{T} = \boldsymbol{T}_{\sigma}^{-1}</script><script type="math/tex; mode=display">
 \tag{14c}
-\mathrm{det}(\boldsymbol{T}_{\sigma}) = \mathrm{det}(\boldsymbol{T}_{\varepsilon}) = 1
-\]</span></p>
-<p>令<span class="math inline">\(~\boldsymbol{T}=\boldsymbol{T}_{\sigma}\)</span>，则<span class="math inline">\(~\boldsymbol{T}^\mathrm{T}=\boldsymbol{T}_{\varepsilon}^{-1}\)</span>，由式<span class="math inline">\((13)\)</span>可得 <span class="math display">\[
+\mathrm{det}(\boldsymbol{T}_{\sigma}) = \mathrm{det}(\boldsymbol{T}_{\varepsilon}) = 1</script><p>令$~\boldsymbol{T}=\boldsymbol{T}<em>{\sigma}$，则$~\boldsymbol{T}^\mathrm{T}=\boldsymbol{T}</em>{\varepsilon}^{-1}$，由式$(13)$可得</p>
+<script type="math/tex; mode=display">
 \tag{15a}
-\boldsymbol{C} = \boldsymbol{T} \cdot \tilde{\boldsymbol{C}} \cdot \boldsymbol{T}^\mathrm{T}
-\]</span> <span class="math display">\[
+\boldsymbol{C} = \boldsymbol{T} \cdot \tilde{\boldsymbol{C}} \cdot \boldsymbol{T}^\mathrm{T}</script><script type="math/tex; mode=display">
 \tag{15b}
-\tilde{\boldsymbol{C}} = \boldsymbol{T}^{-1} \cdot \boldsymbol{C} \cdot \boldsymbol{T}^{-\mathrm{T}}
-\]</span></p>
-<p>至此，<strong>推导完成</strong>。</p>
-<h2 id="各向同性弹性矩阵的验证">各向同性弹性矩阵的验证</h2>
-<p>对于各向同性的材料，可用两个<span class="math inline">\(~\mathrm{Lam} \acute {\mathrm{e}}~\)</span>常数（<span class="math inline">\(\lambda~\)</span>和<span class="math inline">\(~\mu\)</span>）来表示其固体力学特性，进一步将式<span class="math inline">\((7)\)</span>中的弹性矩阵写作 <span class="math display">\[
+\tilde{\boldsymbol{C}} = \boldsymbol{T}^{-1} \cdot \boldsymbol{C} \cdot \boldsymbol{T}^{-\mathrm{T}}</script><p>至此，<strong>推导完成</strong>。</p>
+<h2 id="各向同性弹性矩阵的验证"><a href="#各向同性弹性矩阵的验证" class="headerlink" title="各向同性弹性矩阵的验证"></a>各向同性弹性矩阵的验证</h2><p>对于各向同性的材料，可用两个$~\mathrm{Lam} \acute {\mathrm{e}}~$常数（$\lambda~$和$~\mu$）来表示其固体力学特性，进一步将式$(7)$中的弹性矩阵写作</p>
+<script type="math/tex; mode=display">
 \tag{16}
 \boldsymbol{C} =
 \left[
 \begin{array}{cc}
    \begin{matrix}
-   \lambda+2\mu &amp; \lambda &amp; \lambda \\
-   ~ &amp; \lambda+2\mu &amp; \lambda \\
-   ~ &amp; ~ &amp; \lambda+2\mu
+   \lambda+2\mu & \lambda & \lambda \\
+   ~ & \lambda+2\mu & \lambda \\
+   ~ & ~ & \lambda+2\mu
    \end{matrix}
-   &amp;
+   &
    \begin{matrix}
-   0 &amp; 0 &amp; 0 \\
-   0 &amp; 0 &amp; 0 \\
-   0 &amp; 0 &amp; 0
+   0 & 0 & 0 \\
+   0 & 0 & 0 \\
+   0 & 0 & 0
    \end{matrix} \\
    \begin{matrix}
-   ~ &amp; ~ &amp; ~ \\
-   ~ &amp; \mathrm{symm} &amp; ~ \\
-   ~ &amp; ~ &amp; ~
+   ~ & ~ & ~ \\
+   ~ & \mathrm{symm} & ~ \\
+   ~ & ~ & ~
    \end{matrix}
-   &amp;
+   &
    \begin{matrix}
-   \mu &amp; 0 &amp; 0 \\
-   ~ &amp; \mu &amp; 0 \\
-   ~ &amp; ~ &amp; \mu
+   \mu & 0 & 0 \\
+   ~ & \mu & 0 \\
+   ~ & ~ & \mu
    \end{matrix}
-\end{array}\right]
-\]</span></p>
-<p>任意由单位正交基矢量构成的直角坐标系（螺旋方向一致，一般取右手系）下，各向同性弹性矩阵应是一致的，可将式<span class="math inline">\((16)\)</span>代入式<span class="math inline">\((15)\)</span>进行证明。</p>
+\end{array}\right]</script><p>任意由单位正交基矢量构成的直角坐标系（螺旋方向一致，一般取右手系）下，各向同性弹性矩阵应是一致的，可将式$(16)$代入式$(15)$进行证明。</p>
 <p>下面给出数值验证的代码，其中<code>mat_local</code>为局部坐标系下的弹性矩阵，<code>Q</code>为变换矩阵，<code>mat_global</code>为全局坐标系下的弹性矩阵，并由函数<code>trans_EM</code>计算得到。</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% version - R2018b</span></span><br><span class="line">clc;clear;</span><br><span class="line"></span><br><span class="line"><span class="comment">% Lame constant</span></span><br><span class="line">lambda=<span class="number">115</span>;</span><br><span class="line">mu=<span class="number">77</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">% isotropic elastic matrix in local coordinate system</span></span><br><span class="line">mat_local=<span class="built_in">zeros</span>(<span class="number">6</span>);</span><br><span class="line">mat_local(<span class="number">1</span>:<span class="number">3</span>,<span class="number">1</span>:<span class="number">3</span>)=lambda*<span class="built_in">ones</span>(<span class="number">3</span>)+<span class="built_in">diag</span>(<span class="number">2</span>*mu*<span class="built_in">ones</span>(<span class="number">3</span>,<span class="number">1</span>));</span><br><span class="line">mat_local(<span class="number">4</span>:<span class="number">6</span>,<span class="number">4</span>:<span class="number">6</span>)=<span class="built_in">diag</span>(mu*<span class="built_in">ones</span>(<span class="number">3</span>,<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">% orthogonal matrix Q</span></span><br><span class="line">Q=orth(rands(<span class="number">3</span>,<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">mat_global=trans_EM(mat_local,Q);</span><br><span class="line"><span class="built_in">disp</span>([<span class="string">&#x27; err = &#x27;</span>,num2str(norm(mat_global-mat_local))]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% stress_array=[s11,s22,s33,  s12,  s13,  s23]</span></span><br><span class="line"><span class="comment">% strain_array=[e11,e22,e33,2*e12,2*e13,2*e23] (engineering strain)</span></span><br><span class="line"><span class="comment">% INPUT</span></span><br><span class="line"><span class="comment">%   x    - elastic matrix in local coordinate system,  matrix 6x6</span></span><br><span class="line"><span class="comment">%   rot  - rotation matrix, matrix 3x3</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% OUTPUT</span></span><br><span class="line"><span class="comment">%   y    - elastic matrix in global coordinate system, matrix 6x6</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span>=<span class="title">trans_EM</span><span class="params">(x,rot)</span></span></span><br><span class="line"></span><br><span class="line">    mat1=[rot(:,<span class="number">1</span>),rot(:,<span class="number">1</span>:<span class="number">2</span>)];mat2=[rot(:,<span class="number">2</span>:<span class="number">3</span>),rot(:,<span class="number">3</span>)];</span><br><span class="line">    mat3=[rot(<span class="number">1</span>,:);rot(<span class="number">1</span>:<span class="number">2</span>,:)];mat4=[rot(<span class="number">2</span>:<span class="number">3</span>,:);rot(<span class="number">3</span>,:)];</span><br><span class="line"></span><br><span class="line">    T1=rot.*rot;</span><br><span class="line">    T2=mat1.*mat2;</span><br><span class="line">    T3=mat3.*mat4;</span><br><span class="line"></span><br><span class="line">    <span class="comment">% elementary matrix</span></span><br><span class="line">    e1=[<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>];e2=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">% elementary column transformation</span></span><br><span class="line">    T4=(mat3*e1).*(mat4*e2)+(mat3*e2).*(mat4*e1);</span><br><span class="line"></span><br><span class="line">    <span class="comment">% transformation matrix</span></span><br><span class="line">    T=[T1,<span class="number">2</span>*T2;T3,T4];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">% elastic matrix in global coordinate system</span></span><br><span class="line">    y=T*x*T&#x27;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<hr />
+<hr>
 
     </div>
 
@@ -529,7 +494,7 @@ F_{ij} = \tilde{F}_{mn} Q_{im} Q_{jn}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E6%8D%A2%E7%9F%A9%E9%98%B5boldsymbolq"><span class="nav-number">1.</span> <span class="nav-text">变换矩阵\(~\boldsymbol{Q}\)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E9%98%B6%E5%BC%A0%E9%87%8F%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">一阶张量的变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E9%98%B6%E5%BC%A0%E9%87%8F%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">1.2.</span> <span class="nav-text">二阶张量的变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E9%98%B6%E5%BC%A0%E9%87%8F%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">1.3.</span> <span class="nav-text">四阶张量的变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B9%E6%80%A7%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">2.</span> <span class="nav-text">弹性矩阵的变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E5%90%91%E5%90%8C%E6%80%A7%E5%BC%B9%E6%80%A7%E7%9F%A9%E9%98%B5%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="nav-number">3.</span> <span class="nav-text">各向同性弹性矩阵的验证</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E6%8D%A2%E7%9F%A9%E9%98%B5-boldsymbol-Q"><span class="nav-number">1.</span> <span class="nav-text">变换矩阵$~\boldsymbol{Q}$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E9%98%B6%E5%BC%A0%E9%87%8F%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">一阶张量的变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E9%98%B6%E5%BC%A0%E9%87%8F%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">1.2.</span> <span class="nav-text">二阶张量的变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E9%98%B6%E5%BC%A0%E9%87%8F%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">1.3.</span> <span class="nav-text">四阶张量的变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B9%E6%80%A7%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">2.</span> <span class="nav-text">弹性矩阵的变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E5%90%91%E5%90%8C%E6%80%A7%E5%BC%B9%E6%80%A7%E7%9F%A9%E9%98%B5%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="nav-number">3.</span> <span class="nav-text">各向同性弹性矩阵的验证</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

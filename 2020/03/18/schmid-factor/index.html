@@ -261,230 +261,147 @@
       
         <p>在晶体学中，由<a target="_blank" rel="noopener" href="https://www.tec-science.com/material-science/ductility-of-metals/schmids-law-schmid-factor/">Schmid定律</a>引出了Schmid因子的概念，该因子可用于描述滑移系中应力张量与分解剪应力之间的关系。</p>
 <a id="more"></a>
-<h2 id="定义">定义</h2>
-<p>晶体滑移系由两个矢量来定量描述，即滑移方向<span class="math inline">\(~\boldsymbol{s}~\)</span>与滑移面法线方向<span class="math inline">\(~\boldsymbol{m}~\)</span>。对于单轴受力情况，记应力矢量为<span class="math inline">\(~\boldsymbol{p}~\)</span>，则分解剪应力为 <span class="math display">\[
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>晶体滑移系由两个矢量来定量描述，即滑移方向$~\boldsymbol{s}~$与滑移面法线方向$~\boldsymbol{m}~$。对于单轴受力情况，记应力矢量为$~\boldsymbol{p}~$，则分解剪应力为</p>
+<script type="math/tex; mode=display">
 \tag{1a}
-\tau = \|\boldsymbol{p}\| \cos \lang \boldsymbol{p}~,~\boldsymbol{s} \rang \cos \lang \boldsymbol{p}~,~\boldsymbol{m} \rang = \|\boldsymbol{p}\| \cos \theta \cos \varphi
-\]</span></p>
-<p>将其中的<span class="math inline">\(~\cos \theta \cos \varphi~\)</span>称为Schmid因子，并记作 <span class="math display">\[
+\tau = \|\boldsymbol{p}\| \cos \lang \boldsymbol{p}~,~\boldsymbol{s} \rang \cos \lang \boldsymbol{p}~,~\boldsymbol{m} \rang = \|\boldsymbol{p}\| \cos \theta \cos \varphi</script><p>将其中的$~\cos \theta \cos \varphi~$称为Schmid因子，并记作</p>
+<script type="math/tex; mode=display">
 \tag{1b}
-f = \cos \theta \cos \varphi
-\]</span></p>
-<p>对于多轴受力情况，采用Cauchy应力张量<span class="math inline">\(~\boldsymbol{\sigma}~\)</span>来描述其应力状态。根据Cauchy公式，可得作用在滑移面（法线方向为<span class="math inline">\(~\boldsymbol{m}\)</span>）上应力矢量 <span class="math display">\[
+f = \cos \theta \cos \varphi</script><p>对于多轴受力情况，采用Cauchy应力张量$~\boldsymbol{\sigma}~$来描述其应力状态。根据Cauchy公式，可得作用在滑移面（法线方向为$~\boldsymbol{m}$）上应力矢量</p>
+<script type="math/tex; mode=display">
 \tag{2a}
-\boldsymbol{t} = \boldsymbol{\sigma} \cdot \boldsymbol{m}
-\]</span></p>
-<p>接着将应力矢量<span class="math inline">\(~\boldsymbol{t}~\)</span>投影到滑移方向<span class="math inline">\(~\boldsymbol{s}~\)</span>上，可得分解剪应力 <span class="math display">\[
+\boldsymbol{t} = \boldsymbol{\sigma} \cdot \boldsymbol{m}</script><p>接着将应力矢量$~\boldsymbol{t}~$投影到滑移方向$~\boldsymbol{s}~$上，可得分解剪应力</p>
+<script type="math/tex; mode=display">
 \tag{2b}
-\tau = \boldsymbol{t} \cdot \boldsymbol{s} = (\boldsymbol{\sigma} \cdot \boldsymbol{m}) \cdot \boldsymbol{s} = \boldsymbol{s} \cdot \boldsymbol{\sigma} \cdot \boldsymbol{m} = \boldsymbol{\sigma} : (\boldsymbol{s} \otimes \boldsymbol{m})
-\]</span></p>
-<blockquote>
+\tau = \boldsymbol{t} \cdot \boldsymbol{s} = (\boldsymbol{\sigma} \cdot \boldsymbol{m}) \cdot \boldsymbol{s} = \boldsymbol{s} \cdot \boldsymbol{\sigma} \cdot \boldsymbol{m} = \boldsymbol{\sigma} : (\boldsymbol{s} \otimes \boldsymbol{m})</script><blockquote>
 <p>实际上对于多轴应力状态，并没有一个直观的量来描述Schmid因子</p>
 </blockquote>
-<h2 id="算例面心立方晶体">算例：面心立方晶体</h2>
-<p>面心立方晶体通常有12个滑移系，在晶体局部坐标系下的具体方向为：</p>
-<style type="text/css">
-.tg .tg-9wq8{text-align:center;vertical-align:middle}
-</style>
+<h2 id="算例：面心立方晶体"><a href="#算例：面心立方晶体" class="headerlink" title="算例：面心立方晶体"></a>算例：面心立方晶体</h2><p>面心立方晶体通常有12个滑移系，在晶体局部坐标系下的具体方向为：</p>
+<p><style type="text/css"><br>.tg .tg-9wq8{text-align:center;vertical-align:middle}
+</style></p>
 <table class="tg">
-<tr>
-<th class="tg-9wq8">
-滑移系编号
-</th>
-<th class="tg-9wq8">
-滑移面法线方向 m
-</th>
-<th class="tg-9wq8">
-滑移方向 s
-</th>
-</tr>
-<tr>
-<td class="tg-9wq8">
-1
-</td>
-<td class="tg-9wq8" rowspan="3">
-(1,1,1)
-</td>
-<td class="tg-9wq8">
-[0,-1,1]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-2
-</td>
-<td class="tg-9wq8">
-[1,0,-1]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-3
-</td>
-<td class="tg-9wq8">
-[-1,1,0]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-4
-</td>
-<td class="tg-9wq8" rowspan="3">
-(-1,-1,1)
-</td>
-<td class="tg-9wq8">
-[0,1,1]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-5
-</td>
-<td class="tg-9wq8">
-[-1,0,-1]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-6
-</td>
-<td class="tg-9wq8">
-[1,-1,0]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-7
-</td>
-<td class="tg-9wq8" rowspan="3">
-(-1,1,1)
-</td>
-<td class="tg-9wq8">
-[0,-1,1]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-8
-</td>
-<td class="tg-9wq8">
-[-1,0,-1]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-9
-</td>
-<td class="tg-9wq8">
-[1,1,0]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-10
-</td>
-<td class="tg-9wq8" rowspan="3">
-(1,-1,1)
-</td>
-<td class="tg-9wq8">
-[0,1,1]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-11
-</td>
-<td class="tg-9wq8">
-[1,0,-1]
-</td>
-</tr>
-<tr>
-<td class="tg-9wq8">
-12
-</td>
-<td class="tg-9wq8">
-[-1,-1,0]
-</td>
-</tr>
+  <tr>
+    <th class="tg-9wq8">滑移系编号</th>
+    <th class="tg-9wq8">滑移面法线方向 m</th>
+    <th class="tg-9wq8">滑移方向 s</th>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">1</td>
+    <td class="tg-9wq8" rowspan="3">(1,1,1)</td>
+    <td class="tg-9wq8">[0,-1,1]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">2</td>
+    <td class="tg-9wq8">[1,0,-1]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">3</td>
+    <td class="tg-9wq8">[-1,1,0]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">4</td>
+    <td class="tg-9wq8" rowspan="3">(-1,-1,1)</td>
+    <td class="tg-9wq8">[0,1,1]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">5</td>
+    <td class="tg-9wq8">[-1,0,-1]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">6</td>
+    <td class="tg-9wq8">[1,-1,0]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">7</td>
+    <td class="tg-9wq8" rowspan="3">(-1,1,1)</td>
+    <td class="tg-9wq8">[0,-1,1]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">8</td>
+    <td class="tg-9wq8">[-1,0,-1]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">9</td>
+    <td class="tg-9wq8">[1,1,0]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">10</td>
+    <td class="tg-9wq8" rowspan="3">(1,-1,1)</td>
+    <td class="tg-9wq8">[0,1,1]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">11</td>
+    <td class="tg-9wq8">[1,0,-1]</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">12</td>
+    <td class="tg-9wq8">[-1,-1,0]</td>
+  </tr>
 </table>
-<p>需要注意，一般<span class="math inline">\(~\boldsymbol{s}\)</span>、<span class="math inline">\(\boldsymbol{m}~\)</span>均取单位矢量，在实际使用时需要将表格中矢量单位化。</p>
-<p>式<span class="math inline">\((1)\)</span>和式<span class="math inline">\((2)\)</span>提供了两种计算<strong>单轴应力</strong>下Schmid因子的思路。</p>
+
+<p>需要注意，一般$~\boldsymbol{s}$、$\boldsymbol{m}~$均取单位矢量，在实际使用时需要将表格中矢量单位化。</p>
+<p>式$(1)$和式$(2)$提供了两种计算<strong>单轴应力</strong>下Schmid因子的思路。</p>
 <blockquote>
-<p>Q：为什么采用式<span class="math inline">\((2)\)</span>的多轴应力公式来计算单轴应力状态下的Schmid因子，似乎没有必要？</p>
-<p>A：1、深入理解应力张量；2、式<span class="math inline">\((1)\)</span>和式<span class="math inline">\((2)\)</span>相互验证。</p>
+<p>Q：为什么采用式$(2)$的多轴应力公式来计算单轴应力状态下的Schmid因子，似乎没有必要？</p>
+<p>A：1、深入理解应力张量；2、式$(1)$和式$(2)$相互验证。</p>
 </blockquote>
-<p>在计算面心立方晶体12个滑移系的Schmid因子时，单轴应力一般以全局坐标系下的应力矢量形式（记为<span class="math inline">\(~\{\sigma\}_g\)</span>）给出，因此还需考虑到晶体局部坐标系与全部坐标系之间的关系，通常采用变换矩阵<span class="math inline">\(~\boldsymbol{Q}~\)</span>来描述，详见<a target="_blank" rel="noopener" href="http://sppy.site/2020/03/01/transformation-of-elastic-matrix/">《全局坐标系与局部坐标系下弹性矩阵的变换》</a>。</p>
-<h3 id="采用式1计算">采用式(1)计算</h3>
-<p>将全局坐标系下的应力矢量<span class="math inline">\(~\{\sigma\}_g~\)</span>转换到晶体局部坐标系下，即 <span class="math display">\[
+<p>在计算面心立方晶体12个滑移系的Schmid因子时，单轴应力一般以全局坐标系下的应力矢量形式（记为$~{\sigma}_g$）给出，因此还需考虑到晶体局部坐标系与全部坐标系之间的关系，通常采用变换矩阵$~\boldsymbol{Q}~$来描述，详见<a target="_blank" rel="noopener" href="http://sppy.site/2020/03/01/transformation-of-elastic-matrix/">《全局坐标系与局部坐标系下弹性矩阵的变换》</a>。</p>
+<h3 id="采用式-1-计算"><a href="#采用式-1-计算" class="headerlink" title="采用式(1)计算"></a>采用式(1)计算</h3><p>将全局坐标系下的应力矢量$~{\sigma}_g~$转换到晶体局部坐标系下，即</p>
+<script type="math/tex; mode=display">
 \tag{3a}
-\{\sigma\}_l = \boldsymbol{Q}^\mathrm{T} \cdot \{\sigma\}_g
-\]</span></p>
-<p>将晶体局部坐标系下的滑移方向<span class="math inline">\(~\boldsymbol{s}_l~\)</span>、滑移面法线方向<span class="math inline">\(~\boldsymbol{m}_l~\)</span>转换到全局坐标系下，即 <span class="math display">\[
+\{\sigma\}_l = \boldsymbol{Q}^\mathrm{T} \cdot \{\sigma\}_g</script><p>将晶体局部坐标系下的滑移方向$~\boldsymbol{s}_l~$、滑移面法线方向$~\boldsymbol{m}_l~$转换到全局坐标系下，即</p>
+<script type="math/tex; mode=display">
 \tag{3b}
-\boldsymbol{s}_g = \boldsymbol{Q} \cdot \boldsymbol{s}_l
-\]</span> <span class="math display">\[
+\boldsymbol{s}_g = \boldsymbol{Q} \cdot \boldsymbol{s}_l</script><script type="math/tex; mode=display">
 \tag{3c}
-\boldsymbol{m}_g = \boldsymbol{Q} \cdot \boldsymbol{m}_l
-\]</span></p>
-<p>于是可以在晶体局部坐标系与全局坐标系下分别计算第<span class="math inline">\(~\alpha~\)</span>个滑移系的Schmid因子，即 <span class="math display">\[
+\boldsymbol{m}_g = \boldsymbol{Q} \cdot \boldsymbol{m}_l</script><p>于是可以在晶体局部坐标系与全局坐标系下分别计算第$~\alpha~$个滑移系的Schmid因子，即</p>
+<script type="math/tex; mode=display">
 \tag{4a}
-f^\alpha = \big(\boldsymbol{s}^\alpha_l \cdot \{\sigma\}_l\big)\big(\boldsymbol{m}^\alpha_l \cdot \{\sigma\}_l\big)
-\]</span> <span class="math display">\[
+f^\alpha = \big(\boldsymbol{s}^\alpha_l \cdot \{\sigma\}_l\big)\big(\boldsymbol{m}^\alpha_l \cdot \{\sigma\}_l\big)</script><script type="math/tex; mode=display">
 \tag{4b}
-f^\alpha = \big(\boldsymbol{s}^\alpha_g \cdot \{\sigma\}_g\big)\big(\boldsymbol{m}^\alpha_g \cdot \{\sigma\}_g\big)
-\]</span></p>
-<blockquote>
-<p>不难证明，式<span class="math inline">\((4\mathrm{a})\)</span>与式<span class="math inline">\((4\mathrm{b})\)</span>是等价的</p>
+f^\alpha = \big(\boldsymbol{s}^\alpha_g \cdot \{\sigma\}_g\big)\big(\boldsymbol{m}^\alpha_g \cdot \{\sigma\}_g\big)</script><blockquote>
+<p>不难证明，式$(4\mathrm{a})$与式$(4\mathrm{b})$是等价的</p>
 </blockquote>
-<h3 id="采用式2计算">采用式(2)计算</h3>
-<p>首先需要将应力矢量<span class="math inline">\(~\{\sigma\}_g~\)</span>转化为应力张量<span class="math inline">\(~\boldsymbol{\sigma}_g~\)</span>。考虑到应力矢量<span class="math inline">\(~\{\sigma\}_g~\)</span>对应一个单轴应力状态，为了方便计算Schmid因子，可令单轴应力的大小为1。那么，应力张量<span class="math inline">\(~\boldsymbol{\sigma}_g~\)</span>的三个特征值分别为1、0、0。根据实对称矩阵的相似对角化原理，存在正交矩阵<span class="math inline">\(~\boldsymbol{A}~\)</span>，使得应力张量<span class="math inline">\(~\boldsymbol{\sigma}_g~\)</span>满足： <span class="math display">\[
+<h3 id="采用式-2-计算"><a href="#采用式-2-计算" class="headerlink" title="采用式(2)计算"></a>采用式(2)计算</h3><p>首先需要将应力矢量$~{\sigma}_g~$转化为应力张量$~\boldsymbol{\sigma}_g~$。考虑到应力矢量$~{\sigma}_g~$对应一个单轴应力状态，为了方便计算Schmid因子，可令单轴应力的大小为1。那么，应力张量$~\boldsymbol{\sigma}_g~$的三个特征值分别为1、0、0。根据实对称矩阵的相似对角化原理，存在正交矩阵$~\boldsymbol{A}~$，使得应力张量$~\boldsymbol{\sigma}_g~$满足：</p>
+<script type="math/tex; mode=display">
 \tag{5}
-\boldsymbol{\sigma}_g = \boldsymbol{A} \cdot \mathrm{diag}([0,0,1]) \cdot \boldsymbol{A}^\mathrm{T}
-\]</span></p>
-<p>式中，<span class="math inline">\(\mathrm{diag}([0,0,1])~\)</span>为对角阵，对角阵中元素1的位置会影响正交矩阵<span class="math inline">\(~\boldsymbol{A}~\)</span>的取值，本文将元素1置于对角阵的第三行第三列。</p>
+\boldsymbol{\sigma}_g = \boldsymbol{A} \cdot \mathrm{diag}([0,0,1]) \cdot \boldsymbol{A}^\mathrm{T}</script><p>式中，$\mathrm{diag}([0,0,1])~$为对角阵，对角阵中元素1的位置会影响正交矩阵$~\boldsymbol{A}~$的取值，本文将元素1置于对角阵的第三行第三列。</p>
+<p>&gt;</p>
 <blockquote>
 <p>实际上单轴应力状态对应一个特殊的主应力微体，在该主应力微体上只有一个主应力不为零</p>
 </blockquote>
-<p>接下来需要确定正交矩阵<span class="math inline">\(~\boldsymbol{A}~\)</span>。应力张量<span class="math inline">\(~\boldsymbol{\sigma}_g~\)</span>的特征值1对应的特征向量<span class="math inline">\(~\alpha_3~\)</span>可取为 <span class="math display">\[
+<p>接下来需要确定正交矩阵$~\boldsymbol{A}~$。应力张量$~\boldsymbol{\sigma}_g~$的特征值1对应的特征向量$~\alpha_3~$可取为</p>
+<script type="math/tex; mode=display">
 \tag{6a}
-\alpha_3 = \frac{\{\sigma\}_g}{\|\{\sigma\}_g\|}
-\]</span></p>
-<p>特征向量<span class="math inline">\(~\alpha_2~\)</span>仅需满足垂直于<span class="math inline">\(~\alpha_3~\)</span>，可取为 <span class="math display">\[
+\alpha_3 = \frac{\{\sigma\}_g}{\|\{\sigma\}_g\|}</script><p>特征向量$~\alpha_2~$仅需满足垂直于$~\alpha_3~$，可取为</p>
+<script type="math/tex; mode=display">
 \tag{6b}
-\alpha_2 = \big[-\alpha_3(2)~,~\alpha_3(1)~,~0\big]^\mathrm{T}
-\]</span></p>
-<p>特征向量<span class="math inline">\(~\alpha_1~\)</span>则可取为 <span class="math display">\[
+\alpha_2 = \big[-\alpha_3(2)~,~\alpha_3(1)~,~0\big]^\mathrm{T}</script><p>特征向量$~\alpha_1~$则可取为</p>
+<script type="math/tex; mode=display">
 \tag{6c}
-\alpha_1 = \alpha_2 \times \alpha_3
-\]</span></p>
-<blockquote>
+\alpha_1 = \alpha_2 \times \alpha_3</script><blockquote>
 <p>三个特征向量均为列向量，且构成正交右手系</p>
-<p><span class="math inline">\(\alpha_2~\)</span>的取法并不唯一，例如还可取<span class="math inline">\(~\alpha_2 = \big[0~,~\alpha_3(3)~,~-\alpha_3(2)\big]^\mathrm{T}\)</span></p>
+<p>$\alpha_2~$的取法并不唯一，例如还可取$~\alpha_2 = \big[0~,~\alpha_3(3)~,~-\alpha_3(2)\big]^\mathrm{T}$</p>
 </blockquote>
-<p>于是，可得正交矩阵<span class="math inline">\(~\boldsymbol{A}~\)</span>，即 <span class="math display">\[
+<p>于是，可得正交矩阵$~\boldsymbol{A}~$，即</p>
+<script type="math/tex; mode=display">
 \tag{6d}
-\boldsymbol{A} = \big[\alpha_1~,~\alpha_2~,~\alpha_3\big]_{3\times3}
-\]</span></p>
-<p>由式<span class="math inline">\((5)\)</span>、<span class="math inline">\((6)\)</span>计算得到全局坐标系下的应力张量<span class="math inline">\(~\boldsymbol{\sigma}_g~\)</span>后，还可得到晶体局部坐标系下的应力张量<span class="math inline">\(~\boldsymbol{\sigma}_l~\)</span>，即 <span class="math display">\[
+\boldsymbol{A} = \big[\alpha_1~,~\alpha_2~,~\alpha_3\big]_{3\times3}</script><p>由式$(5)$、$(6)$计算得到全局坐标系下的应力张量$~\boldsymbol{\sigma}_g~$后，还可得到晶体局部坐标系下的应力张量$~\boldsymbol{\sigma}_l~$，即</p>
+<script type="math/tex; mode=display">
 \tag{7}
-\boldsymbol{\sigma}_l = \boldsymbol{Q}^\mathrm{T} \cdot \boldsymbol{\sigma}_g \cdot \boldsymbol{Q}
-\]</span></p>
-<blockquote>
-<p>变换矩阵<span class="math inline">\(~\boldsymbol{Q}~\)</span>也为正交矩阵</p>
+\boldsymbol{\sigma}_l = \boldsymbol{Q}^\mathrm{T} \cdot \boldsymbol{\sigma}_g \cdot \boldsymbol{Q}</script><blockquote>
+<p>变换矩阵$~\boldsymbol{Q}~$也为正交矩阵</p>
 </blockquote>
-<p>于是可以在晶体局部坐标系与全局坐标系下分别计算第<span class="math inline">\(~\alpha~\)</span>个滑移系的Schmid因子，即 <span class="math display">\[
+<p>于是可以在晶体局部坐标系与全局坐标系下分别计算第$~\alpha~$个滑移系的Schmid因子，即</p>
+<script type="math/tex; mode=display">
 \tag{8a}
-f^\alpha = \boldsymbol{s}^\alpha_l \cdot \boldsymbol{\sigma}_l \cdot \boldsymbol{m}^\alpha_l
-\]</span> <span class="math display">\[
+f^\alpha = \boldsymbol{s}^\alpha_l \cdot \boldsymbol{\sigma}_l \cdot \boldsymbol{m}^\alpha_l</script><script type="math/tex; mode=display">
 \tag{8b}
-f^\alpha = \boldsymbol{s}^\alpha_g \cdot \boldsymbol{\sigma}_g \cdot \boldsymbol{m}^\alpha_g
-\]</span></p>
-<blockquote>
-<p>不难证明，式<span class="math inline">\((8\mathrm{a})\)</span>与式<span class="math inline">\((8\mathrm{b})\)</span>也是等价的</p>
+f^\alpha = \boldsymbol{s}^\alpha_g \cdot \boldsymbol{\sigma}_g \cdot \boldsymbol{m}^\alpha_g</script><blockquote>
+<p>不难证明，式$(8\mathrm{a})$与式$(8\mathrm{b})$也是等价的</p>
 </blockquote>
-<h2 id="matlab程序">MATLAB程序</h2>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% 面心立方晶体的Schmid因子</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% INPUT</span></span><br><span class="line"><span class="comment">% sigma_g :  - 全局下载荷方向，列向量 3x1, 即应力矢量</span></span><br><span class="line"><span class="comment">% Q       :  - 变换矩阵, 正交矩阵 3x3, 即Ag=Q*Al, 且Ag与Al中向量按列存储</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% OUTPUT</span></span><br><span class="line"><span class="comment">% y       :  - 12个Schmid因子，12x4</span></span><br><span class="line"><span class="comment">%            - 第一列: 全局坐标系下由应力矢量计算</span></span><br><span class="line"><span class="comment">%            - 第二列: 局部坐标系下由应力矢量计算</span></span><br><span class="line"><span class="comment">%            - 第三列: 全局坐标系下由应力张量计算</span></span><br><span class="line"><span class="comment">%            - 第四列: 局部坐标系下由应力张量计算</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% 调用示例</span></span><br><span class="line"><span class="comment">% 全局坐标系下的随机应力矢量;随机正交变换矩阵;12个Schmid因子</span></span><br><span class="line"><span class="comment">% sigma=rands(3,1);q=orth(rands(3,3));y=Schmid(sigma,q)</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span>=<span class="title">Schmid</span><span class="params">(sigma_g,Q)</span></span></span><br><span class="line"></span><br><span class="line">    [num,~]=<span class="built_in">size</span>(sigma_g);</span><br><span class="line">    <span class="keyword">if</span> num==<span class="number">1</span></span><br><span class="line">        sigma_g=sigma_g&#x27;;<span class="comment">% 转为列向量</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    sigma_g=sigma_g/norm(sigma_g);<span class="comment">% 单位化</span></span><br><span class="line"></span><br><span class="line">    tm=[<span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span>; <span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span>; <span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span>;<span class="number">-1</span> <span class="number">-1</span>  <span class="number">1</span>;<span class="number">-1</span> <span class="number">-1</span>  <span class="number">1</span>;<span class="number">-1</span> <span class="number">-1</span>  <span class="number">1</span>;</span><br><span class="line">       <span class="number">-1</span>  <span class="number">1</span>  <span class="number">1</span>;<span class="number">-1</span>  <span class="number">1</span>  <span class="number">1</span>;<span class="number">-1</span>  <span class="number">1</span>  <span class="number">1</span>; <span class="number">1</span> <span class="number">-1</span>  <span class="number">1</span>; <span class="number">1</span> <span class="number">-1</span>  <span class="number">1</span>; <span class="number">1</span> <span class="number">-1</span>  <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    ts=[<span class="number">0</span> <span class="number">-1</span>  <span class="number">1</span>; <span class="number">1</span>  <span class="number">0</span> <span class="number">-1</span>;<span class="number">-1</span>  <span class="number">1</span>  <span class="number">0</span>; <span class="number">0</span>  <span class="number">1</span>  <span class="number">1</span>;<span class="number">-1</span>  <span class="number">0</span> <span class="number">-1</span>; <span class="number">1</span> <span class="number">-1</span>  <span class="number">0</span>;</span><br><span class="line">        <span class="number">0</span> <span class="number">-1</span>  <span class="number">1</span>;<span class="number">-1</span>  <span class="number">0</span> <span class="number">-1</span>; <span class="number">1</span>  <span class="number">1</span>  <span class="number">0</span>; <span class="number">0</span>  <span class="number">1</span>  <span class="number">1</span>; <span class="number">1</span>  <span class="number">0</span> <span class="number">-1</span>;<span class="number">-1</span> <span class="number">-1</span>  <span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">% 由主应力微体上的应力矢量反推应力张量</span></span><br><span class="line">    lambda=<span class="built_in">diag</span>([<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>]);<span class="comment">% 由于将sigma_g指定为alpha3, 所以是[001]</span></span><br><span class="line">    alpha3=sigma_g;</span><br><span class="line"></span><br><span class="line">    L=(sigma_g==[<span class="number">0</span>;<span class="number">0</span>;<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">if</span> L(<span class="number">1</span>) &amp;&amp; L(<span class="number">2</span>) &amp;&amp; ~L(<span class="number">3</span>)</span><br><span class="line">        A=<span class="built_in">diag</span>([<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">elseif</span> L(<span class="number">1</span>) &amp;&amp; ~L(<span class="number">2</span>) &amp;&amp; L(<span class="number">3</span>)</span><br><span class="line">        A=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">elseif</span> ~L(<span class="number">1</span>) &amp;&amp; L(<span class="number">2</span>) &amp;&amp; L(<span class="number">3</span>)</span><br><span class="line">        A=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        alpha2=[-sigma_g(<span class="number">2</span>);sigma_g(<span class="number">1</span>);<span class="number">0</span>]; <span class="comment">% 假设的, 只要与alpha3垂直即可</span></span><br><span class="line">        <span class="comment">%alpha2=[0;sigma_g(3);-sigma_g(2)];% 还可假设成这样</span></span><br><span class="line">        alpha2=alpha2/norm(alpha2);</span><br><span class="line">        alpha1=<span class="built_in">cross</span>(alpha2,alpha3);</span><br><span class="line">        A=[alpha1,alpha2,alpha3];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    sigma_l=Q&#x27;*sigma_g;<span class="comment">% 局部坐标系下的应力矢量 3x1</span></span><br><span class="line">    sigma_mat_g=A*lambda*A&#x27;;     <span class="comment">% 全局下应力张量 3x3</span></span><br><span class="line">    sigma_mat_l=Q&#x27;*sigma_mat_g*Q;<span class="comment">% 局部下应力张量 3x3</span></span><br><span class="line">    </span><br><span class="line">    y=<span class="built_in">zeros</span>(<span class="number">12</span>,<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">12</span></span><br><span class="line">        sl=ts(<span class="built_in">i</span>,:)&#x27;;sl=sl/norm(sl);<span class="comment">% 局部 3x1</span></span><br><span class="line">        ml=tm(<span class="built_in">i</span>,:)&#x27;;ml=ml/norm(ml);<span class="comment">% 局部 3x1</span></span><br><span class="line">        sg=Q*sl;mg=Q*ml;           <span class="comment">% 全局 3x1</span></span><br><span class="line"></span><br><span class="line">        y(<span class="built_in">i</span>,<span class="number">1</span>)=(sg&#x27;*sigma_g)*(mg&#x27;*sigma_g); <span class="comment">% 全局坐标系下由应力矢量计算</span></span><br><span class="line">        y(<span class="built_in">i</span>,<span class="number">2</span>)=(sl&#x27;*sigma_l)*(ml&#x27;*sigma_l); <span class="comment">% 局部坐标系下由应力矢量计算</span></span><br><span class="line">        y(<span class="built_in">i</span>,<span class="number">3</span>)=sg&#x27;*(sigma_mat_g*mg);        <span class="comment">% 全局坐标系下由应力张量计算</span></span><br><span class="line">        y(<span class="built_in">i</span>,<span class="number">4</span>)=sl&#x27;*(sigma_mat_l*ml);        <span class="comment">% 局部坐标系下由应力张量计算</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<hr />
+<h2 id="MATLAB程序"><a href="#MATLAB程序" class="headerlink" title="MATLAB程序"></a>MATLAB程序</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% 面心立方晶体的Schmid因子</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% INPUT</span></span><br><span class="line"><span class="comment">% sigma_g :  - 全局下载荷方向，列向量 3x1, 即应力矢量</span></span><br><span class="line"><span class="comment">% Q       :  - 变换矩阵, 正交矩阵 3x3, 即Ag=Q*Al, 且Ag与Al中向量按列存储</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% OUTPUT</span></span><br><span class="line"><span class="comment">% y       :  - 12个Schmid因子，12x4</span></span><br><span class="line"><span class="comment">%            - 第一列: 全局坐标系下由应力矢量计算</span></span><br><span class="line"><span class="comment">%            - 第二列: 局部坐标系下由应力矢量计算</span></span><br><span class="line"><span class="comment">%            - 第三列: 全局坐标系下由应力张量计算</span></span><br><span class="line"><span class="comment">%            - 第四列: 局部坐标系下由应力张量计算</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% 调用示例</span></span><br><span class="line"><span class="comment">% 全局坐标系下的随机应力矢量;随机正交变换矩阵;12个Schmid因子</span></span><br><span class="line"><span class="comment">% sigma=rands(3,1);q=orth(rands(3,3));y=Schmid(sigma,q)</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span>=<span class="title">Schmid</span><span class="params">(sigma_g,Q)</span></span></span><br><span class="line"></span><br><span class="line">    [num,~]=<span class="built_in">size</span>(sigma_g);</span><br><span class="line">    <span class="keyword">if</span> num==<span class="number">1</span></span><br><span class="line">        sigma_g=sigma_g&#x27;;<span class="comment">% 转为列向量</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    sigma_g=sigma_g/norm(sigma_g);<span class="comment">% 单位化</span></span><br><span class="line"></span><br><span class="line">    tm=[<span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span>; <span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span>; <span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span>;<span class="number">-1</span> <span class="number">-1</span>  <span class="number">1</span>;<span class="number">-1</span> <span class="number">-1</span>  <span class="number">1</span>;<span class="number">-1</span> <span class="number">-1</span>  <span class="number">1</span>;</span><br><span class="line">       <span class="number">-1</span>  <span class="number">1</span>  <span class="number">1</span>;<span class="number">-1</span>  <span class="number">1</span>  <span class="number">1</span>;<span class="number">-1</span>  <span class="number">1</span>  <span class="number">1</span>; <span class="number">1</span> <span class="number">-1</span>  <span class="number">1</span>; <span class="number">1</span> <span class="number">-1</span>  <span class="number">1</span>; <span class="number">1</span> <span class="number">-1</span>  <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    ts=[<span class="number">0</span> <span class="number">-1</span>  <span class="number">1</span>; <span class="number">1</span>  <span class="number">0</span> <span class="number">-1</span>;<span class="number">-1</span>  <span class="number">1</span>  <span class="number">0</span>; <span class="number">0</span>  <span class="number">1</span>  <span class="number">1</span>;<span class="number">-1</span>  <span class="number">0</span> <span class="number">-1</span>; <span class="number">1</span> <span class="number">-1</span>  <span class="number">0</span>;</span><br><span class="line">        <span class="number">0</span> <span class="number">-1</span>  <span class="number">1</span>;<span class="number">-1</span>  <span class="number">0</span> <span class="number">-1</span>; <span class="number">1</span>  <span class="number">1</span>  <span class="number">0</span>; <span class="number">0</span>  <span class="number">1</span>  <span class="number">1</span>; <span class="number">1</span>  <span class="number">0</span> <span class="number">-1</span>;<span class="number">-1</span> <span class="number">-1</span>  <span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">% 由主应力微体上的应力矢量反推应力张量</span></span><br><span class="line">    lambda=<span class="built_in">diag</span>([<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>]);<span class="comment">% 由于将sigma_g指定为alpha3, 所以是[001]</span></span><br><span class="line">    alpha3=sigma_g;</span><br><span class="line"></span><br><span class="line">    L=(sigma_g==[<span class="number">0</span>;<span class="number">0</span>;<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">if</span> L(<span class="number">1</span>) &amp;&amp; L(<span class="number">2</span>) &amp;&amp; ~L(<span class="number">3</span>)</span><br><span class="line">        A=<span class="built_in">diag</span>([<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">elseif</span> L(<span class="number">1</span>) &amp;&amp; ~L(<span class="number">2</span>) &amp;&amp; L(<span class="number">3</span>)</span><br><span class="line">        A=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">elseif</span> ~L(<span class="number">1</span>) &amp;&amp; L(<span class="number">2</span>) &amp;&amp; L(<span class="number">3</span>)</span><br><span class="line">        A=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        alpha2=[-sigma_g(<span class="number">2</span>);sigma_g(<span class="number">1</span>);<span class="number">0</span>]; <span class="comment">% 假设的, 只要与alpha3垂直即可</span></span><br><span class="line">        <span class="comment">%alpha2=[0;sigma_g(3);-sigma_g(2)];% 还可假设成这样</span></span><br><span class="line">        alpha2=alpha2/norm(alpha2);</span><br><span class="line">        alpha1=<span class="built_in">cross</span>(alpha2,alpha3);</span><br><span class="line">        A=[alpha1,alpha2,alpha3];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    sigma_l=Q&#x27;*sigma_g;<span class="comment">% 局部坐标系下的应力矢量 3x1</span></span><br><span class="line">    sigma_mat_g=A*lambda*A&#x27;;     <span class="comment">% 全局下应力张量 3x3</span></span><br><span class="line">    sigma_mat_l=Q&#x27;*sigma_mat_g*Q;<span class="comment">% 局部下应力张量 3x3</span></span><br><span class="line">    </span><br><span class="line">    y=<span class="built_in">zeros</span>(<span class="number">12</span>,<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">12</span></span><br><span class="line">        sl=ts(<span class="built_in">i</span>,:)&#x27;;sl=sl/norm(sl);<span class="comment">% 局部 3x1</span></span><br><span class="line">        ml=tm(<span class="built_in">i</span>,:)&#x27;;ml=ml/norm(ml);<span class="comment">% 局部 3x1</span></span><br><span class="line">        sg=Q*sl;mg=Q*ml;           <span class="comment">% 全局 3x1</span></span><br><span class="line"></span><br><span class="line">        y(<span class="built_in">i</span>,<span class="number">1</span>)=(sg&#x27;*sigma_g)*(mg&#x27;*sigma_g); <span class="comment">% 全局坐标系下由应力矢量计算</span></span><br><span class="line">        y(<span class="built_in">i</span>,<span class="number">2</span>)=(sl&#x27;*sigma_l)*(ml&#x27;*sigma_l); <span class="comment">% 局部坐标系下由应力矢量计算</span></span><br><span class="line">        y(<span class="built_in">i</span>,<span class="number">3</span>)=sg&#x27;*(sigma_mat_g*mg);        <span class="comment">% 全局坐标系下由应力张量计算</span></span><br><span class="line">        y(<span class="built_in">i</span>,<span class="number">4</span>)=sl&#x27;*(sigma_mat_l*ml);        <span class="comment">% 局部坐标系下由应力张量计算</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr>
 
     </div>
 
@@ -570,7 +487,7 @@ f^\alpha = \boldsymbol{s}^\alpha_g \cdot \boldsymbol{\sigma}_g \cdot \boldsymbol
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E4%BE%8B%E9%9D%A2%E5%BF%83%E7%AB%8B%E6%96%B9%E6%99%B6%E4%BD%93"><span class="nav-number">2.</span> <span class="nav-text">算例：面心立方晶体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E7%94%A8%E5%BC%8F1%E8%AE%A1%E7%AE%97"><span class="nav-number">2.1.</span> <span class="nav-text">采用式(1)计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E7%94%A8%E5%BC%8F2%E8%AE%A1%E7%AE%97"><span class="nav-number">2.2.</span> <span class="nav-text">采用式(2)计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matlab%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">MATLAB程序</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E4%BE%8B%EF%BC%9A%E9%9D%A2%E5%BF%83%E7%AB%8B%E6%96%B9%E6%99%B6%E4%BD%93"><span class="nav-number">2.</span> <span class="nav-text">算例：面心立方晶体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E7%94%A8%E5%BC%8F-1-%E8%AE%A1%E7%AE%97"><span class="nav-number">2.1.</span> <span class="nav-text">采用式(1)计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E7%94%A8%E5%BC%8F-2-%E8%AE%A1%E7%AE%97"><span class="nav-number">2.2.</span> <span class="nav-text">采用式(2)计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MATLAB%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">MATLAB程序</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

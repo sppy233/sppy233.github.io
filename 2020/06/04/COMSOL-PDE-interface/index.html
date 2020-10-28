@@ -260,53 +260,47 @@
       
         <p><a target="_blank" rel="noopener" href="http://cn.comsol.com/" title="COMSOL 中国">COMSOL Multiphysics</a>是一款强大的多物理场仿真软件。除了内置的众多典型物理场外，其还允许用户基于方程进行建模，例如使用 PDEs (Partial Differential Equations) 、ODEs (Ordinary Differential Equations) 以及 DAEs (Differential Algebraic Equations) 建模。这里主要介绍COMSOL偏微分方程接口。</p>
 <a id="more"></a>
-<h2 id="接口简介">接口简介</h2>
-<p>COMSOL的偏微分方程接口下常用的有两种方程形式：</p>
-<ol type="1">
+<h2 id="接口简介"><a href="#接口简介" class="headerlink" title="接口简介"></a>接口简介</h2><p>COMSOL的偏微分方程接口下常用的有两种方程形式：</p>
+<ol>
 <li>系数型偏微分方程</li>
 <li>一般形式偏微分方程</li>
 </ol>
-<h3 id="系数型偏微分方程">系数型偏微分方程</h3>
-<p>COMSOL提供的模板 <span class="math display">\[
-\underbrace{\textcolor{red}{e_a}\frac{\partial^2u}{\partial t^2}}_{\text{质量}}+\underbrace{\textcolor{red}{d_a}\frac{\partial u}{\partial t}}_{\text{阻尼}}+\nabla\cdot\overbrace{(-\underbrace{\textcolor{red}{c}\nabla u}_{\text{扩散}}-\underbrace{\textcolor{red}{\alpha} u}_{\text{对流}}+\underbrace{\textcolor{red}{\gamma}}_{\text{源}})}^{\text{守恒通量}}+\underbrace{\textcolor{red}{\beta}\cdot\nabla u}_{\text{对流}}+\underbrace{\textcolor{red}{a}u}_{\text{吸收}}=\underbrace{\textcolor{red}{f}}_{\text{源}}
-\]</span> 式中，<span class="math inline">\(u\)</span> 为所研究的场变量，红色变量是由用户确定的数值或表达式。</p>
-<h3 id="一般形式偏微分方程">一般形式偏微分方程</h3>
-<p>COMSOL提供的模板 <span class="math display">\[
-\textcolor{red}{e_a}\frac{\partial^2u}{\partial t^2}+\textcolor{red}{d_a}\frac{\partial u}{\partial t}+\nabla\cdot\textcolor{red}{\Gamma}=\textcolor{red}{f}
-\]</span> 同样地，<span class="math inline">\(u\)</span> 为场变量，红色变量由用户确定。需要注意，变量 <span class="math inline">\(\Gamma\)</span> 可以为包含场变量以及其偏导数的复杂表达式。</p>
-<h2 id="算例测试">算例测试</h2>
-<p>采用<a target="_blank" rel="noopener" href="http://sppy.site/2020/04/14/a-phase-field-model-for-damage/">《相场损伤模型》</a>中的物理模型，即 <span class="math display">\[
+<h3 id="系数型偏微分方程"><a href="#系数型偏微分方程" class="headerlink" title="系数型偏微分方程"></a>系数型偏微分方程</h3><p>COMSOL提供的模板</p>
+<script type="math/tex; mode=display">
+\underbrace{\textcolor{red}{e_a}\frac{\partial^2u}{\partial t^2}}_{\text{质量}}+\underbrace{\textcolor{red}{d_a}\frac{\partial u}{\partial t}}_{\text{阻尼}}+\nabla\cdot\overbrace{(-\underbrace{\textcolor{red}{c}\nabla u}_{\text{扩散}}-\underbrace{\textcolor{red}{\alpha} u}_{\text{对流}}+\underbrace{\textcolor{red}{\gamma}}_{\text{源}})}^{\text{守恒通量}}+\underbrace{\textcolor{red}{\beta}\cdot\nabla u}_{\text{对流}}+\underbrace{\textcolor{red}{a}u}_{\text{吸收}}=\underbrace{\textcolor{red}{f}}_{\text{源}}</script><p>式中，$u$ 为所研究的场变量，红色变量是由用户确定的数值或表达式。</p>
+<h3 id="一般形式偏微分方程"><a href="#一般形式偏微分方程" class="headerlink" title="一般形式偏微分方程"></a>一般形式偏微分方程</h3><p>COMSOL提供的模板</p>
+<script type="math/tex; mode=display">
+\textcolor{red}{e_a}\frac{\partial^2u}{\partial t^2}+\textcolor{red}{d_a}\frac{\partial u}{\partial t}+\nabla\cdot\textcolor{red}{\Gamma}=\textcolor{red}{f}</script><p>同样地，$u$ 为场变量，红色变量由用户确定。需要注意，变量 $\Gamma$ 可以为包含场变量以及其偏导数的复杂表达式。</p>
+<h2 id="算例测试"><a href="#算例测试" class="headerlink" title="算例测试"></a>算例测试</h2><p>采用<a target="_blank" rel="noopener" href="http://sppy.site/2020/04/14/a-phase-field-model-for-damage/">《相场损伤模型》</a>中的物理模型，即</p>
+<script type="math/tex; mode=display">
 \begin{cases}
-d-l^2\Delta d=0&amp;~\mathrm{in}~V\\[5pt]
-\nabla d\cdot\boldsymbol{n}=0&amp;~\mathrm{on}~\partial V\\[5pt]
-d(\boldsymbol{x})=1&amp;~\mathrm{on}~\Gamma
-\end{cases}
-\]</span> 对于特征长度参数 <span class="math inline">\(l=0.25\)</span> 、边长为 2 的正方形（二维）求解域进行计算。</p>
-<h3 id="采用系数型方程">采用系数型方程</h3>
-<p>令扩散系数 <span class="math inline">\(c=l^2\)</span> 、吸收系数 <span class="math inline">\(a=1\)</span> 、其余待定变量均设为零。裂纹几何特征与<a target="_blank" rel="noopener" href="http://sppy.site/2020/04/14/a-phase-field-model-for-damage/">《相场损伤模型》</a>中保持一致。</p>
+d-l^2\Delta d=0&~\mathrm{in}~V\\[5pt]
+\nabla d\cdot\boldsymbol{n}=0&~\mathrm{on}~\partial V\\[5pt]
+d(\boldsymbol{x})=1&~\mathrm{on}~\Gamma
+\end{cases}</script><p>对于特征长度参数 $l=0.25$ 、边长为 2 的正方形（二维）求解域进行计算。</p>
+<h3 id="采用系数型方程"><a href="#采用系数型方程" class="headerlink" title="采用系数型方程"></a>采用系数型方程</h3><p>令扩散系数 $c=l^2$ 、吸收系数 $a=1$ 、其余待定变量均设为零。裂纹几何特征与<a target="_blank" rel="noopener" href="http://sppy.site/2020/04/14/a-phase-field-model-for-damage/">《相场损伤模型》</a>中保持一致。</p>
 <p>计算结果如下</p>
 <p><img src="https://s1.ax1x.com/2020/06/04/t0AtB9.png" width="70%"></p>
-<h3 id="采用一般形式方程">采用一般形式方程</h3>
-<p>令守恒通量 <span class="math inline">\(\Gamma=[\partial d/\partial x,\partial d/\partial y]\)</span> 、源项 <span class="math inline">\(f=d/l^2\)</span> 、其余待定变量均设为零。裂纹几何特征采用箕舌线的形式，在本文中其具体方程为 <span class="math display">\[
+<h3 id="采用一般形式方程"><a href="#采用一般形式方程" class="headerlink" title="采用一般形式方程"></a>采用一般形式方程</h3><p>令守恒通量 $\Gamma=[\partial d/\partial x,\partial d/\partial y]$ 、源项 $f=d/l^2$ 、其余待定变量均设为零。裂纹几何特征采用箕舌线的形式，在本文中其具体方程为</p>
+<script type="math/tex; mode=display">
 \begin{cases}
 x=\tan\theta\\[5pt]
 y=\cos^2\theta-0.7
-\end{cases}
-\]</span> 式中，<span class="math inline">\(\theta\in[-\pi/4,\pi/4]\)</span> 。</p>
+\end{cases}</script><p>式中，$\theta\in[-\pi/4,\pi/4]$ 。</p>
 <p>计算结果如下</p>
 <p><img src="https://s1.ax1x.com/2020/06/04/t0AYnJ.png" width="70%"></p>
-<h2 id="注意事项">注意事项</h2>
-<ol type="1">
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
 <li><p>对裂纹处网格进行手动划分时，可设置全局变量来控制裂纹边上的最大单元大小，并将最大单元增长率设为较小值，由此获得较高的网格质量</p>
 <blockquote>
-<p>本文设裂纹边的最大单元大小 <span class="math inline">\(l_e=0.07\)</span> 、最大单元增长率为1.1，除裂纹边外区域的最大单元大小为 <span class="math inline">\(3l_e\)</span></p>
-</blockquote></li>
+<p>本文设裂纹边的最大单元大小 $l_e=0.07$ 、最大单元增长率为1.1，除裂纹边外区域的最大单元大小为 $3l_e$ </p>
+</blockquote>
+</li>
 </ol>
 <p><img src="https://s1.ax1x.com/2020/06/04/t0133d.png" width="65%"></p>
-<ol start="2" type="1">
+<ol>
 <li>在COMSOL中<code>零通量</code>选项对应Neumann边界条件，Dirichlet边界条件需手动添加</li>
 </ol>
-<hr />
+<hr>
 
     </div>
 

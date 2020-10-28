@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="沙堆模型（sandpile model）是根据一个简单的沙粒扩散规则来描述沙堆的累计和崩塌。当沙粒数量达到一定时，沙堆可呈现出明显的分形结构。除此之外，沙堆模型还包含很多有趣现象。  推荐阅读：The Amazing, Autotuning Sandpile、Sandgallery、Mommy Talk">
+  <meta name="description" content="沙堆模型（sandpile model）是根据一个简单的沙粒扩散规则来描述沙堆的累计和崩塌。当沙粒数量达到一定时，沙堆可呈现出明显的分形结构。除此之外，沙堆模型还包含很多有趣现象。  推荐阅读：The Amazing, Autotuning Sandpile、Sandgallery、Mommy Talk">
 <meta property="og:type" content="article">
 <meta property="og:title" content="沙堆模型">
 <meta property="og:url" content="http://www.sppy.site/2020/04/01/sandpile-model/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="沙堆模型（sandpile model）是根据一个简单的沙粒扩散规则来描述沙堆的累计和崩塌。当沙粒数量达到一定时，沙堆可呈现出明显的分形结构。除此之外，沙堆模型还包含很多有趣现象。  推荐阅读：The Amazing, Autotuning Sandpile、Sandgallery、Mommy Talk">
+<meta property="og:description" content="沙堆模型（sandpile model）是根据一个简单的沙粒扩散规则来描述沙堆的累计和崩塌。当沙粒数量达到一定时，沙堆可呈现出明显的分形结构。除此之外，沙堆模型还包含很多有趣现象。  推荐阅读：The Amazing, Autotuning Sandpile、Sandgallery、Mommy Talk">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s1.ax1x.com/2020/03/28/GAM4e0.jpg">
 <meta property="og:image" content="https://s1.ax1x.com/2020/03/28/GAMTFU.png">
@@ -265,100 +265,71 @@
 <p>推荐阅读：<a target="_blank" rel="noopener" href="http://nautil.us/issue/23/dominoes/the-amazing-autotuning-sandpile" title="科普文章">The Amazing, Autotuning Sandpile</a>、<a target="_blank" rel="noopener" href="http://www.math.cmu.edu/~wes/sandgallery.html" title="卡内基梅隆大学">Sandgallery</a>、<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1W7411C7iE/" title="B站科普视频">Mommy Talk</a></p>
 </blockquote>
 <a id="more"></a>
-<h2 id="规则">规则</h2>
-<p>假设有一个无限大的正交网格，仅在某个固定格点处逐粒放沙。如下图所示，当某一格点中的沙粒的数量达到4时，这个格点发生崩塌，减去4颗沙粒，并将这4颗沙粒等分给上下左右的4个格点。</p>
-<p><span class="math display">\[
+<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><p>假设有一个无限大的正交网格，仅在某个固定格点处逐粒放沙。如下图所示，当某一格点中的沙粒的数量达到4时，这个格点发生崩塌，减去4颗沙粒，并将这4颗沙粒等分给上下左右的4个格点。</p>
+<script type="math/tex; mode=display">
 \boxed{\begin{matrix}
-   0 &amp; 0 &amp; 0 \\
-   0 &amp; \textcolor{red}{4} &amp; 0 \\
-   0 &amp; 0 &amp; 0
+   0 & 0 & 0 \\
+   0 & \textcolor{red}{4} & 0 \\
+   0 & 0 & 0
 \end{matrix}} \quad\Longrightarrow\quad
 \boxed{\begin{matrix}
-   0 &amp; \textcolor{red}{1} &amp; 0 \\
-   \textcolor{red}{1} &amp; 0 &amp; \textcolor{red}{1} \\
-   0 &amp; \textcolor{red}{1} &amp; 0
-\end{matrix}}
-\]</span></p>
-<p>按照上面的规则，沙堆模型会在不断地累计与崩塌之间逐渐扩大。</p>
-<h2 id="分形">分形</h2>
-<h3 id="一百万粒沙">一百万粒沙</h3>
-<p>整个沙堆稳定后，格点中的沙粒数只有4个状态：3、2、1、0。将这四种状态分别用4种颜色代替，即：</p>
-<table>
-<tr>
-<td bgcolor="#F40000">
-三粒沙：亮红色，即RGB = #F40000 = [244,0,0]
-</td>
-</tr>
-</table>
-<table>
-<tr>
-<td bgcolor="#FF7F00">
-两粒沙：橘黄色，即RGB = #FF7F00 = [255,127,0]
-</td>
-</tr>
-</table>
-<table>
-<tr>
-<td bgcolor="#FFF200">
-一粒沙：亮黄色，即RGB = #FFF200 = [255,255,32]
-</td>
-</tr>
-</table>
-<table>
-<tr>
-<td bgcolor="#FFFFFF">
-零粒沙：纯白色，即RGB = #FFFFFF = [255,255,255]
-</td>
-</tr>
-</table>
-<p>当落下一百万粒沙（<span class="math inline">\(10^6\)</span>），沙堆累计的可视化过程如下</p>
+   0 & \textcolor{red}{1} & 0 \\
+   \textcolor{red}{1} & 0 & \textcolor{red}{1} \\
+   0 & \textcolor{red}{1} & 0
+\end{matrix}}</script><p>按照上面的规则，沙堆模型会在不断地累计与崩塌之间逐渐扩大。</p>
+<h2 id="分形"><a href="#分形" class="headerlink" title="分形"></a>分形</h2><h3 id="一百万粒沙"><a href="#一百万粒沙" class="headerlink" title="一百万粒沙"></a>一百万粒沙</h3><p>整个沙堆稳定后，格点中的沙粒数只有4个状态：3、2、1、0。将这四种状态分别用4种颜色代替，即：</p>
+<table><tr><td bgcolor=#F40000>三粒沙：亮红色，即RGB = #F40000 = [244,0,0]</td></tr></table>
+
+<table><tr><td bgcolor=#FF7F00>两粒沙：橘黄色，即RGB = #FF7F00 = [255,127,0]</td></tr></table>
+
+<table><tr><td bgcolor=#FFF200>一粒沙：亮黄色，即RGB = #FFF200 = [255,255,32]</td></tr></table>
+
+<table><tr><td bgcolor=#FFFFFF>零粒沙：纯白色，即RGB = #FFFFFF = [255,255,255]</td></tr></table>
+
+<p>当落下一百万粒沙（$10^6$），沙堆累计的可视化过程如下</p>
 
 <div style="position: relative; width: 100%; height: 0;padding-bottom: 75%;"><iframe src="//player.bilibili.com/player.html?aid=497615670&bvid=BV18K411L7VU&cid=170712189&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div>
 
-<hr />
+<hr>
 <p>一百万粒沙的沙堆具有较明显的分形结构，沙堆效果如下</p>
 <p><img src="https://s1.ax1x.com/2020/03/28/GAM4e0.jpg" width="85%"></p>
-<h3 id="十亿粒沙">十亿粒沙</h3>
-<p>当落下十亿粒沙（<span class="math inline">\(10^9\)</span>），具有很明显的分形效果，沙堆效果如下</p>
+<h3 id="十亿粒沙"><a href="#十亿粒沙" class="headerlink" title="十亿粒沙"></a>十亿粒沙</h3><p>当落下十亿粒沙（$10^9$），具有很明显的分形效果，沙堆效果如下</p>
 <p><img src="https://s1.ax1x.com/2020/03/28/GAMTFU.png" width="85%"></p>
 <blockquote>
 <p>上图来自<a target="_blank" rel="noopener" href="http://www.math.cmu.edu/~wes/sandgallery.html">Sandgallery</a></p>
 </blockquote>
-<hr />
-<h2 id="分析">分析</h2>
-<p>分析一百万粒沙累计过程的数据。</p>
-<h3 id="格点总数-沙粒总数">格点总数-沙粒总数</h3>
-<ul>
+<hr>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>分析一百万粒沙累计过程的数据。</p>
+<h3 id="格点总数-沙粒总数"><a href="#格点总数-沙粒总数" class="headerlink" title="格点总数-沙粒总数"></a>格点总数-沙粒总数</h3><ul>
 <li><p>格点总数：沙堆所占区域的总格点数（包括<strong>内部</strong>零沙粒格点，但不包括<strong>外部</strong>零沙粒格点）</p>
 <blockquote>
 <p>十亿粒沙的沙堆图中蓝色部分为<strong>外部</strong>零沙粒格点</p>
-</blockquote></li>
-<li><p>沙粒总数：沙堆中沙粒的总数量</p></li>
+</blockquote>
+</li>
+<li><p>沙粒总数：沙堆中沙粒的总数量</p>
+</li>
 </ul>
-<p>例如下图中的沙粒总数为7，格点总数为5。 <span class="math display">\[
+<p>例如下图中的沙粒总数为7，格点总数为5。</p>
+<script type="math/tex; mode=display">
 \boxed{\begin{matrix}
-    &amp; 1 &amp;  \\
-   1 &amp; 3 &amp; 1 \\
-    &amp; 1 &amp; 
-\end{matrix}}
-\]</span></p>
-<p><img src="https://s1.ax1x.com/2020/03/28/GAq6qf.png" width="50%"></p>
+    & 1 &  \\
+   1 & 3 & 1 \\
+    & 1 & 
+\end{matrix}}</script><p><img src="https://s1.ax1x.com/2020/03/28/GAq6qf.png" width="50%"></p>
 <blockquote>
 <p>线性关系</p>
 </blockquote>
-<h3 id="单格平均沙粒数-沙粒总数">单格平均沙粒数-沙粒总数</h3>
-<ul>
+<h3 id="单格平均沙粒数-沙粒总数"><a href="#单格平均沙粒数-沙粒总数" class="headerlink" title="单格平均沙粒数-沙粒总数"></a>单格平均沙粒数-沙粒总数</h3><ul>
 <li>单格平均沙粒数：沙粒总数 / 格点总数</li>
 </ul>
 <p><img src="https://s1.ax1x.com/2020/03/28/GAqRIg.png" width="50%"></p>
 <blockquote>
 <p>单格平均沙粒数稳定到2.30左右？</p>
 </blockquote>
-<h3 id="二八定律">二八定律</h3>
-<p>沙堆的沙粒总数记为 <span class="math inline">\(M\)</span>，格点总数记为 <span class="math inline">\(N\)</span>，格点中沙粒数为 <span class="math inline">\(k\)</span> 的格点共有 <span class="math inline">\(n\)</span> 个，于是</p>
+<h3 id="二八定律"><a href="#二八定律" class="headerlink" title="二八定律"></a>二八定律</h3><p>沙堆的沙粒总数记为 $M$，格点总数记为 $N$，格点中沙粒数为 $k$ 的格点共有 $n$ 个，于是</p>
 <ul>
-<li>沙粒数为 <span class="math inline">\(k\)</span> 的<strong>数量分布</strong>定义为 <span class="math inline">\(nk/M\)</span></li>
-<li>沙粒数为 <span class="math inline">\(k\)</span> 的<strong>格点分布</strong>定义为 <span class="math inline">\(n/N\)</span></li>
+<li>沙粒数为 $k$ 的<strong>数量分布</strong>定义为 $nk/M$</li>
+<li>沙粒数为 $k$ 的<strong>格点分布</strong>定义为 $n/N$</li>
 </ul>
 <p><img src="https://s1.ax1x.com/2020/03/28/GAqsMt.png" width="50%"></p>
 <blockquote>
@@ -370,10 +341,9 @@
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%8C%E5%85%AB%E5%AE%9A%E5%BE%8B">二八定律</a>是一个社会现象，其中一条是“20%的人掌握着80%的财富”。</p>
 <p>对于本文所计算的<strong>一百万粒沙</strong>，对应为“60%的<strong>格点</strong>掌握着80%的<strong>沙粒</strong>”。</p>
-<h2 id="程序">程序</h2>
-<p>MATLAB程序：</p>
+<h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>MATLAB程序：</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 10^5颗沙粒的累计过程</span></span><br><span class="line"><span class="comment">% sandpile model</span></span><br><span class="line">clc;clear;close all;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 沙粒个数</span></span><br><span class="line">num1=<span class="number">10</span>^<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 初始化</span></span><br><span class="line">dis=<span class="number">10</span>^<span class="number">2</span>;<span class="comment">% 每dis颗沙粒保存一帧</span></span><br><span class="line">pt=<span class="number">25</span>;<span class="comment">% 字体大小</span></span><br><span class="line">L=<span class="number">1</span>;<span class="comment">% 正方形沙盘长度, 奇数格</span></span><br><span class="line">center=<span class="built_in">ceil</span>(L/<span class="number">2</span>);<span class="comment">% 沙盘中心坐标</span></span><br><span class="line">sand=<span class="built_in">zeros</span>(L,L);<span class="comment">% 初始化沙盘, 全置零</span></span><br><span class="line">color=[<span class="number">1.0000</span>,<span class="number">1.0000</span>,<span class="number">1.0000</span>; <span class="comment">% 纯白色</span></span><br><span class="line">       <span class="number">1.0000</span>,<span class="number">1.0000</span>,<span class="number">0.1250</span>; <span class="comment">% 亮黄色</span></span><br><span class="line">       <span class="number">1.0000</span>,<span class="number">0.5000</span>,<span class="number">0.0000</span>; <span class="comment">% 橘黄色</span></span><br><span class="line">       <span class="number">0.9583</span>,<span class="number">0.0000</span>,<span class="number">0.0000</span>];<span class="comment">% 亮红色</span></span><br><span class="line">index=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 每帧图片</span></span><br><span class="line">frames(num1/dis)=struct(<span class="string">&#x27;cdata&#x27;</span>,[],<span class="string">&#x27;colormap&#x27;</span>,[]);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 逐粒放沙</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:num1</span><br><span class="line">    sand(center,center)=sand(center,center)+<span class="number">1</span>;</span><br><span class="line">    [tempi,tempj]=<span class="built_in">find</span>(sand&gt;=<span class="number">4</span>);<span class="comment">% 大于3的位置</span></span><br><span class="line">    num2=<span class="built_in">length</span>(tempi);</span><br><span class="line">    <span class="keyword">while</span> num2&gt;<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:num2</span><br><span class="line">            </span><br><span class="line">           <span class="comment">%% 防止溢出</span></span><br><span class="line">            <span class="keyword">if</span> tempi(<span class="built_in">j</span>)==<span class="number">1</span> || tempi(<span class="built_in">j</span>)==L || tempj(<span class="built_in">j</span>)==<span class="number">1</span> || tempj(<span class="built_in">j</span>)==L</span><br><span class="line">                <span class="comment">% 四周加一圈零</span></span><br><span class="line">                sand=[         <span class="number">0</span>, <span class="built_in">zeros</span>(<span class="number">1</span>,L),          <span class="number">0</span>;</span><br><span class="line">                      <span class="built_in">zeros</span>(L,<span class="number">1</span>),       sand, <span class="built_in">zeros</span>(L,<span class="number">1</span>);</span><br><span class="line">                               <span class="number">0</span>, <span class="built_in">zeros</span>(<span class="number">1</span>,L),          <span class="number">0</span>];</span><br><span class="line">                L=L+<span class="number">2</span>;center=center+<span class="number">1</span>;</span><br><span class="line">                tempi=tempi+<span class="number">1</span>;tempj=tempj+<span class="number">1</span>; </span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            </span><br><span class="line">           <span class="comment">%% 沙堆崩塌</span></span><br><span class="line">            sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>))=sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>))<span class="number">-4</span>;</span><br><span class="line">            sand(tempi(<span class="built_in">j</span>)+<span class="number">1</span>,tempj(<span class="built_in">j</span>))=sand(tempi(<span class="built_in">j</span>)+<span class="number">1</span>,tempj(<span class="built_in">j</span>))+<span class="number">1</span>;</span><br><span class="line">            sand(tempi(<span class="built_in">j</span>)<span class="number">-1</span>,tempj(<span class="built_in">j</span>))=sand(tempi(<span class="built_in">j</span>)<span class="number">-1</span>,tempj(<span class="built_in">j</span>))+<span class="number">1</span>;</span><br><span class="line">            sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>)+<span class="number">1</span>)=sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>)+<span class="number">1</span>)+<span class="number">1</span>;</span><br><span class="line">            sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>)<span class="number">-1</span>)=sand(tempi(<span class="built_in">j</span>),tempj(<span class="built_in">j</span>)<span class="number">-1</span>)+<span class="number">1</span>;</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        [tempi,tempj]=<span class="built_in">find</span>(sand&gt;=<span class="number">4</span>);<span class="comment">% 大于3的位置</span></span><br><span class="line">        num2=<span class="built_in">length</span>(tempi);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">mod</span>(<span class="built_in">i</span>,dis)==<span class="number">0</span></span><br><span class="line">        imshow(sand,[<span class="number">0</span>,<span class="number">3</span>],<span class="string">&#x27;Colormap&#x27;</span>,color);</span><br><span class="line">        figset([<span class="number">20</span>,<span class="number">20</span>,<span class="number">0.3</span>,<span class="number">0.02</span>],[<span class="number">0.9</span>,<span class="number">0.9</span>,<span class="number">0.05</span>,<span class="number">0.02</span>]);</span><br><span class="line">        </span><br><span class="line">        str1=<span class="string">&#x27;\bf&#123;Sandpile Model&#125;&#x27;</span>;h1=text(<span class="number">0</span>,<span class="number">0</span>,str1);</span><br><span class="line">        set(h1,<span class="string">&#x27;interpreter&#x27;</span>,<span class="string">&#x27;latex&#x27;</span>,<span class="string">&#x27;HorizontalAlignment&#x27;</span>,<span class="string">&#x27;left&#x27;</span>);</span><br><span class="line">        set(h1,<span class="string">&#x27;units&#x27;</span>,<span class="string">&#x27;normalized&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,pt,<span class="string">&#x27;position&#x27;</span>,[<span class="number">0.03</span>,<span class="number">1.04</span>]);</span><br><span class="line">        </span><br><span class="line">        str2=[<span class="string">&#x27;ticks: &#x27;</span>,sprintf(<span class="string">&#x27;%d&#x27;</span>,<span class="built_in">i</span>)];h2=text(<span class="number">0</span>,<span class="number">0</span>,str2);</span><br><span class="line">        set(h2,<span class="string">&#x27;interpreter&#x27;</span>,<span class="string">&#x27;latex&#x27;</span>,<span class="string">&#x27;HorizontalAlignment&#x27;</span>,<span class="string">&#x27;right&#x27;</span>);</span><br><span class="line">        set(h2,<span class="string">&#x27;units&#x27;</span>,<span class="string">&#x27;normalized&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,pt,<span class="string">&#x27;position&#x27;</span>,[<span class="number">0.97</span>,<span class="number">1.04</span>]);</span><br><span class="line">        </span><br><span class="line">        drawnow;</span><br><span class="line">        frames(index)=getframe(gcf);</span><br><span class="line">        index=index+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 视频</span></span><br><span class="line">v=VideoWriter(<span class="string">&#x27;newfile.mp4&#x27;</span>,<span class="string">&#x27;MPEG-4&#x27;</span>);</span><br><span class="line">v.Quality=<span class="number">100</span>;v.FrameRate=<span class="number">30</span>;</span><br><span class="line">open(v);</span><br><span class="line">writeVideo(v,frames);</span><br><span class="line">close(v);</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 设置图像尺寸与位置</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">figset</span><span class="params">(parameter1,parameter2)</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">%电脑屏幕尺寸</span></span><br><span class="line">    set(<span class="number">0</span>,<span class="string">&#x27;units&#x27;</span>,<span class="string">&#x27;centimeters&#x27;</span>)</span><br><span class="line">    cm_ss=get(<span class="number">0</span>,<span class="string">&#x27;screensize&#x27;</span>);</span><br><span class="line">    W=cm_ss(<span class="number">3</span>);<span class="comment">%电脑屏幕长度，单位cm</span></span><br><span class="line">    H=cm_ss(<span class="number">4</span>);<span class="comment">%电脑屏幕宽度，单位cm</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">%设置figure在screen中的比例位置与大小</span></span><br><span class="line">	temp1=[parameter1(<span class="number">3</span>),parameter1(<span class="number">4</span>),parameter1(<span class="number">1</span>)/W,parameter1(<span class="number">2</span>)/H];</span><br><span class="line">    set(gcf,<span class="string">&#x27;units&#x27;</span>,<span class="string">&#x27;normalized&#x27;</span>,<span class="string">&#x27;position&#x27;</span>,temp1);</span><br><span class="line">    <span class="keyword">if</span> nargin==<span class="number">2</span></span><br><span class="line">		<span class="comment">%设置axis在figure中的比例位置与大小</span></span><br><span class="line">		temp2=[parameter2(<span class="number">3</span>),parameter2(<span class="number">4</span>),parameter2(<span class="number">1</span>),parameter2(<span class="number">2</span>)];</span><br><span class="line">        set(gca,<span class="string">&#x27;position&#x27;</span>,temp2);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<hr />
+<hr>
 
     </div>
 

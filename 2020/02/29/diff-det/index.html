@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="问题 记\(~\boldsymbol{F}~\)为\(~N~\)阶方阵，其第\(~i~\)行、第\(~j~\)列的分量记为\(~F_{ij}\)，其行列式记为\(~|\boldsymbol{F}|~\)，将分量\(~F_{ij}~\)对应的代数余子式记为\(~\mathcal{F}_{ij}\)，将\(~\boldsymbol{F}~\)的伴随矩阵记为\(~\boldsymbol{F}^*\)。">
+  <meta name="description" content="问题记$~\boldsymbol{F}~$为$~N~$阶方阵，其第$~i~$行、第$~j~$列的分量记为$~F{ij}$，其行列式记为$~|\boldsymbol{F}|~$，将分量$~F{ij}~$对应的代数余子式记为$~\mathcal{F}_{ij}$，将$~\boldsymbol{F}~$的伴随矩阵记为$~\boldsymbol{F}^*$。  在线性代数教材中，一般用$~\boldsym">
 <meta property="og:type" content="article">
 <meta property="og:title" content="行列式的导数">
 <meta property="og:url" content="http://www.sppy.site/2020/02/29/diff-det/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="问题 记\(~\boldsymbol{F}~\)为\(~N~\)阶方阵，其第\(~i~\)行、第\(~j~\)列的分量记为\(~F_{ij}\)，其行列式记为\(~|\boldsymbol{F}|~\)，将分量\(~F_{ij}~\)对应的代数余子式记为\(~\mathcal{F}_{ij}\)，将\(~\boldsymbol{F}~\)的伴随矩阵记为\(~\boldsymbol{F}^*\)。">
+<meta property="og:description" content="问题记$~\boldsymbol{F}~$为$~N~$阶方阵，其第$~i~$行、第$~j~$列的分量记为$~F{ij}$，其行列式记为$~|\boldsymbol{F}|~$，将分量$~F{ij}~$对应的代数余子式记为$~\mathcal{F}_{ij}$，将$~\boldsymbol{F}~$的伴随矩阵记为$~\boldsymbol{F}^*$。  在线性代数教材中，一般用$~\boldsym">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-29T08:32:20.000Z">
 <meta property="article:modified_time" content="2020-03-21T11:09:30.054Z">
@@ -259,82 +259,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="问题">问题</h2>
-<p>记<span class="math inline">\(~\boldsymbol{F}~\)</span>为<span class="math inline">\(~N~\)</span>阶方阵，其第<span class="math inline">\(~i~\)</span>行、第<span class="math inline">\(~j~\)</span>列的分量记为<span class="math inline">\(~F_{ij}\)</span>，其行列式记为<span class="math inline">\(~|\boldsymbol{F}|~\)</span>，将分量<span class="math inline">\(~F_{ij}~\)</span>对应的代数余子式记为<span class="math inline">\(~\mathcal{F}_{ij}\)</span>，将<span class="math inline">\(~\boldsymbol{F}~\)</span>的伴随矩阵记为<span class="math inline">\(~\boldsymbol{F}^*\)</span>。</p>
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>记$~\boldsymbol{F}~$为$~N~$阶方阵，其第$~i~$行、第$~j~$列的分量记为$~F<em>{ij}$，其行列式记为$~|\boldsymbol{F}|~$，将分量$~F</em>{ij}~$对应的代数余子式记为$~\mathcal{F}_{ij}$，将$~\boldsymbol{F}~$的伴随矩阵记为$~\boldsymbol{F}^*$。</p>
 <blockquote>
-<p>在线性代数教材中，一般用<span class="math inline">\(~\boldsymbol{A}~\)</span>表示方阵，<span class="math inline">\(a_{ij}~\)</span>表示分量，<span class="math inline">\(A_{ij}~\)</span>表示<span class="math inline">\(~a_{ij}~\)</span>对应的代数余子式</p>
+<p>在线性代数教材中，一般用$~\boldsymbol{A}~$表示方阵，$a<em>{ij}~$表示分量，$A</em>{ij}~$表示$~a_{ij}~$对应的代数余子式</p>
 <p>本文采用张量的表示形式，故与线性代数教材中符号不一致</p>
 </blockquote>
-<p>那么，<span class="math inline">\(\mathrm{d}|\boldsymbol{F}| \big/ \mathrm{d}t=~?\)</span></p>
+<p>那么，$\mathrm{d}|\boldsymbol{F}| \big/ \mathrm{d}t=~?$</p>
 <a id="more"></a>
-<h2 id="解答">解答</h2>
-<p>行列式<span class="math inline">\(~|\boldsymbol{F}|~\)</span>等于它的第<span class="math inline">\(~i~\)</span>行（第<span class="math inline">\(~j~\)</span>列）的各元素与其对应的代数余子式乘积之和，即</p>
-<p><span class="math display">\[
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>行列式$~|\boldsymbol{F}|~$等于它的第$~i~$行（第$~j~$列）的各元素与其对应的代数余子式乘积之和，即</p>
+<script type="math/tex; mode=display">
 \tag{1a}
-|\boldsymbol{F}|=\sum\limits^{N}_{j=1} F_{ij} \mathcal{F}_{ij}
-\]</span> 或者 <span class="math display">\[
+|\boldsymbol{F}|=\sum\limits^{N}_{j=1} F_{ij} \mathcal{F}_{ij}</script><p>或者</p>
+<script type="math/tex; mode=display">
 \tag{1b}
-|\boldsymbol{F}|=\sum\limits^{N}_{i=1} F_{ij} \mathcal{F}_{ij}
-\]</span></p>
-<p>当行列式<span class="math inline">\(~|\boldsymbol{F}|~\)</span>中第<span class="math inline">\(~i~\)</span>行、第<span class="math inline">\(~j~\)</span>列的值<span class="math inline">\(~F_{ij}~\)</span>变为<span class="math inline">\(~F_{ij}+\varepsilon\)</span>，且其余位置的值保持不变，得到一个新的行列式，记为<span class="math inline">\(~|\boldsymbol{F}(F_{ij}+\varepsilon)|\)</span>，将其按第<span class="math inline">\(~i~\)</span>行展开，于是由式<span class="math inline">\((1\mathrm{a})\)</span>可得 <span class="math display">\[
+|\boldsymbol{F}|=\sum\limits^{N}_{i=1} F_{ij} \mathcal{F}_{ij}</script><p>当行列式$~|\boldsymbol{F}|~$中第$~i~$行、第$~j~$列的值$~F<em>{ij}~$变为$~F</em>{ij}+\varepsilon$，且其余位置的值保持不变，得到一个新的行列式，记为$~|\boldsymbol{F}(F_{ij}+\varepsilon)|$，将其按第$~i~$行展开，于是由式$(1\mathrm{a})$可得</p>
+<script type="math/tex; mode=display">
 \tag{2}
-|\boldsymbol{F}(F_{ij}+\varepsilon)|=\varepsilon\mathcal{F}_{ij}+\sum\limits^{N}_{j=1} F_{ij} \mathcal{F}_{ij}
-\]</span></p>
-<p>进一步得到 <span class="math display">\[
+|\boldsymbol{F}(F_{ij}+\varepsilon)|=\varepsilon\mathcal{F}_{ij}+\sum\limits^{N}_{j=1} F_{ij} \mathcal{F}_{ij}</script><p>进一步得到</p>
+<script type="math/tex; mode=display">
 \tag{3}
-|\boldsymbol{F}(F_{ij}+\varepsilon)|-|\boldsymbol{F}|=\varepsilon\mathcal{F}_{ij}
-\]</span></p>
-<p>故有 <span class="math display">\[
+|\boldsymbol{F}(F_{ij}+\varepsilon)|-|\boldsymbol{F}|=\varepsilon\mathcal{F}_{ij}</script><p>故有</p>
+<script type="math/tex; mode=display">
 \tag{4}
-\frac{\partial|\boldsymbol{F}|}{\partial F_{ij}}=\mathcal{F}_{ij}
-\]</span></p>
-<p>根据代数余子式与伴随矩阵的定义，有 <span class="math display">\[
+\frac{\partial|\boldsymbol{F}|}{\partial F_{ij}}=\mathcal{F}_{ij}</script><p>根据代数余子式与伴随矩阵的定义，有</p>
+<script type="math/tex; mode=display">
 \tag{5}
-\mathcal{F}_{ij}=(\boldsymbol{F}^*)_{ji}=|\boldsymbol{F}|(\boldsymbol{F}^{-1})_{ji}
-\]</span></p>
-<p>将式<span class="math inline">\((5)\)</span>代入式<span class="math inline">\((4)\)</span>，可得 <span class="math display">\[
+\mathcal{F}_{ij}=(\boldsymbol{F}^*)_{ji}=|\boldsymbol{F}|(\boldsymbol{F}^{-1})_{ji}</script><p>将式$(5)$代入式$(4)$，可得</p>
+<script type="math/tex; mode=display">
 \tag{6}
-\frac{\partial|\boldsymbol{F}|}{\partial F_{ij}}=|\boldsymbol{F}|(\boldsymbol{F}^{-1})_{ji}
-\]</span></p>
-<p>接下来推导<span class="math inline">\(~\mathrm{d}|\boldsymbol{F}| \big/ \mathrm{d}t~\)</span>： <span class="math display">\[
+\frac{\partial|\boldsymbol{F}|}{\partial F_{ij}}=|\boldsymbol{F}|(\boldsymbol{F}^{-1})_{ji}</script><p>接下来推导$~\mathrm{d}|\boldsymbol{F}| \big/ \mathrm{d}t~$：</p>
+<script type="math/tex; mode=display">
 \tag{7}
 \begin{aligned}
-\frac{\mathrm{d}|\boldsymbol{F}|}{\mathrm{d}t} &amp; =
+\frac{\mathrm{d}|\boldsymbol{F}|}{\mathrm{d}t} & =
 \frac{\partial|\boldsymbol{F}|}{\partial F_{ij}} \frac{\partial F_{ij}}{\partial t} \stackrel{\text{式}(6)}{=}
 |\boldsymbol{F}| (\boldsymbol{F}^{-1})_{ji} \frac{\partial F_{ij}}{\partial t} \\
-&amp; = |\boldsymbol{F}|~\mathrm{tr}(\boldsymbol{F}^{-1} \cdot \dot{\boldsymbol{F}}) =
+& = |\boldsymbol{F}|~\mathrm{tr}(\boldsymbol{F}^{-1} \cdot \dot{\boldsymbol{F}}) =
 |\boldsymbol{F}|~\mathrm{tr}(\dot{\boldsymbol{F}} \cdot \boldsymbol{F}^{-1})
-\end{aligned}
-\]</span></p>
-<blockquote>
-<p>需要注意，上式中<span class="math inline">\(~i\)</span>、<span class="math inline">\(j~\)</span>为哑指标，即采用Einstein求和约定</p>
+\end{aligned}</script><blockquote>
+<p>需要注意，上式中$~i$、$j~$为哑指标，即采用Einstein求和约定</p>
 </blockquote>
-<p>式中，<span class="math inline">\(\mathrm{tr}~\)</span>是矩阵取迹的运算符。至此，<strong>推导完成</strong>。</p>
-<h2 id="力学延伸">力学延伸</h2>
-<p>在连续介质力学中，常用<span class="math inline">\(~\boldsymbol{F}~\)</span>表示变形梯度张量，<span class="math inline">\(\boldsymbol{L}~\)</span>表示速度梯度张量，两者定义分别为 <span class="math display">\[
+<p>式中，$\mathrm{tr}~$是矩阵取迹的运算符。至此，<strong>推导完成</strong>。</p>
+<h2 id="力学延伸"><a href="#力学延伸" class="headerlink" title="力学延伸"></a>力学延伸</h2><p>在连续介质力学中，常用$~\boldsymbol{F}~$表示变形梯度张量，$\boldsymbol{L}~$表示速度梯度张量，两者定义分别为</p>
+<script type="math/tex; mode=display">
 \tag{8}
-\boldsymbol{F}=\frac{\partial\boldsymbol{x}}{\partial\boldsymbol{X}}=\boldsymbol{x} \otimes  \nabla_{\boldsymbol{X}} \qquad F_{ij}=\frac{\partial x_i}{\partial X_j}
-\]</span> <span class="math display">\[
+\boldsymbol{F}=\frac{\partial\boldsymbol{x}}{\partial\boldsymbol{X}}=\boldsymbol{x} \otimes  \nabla_{\boldsymbol{X}} \qquad F_{ij}=\frac{\partial x_i}{\partial X_j}</script><script type="math/tex; mode=display">
 \tag{9}
-\boldsymbol{L}=\dot{\boldsymbol{F}} \cdot \boldsymbol{F}^{-1}=\frac{\partial\boldsymbol{v}}{\partial\boldsymbol{x}}=\boldsymbol{v} \otimes  \nabla_{\boldsymbol{x}} \qquad L_{ij}=\frac{\partial v_i}{\partial x_j}
-\]</span></p>
-<p>式中，<span class="math inline">\(\nabla~\)</span>为Hamiltonian算符。变形梯度张量<span class="math inline">\(~\boldsymbol{F}~\)</span>的行列式用于衡量变形前后的体积改变，一般记为 <span class="math display">\[
+\boldsymbol{L}=\dot{\boldsymbol{F}} \cdot \boldsymbol{F}^{-1}=\frac{\partial\boldsymbol{v}}{\partial\boldsymbol{x}}=\boldsymbol{v} \otimes  \nabla_{\boldsymbol{x}} \qquad L_{ij}=\frac{\partial v_i}{\partial x_j}</script><p>式中，$\nabla~$为Hamiltonian算符。变形梯度张量$~\boldsymbol{F}~$的行列式用于衡量变形前后的体积改变，一般记为</p>
+<script type="math/tex; mode=display">
 \tag{10}
-J=|\boldsymbol{F}|
-\]</span></p>
-<p>于是，由式<span class="math inline">\((7)\)</span>、<span class="math inline">\((9)\)</span>、<span class="math inline">\((10)\)</span>可得 <span class="math display">\[
+J=|\boldsymbol{F}|</script><p>于是，由式$(7)$、$(9)$、$(10)$可得</p>
+<script type="math/tex; mode=display">
 \tag{11}
-\dot{J}=J~\mathrm{tr}(\boldsymbol{L})=J~\nabla_{\boldsymbol{x}} \cdot \boldsymbol{v}
-\]</span></p>
-<p>式<span class="math inline">\((11)\)</span>表明，微体单位体积的体积对时间变化率等于其速度梯度的散度。连续体在变形过程中需满足质量守恒定律，即 <span class="math display">\[
+\dot{J}=J~\mathrm{tr}(\boldsymbol{L})=J~\nabla_{\boldsymbol{x}} \cdot \boldsymbol{v}</script><p>式$(11)$表明，微体单位体积的体积对时间变化率等于其速度梯度的散度。连续体在变形过程中需满足质量守恒定律，即</p>
+<script type="math/tex; mode=display">
 \tag{12}
-\frac{\mathrm{d}}{\mathrm{d}t}(\rho J)=\dot{\rho}~J+\rho~\dot{J}=0
-\]</span></p>
-<p>将式<span class="math inline">\((11)\)</span>代入式<span class="math inline">\((12)\)</span>，可得 <span class="math display">\[
+\frac{\mathrm{d}}{\mathrm{d}t}(\rho J)=\dot{\rho}~J+\rho~\dot{J}=0</script><p>将式$(11)$代入式$(12)$，可得</p>
+<script type="math/tex; mode=display">
 \tag{13}
-\dot{\rho}+\rho~\nabla_{\boldsymbol{x}} \cdot \boldsymbol{v} =0
-\]</span></p>
-<p>式中，<span class="math inline">\(\rho~\)</span>为密度。式<span class="math inline">\((13)\)</span>则是流体力学中常用的连续性方程。</p>
+\dot{\rho}+\rho~\nabla_{\boldsymbol{x}} \cdot \boldsymbol{v} =0</script><p>式中，$\rho~$为密度。式$(13)$则是流体力学中常用的连续性方程。</p>
 
     </div>
 
