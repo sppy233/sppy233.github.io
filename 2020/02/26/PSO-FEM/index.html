@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="前言商业有限元软件允许用户定义本构关系，例如ABAQUS可以通过UserMATerial（UMAT）子程序引入复杂的本构关系。复杂本构中的参数往往无法与实验结果建立一一对应的关系，解决参数标定的基本思想是用有限元计算结果去不断逼近实验结果，这会引出两个子问题：">
+  <meta name="description" content="前言 商业有限元软件允许用户定义本构关系，例如ABAQUS可以通过UserMATerial（UMAT）子程序引入复杂的本构关系。复杂本构中的参数往往无法与实验结果建立一一对应的关系，解决参数标定的基本思想是用有限元计算结果去不断逼近实验结果，这会引出两个子问题：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于粒子群算法的本构参数标定方法">
 <meta property="og:url" content="http://www.sppy.site/2020/02/26/PSO-FEM/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="前言商业有限元软件允许用户定义本构关系，例如ABAQUS可以通过UserMATerial（UMAT）子程序引入复杂的本构关系。复杂本构中的参数往往无法与实验结果建立一一对应的关系，解决参数标定的基本思想是用有限元计算结果去不断逼近实验结果，这会引出两个子问题：">
+<meta property="og:description" content="前言 商业有限元软件允许用户定义本构关系，例如ABAQUS可以通过UserMATerial（UMAT）子程序引入复杂的本构关系。复杂本构中的参数往往无法与实验结果建立一一对应的关系，解决参数标定的基本思想是用有限元计算结果去不断逼近实验结果，这会引出两个子问题：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-26T15:54:50.000Z">
 <meta property="article:modified_time" content="2020-03-20T15:09:10.208Z">
@@ -262,106 +262,121 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>商业有限元软件允许用户定义本构关系，例如<strong>ABAQUS</strong>可以通过<strong>U</strong>ser<strong>MAT</strong>erial（UMAT）子程序引入复杂的本构关系。复杂本构中的参数往往无法与实验结果建立一一对应的关系，解决参数标定的基本思想是用有限元计算结果去不断逼近实验结果，这会引出两个子问题：</p>
+        <h2 id="前言">前言</h2>
+<p>商业有限元软件允许用户定义本构关系，例如<strong>ABAQUS</strong>可以通过<strong>U</strong>ser<strong>MAT</strong>erial（UMAT）子程序引入复杂的本构关系。复杂本构中的参数往往无法与实验结果建立一一对应的关系，解决参数标定的基本思想是用有限元计算结果去不断逼近实验结果，这会引出两个子问题：</p>
 <a id="more"></a>
-<ol>
+<ol type="1">
 <li>如何<strong>定量</strong>描述有限元计算or实验结果之间的误差</li>
 <li>采用什么方法逼近</li>
 </ol>
 <p>发扬“愚公移山”精神的<strong>试错法</strong>（即肉眼衡量+手动迭代）需要用户手动完成有限元的前处理（修改参数）、提交计算、后处理（提取数据）的全部过程，显然十分费时费力。</p>
 <p>为了高效地解决这个问题，经调研发现<a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007%2Fs11771-017-3688-1">HuLi</a>在其文章中使用了基于粒子群算法来标定参数。个人认为这种方法实现简单、并行计算强、标定效果好，下面介绍我的具体实现方法。</p>
-<h2 id="两个子问题"><a href="#两个子问题" class="headerlink" title="两个子问题"></a>两个子问题</h2><h3 id="子问题1"><a href="#子问题1" class="headerlink" title="子问题1"></a>子问题1</h3><blockquote>
+<h2 id="两个子问题">两个子问题</h2>
+<h3 id="子问题1">子问题1</h3>
+<blockquote>
 <p><strong>前言</strong>中的第一个子问题，如何定量描述两种结果之间的误差</p>
 </blockquote>
-<p>在实验中常常得到的是各种<strong>载荷-位移</strong>曲线，记为$f_1=g(\delta_1)$；有限元计算是对实验的模拟，相应地也可以得一条<strong>载荷-位移</strong>曲线，记为$f_2=h(\delta_2)$。事实上，实验和有限元得到数据并不连续，而是众多的离散点，因此连续函数$~g~$和$~h~$在离散点外的值需要通过插值得到，可以使用<strong>MATLAB</strong>里的线性插值命令<code>interp1</code>。对于一组材料参数$\boldsymbol{x}$，选取$N$个数据点，相应的误差可定义为</p>
-<script type="math/tex; mode=display">
+<p>在实验中常常得到的是各种<strong>载荷-位移</strong>曲线，记为<span class="math inline">\(f_1=g(\delta_1)\)</span>；有限元计算是对实验的模拟，相应地也可以得一条<strong>载荷-位移</strong>曲线，记为<span class="math inline">\(f_2=h(\delta_2)\)</span>。事实上，实验和有限元得到数据并不连续，而是众多的离散点，因此连续函数<span class="math inline">\(~g~\)</span>和<span class="math inline">\(~h~\)</span>在离散点外的值需要通过插值得到，可以使用<strong>MATLAB</strong>里的线性插值命令<code>interp1</code>。对于一组材料参数<span class="math inline">\(\boldsymbol{x}\)</span>，选取<span class="math inline">\(N\)</span>个数据点，相应的误差可定义为</p>
+<p><span class="math display">\[
 \tag{1}
-err(\boldsymbol{x}) = \sqrt{\frac{\sum\nolimits^N_{i=1} \big[g(\delta_i)-h(\delta_i)\big]^2}{N}}</script><h3 id="子问题2"><a href="#子问题2" class="headerlink" title="子问题2"></a>子问题2</h3><blockquote>
-<p><strong>前言</strong>中的第二个子问题，如何逼近，使得误差$err$尽量小</p>
+err(\boldsymbol{x}) = \sqrt{\frac{\sum\nolimits^N_{i=1} \big[g(\delta_i)-h(\delta_i)\big]^2}{N}}
+\]</span></p>
+<h3 id="子问题2">子问题2</h3>
+<blockquote>
+<p><strong>前言</strong>中的第二个子问题，如何逼近，使得误差<span class="math inline">\(err\)</span>尽量小</p>
 </blockquote>
-<p>如何求式$(1)$的极小值，在数学上等价为一个最优化问题。<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E7%B2%92%E5%AD%90%E7%BE%A4%E4%BC%98%E5%8C%96">粒子群优化算法</a>不需要目标函数的导数信息，且可实现并行计算，故对参数标定这类优化问题有很好的效果。这里简单介绍该算法的基本思想，详细内容可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/daaikuaichuan/article/details/81382794">blog</a>或<a target="_blank" rel="noopener" href="http://book.ucdrs.superlib.net/views/specific/2929/bookDetail.jsp?dxNumber=000006794815&amp;d=2D6C4A0C715782BB7C265F866B587A89&amp;fenlei=18170206">《粒子群优化算法》</a>。</p>
-<p>粒子群算法认为对每个粒子有两个属性：速度$\boldsymbol{v}$和位置$\boldsymbol{x}$，其中位置$\boldsymbol{x}$在本文的背景下就是一组材料参数。对于每个位置$\boldsymbol{x}$，可由式$(1)$得到$err$，并称为该位置的适应度。</p>
-<p>在算法开始时，根据指定的速度和位置边界来随机地初始化一系列粒子，即初始粒子群。在第$~j~$步迭代过程中，第$~i~$个粒子在搜索空间中单独的搜寻最优解，并将其记为当前个体极值$\mathrm{pFitness}^{(j)}_i$，并将个体极值与整个粒子群里的其他粒子共享，找到所有迭代步中最优的个体极值作为整个粒子群的当前全局最优解$\mathrm{gFitness}^{(j)}$，相应地把个体极值$\mathrm{pFitness}^{(j)}_i$对应的位置记为历史最优位置$\mathrm{pBest}^{(j)}_i$，把全局最优解$\mathrm{gFitness}^{(j)}$对应的位置记为全局最优位置$\mathrm{gBest}^{(j)}$。粒子通过跟踪两个最优位置来更新自身，更新公式如下</p>
-<script type="math/tex; mode=display">
+<p>如何求式<span class="math inline">\((1)\)</span>的极小值，在数学上等价为一个最优化问题。<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E7%B2%92%E5%AD%90%E7%BE%A4%E4%BC%98%E5%8C%96">粒子群优化算法</a>不需要目标函数的导数信息，且可实现并行计算，故对参数标定这类优化问题有很好的效果。这里简单介绍该算法的基本思想，详细内容可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/daaikuaichuan/article/details/81382794">blog</a>或<a target="_blank" rel="noopener" href="http://book.ucdrs.superlib.net/views/specific/2929/bookDetail.jsp?dxNumber=000006794815&amp;d=2D6C4A0C715782BB7C265F866B587A89&amp;fenlei=18170206">《粒子群优化算法》</a>。</p>
+<p>粒子群算法认为对每个粒子有两个属性：速度<span class="math inline">\(\boldsymbol{v}\)</span>和位置<span class="math inline">\(\boldsymbol{x}\)</span>，其中位置<span class="math inline">\(\boldsymbol{x}\)</span>在本文的背景下就是一组材料参数。对于每个位置<span class="math inline">\(\boldsymbol{x}\)</span>，可由式<span class="math inline">\((1)\)</span>得到<span class="math inline">\(err\)</span>，并称为该位置的适应度。</p>
+<p>在算法开始时，根据指定的速度和位置边界来随机地初始化一系列粒子，即初始粒子群。在第<span class="math inline">\(~j~\)</span>步迭代过程中，第<span class="math inline">\(~i~\)</span>个粒子在搜索空间中单独的搜寻最优解，并将其记为当前个体极值<span class="math inline">\(\mathrm{pFitness}^{(j)}_i\)</span>，并将个体极值与整个粒子群里的其他粒子共享，找到所有迭代步中最优的个体极值作为整个粒子群的当前全局最优解<span class="math inline">\(\mathrm{gFitness}^{(j)}\)</span>，相应地把个体极值<span class="math inline">\(\mathrm{pFitness}^{(j)}_i\)</span>对应的位置记为历史最优位置<span class="math inline">\(\mathrm{pBest}^{(j)}_i\)</span>，把全局最优解<span class="math inline">\(\mathrm{gFitness}^{(j)}\)</span>对应的位置记为全局最优位置<span class="math inline">\(\mathrm{gBest}^{(j)}\)</span>。粒子通过跟踪两个最优位置来更新自身，更新公式如下 <span class="math display">\[
 \tag{2a}
 \boldsymbol{v}^{(j+1)}_i = \underbrace{\omega^{(j)} \boldsymbol{v}^{(j)}_{i}}_{\text{记忆项}} +
 \underbrace{c_1~r_1~(\mathrm{pBest}^{(j)}_i - \boldsymbol{x}^{(j)}_i)}_{\text{自身认知项}} +
-\underbrace{c_2~r_2~(\mathrm{gBest}^{(j)} - \boldsymbol{x}^{(j)}_i)}_{\text{群体认知项}}</script><script type="math/tex; mode=display">
+\underbrace{c_2~r_2~(\mathrm{gBest}^{(j)} - \boldsymbol{x}^{(j)}_i)}_{\text{群体认知项}}
+\]</span></p>
+<p><span class="math display">\[
 \tag{2b}
 \boldsymbol{x}^{(j+1)}_i = \boldsymbol{x}^{(j)}_i + 
-\boldsymbol{v}^{(j+1)}_i</script><p>式中，$c_1$、$c_2$为学习因子，一般均取2；$r_1$、$r_2$为0到1之间的随机数；$\omega^{(j)}$为第$~j~$次迭代的惯性因子，一般采用常数或线性递减形式。式$(2)$便是粒子群算法的核心公式，收敛准则可采用$err(\boldsymbol{x})&lt;e_0$的简单形式。</p>
-<h2 id="程序实现"><a href="#程序实现" class="headerlink" title="程序实现"></a>程序实现</h2><p>本文使用<strong>ABAQUS</strong>有限元软件，采用<strong>MATLAB</strong>作为主计算平台，负责粒子群算法的实现与有限元算计三个步骤的自动提交。</p>
+\boldsymbol{v}^{(j+1)}_i
+\]</span></p>
+<p>式中，<span class="math inline">\(c_1\)</span>、<span class="math inline">\(c_2\)</span>为学习因子，一般均取2；<span class="math inline">\(r_1\)</span>、<span class="math inline">\(r_2\)</span>为0到1之间的随机数；<span class="math inline">\(\omega^{(j)}\)</span>为第<span class="math inline">\(~j~\)</span>次迭代的惯性因子，一般采用常数或线性递减形式。式<span class="math inline">\((2)\)</span>便是粒子群算法的核心公式，收敛准则可采用<span class="math inline">\(err(\boldsymbol{x})&lt;e_0\)</span>的简单形式。</p>
+<h2 id="程序实现">程序实现</h2>
+<p>本文使用<strong>ABAQUS</strong>有限元软件，采用<strong>MATLAB</strong>作为主计算平台，负责粒子群算法的实现与有限元算计三个步骤的自动提交。</p>
 <p>整个计算项目存放在根目录<code>\root</code>下，所有<strong>MATLAB</strong>代码存放在<code>\root\matlab_code</code>下，第<code>i</code>个有限元计算文件存放在<code>\root\abaqus_inp_i</code>下（包括INP文件、UMAT子程序以及提取数据的<strong>Python</strong>脚本）。</p>
-<h3 id="粒子群算法"><a href="#粒子群算法" class="headerlink" title="粒子群算法"></a>粒子群算法</h3><p>粒子群算法的实现十分简单，将粒子群规模设定为30，待标定的参数个数为3，函数<code>fitness30</code>用于计算30个粒子的适应度，完整代码如下</p>
+<h3 id="粒子群算法">粒子群算法</h3>
+<p>粒子群算法的实现十分简单，将粒子群规模设定为30，待标定的参数个数为3，函数<code>fitness30</code>用于计算30个粒子的适应度，完整代码如下</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">clc;clear;</span><br><span class="line">profile on;<span class="comment">%打开探查器, 用统计用时等信息</span></span><br><span class="line">num=<span class="number">30</span>;<span class="comment">%粒子群数</span></span><br><span class="line">c1=<span class="number">1.5</span>;c2=<span class="number">1.5</span>;<span class="comment">%学习因子</span></span><br><span class="line">N=<span class="number">100</span>;<span class="comment">%最大迭代次数</span></span><br><span class="line"></span><br><span class="line">omega0=<span class="number">0.95</span>;omega1=<span class="number">0.4</span>;</span><br><span class="line">omega=@(x) (omega0-omega1)*(N-x)/N+omega1;<span class="comment">%线性递减权值</span></span><br><span class="line"></span><br><span class="line">p_limit=[<span class="number">10</span>,<span class="number">30</span>,<span class="number">5</span>;<span class="number">200</span>,<span class="number">100</span>,<span class="number">28</span>];<span class="comment">%粒子位置范围</span></span><br><span class="line">v_limit=[<span class="number">-20</span>,<span class="number">-10</span>,<span class="number">-10</span>;<span class="number">20</span>,<span class="number">10</span>,<span class="number">10</span>];<span class="comment">%粒子速度范围</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:num</span><br><span class="line">    p_mat(<span class="built_in">i</span>,:)=p_limit(<span class="number">1</span>,:)+(p_limit(<span class="number">2</span>,:)-p_limit(<span class="number">1</span>,:)).*<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">3</span>);<span class="comment">%初始化随机粒子位置</span></span><br><span class="line">    v_mat(<span class="built_in">i</span>,:)=v_limit(<span class="number">1</span>,:)+(v_limit(<span class="number">2</span>,:)-v_limit(<span class="number">1</span>,:)).*<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">3</span>);<span class="comment">%初始化随机粒子速度</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">pbest=p_mat;<span class="comment">%粒子的历史最优位置, 即为每个粒子的历史最优位置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%计算初始适应度</span></span><br><span class="line">fy=fitness30(p_mat);</span><br><span class="line">[min_fy,index]=<span class="built_in">min</span>(fy);</span><br><span class="line">gbest=pbest(index,:);</span><br><span class="line"></span><br><span class="line">fitness_table=<span class="built_in">zeros</span>(N,<span class="number">1</span>);</span><br><span class="line"><span class="comment">%存储初始数据</span></span><br><span class="line">fid2=fopen(<span class="string">&#x27;process_data2.txt&#x27;</span>,<span class="string">&#x27;at&#x27;</span>);<span class="comment">%初始最优粒子的数据</span></span><br><span class="line">fprintf(fid2,<span class="string">&#x27;%d\t%d\t%.7e\t%.7e\t%.7e\t%.7e\n&#x27;</span>,...</span><br><span class="line"><span class="number">0</span>,index,min_fy,gbest(<span class="number">1</span>),gbest(<span class="number">2</span>),gbest(<span class="number">3</span>));</span><br><span class="line">fclose(fid2);</span><br><span class="line"></span><br><span class="line"><span class="comment">%进入迭代</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:N</span><br><span class="line">    </span><br><span class="line">    <span class="comment">%更新速度</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:num</span><br><span class="line">        v_mat(<span class="built_in">j</span>,:)=omega(<span class="built_in">i</span>)*v_mat(<span class="built_in">j</span>,:)+c1*(pbest(<span class="built_in">j</span>,:)-...</span><br><span class="line">        p_mat(<span class="built_in">j</span>,:)).*<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">3</span>)+c2*(gbest-p_mat(<span class="built_in">j</span>,:)).*<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line">        <span class="comment">%考虑速度边界</span></span><br><span class="line">        <span class="keyword">for</span> k=<span class="number">1</span>:<span class="number">3</span></span><br><span class="line">            <span class="keyword">if</span> v_mat(<span class="built_in">j</span>,k)&lt;v_limit(<span class="number">1</span>,k)</span><br><span class="line">                v_mat(<span class="built_in">j</span>,k)=v_limit(<span class="number">1</span>,k);</span><br><span class="line">            <span class="keyword">elseif</span> v_mat(<span class="built_in">j</span>,k)&gt;v_limit(<span class="number">2</span>,k)</span><br><span class="line">                v_mat(<span class="built_in">j</span>,k)=v_limit(<span class="number">2</span>,k);</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">%更新位置</span></span><br><span class="line">    p_mat=p_mat+v_mat;</span><br><span class="line">    <span class="comment">%考虑位置边界</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:num</span><br><span class="line">        <span class="keyword">for</span> k=<span class="number">1</span>:<span class="number">3</span></span><br><span class="line">            <span class="keyword">if</span> p_mat(<span class="built_in">j</span>,k)&lt;p_limit(<span class="number">1</span>,k)</span><br><span class="line">                p_mat(<span class="built_in">j</span>,k)=p_limit(<span class="number">1</span>,k);</span><br><span class="line">            <span class="keyword">elseif</span> p_mat(<span class="built_in">j</span>,k)&gt;p_limit(<span class="number">2</span>,k)</span><br><span class="line">                p_mat(<span class="built_in">j</span>,k)=p_limit(<span class="number">2</span>,k);</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    fy_new=fitness30(p_mat);<span class="comment">%计算新的适应度</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:num</span><br><span class="line">        <span class="keyword">if</span> fy_new(<span class="built_in">j</span>)&lt;fy(<span class="built_in">j</span>)</span><br><span class="line">            fy(<span class="built_in">j</span>)=fy_new(<span class="built_in">j</span>);</span><br><span class="line">            pbest(<span class="built_in">j</span>,:)=p_mat(<span class="built_in">j</span>,:);<span class="comment">%更新个体最优</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    [min_fy,index]=<span class="built_in">min</span>(fy);</span><br><span class="line">    gbest=pbest(index,:);</span><br><span class="line">    fitness_table(<span class="built_in">i</span>)=min_fy;<span class="comment">%记录每次迭代的全局最优</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">%存储数据</span></span><br><span class="line">    fid2=fopen(<span class="string">&#x27;process_data2.txt&#x27;</span>,<span class="string">&#x27;at&#x27;</span>);<span class="comment">%每次迭代过程最优粒子的数据</span></span><br><span class="line">    fprintf(fid2,<span class="string">&#x27;%d\t%d\t%.7e\t%.7e\t%.7e\t%.7e\n&#x27;</span>,...</span><br><span class="line">    <span class="built_in">i</span>,index,min_fy,gbest(<span class="number">1</span>),gbest(<span class="number">2</span>),gbest(<span class="number">3</span>));</span><br><span class="line">    fclose(fid2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">%第二个终止准则</span></span><br><span class="line">    <span class="keyword">if</span> min_fy&lt;<span class="number">0.4</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">profile viewer;</span><br></pre></td></tr></table></figure>
-<h3 id="有限元计算"><a href="#有限元计算" class="headerlink" title="有限元计算"></a>有限元计算</h3><blockquote>
+<h3 id="有限元计算">有限元计算</h3>
+<blockquote>
 <p>完成有限元计算的三个步骤：前处理（修改参数）、提交计算、后处理（提取数据）</p>
 </blockquote>
-<h4 id="前处理"><a href="#前处理" class="headerlink" title="前处理"></a>前处理</h4><p>针对本构参数标定，前处理仅需改变材料参数的数值即可。使用UMAT子程序时，可对<strong>ABAQUS</strong>的INP文件中进行修改，需要修改的材料参数位于关键字<code>*User Material</code>下。</p>
+<h4 id="前处理">前处理</h4>
+<p>针对本构参数标定，前处理仅需改变材料参数的数值即可。使用UMAT子程序时，可对<strong>ABAQUS</strong>的INP文件中进行修改，需要修改的材料参数位于关键字<code>*User Material</code>下。</p>
 <p>首先，读取INP文件，找到需要修改位置，并存储在<code>newline</code>中</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">absolute_path=[path,<span class="string">&#x27;\&#x27;,InpFile,&#x27;</span>.inp&#x27;];<span class="comment">%生成绝对路径</span></span><br><span class="line">fid=fopen(absolute_path,<span class="string">&#x27;rt+&#x27;</span>);<span class="comment">%以只读模式打开绝对路径下的INP文件</span></span><br><span class="line"><span class="built_in">i</span>=<span class="number">0</span>;</span><br><span class="line">newline=cell(<span class="number">1</span>,<span class="number">1000</span>);<span class="comment">%预制存储元胞, 长度大于INP文件的行数即可</span></span><br><span class="line"><span class="keyword">while</span> ~feof(fid)</span><br><span class="line">    tline=fgetl(fid);</span><br><span class="line">    <span class="built_in">i</span>=<span class="built_in">i</span>+<span class="number">1</span>;</span><br><span class="line">    newline&#123;<span class="built_in">i</span>&#125;=tline;</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">i</span>==<span class="number">408</span> <span class="comment">%遍历到INP文件中需要修改的第408行</span></span><br><span class="line">        <span class="comment">%将该行修改为 1.0,2.0,3.0</span></span><br><span class="line">        newline&#123;<span class="built_in">i</span>&#125;=[num2str(<span class="number">1.0</span>),<span class="string">&#x27;,&#x27;</span>,num2str(<span class="number">2.0</span>),<span class="string">&#x27;,&#x27;</span>,num2str(<span class="number">3.0</span>)];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fclose(fid);<span class="comment">%关闭绝对路径下的INP文件</span></span><br></pre></td></tr></table></figure>
 <p>接着，根据<code>newline</code>中的数据覆盖原来的INP文件</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fid=fopen(absolute_path,<span class="string">&#x27;wt+&#x27;</span>);<span class="comment">%以读写模式打开绝对路径下的INP文件</span></span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:<span class="built_in">i</span></span><br><span class="line">    fprintf(fid,<span class="string">&#x27;%s\n&#x27;</span>,newline&#123;k&#125;);<span class="comment">%覆盖原来的INP文件</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fclose(fid);<span class="comment">%关闭绝对路径下的INP文件</span></span><br></pre></td></tr></table></figure>
 <p>INP文件作为<strong>ABAQUS</strong>的输入文件，提交后不会被<strong>ABAQUS</strong>修改，其内容和结构是固定的，因此可在<strong>MATLAB</strong>中每次遍历修改某些行的内容。</p>
-<h4 id="提交计算"><a href="#提交计算" class="headerlink" title="提交计算"></a>提交计算</h4><p><strong>ABAQUS</strong>提供了提交计算的系统命令，在<strong>MATLAB</strong>中命令如下</p>
+<h4 id="提交计算">提交计算</h4>
+<p><strong>ABAQUS</strong>提供了提交计算的系统命令，在<strong>MATLAB</strong>中命令如下</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MatlabPath=pwd();<span class="comment">%记下当前Matlab目录, 即\root\matlab_code</span></span><br><span class="line">cd(path);<span class="comment">%进入INP文件所在目录</span></span><br><span class="line">InpFile = <span class="string">&#x27;Job-1&#x27;</span>;<span class="comment">%INP文件</span></span><br><span class="line">UserFile = <span class="string">&#x27;my_UMAT&#x27;</span>;<span class="comment">%用户子程序</span></span><br><span class="line">NumCpu = <span class="string">&#x27;1&#x27;</span>;<span class="comment">%计算使用的CPU线程数</span></span><br><span class="line">InputFile = [<span class="string">&#x27;abaqus job=&#x27;</span>,InpFile,<span class="string">&#x27; user=&#x27;</span>,UserFile,<span class="string">&#x27; cpus=&#x27;</span>,NumCpu];</span><br><span class="line">system(InputFile);<span class="comment">%通过系统命令提交ABAQUS计算任务</span></span><br><span class="line">cd(MatlabPath);<span class="comment">%返回Matlab目录, 即\root\matlab_code</span></span><br></pre></td></tr></table></figure>
-<h4 id="后处理"><a href="#后处理" class="headerlink" title="后处理"></a>后处理</h4><p><strong>ABAQUS</strong>提供了提交计算和后处理脚本的系统命令，在<strong>MATLAB</strong>中命令如下</p>
+<h4 id="后处理">后处理</h4>
+<p><strong>ABAQUS</strong>提供了提交计算和后处理脚本的系统命令，在<strong>MATLAB</strong>中命令如下</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MatlabPath=pwd();<span class="comment">%记下当前Matlab目录, 即\root\matlab_code</span></span><br><span class="line">cd(path);<span class="comment">%进入INP文件所在目录</span></span><br><span class="line">system(<span class="string">&#x27;abaqus cae noGUI=get_data.py&#x27;</span>);<span class="comment">%通过系统命令执行Python脚本提取ODB文件中数据</span></span><br><span class="line">cd(MatlabPath);<span class="comment">%返回Matlab目录, 即\root\matlab_code</span></span><br></pre></td></tr></table></figure>
 <p>后处理提出数据还需要编写<strong>Python</strong>脚本，关键代码如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> abaqus <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">from</span> odbAccess <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">...</span><br><span class="line">odb=openOdb(<span class="string">&#x27;Job-1.odb&#x27;</span>)</span><br><span class="line">history=odb.steps[<span class="string">&#x27;Step-1&#x27;</span>].historyRegions</span><br><span class="line">kk=history.keys()</span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> kk:</span><br><span class="line">    p=history[k].historyOutputs</span><br><span class="line">...</span><br><span class="line">np.savetxt(<span class="string">&#x27;data_abaqus.txt&#x27;</span>,temp_table,fmt=<span class="string">&#x27;%.6e  %.9e  %.9e&#x27;</span>)<span class="comment">#[t,f,x]</span></span><br><span class="line">odb.close()</span><br></pre></td></tr></table></figure>
 <p>为了提高读取速度，在<strong>Python</strong>脚本中采用的是历史输出结果<code>historyOutputs</code>，而非场输出结果<code>fieldOutputs</code>，同时需要在<strong>ABAQUS</strong>中提前设置历史输出量。</p>
-<h3 id="计算判断"><a href="#计算判断" class="headerlink" title="计算判断"></a>计算判断</h3><blockquote>
+<h3 id="计算判断">计算判断</h3>
+<blockquote>
 <p>判断ABAQUS计算是否崩溃、计算提交是否成功、计算是否结束</p>
 </blockquote>
 <p><strong>ABAQUS-Standard</strong>求解器允许同时提交多个计算任务，而多任务并行计算时可能会导致某个计算任务崩溃（概率不大）。一旦发生计算崩溃，在粒子群算法中对应的这个粒子也会停止迭代，导致整个计算停止。</p>
-<p>在新一轮的$N$个计算任务开始前，若文件夹<code>\root\abaqus_inp_i</code>中存在<code>.lck</code>文件，则说明上一轮的计算已经崩溃。</p>
+<p>在新一轮的<span class="math inline">\(N\)</span>个计算任务开始前，若文件夹<code>\root\abaqus_inp_i</code>中存在<code>.lck</code>文件，则说明上一轮的计算已经崩溃。</p>
 <blockquote>
 <p>Q：为什么不能是上一轮计算还未完成，导致<code>.lck</code>文件存在？</p>
 <p>A：因为一轮的计算正常完成所花费的时间足够完成第<code>i</code>个有限元计算。</p>
 </blockquote>
 <p>为解决该问题，可新建文件夹<code>\root\abaqus_inp_i_OXT</code>（<code>0XT</code>表示新建的第<code>X</code>个的文件夹，前<code>X-1</code>个也都崩溃了），从备份文件夹<code>\root\abaqus_copy</code>中拷贝文件到新建文件夹中，并完成第<code>i</code>个有限元计算，关键代码如下</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%计算失败判断, 更换路径并开启新的计算</span></span><br><span class="line"><span class="keyword">if</span> exist([path,<span class="string">&#x27;\Job-1.lck&#x27;</span>],<span class="string">&#x27;file&#x27;</span>)==<span class="number">2</span></span><br><span class="line">    temp_str=path;</span><br><span class="line">    <span class="keyword">if</span> temp_str(<span class="keyword">end</span>)~=<span class="string">&#x27;T&#x27;</span><span class="comment">%第一次计算失败</span></span><br><span class="line">        temp_str1=[temp_str,<span class="string">&#x27;_01T&#x27;</span>];</span><br><span class="line">    <span class="keyword">else</span><span class="comment">%非第一次计算失败, 最多允许失败九次</span></span><br><span class="line">        temp_sn=str2double(temp_str(<span class="keyword">end</span><span class="number">-2</span>:<span class="keyword">end</span><span class="number">-1</span>))+<span class="number">1</span>;</span><br><span class="line">        temp_str1=[temp_str(<span class="number">1</span>:<span class="keyword">end</span><span class="number">-3</span>),<span class="string">&#x27;0&#x27;</span>,num2str(temp_sn),<span class="string">&#x27;T&#x27;</span>];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    mkdir(temp_str1);pause(<span class="number">0.5</span>);<span class="comment">%创建新文件夹</span></span><br><span class="line">    <span class="comment">%复制三个文件</span></span><br><span class="line">    copyfile(<span class="string">&#x27;\root\abaqus_copy\my_UMAT.for&#x27;</span>,temp_str1);pause(<span class="number">0.5</span>);</span><br><span class="line">    copyfile(<span class="string">&#x27;\root\abaqus_copy\get_data.py&#x27;</span>,temp_str1);pause(<span class="number">0.5</span>);</span><br><span class="line">    copyfile(<span class="string">&#x27;\root\abaqus_copy\Job-1.inp&#x27;</span>,temp_str1);pause(<span class="number">0.5</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>完成计算是否崩溃的判断后，通过系统命令提交<strong>ABAQUS</strong>进行计算，此时<code>exist([path,&#39;\Job-1.lck&#39;],&#39;file&#39;)</code>的值若为2，即提交成功。</p>
-<p>当<code>exist([path,&#39;\Job-1.lck&#39;],&#39;file&#39;)</code>的值为0时，说明计算结束，可以进行数据提取。</p>
-<h2 id="算例结果"><a href="#算例结果" class="headerlink" title="算例结果"></a>算例结果</h2><blockquote>
-<p>计算使用的处理器为$\mathrm{i}9$-$9980\mathrm{XE}$，具有18核心、36线程，可满足种群数为30的计算需求</p>
+<p>完成计算是否崩溃的判断后，通过系统命令提交<strong>ABAQUS</strong>进行计算，此时<code>exist([path,'\Job-1.lck'],'file')</code>的值若为2，即提交成功。</p>
+<p>当<code>exist([path,'\Job-1.lck'],'file')</code>的值为0时，说明计算结束，可以进行数据提取。</p>
+<h2 id="算例结果">算例结果</h2>
+<blockquote>
+<p>计算使用的处理器为<span class="math inline">\(\mathrm{i}9\)</span>-<span class="math inline">\(9980\mathrm{XE}\)</span>，具有18核心、36线程，可满足种群数为30的计算需求</p>
 </blockquote>
-<p>种群数为30，最大迭代次数为100，共计完成3000次有限元的前处理、计算以及后处理过程，100轮迭代完成时$err\approx0.47$，探查器统计的部分信息如下表所示</p>
-<div class="table-container">
+<p>种群数为30，最大迭代次数为100，共计完成3000次有限元的前处理、计算以及后处理过程，100轮迭代完成时<span class="math inline">\(err\approx0.47\)</span>，探查器统计的部分信息如下表所示</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:center">函数名称</th>
-<th style="text-align:center">调用次数</th>
-<th style="text-align:center">总时间</th>
-<th style="text-align:center">自用时间</th>
+<tr class="header">
+<th style="text-align: center;">函数名称</th>
+<th style="text-align: center;">调用次数</th>
+<th style="text-align: center;">总时间</th>
+<th style="text-align: center;">自用时间</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">main</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">27008 s</td>
-<td style="text-align:center">2 s</td>
+<tr class="odd">
+<td style="text-align: center;">main</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">27008 s</td>
+<td style="text-align: center;">2 s</td>
 </tr>
-<tr>
-<td style="text-align:center">fitness30</td>
-<td style="text-align:center">101</td>
-<td style="text-align:center">27006 s</td>
-<td style="text-align:center">1724 s</td>
+<tr class="even">
+<td style="text-align: center;">fitness30</td>
+<td style="text-align: center;">101</td>
+<td style="text-align: center;">27006 s</td>
+<td style="text-align: center;">1724 s</td>
 </tr>
-<tr>
-<td style="text-align:center">dos</td>
-<td style="text-align:center">6057</td>
-<td style="text-align:center">15971 s</td>
-<td style="text-align:center">15971 s</td>
+<tr class="odd">
+<td style="text-align: center;">dos</td>
+<td style="text-align: center;">6057</td>
+<td style="text-align: center;">15971 s</td>
+<td style="text-align: center;">15971 s</td>
 </tr>
 </tbody>
 </table>
-</div>
 <ul>
-<li>平均每次过程用时$\bar{t}=27008~\mathrm{s}/3000 \approx 9~\mathrm{s}$</li>
-<li>该算例迭代到20轮左右时，$err&lt;1$</li>
+<li>平均每次过程用时<span class="math inline">\(\bar{t}=27008~\mathrm{s}/3000 \approx 9~\mathrm{s}\)</span></li>
+<li>该算例迭代到20轮左右时，<span class="math inline">\(err&lt;1\)</span></li>
 <li>显然，使用粒子群算法来标定材料参数，其标定效果和计算效率都是很可观的</li>
 </ul>
 

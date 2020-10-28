@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="基本形式泛函定义：  \min_{y(x)} ~I(y)&#x3D;\int_{x_1}^{x_2}F\Big(x,~y(x),~y&#39;(x)\Big)\mathrm{d}x泛函取极值的必要条件，即Euler-Lagrange方程：  \frac{\partial F}{\partial y}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac{\partial F}{\par">
+  <meta name="description" content="基本形式 泛函定义： \[ \min_{y(x)} ~I(y)&#x3D;\int_{x_1}^{x_2}F\Big(x,~y(x),~y&#39;(x)\Big)\mathrm{d}x \] 泛函取极值的必要条件，即Euler-Lagrange方程： \[ \frac{\partial F}{\partial y}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac">
 <meta property="og:type" content="article">
 <meta property="og:title" content="泛函与变分基础">
 <meta property="og:url" content="http://www.sppy.site/2020/04/13/variational-method/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="基本形式泛函定义：  \min_{y(x)} ~I(y)&#x3D;\int_{x_1}^{x_2}F\Big(x,~y(x),~y&#39;(x)\Big)\mathrm{d}x泛函取极值的必要条件，即Euler-Lagrange方程：  \frac{\partial F}{\partial y}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac{\partial F}{\par">
+<meta property="og:description" content="基本形式 泛函定义： \[ \min_{y(x)} ~I(y)&#x3D;\int_{x_1}^{x_2}F\Big(x,~y(x),~y&#39;(x)\Big)\mathrm{d}x \] 泛函取极值的必要条件，即Euler-Lagrange方程： \[ \frac{\partial F}{\partial y}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-13T04:00:00.000Z">
 <meta property="article:modified_time" content="2020-04-13T04:39:23.113Z">
@@ -252,20 +252,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h2><p>泛函定义：</p>
-<script type="math/tex; mode=display">
-\min_{y(x)} ~I(y)=\int_{x_1}^{x_2}F\Big(x,~y(x),~y'(x)\Big)\mathrm{d}x</script><p>泛函取极值的必要条件，即<strong>Euler-Lagrange</strong>方程：</p>
-<script type="math/tex; mode=display">
-\frac{\partial F}{\partial y}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac{\partial F}{\partial y'}\bigg)=0</script><a id="more"></a>
-<h2 id="具有多个因变量"><a href="#具有多个因变量" class="headerlink" title="具有多个因变量"></a>具有多个因变量</h2><p>泛函定义：</p>
-<script type="math/tex; mode=display">
-\min_{y(x)} ~I(y)=\int_{x_1}^{x_2}F\Big(x,~y_1,y_2,\cdots,y_n,~y'_1,y'_2,\cdots,y'_n\Big)\mathrm{d}x</script><p>泛函取极值的必要条件：</p>
-<script type="math/tex; mode=display">
-\frac{\partial F}{\partial y_i}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac{\partial F}{\partial y'_i}\bigg)=0\qquad (i=1,2,3,\cdots,n)</script><h2 id="具有高阶导数"><a href="#具有高阶导数" class="headerlink" title="具有高阶导数"></a>具有高阶导数</h2><p>泛函定义：</p>
-<script type="math/tex; mode=display">
-\min_{y(x)} ~I(y)=\int_{x_1}^{x_2}F\Big(x,~y,~y',~y'',\cdots,y^{(n)}\Big)\mathrm{d}x</script><p>泛函取极值的必要条件，即<strong>Euler-Poisson</strong>方程：</p>
-<script type="math/tex; mode=display">
-\frac{\partial F}{\partial y}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac{\partial F}{\partial y'}\bigg)+\frac{\mathrm{d}^2}{\mathrm{d}x^2}\bigg(\frac{\partial F}{\partial y''}\bigg)-\cdots+(-1)^n\frac{\mathrm{d}^n}{\mathrm{d}x^n}\bigg(\frac{\partial F}{\partial y^{(n)}}\bigg)=0</script><hr>
+        <h2 id="基本形式">基本形式</h2>
+<p>泛函定义： <span class="math display">\[
+\min_{y(x)} ~I(y)=\int_{x_1}^{x_2}F\Big(x,~y(x),~y&#39;(x)\Big)\mathrm{d}x
+\]</span> 泛函取极值的必要条件，即<strong>Euler-Lagrange</strong>方程： <span class="math display">\[
+\frac{\partial F}{\partial y}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac{\partial F}{\partial y&#39;}\bigg)=0
+\]</span></p>
+<a id="more"></a>
+<h2 id="具有多个因变量">具有多个因变量</h2>
+<p>泛函定义： <span class="math display">\[
+\min_{y(x)} ~I(y)=\int_{x_1}^{x_2}F\Big(x,~y_1,y_2,\cdots,y_n,~y&#39;_1,y&#39;_2,\cdots,y&#39;_n\Big)\mathrm{d}x
+\]</span> 泛函取极值的必要条件： <span class="math display">\[
+\frac{\partial F}{\partial y_i}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac{\partial F}{\partial y&#39;_i}\bigg)=0\qquad (i=1,2,3,\cdots,n)
+\]</span></p>
+<h2 id="具有高阶导数">具有高阶导数</h2>
+<p>泛函定义： <span class="math display">\[
+\min_{y(x)} ~I(y)=\int_{x_1}^{x_2}F\Big(x,~y,~y&#39;,~y&#39;&#39;,\cdots,y^{(n)}\Big)\mathrm{d}x
+\]</span> 泛函取极值的必要条件，即<strong>Euler-Poisson</strong>方程： <span class="math display">\[
+\frac{\partial F}{\partial y}-\frac{\mathrm{d}}{\mathrm{d}x}\bigg(\frac{\partial F}{\partial y&#39;}\bigg)+\frac{\mathrm{d}^2}{\mathrm{d}x^2}\bigg(\frac{\partial F}{\partial y&#39;&#39;}\bigg)-\cdots+(-1)^n\frac{\mathrm{d}^n}{\mathrm{d}x^n}\bigg(\frac{\partial F}{\partial y^{(n)}}\bigg)=0
+\]</span></p>
+<hr />
 
     </div>
 

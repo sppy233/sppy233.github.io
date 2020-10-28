@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="应变能密度的推导考虑求解域 $V$ ，弹性力学问题的平衡方程与边界条件为  \tag{1} \begin{cases} \nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}&#x3D;\rho\ddot{\boldsymbol{u}}&amp;~\mathrm{in}~V\\[5pt] \boldsymbol{n}\cdot\boldsymbol{\sigma}&#x3D;\boldsy">
+  <meta name="description" content="应变能密度的推导 考虑求解域 \(V\) ，弹性力学问题的平衡方程与边界条件为 \[ \tag{1} \begin{cases} \nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}&#x3D;\rho\ddot{\boldsymbol{u}}&amp;~\mathrm{in}~V\\[5pt] \boldsymbol{n}\cdot\boldsymbol{\">
 <meta property="og:type" content="article">
 <meta property="og:title" content="弹性体的应变能密度">
 <meta property="og:url" content="http://www.sppy.site/2020/04/12/strain-energy-density/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="应变能密度的推导考虑求解域 $V$ ，弹性力学问题的平衡方程与边界条件为  \tag{1} \begin{cases} \nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}&#x3D;\rho\ddot{\boldsymbol{u}}&amp;~\mathrm{in}~V\\[5pt] \boldsymbol{n}\cdot\boldsymbol{\sigma}&#x3D;\boldsy">
+<meta property="og:description" content="应变能密度的推导 考虑求解域 \(V\) ，弹性力学问题的平衡方程与边界条件为 \[ \tag{1} \begin{cases} \nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}&#x3D;\rho\ddot{\boldsymbol{u}}&amp;~\mathrm{in}~V\\[5pt] \boldsymbol{n}\cdot\boldsymbol{\">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-12T04:00:00.000Z">
 <meta property="article:modified_time" content="2020-04-15T04:24:59.012Z">
@@ -260,124 +260,144 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="应变能密度的推导"><a href="#应变能密度的推导" class="headerlink" title="应变能密度的推导"></a>应变能密度的推导</h2><p>考虑求解域 $V$ ，弹性力学问题的平衡方程与边界条件为</p>
-<script type="math/tex; mode=display">
+        <h2 id="应变能密度的推导">应变能密度的推导</h2>
+<p>考虑求解域 <span class="math inline">\(V\)</span> ，弹性力学问题的平衡方程与边界条件为 <span class="math display">\[
 \tag{1}
 \begin{cases}
-\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}=\rho\ddot{\boldsymbol{u}}&~\mathrm{in}~V\\[5pt]
-\boldsymbol{n}\cdot\boldsymbol{\sigma}=\boldsymbol{t}&~\mathrm{on}~\partial V\\[5pt]
-\boldsymbol{u}=\boldsymbol{\bar{u}}&~\mathrm{on}~\partial V^u
-\end{cases}</script><p>式中，$\rho$ 为密度，$\boldsymbol{b}$ 为体力，$\boldsymbol{t}$ 为自然边界 $\partial V$ 上的面力，$\boldsymbol{\bar{u}}$ 为强制边界 $\partial V^u$ 上的位移。</p>
+\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}=\rho\ddot{\boldsymbol{u}}&amp;~\mathrm{in}~V\\[5pt]
+\boldsymbol{n}\cdot\boldsymbol{\sigma}=\boldsymbol{t}&amp;~\mathrm{on}~\partial V\\[5pt]
+\boldsymbol{u}=\boldsymbol{\bar{u}}&amp;~\mathrm{on}~\partial V^u
+\end{cases}
+\]</span></p>
+<p>式中，<span class="math inline">\(\rho\)</span> 为密度，<span class="math inline">\(\boldsymbol{b}\)</span> 为体力，<span class="math inline">\(\boldsymbol{t}\)</span> 为自然边界 <span class="math inline">\(\partial V\)</span> 上的面力，<span class="math inline">\(\boldsymbol{\bar{u}}\)</span> 为强制边界 <span class="math inline">\(\partial V^u\)</span> 上的位移。</p>
 <a id="more"></a>
-<p>由热力学第一定律可知</p>
-<script type="math/tex; mode=display">
+<p>由热力学第一定律可知 <span class="math display">\[
 \tag{2}
-\delta V_\varepsilon+\delta K=\delta W</script><p>式中，$\delta V_\varepsilon$、$\delta K$、 $\delta W$ 分别为应变能（势能）增量、动能增量、外力功增量。</p>
-<h3 id="应变能增量"><a href="#应变能增量" class="headerlink" title="应变能增量"></a>应变能增量</h3><p>弹性应变能与变形过程无关，仅取决于变形的最终状态，即为状态函数，其增量为全微分</p>
-<script type="math/tex; mode=display">
+\delta V_\varepsilon+\delta K=\delta W
+\]</span> 式中，<span class="math inline">\(\delta V_\varepsilon\)</span>、<span class="math inline">\(\delta K\)</span>、 <span class="math inline">\(\delta W\)</span> 分别为应变能（势能）增量、动能增量、外力功增量。</p>
+<h3 id="应变能增量">应变能增量</h3>
+<p>弹性应变能与变形过程无关，仅取决于变形的最终状态，即为状态函数，其增量为全微分 <span class="math display">\[
 \tag{3a}
-v_\varepsilon=v_\varepsilon(\boldsymbol{\varepsilon})</script><script type="math/tex; mode=display">
+v_\varepsilon=v_\varepsilon(\boldsymbol{\varepsilon})
+\]</span></p>
+<p><span class="math display">\[
 \tag{3b}
-\delta v_\varepsilon=\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}:\delta\boldsymbol{\varepsilon}</script><p>式中 $v_\varepsilon$ 为应变能密度。于是可得到应变能增量</p>
-<script type="math/tex; mode=display">
+\delta v_\varepsilon=\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}:\delta\boldsymbol{\varepsilon}
+\]</span></p>
+<p>式中 <span class="math inline">\(v_\varepsilon\)</span> 为应变能密度。于是可得到应变能增量 <span class="math display">\[
 \tag{4}
-\delta V_\varepsilon=\int_V\delta v_\varepsilon\mathrm{d}v=\int_V\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}:\delta\boldsymbol{\varepsilon}\mathrm{d}v</script><h3 id="动能增量"><a href="#动能增量" class="headerlink" title="动能增量"></a>动能增量</h3><p>动能 $K$ 等于</p>
-<script type="math/tex; mode=display">
+\delta V_\varepsilon=\int_V\delta v_\varepsilon\mathrm{d}v=\int_V\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}:\delta\boldsymbol{\varepsilon}\mathrm{d}v
+\]</span></p>
+<h3 id="动能增量">动能增量</h3>
+<p>动能 <span class="math inline">\(K\)</span> 等于 <span class="math display">\[
 \tag{5}
-K(\dot{\boldsymbol{u}})=\int_V\frac{1}{2}\rho\dot{\boldsymbol{u}}\cdot\dot{\boldsymbol{u}}\mathrm{d}v</script><p>于是动能增量为</p>
-<script type="math/tex; mode=display">
+K(\dot{\boldsymbol{u}})=\int_V\frac{1}{2}\rho\dot{\boldsymbol{u}}\cdot\dot{\boldsymbol{u}}\mathrm{d}v
+\]</span> 于是动能增量为 <span class="math display">\[
 \tag{6}
 \begin{aligned}
-\delta K&=K(\dot{\boldsymbol{u}}+\delta\dot{\boldsymbol{u}})-K(\dot{\boldsymbol{u}})\\[5pt]
-&=\int_V\frac{1}{2}\rho(\dot{\boldsymbol{u}}+\delta\dot{\boldsymbol{u}})\cdot(\dot{\boldsymbol{u}}+\delta\dot{\boldsymbol{u}})\mathrm{d}v-\int_V\frac{1}{2}\rho\dot{\boldsymbol{u}}\cdot\dot{\boldsymbol{u}}\mathrm{d}v\\[5pt]
-&=\int_V\big[\rho\dot{\boldsymbol{u}}\cdot\delta\dot{\boldsymbol{u}}+\underbrace{\bcancel{o(\delta^2\dot{\boldsymbol{u}})}}_{\text{高阶无穷小}}\big]\mathrm{d}v=\int_V\rho(\dot{\boldsymbol{u}}\cdot\ddot{\boldsymbol{u}})\delta t\mathrm{d}v\\[1pt]
-&=\int_V\rho\ddot{\boldsymbol{u}}\cdot\delta\boldsymbol{u}\mathrm{d}v
-\end{aligned}</script><h3 id="外力功增量"><a href="#外力功增量" class="headerlink" title="外力功增量"></a>外力功增量</h3><p>对于任一微元体 $V$，其表面为 $\partial V$，外载荷在物体上做功为</p>
-<script type="math/tex; mode=display">
+\delta K&amp;=K(\dot{\boldsymbol{u}}+\delta\dot{\boldsymbol{u}})-K(\dot{\boldsymbol{u}})\\[5pt]
+&amp;=\int_V\frac{1}{2}\rho(\dot{\boldsymbol{u}}+\delta\dot{\boldsymbol{u}})\cdot(\dot{\boldsymbol{u}}+\delta\dot{\boldsymbol{u}})\mathrm{d}v-\int_V\frac{1}{2}\rho\dot{\boldsymbol{u}}\cdot\dot{\boldsymbol{u}}\mathrm{d}v\\[5pt]
+&amp;=\int_V\big[\rho\dot{\boldsymbol{u}}\cdot\delta\dot{\boldsymbol{u}}+\underbrace{\bcancel{o(\delta^2\dot{\boldsymbol{u}})}}_{\text{高阶无穷小}}\big]\mathrm{d}v=\int_V\rho(\dot{\boldsymbol{u}}\cdot\ddot{\boldsymbol{u}})\delta t\mathrm{d}v\\[1pt]
+&amp;=\int_V\rho\ddot{\boldsymbol{u}}\cdot\delta\boldsymbol{u}\mathrm{d}v
+\end{aligned}
+\]</span></p>
+<h3 id="外力功增量">外力功增量</h3>
+<p>对于任一微元体 <span class="math inline">\(V\)</span>，其表面为 <span class="math inline">\(\partial V\)</span>，外载荷在物体上做功为 <span class="math display">\[
 \tag{7}
 \begin{aligned}
-\delta W&=\int_V \boldsymbol{b}\cdot\delta\boldsymbol{u}\mathrm{d}v+\oint_{\partial V}\boldsymbol{t}\cdot\delta\boldsymbol{u}\mathrm{d}s\\[8pt]
-&=\int_V \boldsymbol{b}\cdot\delta\boldsymbol{u}\mathrm{d}v+\oint_{\partial V}\boldsymbol{n}\cdot\boldsymbol{\sigma}\cdot\delta\boldsymbol{u}\mathrm{d}s
-\end{aligned}</script><p>由高斯公式</p>
+\delta W&amp;=\int_V \boldsymbol{b}\cdot\delta\boldsymbol{u}\mathrm{d}v+\oint_{\partial V}\boldsymbol{t}\cdot\delta\boldsymbol{u}\mathrm{d}s\\[8pt]
+&amp;=\int_V \boldsymbol{b}\cdot\delta\boldsymbol{u}\mathrm{d}v+\oint_{\partial V}\boldsymbol{n}\cdot\boldsymbol{\sigma}\cdot\delta\boldsymbol{u}\mathrm{d}s
+\end{aligned}
+\]</span></p>
+<p>由高斯公式</p>
 <blockquote>
-<script type="math/tex; mode=display">
-\oint_{\partial V}\boldsymbol{n}\cdot\boldsymbol{F}\mathrm{d}s=\int_V\nabla\cdot\boldsymbol{F}\mathrm{d}v</script><p>式中，向量场 $\boldsymbol{F}=P\boldsymbol{i}+Q\boldsymbol{j}+R\boldsymbol{k}$ </p>
+<p><span class="math display">\[
+\oint_{\partial V}\boldsymbol{n}\cdot\boldsymbol{F}\mathrm{d}s=\int_V\nabla\cdot\boldsymbol{F}\mathrm{d}v
+\]</span></p>
+<p>式中，向量场 <span class="math inline">\(\boldsymbol{F}=P\boldsymbol{i}+Q\boldsymbol{j}+R\boldsymbol{k}\)</span></p>
 </blockquote>
 <p>可得</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \tag{8}
-\delta W=\int_V \boldsymbol{b}\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\nabla\cdot(\boldsymbol{\sigma}\cdot\delta\boldsymbol{u})\mathrm{d}v</script><p>考虑到</p>
-<script type="math/tex; mode=display">
+\delta W=\int_V \boldsymbol{b}\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\nabla\cdot(\boldsymbol{\sigma}\cdot\delta\boldsymbol{u})\mathrm{d}v
+\]</span> 考虑到 <span class="math display">\[
 \tag{9}
 \begin{aligned}
-\nabla\cdot(\boldsymbol{\sigma}\cdot\delta\boldsymbol{u})&=\partial_i\boldsymbol{e}_i\cdot(\sigma_{jk}\boldsymbol{e}_j\boldsymbol{e}_k\cdot\delta u_l\boldsymbol{e}_l)=\delta_{ij}\delta_{kl}(\sigma_{jk}\delta u_l)_{,i}\\[5pt]
-&=(\sigma_{il}\delta u_l)_{,i}=\sigma_{il,i}\delta u_l+\sigma_{il}\delta u_{l,i}
-\end{aligned}</script><p>进一步</p>
-<script type="math/tex; mode=display">
+\nabla\cdot(\boldsymbol{\sigma}\cdot\delta\boldsymbol{u})&amp;=\partial_i\boldsymbol{e}_i\cdot(\sigma_{jk}\boldsymbol{e}_j\boldsymbol{e}_k\cdot\delta u_l\boldsymbol{e}_l)=\delta_{ij}\delta_{kl}(\sigma_{jk}\delta u_l)_{,i}\\[5pt]
+&amp;=(\sigma_{il}\delta u_l)_{,i}=\sigma_{il,i}\delta u_l+\sigma_{il}\delta u_{l,i}
+\end{aligned}
+\]</span></p>
+<p>进一步</p>
+<p><span class="math display">\[
 \tag{10}
 \begin{aligned}
-\sigma_{il}\delta u_{l,i}&=\frac{1}{2}\sigma_{il}\delta u_{l,i}+\frac{1}{2}\sigma_{li}\delta u_{i,l}\\[5pt]
-&=\frac{1}{2}\sigma_{il}\delta u_{l,i}+\frac{1}{2}\sigma_{il}\delta u_{i,l}\\[5pt]
-&=\sigma_{il}\frac{1}{2}(\delta u_{l,i}+\delta u_{i,l})=\sigma_{il}\delta \varepsilon_{il}
-\end{aligned}</script><p>式$(10)$的推导利用了应力张量 $\boldsymbol{\sigma}$ 的对称性和应变张量 $\boldsymbol{\varepsilon}$ 的定义，即 $\boldsymbol{\varepsilon}=[\nabla\otimes\boldsymbol{u}+\boldsymbol{u}\otimes\nabla]/2$ 。于是有</p>
-<script type="math/tex; mode=display">
+\sigma_{il}\delta u_{l,i}&amp;=\frac{1}{2}\sigma_{il}\delta u_{l,i}+\frac{1}{2}\sigma_{li}\delta u_{i,l}\\[5pt]
+&amp;=\frac{1}{2}\sigma_{il}\delta u_{l,i}+\frac{1}{2}\sigma_{il}\delta u_{i,l}\\[5pt]
+&amp;=\sigma_{il}\frac{1}{2}(\delta u_{l,i}+\delta u_{i,l})=\sigma_{il}\delta \varepsilon_{il}
+\end{aligned}
+\]</span></p>
+<p>式<span class="math inline">\((10)\)</span>的推导利用了应力张量 <span class="math inline">\(\boldsymbol{\sigma}\)</span> 的对称性和应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> 的定义，即 <span class="math inline">\(\boldsymbol{\varepsilon}=[\nabla\otimes\boldsymbol{u}+\boldsymbol{u}\otimes\nabla]/2\)</span> 。于是有 <span class="math display">\[
 \tag{11}
-\nabla\cdot(\boldsymbol{\sigma}\cdot\delta\boldsymbol{u})=(\nabla\cdot\boldsymbol{\sigma})\cdot\delta\boldsymbol{u}+\boldsymbol{\sigma}:\delta \boldsymbol{\varepsilon}</script><p>将式$(11)$代入式$(8)$可得</p>
-<script type="math/tex; mode=display">
+\nabla\cdot(\boldsymbol{\sigma}\cdot\delta\boldsymbol{u})=(\nabla\cdot\boldsymbol{\sigma})\cdot\delta\boldsymbol{u}+\boldsymbol{\sigma}:\delta \boldsymbol{\varepsilon}
+\]</span> 将式<span class="math inline">\((11)\)</span>代入式<span class="math inline">\((8)\)</span>可得 <span class="math display">\[
 \tag{12}
-\delta W=\int_V(\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b})\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\boldsymbol{\sigma}:\delta\boldsymbol{\varepsilon}\mathrm{d}v</script><hr>
-<p>将式$(4)$、$(6)$、$(12)$代入式$(2)$可得</p>
-<script type="math/tex; mode=display">
+\delta W=\int_V(\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b})\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\boldsymbol{\sigma}:\delta\boldsymbol{\varepsilon}\mathrm{d}v
+\]</span></p>
+<hr />
+<p>将式<span class="math inline">\((4)\)</span>、<span class="math inline">\((6)\)</span>、<span class="math inline">\((12)\)</span>代入式<span class="math inline">\((2)\)</span>可得 <span class="math display">\[
 \tag{13}
-\delta W-\delta V_\varepsilon-\delta K=\int_V(\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}-\rho\ddot{\boldsymbol{u}})\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\big(\boldsymbol{\sigma}-\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}\big):\delta\boldsymbol{\varepsilon}\mathrm{d}v=0</script><blockquote>
-<p>$\delta\boldsymbol{u}$ 与 $\delta\boldsymbol{\varepsilon}$ 并不独立，也就无法由式$(13)$导出式$(1)$中的平衡方程，以及式$(14)$中的物理方程</p>
-<p>式$(1)$中的平衡方程可由牛顿第二定律证明</p>
-</blockquote>
-<p>由式$(1)$中的平衡方程可知，式$(13)$中 $\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}-\rho\ddot{\boldsymbol{u}}=\boldsymbol{0}$ ，于是有</p>
-<script type="math/tex; mode=display">
+\delta W-\delta V_\varepsilon-\delta K=\int_V(\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}-\rho\ddot{\boldsymbol{u}})\cdot\delta\boldsymbol{u}\mathrm{d}v+\int_V\big(\boldsymbol{\sigma}-\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}\big):\delta\boldsymbol{\varepsilon}\mathrm{d}v=0
+\]</span> &gt; <span class="math inline">\(\delta\boldsymbol{u}\)</span> 与 <span class="math inline">\(\delta\boldsymbol{\varepsilon}\)</span> 并不独立，也就无法由式<span class="math inline">\((13)\)</span>导出式<span class="math inline">\((1)\)</span>中的平衡方程，以及式<span class="math inline">\((14)\)</span>中的物理方程 &gt; &gt; 式<span class="math inline">\((1)\)</span>中的平衡方程可由牛顿第二定律证明</p>
+<p>由式<span class="math inline">\((1)\)</span>中的平衡方程可知，式<span class="math inline">\((13)\)</span>中 <span class="math inline">\(\nabla\cdot\boldsymbol{\sigma}+\boldsymbol{b}-\rho\ddot{\boldsymbol{u}}=\boldsymbol{0}\)</span> ，于是有 <span class="math display">\[
 \tag{14a}
-\int_V\big(\boldsymbol{\sigma}-\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}\big):\delta\boldsymbol{\varepsilon}\mathrm{d}v=0</script><p>即有</p>
-<script type="math/tex; mode=display">
+\int_V\big(\boldsymbol{\sigma}-\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}\big):\delta\boldsymbol{\varepsilon}\mathrm{d}v=0
+\]</span> 即有 <span class="math display">\[
 \tag{14b}
-\boldsymbol{\sigma}=\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}</script><p>式$(14\mathrm{b})$被称为Green公式，即能量形式的物理方程。推导式$(14)$的过程中使用了热力学第一定律、高斯公式、应力张量的对称性、应变张量的定义、平衡方程，适用于<strong>一般的弹性材料</strong>，不局限线弹性材料。</p>
-<p>对于<strong>线弹性材料</strong>，积分与路径无关，可假设按等比例加载，则应变能密度为</p>
-<script type="math/tex; mode=display">
+\boldsymbol{\sigma}=\frac{\partial v_\varepsilon}{\partial \boldsymbol{\varepsilon}}
+\]</span></p>
+<p>式<span class="math inline">\((14\mathrm{b})\)</span>被称为Green公式，即能量形式的物理方程。推导式<span class="math inline">\((14)\)</span>的过程中使用了热力学第一定律、高斯公式、应力张量的对称性、应变张量的定义、平衡方程，适用于<strong>一般的弹性材料</strong>，不局限线弹性材料。</p>
+<p>对于<strong>线弹性材料</strong>，积分与路径无关，可假设按等比例加载，则应变能密度为 <span class="math display">\[
 \tag{15}
 \begin{aligned}
-v_\varepsilon&=\int_{t_0}^{t_1}\boldsymbol{\sigma}:\delta\boldsymbol{\varepsilon}=\int_0^1t\boldsymbol{\sigma}:(t\delta\boldsymbol{\varepsilon})\\[5pt]
-&=\boldsymbol{\sigma}:\boldsymbol{\varepsilon}\int_0^1t\delta t=\frac{1}{2}\boldsymbol{\sigma}:\boldsymbol{\varepsilon}=\frac{1}{2}\sigma_{ij}\varepsilon_{ij}
-\end{aligned}</script><p>对于<strong>各向同性线弹性材料</strong>，其 $\mathrm{Lam} \acute {\mathrm{e}}$ 形式的物理方程为</p>
-<script type="math/tex; mode=display">
+v_\varepsilon&amp;=\int_{t_0}^{t_1}\boldsymbol{\sigma}:\delta\boldsymbol{\varepsilon}=\int_0^1t\boldsymbol{\sigma}:(t\delta\boldsymbol{\varepsilon})\\[5pt]
+&amp;=\boldsymbol{\sigma}:\boldsymbol{\varepsilon}\int_0^1t\delta t=\frac{1}{2}\boldsymbol{\sigma}:\boldsymbol{\varepsilon}=\frac{1}{2}\sigma_{ij}\varepsilon_{ij}
+\end{aligned}
+\]</span> 对于<strong>各向同性线弹性材料</strong>，其 <span class="math inline">\(\mathrm{Lam} \acute {\mathrm{e}}\)</span> 形式的物理方程为 <span class="math display">\[
 \tag{16a}
-\boldsymbol{\sigma}(\boldsymbol{\varepsilon})=2\mu\boldsymbol{\varepsilon}+\lambda\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{I}</script><p>其应变能密度为</p>
-<script type="math/tex; mode=display">
+\boldsymbol{\sigma}(\boldsymbol{\varepsilon})=2\mu\boldsymbol{\varepsilon}+\lambda\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{I}
+\]</span> 其应变能密度为 <span class="math display">\[
 \tag{16b}
-v_\varepsilon(\boldsymbol{\varepsilon})=\frac{1}{2}\boldsymbol{\sigma}:\boldsymbol{\varepsilon}=\mu\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}+\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon})=\mu\mathrm{tr}(\boldsymbol{\varepsilon}\cdot\boldsymbol{\varepsilon})+\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon})</script><p>应变能密度还可由应变张量的三个主应变（特征值）给出</p>
-<script type="math/tex; mode=display">
+v_\varepsilon(\boldsymbol{\varepsilon})=\frac{1}{2}\boldsymbol{\sigma}:\boldsymbol{\varepsilon}=\mu\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}+\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon})=\mu\mathrm{tr}(\boldsymbol{\varepsilon}\cdot\boldsymbol{\varepsilon})+\frac{1}{2}\lambda\mathrm{tr}^2(\boldsymbol{\varepsilon})
+\]</span></p>
+<p>应变能密度还可由应变张量的三个主应变（特征值）给出 <span class="math display">\[
 \tag{16c}
-v_\varepsilon(\varepsilon_1,\varepsilon_2,\varepsilon_3)=\mu(\varepsilon_1^2+\varepsilon_2^2+\varepsilon_3^2)+\frac{1}{2}\lambda(\varepsilon_1+\varepsilon_2+\varepsilon_3)^2</script><blockquote>
-<p>$\mathrm{Hooke}$ 形式的物理方程</p>
-<script type="math/tex; mode=display">
-\boldsymbol{\varepsilon}(\boldsymbol{\sigma})=\frac{1+\nu}{E}\boldsymbol{\sigma}-\frac{\nu}{E}\mathrm{tr}(\boldsymbol{\sigma})\boldsymbol{I}</script><p>应变能密度</p>
-<script type="math/tex; mode=display">
-v_\varepsilon(\boldsymbol{\sigma})=\frac{1}{2}\boldsymbol{\sigma}:\boldsymbol{\varepsilon}=\frac{1+\nu}{2E}\boldsymbol{\sigma}:\boldsymbol{\sigma}-\frac{\nu}{2E}\mathrm{tr}^2(\boldsymbol{\sigma})</script><p>主应力形式</p>
-<script type="math/tex; mode=display">
-v_\varepsilon(\sigma_1,\sigma_2,\sigma_3)=\frac{1+\nu}{2E}(\sigma_1^2+\sigma_2^2+\sigma_3^2)-\frac{\nu}{2E}(\sigma_1+\sigma_2+\sigma_3)^2</script></blockquote>
-<h2 id="应变能密度的分解"><a href="#应变能密度的分解" class="headerlink" title="应变能密度的分解"></a>应变能密度的分解</h2><p>首先将应变张量 $\boldsymbol{\varepsilon}$ 分解为球形部分和偏斜部分</p>
-<script type="math/tex; mode=display">
+v_\varepsilon(\varepsilon_1,\varepsilon_2,\varepsilon_3)=\mu(\varepsilon_1^2+\varepsilon_2^2+\varepsilon_3^2)+\frac{1}{2}\lambda(\varepsilon_1+\varepsilon_2+\varepsilon_3)^2
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(\mathrm{Hooke}\)</span> 形式的物理方程</p>
+<p><span class="math display">\[
+\boldsymbol{\varepsilon}(\boldsymbol{\sigma})=\frac{1+\nu}{E}\boldsymbol{\sigma}-\frac{\nu}{E}\mathrm{tr}(\boldsymbol{\sigma})\boldsymbol{I}
+\]</span> 应变能密度 <span class="math display">\[
+v_\varepsilon(\boldsymbol{\sigma})=\frac{1}{2}\boldsymbol{\sigma}:\boldsymbol{\varepsilon}=\frac{1+\nu}{2E}\boldsymbol{\sigma}:\boldsymbol{\sigma}-\frac{\nu}{2E}\mathrm{tr}^2(\boldsymbol{\sigma})
+\]</span> 主应力形式 <span class="math display">\[
+v_\varepsilon(\sigma_1,\sigma_2,\sigma_3)=\frac{1+\nu}{2E}(\sigma_1^2+\sigma_2^2+\sigma_3^2)-\frac{\nu}{2E}(\sigma_1+\sigma_2+\sigma_3)^2
+\]</span></p>
+</blockquote>
+<h2 id="应变能密度的分解">应变能密度的分解</h2>
+<p>首先将应变张量 <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> 分解为球形部分和偏斜部分 <span class="math display">\[
 \tag{17}
 \begin{cases}
 \boldsymbol{\varepsilon}_\mathrm{v}=\displaystyle\frac{1}{3}\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{I}\\[5pt]
 \boldsymbol{\varepsilon}_\mathrm{d}=\boldsymbol{\varepsilon}-\boldsymbol{\varepsilon}_\mathrm{v}
-\end{cases}</script><p>不难证明 $\boldsymbol{\varepsilon}<em>\mathrm{v}$ 和 $\boldsymbol{\varepsilon}</em>\mathrm{d}$ 满足下列表达式</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span> 不难证明 <span class="math inline">\(\boldsymbol{\varepsilon}_\mathrm{v}\)</span> 和 <span class="math inline">\(\boldsymbol{\varepsilon}_\mathrm{d}\)</span> 满足下列表达式 <span class="math display">\[
 \tag{18}
 \begin{cases}
 \boldsymbol{\varepsilon}_\mathrm{v}:\boldsymbol{\varepsilon}_\mathrm{d}=0\\[5pt]
 \boldsymbol{\varepsilon}_\mathrm{v}:\boldsymbol{\varepsilon}_\mathrm{v}=\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}_\mathrm{v}=\displaystyle\frac{1}{3}\mathrm{tr}^2(\boldsymbol{\varepsilon})\\[5pt]
 \boldsymbol{\varepsilon}_\mathrm{d}:\boldsymbol{\varepsilon}_\mathrm{d}=\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}_\mathrm{d}=\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}-\displaystyle\frac{1}{3}\mathrm{tr}^2(\boldsymbol{\varepsilon})
-\end{cases}</script><p>考虑到 $\boldsymbol{\varepsilon}$、$\boldsymbol{\varepsilon}<em>\mathrm{v}$、$\boldsymbol{\varepsilon}</em>\mathrm{d}$ 三者的对称性，有</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span> 考虑到 <span class="math inline">\(\boldsymbol{\varepsilon}\)</span>、<span class="math inline">\(\boldsymbol{\varepsilon}_\mathrm{v}\)</span>、<span class="math inline">\(\boldsymbol{\varepsilon}_\mathrm{d}\)</span> 三者的对称性，有 <span class="math display">\[
 \tag{19}
 \begin{cases}
 \boldsymbol{\varepsilon}\cdot\boldsymbol{\varepsilon}_\mathrm{v}=\displaystyle\frac{1}{3}\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{\varepsilon}\\[5pt]
@@ -385,44 +405,47 @@ v_\varepsilon(\sigma_1,\sigma_2,\sigma_3)=\frac{1+\nu}{2E}(\sigma_1^2+\sigma_2^2
 \boldsymbol{\varepsilon}_\mathrm{v}\cdot\boldsymbol{\varepsilon}_\mathrm{d}=\displaystyle\frac{1}{3}\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{\varepsilon}-\frac{1}{9}\mathrm{tr}^2(\boldsymbol{\varepsilon})\boldsymbol{I}\\[8pt]
 \boldsymbol{\varepsilon}_\mathrm{v}\cdot\boldsymbol{\varepsilon}_\mathrm{v}=\displaystyle\frac{1}{9}\mathrm{tr}^2(\boldsymbol{\varepsilon})\boldsymbol{I}\\[5pt]
 \boldsymbol{\varepsilon}_\mathrm{d}\cdot\boldsymbol{\varepsilon}_\mathrm{d}=\boldsymbol{\varepsilon}\cdot\boldsymbol{\varepsilon}-\displaystyle\frac{2}{3}\mathrm{tr}(\boldsymbol{\varepsilon})\boldsymbol{\varepsilon}+\frac{1}{9}\mathrm{tr}^2(\boldsymbol{\varepsilon})\boldsymbol{I}
-\end{cases}</script><p>将应变张量的分解形式代入式$(16\mathrm{a})$可得</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span> 将应变张量的分解形式代入式<span class="math inline">\((16\mathrm{a})\)</span>可得 <span class="math display">\[
 \tag{20}
 \begin{aligned}
-\boldsymbol{\sigma}&=2\mu(\boldsymbol{\varepsilon}_\mathrm{v}+\boldsymbol{\varepsilon}_\mathrm{d})+\lambda\mathrm{tr}(\boldsymbol{\varepsilon}_\mathrm{v}+\boldsymbol{\varepsilon}_\mathrm{d})\boldsymbol{I}\\[5pt]
-&=\underbrace{(2\mu+3\lambda)\boldsymbol{\varepsilon}_\mathrm{v}}_{\boldsymbol{\sigma}_\mathrm{v}}+\underbrace{2\mu\boldsymbol{\varepsilon}_\mathrm{d}}_{\boldsymbol{\sigma}_\mathrm{d}}
-\end{aligned}</script><p>式$(20)$定义了应力张量的球形部分和偏斜部分，且不难证明 $\boldsymbol{\varepsilon}<em>\mathrm{v}\xrightarrow{\text{式(16a)}}\boldsymbol{\sigma}</em>\mathrm{v}$ 、$\boldsymbol{\varepsilon}<em>\mathrm{d}\xrightarrow{\text{式(16a)}}\boldsymbol{\sigma}</em>\mathrm{d}$ 。</p>
-<p>将式$(20)$代入式$(15)$，并利用式$(18)$可得</p>
-<script type="math/tex; mode=display">
+\boldsymbol{\sigma}&amp;=2\mu(\boldsymbol{\varepsilon}_\mathrm{v}+\boldsymbol{\varepsilon}_\mathrm{d})+\lambda\mathrm{tr}(\boldsymbol{\varepsilon}_\mathrm{v}+\boldsymbol{\varepsilon}_\mathrm{d})\boldsymbol{I}\\[5pt]
+&amp;=\underbrace{(2\mu+3\lambda)\boldsymbol{\varepsilon}_\mathrm{v}}_{\boldsymbol{\sigma}_\mathrm{v}}+\underbrace{2\mu\boldsymbol{\varepsilon}_\mathrm{d}}_{\boldsymbol{\sigma}_\mathrm{d}}
+\end{aligned}
+\]</span> 式<span class="math inline">\((20)\)</span>定义了应力张量的球形部分和偏斜部分，且不难证明 <span class="math inline">\(\boldsymbol{\varepsilon}_\mathrm{v}\xrightarrow{\text{式(16a)}}\boldsymbol{\sigma}_\mathrm{v}\)</span> 、<span class="math inline">\(\boldsymbol{\varepsilon}_\mathrm{d}\xrightarrow{\text{式(16a)}}\boldsymbol{\sigma}_\mathrm{d}\)</span> 。</p>
+<p>将式<span class="math inline">\((20)\)</span>代入式<span class="math inline">\((15)\)</span>，并利用式<span class="math inline">\((18)\)</span>可得 <span class="math display">\[
 \tag{21}
 \begin{aligned}
-v_\varepsilon&=\frac{1}{2}[(2\mu+3\lambda)\boldsymbol{\varepsilon}_\mathrm{v}+2\mu\boldsymbol{\varepsilon}_\mathrm{d}]:(\boldsymbol{\varepsilon}_\mathrm{v}+\boldsymbol{\varepsilon}_\mathrm{d})\\[8pt]
-&=\underbrace{\frac{1}{6}(2\mu+3\lambda)\mathrm{tr}^2(\boldsymbol{\varepsilon})}_{v_\mathrm{v}}+\underbrace{\mu\big[\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}-\frac{1}{3}\mathrm{tr}^2(\boldsymbol{\varepsilon})\big]}_{v_\mathrm{d}}
-\end{aligned}</script><p>式$(21)$定义了应变能密度的球形部分和偏斜部分，且不难证明 $\boldsymbol{\varepsilon}<em>\mathrm{v}\xrightarrow{\text{式(16b)}}v</em>\mathrm{v}$ 、$\boldsymbol{\varepsilon}<em>\mathrm{d}\xrightarrow{\text{式(16b)}}v</em>\mathrm{d}$ 。</p>
-<p>一般将 $v<em>\mathrm{v}$ 称为<strong>体积改变能密度</strong>，$v</em>\mathrm{d}$ 称为<strong>畸变能密度</strong>。</p>
-<p>采用应变张量的三个主应变， $v<em>\mathrm{v}$、$v</em>\mathrm{d}$ 可写作</p>
-<script type="math/tex; mode=display">
+v_\varepsilon&amp;=\frac{1}{2}[(2\mu+3\lambda)\boldsymbol{\varepsilon}_\mathrm{v}+2\mu\boldsymbol{\varepsilon}_\mathrm{d}]:(\boldsymbol{\varepsilon}_\mathrm{v}+\boldsymbol{\varepsilon}_\mathrm{d})\\[8pt]
+&amp;=\underbrace{\frac{1}{6}(2\mu+3\lambda)\mathrm{tr}^2(\boldsymbol{\varepsilon})}_{v_\mathrm{v}}+\underbrace{\mu\big[\boldsymbol{\varepsilon}:\boldsymbol{\varepsilon}-\frac{1}{3}\mathrm{tr}^2(\boldsymbol{\varepsilon})\big]}_{v_\mathrm{d}}
+\end{aligned}
+\]</span> 式<span class="math inline">\((21)\)</span>定义了应变能密度的球形部分和偏斜部分，且不难证明 <span class="math inline">\(\boldsymbol{\varepsilon}_\mathrm{v}\xrightarrow{\text{式(16b)}}v_\mathrm{v}\)</span> 、<span class="math inline">\(\boldsymbol{\varepsilon}_\mathrm{d}\xrightarrow{\text{式(16b)}}v_\mathrm{d}\)</span> 。</p>
+<p>一般将 <span class="math inline">\(v_\mathrm{v}\)</span> 称为<strong>体积改变能密度</strong>，<span class="math inline">\(v_\mathrm{d}\)</span> 称为<strong>畸变能密度</strong>。</p>
+<p>采用应变张量的三个主应变， <span class="math inline">\(v_\mathrm{v}\)</span>、<span class="math inline">\(v_\mathrm{d}\)</span> 可写作 <span class="math display">\[
 \tag{22}
 \begin{cases}
 v_\mathrm{v}=\displaystyle\frac{1}{6}(2\mu+3\lambda)(\varepsilon_1+\varepsilon_2+\varepsilon_3)^2\\[8pt]
 v_\mathrm{d}=\displaystyle\frac{1}{3}\mu\big[(\varepsilon_1-\varepsilon_2)^2+(\varepsilon_2-\varepsilon_3)^2+(\varepsilon_3-\varepsilon_1)^2\big]
-\end{cases}</script><blockquote>
-<p>若将应力张量 $\boldsymbol{\sigma}$ 分解为球形部分和偏斜部分</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span></p>
+<blockquote>
+<p>若将应力张量 <span class="math inline">\(\boldsymbol{\sigma}\)</span> 分解为球形部分和偏斜部分 <span class="math display">\[
 \begin{cases}
 \boldsymbol{\sigma}_\mathrm{v}=\displaystyle\frac{1}{3}\mathrm{tr}(\boldsymbol{\sigma})\boldsymbol{I}\\[5pt]
 \boldsymbol{\sigma}_\mathrm{d}=\boldsymbol{\sigma}-\boldsymbol{\sigma}_\mathrm{v}
-\end{cases}</script><p>采用 $\mathrm{Hooke}$ 形式的物理方程，则相应的结论为</p>
-<script type="math/tex; mode=display">
-\boldsymbol{\varepsilon}=\underbrace{\frac{1-2\nu}{E}\boldsymbol{\sigma}_\mathrm{v}}_{\boldsymbol{\varepsilon}_\mathrm{v}}+\underbrace{\frac{1+\nu}{E}\boldsymbol{\sigma}_\mathrm{d}}_{\boldsymbol{\varepsilon}_\mathrm{d}}</script><p>应变能密度</p>
-<script type="math/tex; mode=display">
-v_\varepsilon=\underbrace{\frac{1-2\nu}{6E}\mathrm{tr}^2(\boldsymbol{\sigma})}_{v_\mathrm{v}}+\underbrace{\frac{1+\nu}{2E}\big[\boldsymbol{\sigma}:\boldsymbol{\sigma}-\frac{1}{3}\mathrm{tr}^2(\boldsymbol{\sigma})\big]}_{v_\mathrm{d}}</script><p>主应力形式</p>
-<script type="math/tex; mode=display">
+\end{cases}
+\]</span> 采用 <span class="math inline">\(\mathrm{Hooke}\)</span> 形式的物理方程，则相应的结论为 <span class="math display">\[
+\boldsymbol{\varepsilon}=\underbrace{\frac{1-2\nu}{E}\boldsymbol{\sigma}_\mathrm{v}}_{\boldsymbol{\varepsilon}_\mathrm{v}}+\underbrace{\frac{1+\nu}{E}\boldsymbol{\sigma}_\mathrm{d}}_{\boldsymbol{\varepsilon}_\mathrm{d}}
+\]</span> 应变能密度 <span class="math display">\[
+v_\varepsilon=\underbrace{\frac{1-2\nu}{6E}\mathrm{tr}^2(\boldsymbol{\sigma})}_{v_\mathrm{v}}+\underbrace{\frac{1+\nu}{2E}\big[\boldsymbol{\sigma}:\boldsymbol{\sigma}-\frac{1}{3}\mathrm{tr}^2(\boldsymbol{\sigma})\big]}_{v_\mathrm{d}}
+\]</span> 主应力形式 <span class="math display">\[
 \begin{cases}
 v_\mathrm{v}=\displaystyle\frac{1-2\nu}{6E}(\sigma_1+\sigma_2+\sigma_3)^2\\[8pt]
 v_\mathrm{d}=\displaystyle\frac{1+\nu}{6E}\big[(\sigma_1-\sigma_2)^2+(\sigma_2-\sigma_3)^2+(\sigma_3-\sigma_1)^2\big]
-\end{cases}</script></blockquote>
-<hr>
+\end{cases}
+\]</span></p>
+</blockquote>
+<hr />
 
     </div>
 

@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="背景如何计算曲线$~y(x)~$上的曲率，而曲线是由若干离散点构成。我的第一反应是根据离散点差分得到一阶导数$~y’~$和二阶导数$~y’’~$，然后由下式计算  \tag{0a} k&#x3D;\frac{|y&#39;&#39;|}{(1+y&#39;^2)^{3&#x2F;2}}曲线的凹凸方向则由$~y’’~$的符号确定。">
+  <meta name="description" content="背景 如何计算曲线\(~y(x)~\)上的曲率，而曲线是由若干离散点构成。我的第一反应是根据离散点差分得到一阶导数\(~y&#39;~\)和二阶导数\(~y&#39;&#39;~\)，然后由下式计算 \[ \tag{0a} k&#x3D;\frac{|y&#39;&#39;|}{(1+y&#39;^2)^{3&#x2F;2}} \] 曲线的凹凸方向则由\(~y&#39;&#39;~\)的符号确定。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="由圆上三点确定圆心和半径">
 <meta property="og:url" content="http://www.sppy.site/2020/03/05/points2circle/index.html">
 <meta property="og:site_name" content="Island">
-<meta property="og:description" content="背景如何计算曲线$~y(x)~$上的曲率，而曲线是由若干离散点构成。我的第一反应是根据离散点差分得到一阶导数$~y’~$和二阶导数$~y’’~$，然后由下式计算  \tag{0a} k&#x3D;\frac{|y&#39;&#39;|}{(1+y&#39;^2)^{3&#x2F;2}}曲线的凹凸方向则由$~y’’~$的符号确定。">
+<meta property="og:description" content="背景 如何计算曲线\(~y(x)~\)上的曲率，而曲线是由若干离散点构成。我的第一反应是根据离散点差分得到一阶导数\(~y&#39;~\)和二阶导数\(~y&#39;&#39;~\)，然后由下式计算 \[ \tag{0a} k&#x3D;\frac{|y&#39;&#39;|}{(1+y&#39;^2)^{3&#x2F;2}} \] 曲线的凹凸方向则由\(~y&#39;&#39;~\)的符号确定。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-05T05:25:39.000Z">
 <meta property="article:modified_time" content="2020-03-18T09:56:45.444Z">
@@ -259,219 +259,265 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>如何计算曲线$~y(x)~$上的曲率，而曲线是由若干离散点构成。我的第一反应是根据离散点差分得到一阶导数$~y’~$和二阶导数$~y’’~$，然后由下式计算</p>
-<script type="math/tex; mode=display">
+        <h2 id="背景">背景</h2>
+<p>如何计算曲线<span class="math inline">\(~y(x)~\)</span>上的曲率，而曲线是由若干离散点构成。我的第一反应是根据离散点差分得到一阶导数<span class="math inline">\(~y&#39;~\)</span>和二阶导数<span class="math inline">\(~y&#39;&#39;~\)</span>，然后由下式计算 <span class="math display">\[
 \tag{0a}
-k=\frac{|y''|}{(1+y'^2)^{3/2}}</script><p>曲线的凹凸方向则由$~y’’~$的符号确定。</p>
+k=\frac{|y&#39;&#39;|}{(1+y&#39;^2)^{3/2}}
+\]</span></p>
+<p>曲线的凹凸方向则由<span class="math inline">\(~y&#39;&#39;~\)</span>的符号确定。</p>
 <a id="more"></a>
-<p>后面，我想到了可以根据曲率的几何意义来计算，即</p>
-<script type="math/tex; mode=display">
+<p>后面，我想到了可以根据曲率的几何意义来计算，即 <span class="math display">\[
 \tag{0b}
-k=\frac{1}{r}</script><p>式中，$r~$是该点的曲率半径，可以通过该点及其两个相邻点得到（不共线的三点确定一个圆）。</p>
-<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><h3 id="平面三点"><a href="#平面三点" class="headerlink" title="平面三点"></a>平面三点</h3><p>三个已知点的坐标分别记为$~(x_1,y_1)$、$(x_2,y_2)$、$(x_3,y_3)$，圆的一般方程可写为二次多项式，即</p>
-<script type="math/tex; mode=display">
+k=\frac{1}{r}
+\]</span></p>
+<p>式中，<span class="math inline">\(r~\)</span>是该点的曲率半径，可以通过该点及其两个相邻点得到（不共线的三点确定一个圆）。</p>
+<h2 id="公式">公式</h2>
+<h3 id="平面三点">平面三点</h3>
+<p>三个已知点的坐标分别记为<span class="math inline">\(~(x_1,y_1)\)</span>、<span class="math inline">\((x_2,y_2)\)</span>、<span class="math inline">\((x_3,y_3)\)</span>，圆的一般方程可写为二次多项式，即 <span class="math display">\[
 \tag{1a}
-A(x^2+y^2)+Bx+Cy+D=0</script><p>将式$(1\mathrm{a})$变形可得圆的标准方程，即</p>
-<script type="math/tex; mode=display">
+A(x^2+y^2)+Bx+Cy+D=0
+\]</span></p>
+<p>将式<span class="math inline">\((1\mathrm{a})\)</span>变形可得圆的标准方程，即 <span class="math display">\[
 \tag{1b}
-\bigg(x+\frac{B}{2A}\bigg)^2+\bigg(y+\frac{C}{2A}\bigg)^2=\frac{B^2+C^2-4AD}{4A^2}</script><p>将三个已知点代入式$(1\mathrm{a})$，可得关于$~A$、$B$、$C$、$D~$的齐次线性方程组，即</p>
-<script type="math/tex; mode=display">
+\bigg(x+\frac{B}{2A}\bigg)^2+\bigg(y+\frac{C}{2A}\bigg)^2=\frac{B^2+C^2-4AD}{4A^2}
+\]</span></p>
+<p>将三个已知点代入式<span class="math inline">\((1\mathrm{a})\)</span>，可得关于<span class="math inline">\(~A\)</span>、<span class="math inline">\(B\)</span>、<span class="math inline">\(C\)</span>、<span class="math inline">\(D~\)</span>的齐次线性方程组，即 <span class="math display">\[
 \tag{2}
 \begin{bmatrix}
-   x^2+y^2 & x & y & 1 \\[3pt]
-   x^2_1+y^2_1 & x_1 & y_1 & 1 \\[3pt]
-   x^2_2+y^2_2 & x_2 & y_2 & 1 \\[3pt]
-   x^2_3+y^2_3 & x_3 & y_3 & 1
+   x^2+y^2 &amp; x &amp; y &amp; 1 \\[3pt]
+   x^2_1+y^2_1 &amp; x_1 &amp; y_1 &amp; 1 \\[3pt]
+   x^2_2+y^2_2 &amp; x_2 &amp; y_2 &amp; 1 \\[3pt]
+   x^2_3+y^2_3 &amp; x_3 &amp; y_3 &amp; 1
 \end{bmatrix} \cdot 
 \begin{bmatrix}
 A\\ B\\ C\\ D
 \end{bmatrix} =
 \begin{bmatrix}
 0\\ 0\\ 0\\ 0
-\end{bmatrix}</script><p>显然在三点不共线的前提下，该齐次线性方程组有非零解，其等价于系数矩阵不满秩，即有</p>
-<script type="math/tex; mode=display">
+\end{bmatrix}
+\]</span></p>
+<p>显然在三点不共线的前提下，该齐次线性方程组有非零解，其等价于系数矩阵不满秩，即有 <span class="math display">\[
 \tag{3}
 \begin{vmatrix}
-   x^2+y^2 & x & y & 1 \\[3pt]
-   x^2_1+y^2_1 & x_1 & y_1 & 1 \\[3pt]
-   x^2_2+y^2_2 & x_2 & y_2 & 1 \\[3pt]
-   x^2_3+y^2_3 & x_3 & y_3 & 1
-\end{vmatrix} = 0</script><p>将式$(3)$展开，并与式$(1)$对比可得四个系数，即</p>
-<script type="math/tex; mode=display">
+   x^2+y^2 &amp; x &amp; y &amp; 1 \\[3pt]
+   x^2_1+y^2_1 &amp; x_1 &amp; y_1 &amp; 1 \\[3pt]
+   x^2_2+y^2_2 &amp; x_2 &amp; y_2 &amp; 1 \\[3pt]
+   x^2_3+y^2_3 &amp; x_3 &amp; y_3 &amp; 1
+\end{vmatrix} = 0
+\]</span></p>
+<p>将式<span class="math inline">\((3)\)</span>展开，并与式<span class="math inline">\((1)\)</span>对比可得四个系数，即 <span class="math display">\[
 \tag{4a}
 A=+\begin{vmatrix}
-   x_1 & y_1 & 1 \\
-   x_2 & y_2 & 1 \\
-   x_3 & y_3 & 1
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   x_1 &amp; y_1 &amp; 1 \\
+   x_2 &amp; y_2 &amp; 1 \\
+   x_3 &amp; y_3 &amp; 1
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{4b}
 B=-\begin{vmatrix}
-   x^2_1+y^2_1 & y_1 & 1 \\[3pt]
-   x^2_2+y^2_2 & y_2 & 1 \\[3pt]
-   x^2_3+y^2_3 & y_3 & 1
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   x^2_1+y^2_1 &amp; y_1 &amp; 1 \\[3pt]
+   x^2_2+y^2_2 &amp; y_2 &amp; 1 \\[3pt]
+   x^2_3+y^2_3 &amp; y_3 &amp; 1
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{4c}
 C=+\begin{vmatrix}
-   x^2_1+y^2_1 & x_1 & 1 \\[3pt]
-   x^2_2+y^2_2 & x_2 & 1 \\[3pt]
-   x^2_3+y^2_3 & x_3 & 1
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   x^2_1+y^2_1 &amp; x_1 &amp; 1 \\[3pt]
+   x^2_2+y^2_2 &amp; x_2 &amp; 1 \\[3pt]
+   x^2_3+y^2_3 &amp; x_3 &amp; 1
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{4d}
 D=-\begin{vmatrix}
-   x^2_1+y^2_1 & x_1 & y_1 \\[3pt]
-   x^2_2+y^2_2 & x_2 & y_2 \\[3pt]
-   x^2_3+y^2_3 & x_3 & y_3
-\end{vmatrix}</script><p>由式$(1\mathrm{b})$可得圆心坐标$~(x_c,y_c)~$和半径$~r$，即</p>
-<script type="math/tex; mode=display">
+   x^2_1+y^2_1 &amp; x_1 &amp; y_1 \\[3pt]
+   x^2_2+y^2_2 &amp; x_2 &amp; y_2 \\[3pt]
+   x^2_3+y^2_3 &amp; x_3 &amp; y_3
+\end{vmatrix}
+\]</span></p>
+<p>由式<span class="math inline">\((1\mathrm{b})\)</span>可得圆心坐标<span class="math inline">\(~(x_c,y_c)~\)</span>和半径<span class="math inline">\(~r\)</span>，即 <span class="math display">\[
 \tag{5}
 \begin{cases}
-x_c &=~ -\displaystyle\frac{B}{2A} \\[8pt]
-y_c &=~ -\displaystyle\frac{C}{2A} \\[8pt]
-r &=~ \sqrt{\displaystyle\frac{B^2+C^2-4AD}{4A^2}}
-\end{cases}</script><blockquote>
-<p>$A~$可能是负数</p>
+x_c &amp;=~ -\displaystyle\frac{B}{2A} \\[8pt]
+y_c &amp;=~ -\displaystyle\frac{C}{2A} \\[8pt]
+r &amp;=~ \sqrt{\displaystyle\frac{B^2+C^2-4AD}{4A^2}}
+\end{cases}
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(A~\)</span>可能是负数</p>
 </blockquote>
-<h3 id="空间三点"><a href="#空间三点" class="headerlink" title="空间三点"></a>空间三点</h3><p>进一步推广到空间中，三个已知点的坐标分别记为$~(x_1,y_1,z_1)$、$(x_2,y_2,z_2)$、$(x_3,y_3,z_3)$。</p>
+<h3 id="空间三点">空间三点</h3>
+<p>进一步推广到空间中，三个已知点的坐标分别记为<span class="math inline">\(~(x_1,y_1,z_1)\)</span>、<span class="math inline">\((x_2,y_2,z_2)\)</span>、<span class="math inline">\((x_3,y_3,z_3)\)</span>。</p>
 <p>空间中确定一个圆至少需要7个参数，一般取：</p>
-<ol>
-<li>圆心$~(x_c,y_c,z_c)$</li>
-<li>半径$~r$</li>
-<li>圆所在平面的法向量$~(m,n,p)$</li>
+<ol type="1">
+<li>圆心<span class="math inline">\(~(x_c,y_c,z_c)\)</span></li>
+<li>半径<span class="math inline">\(~r\)</span></li>
+<li>圆所在平面的法向量<span class="math inline">\(~(m,n,p)\)</span></li>
 </ol>
-<p>将三个点所在的球的一般方程写作</p>
-<script type="math/tex; mode=display">
+<p>将三个点所在的球的一般方程写作 <span class="math display">\[
 \tag{6a}
-A(x^2+y^2+z^2)+Bx+Cy+Dz+E=0</script><p>将式$(6\mathrm{a})$变形可得球的标准方程，即</p>
-<script type="math/tex; mode=display">
+A(x^2+y^2+z^2)+Bx+Cy+Dz+E=0
+\]</span></p>
+<p>将式<span class="math inline">\((6\mathrm{a})\)</span>变形可得球的标准方程，即 <span class="math display">\[
 \tag{6b}
-\bigg(x+\frac{B}{2A}\bigg)^2+\bigg(y+\frac{C}{2A}\bigg)^2+\bigg(z+\frac{D}{2A}\bigg)^2=\frac{B^2+C^2+D^2-4AE}{4A^2}</script><p>将三个已知点代入式$(6\mathrm{a})$，可得关于$~A$、$B$、$C$、$D$、$E~$的齐次线性方程组，即</p>
-<script type="math/tex; mode=display">
+\bigg(x+\frac{B}{2A}\bigg)^2+\bigg(y+\frac{C}{2A}\bigg)^2+\bigg(z+\frac{D}{2A}\bigg)^2=\frac{B^2+C^2+D^2-4AE}{4A^2}
+\]</span></p>
+<p>将三个已知点代入式<span class="math inline">\((6\mathrm{a})\)</span>，可得关于<span class="math inline">\(~A\)</span>、<span class="math inline">\(B\)</span>、<span class="math inline">\(C\)</span>、<span class="math inline">\(D\)</span>、<span class="math inline">\(E~\)</span>的齐次线性方程组，即 <span class="math display">\[
 \tag{7}
 \begin{bmatrix}
-   x^2+y^2+z^2 & x & y & z & 1 \\[3pt]
-   x^2_1+y^2_1+z^2_1 & x_1 & y_1 & z_1 & 1 \\[3pt]
-   x^2_2+y^2_2+z^2_2 & x_2 & y_2 & z_2 & 1 \\[3pt]
-   x^2_3+y^2_3+z^2_3 & x_3 & y_3 & z_3 & 1
+   x^2+y^2+z^2 &amp; x &amp; y &amp; z &amp; 1 \\[3pt]
+   x^2_1+y^2_1+z^2_1 &amp; x_1 &amp; y_1 &amp; z_1 &amp; 1 \\[3pt]
+   x^2_2+y^2_2+z^2_2 &amp; x_2 &amp; y_2 &amp; z_2 &amp; 1 \\[3pt]
+   x^2_3+y^2_3+z^2_3 &amp; x_3 &amp; y_3 &amp; z_3 &amp; 1
 \end{bmatrix}_{4\times5} \cdot 
 \begin{bmatrix}
 A\\ B\\ C\\ D\\ E
 \end{bmatrix} =
 \begin{bmatrix}
 0\\ 0\\ 0\\ 0
-\end{bmatrix}</script><p>考虑使用式$(3)$中的做法，但式$(7)$中的系数矩阵并非方阵。于是利用三个已知点来确定平面$~\pi$，其方程为</p>
-<script type="math/tex; mode=display">
+\end{bmatrix}
+\]</span></p>
+<p>考虑使用式<span class="math inline">\((3)\)</span>中的做法，但式<span class="math inline">\((7)\)</span>中的系数矩阵并非方阵。于是利用三个已知点来确定平面<span class="math inline">\(~\pi\)</span>，其方程为 <span class="math display">\[
 \tag{8}
-mx+ny+pz+q=0</script><p>将三个已知点代入式$(8)$，可得关于$~m$、$n$、$p$、$q~$的齐次线性方程组，即</p>
-<script type="math/tex; mode=display">
+mx+ny+pz+q=0
+\]</span></p>
+<p>将三个已知点代入式<span class="math inline">\((8)\)</span>，可得关于<span class="math inline">\(~m\)</span>、<span class="math inline">\(n\)</span>、<span class="math inline">\(p\)</span>、<span class="math inline">\(q~\)</span>的齐次线性方程组，即 <span class="math display">\[
 \tag{9}
 \begin{bmatrix}
-   x & y & z & 1 \\
-   x_1 & y_1 & z_1 & 1 \\
-   x_2 & y_2 & z_2 & 1 \\
-   x_3 & y_3 & z_3 & 1
+   x &amp; y &amp; z &amp; 1 \\
+   x_1 &amp; y_1 &amp; z_1 &amp; 1 \\
+   x_2 &amp; y_2 &amp; z_2 &amp; 1 \\
+   x_3 &amp; y_3 &amp; z_3 &amp; 1
 \end{bmatrix} \cdot 
 \begin{bmatrix}
 m\\ n\\ p\\ q
 \end{bmatrix} =
 \begin{bmatrix}
 0\\ 0\\ 0\\ 0
-\end{bmatrix}</script><p>同理，在三点不共线的前提下，该齐次线性方程组有非零解，其等价于系数矩阵不满秩。于是将其系数矩阵的行列式展开，并与式$(8)$对比可得四个系数，即</p>
-<script type="math/tex; mode=display">
+\end{bmatrix}
+\]</span></p>
+<p>同理，在三点不共线的前提下，该齐次线性方程组有非零解，其等价于系数矩阵不满秩。于是将其系数矩阵的行列式展开，并与式<span class="math inline">\((8)\)</span>对比可得四个系数，即 <span class="math display">\[
 \tag{10a}
 m=+\begin{vmatrix}
-   y_1 & z_1 & 1 \\
-   y_2 & z_2 & 1 \\
-   y_3 & z_3 & 1
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   y_1 &amp; z_1 &amp; 1 \\
+   y_2 &amp; z_2 &amp; 1 \\
+   y_3 &amp; z_3 &amp; 1
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{10b}
 n=-\begin{vmatrix}
-   x_1 & z_1 & 1 \\
-   x_2 & z_2 & 1 \\
-   x_3 & z_3 & 1
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   x_1 &amp; z_1 &amp; 1 \\
+   x_2 &amp; z_2 &amp; 1 \\
+   x_3 &amp; z_3 &amp; 1
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{10c}
 p=+\begin{vmatrix}
-   x_1 & y_1 & 1 \\
-   x_2 & y_2 & 1 \\
-   x_3 & y_3 & 1
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   x_1 &amp; y_1 &amp; 1 \\
+   x_2 &amp; y_2 &amp; 1 \\
+   x_3 &amp; y_3 &amp; 1
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{10d}
 q=-\begin{vmatrix}
-   x_1 & y_1 & z_1 \\
-   x_2 & y_2 & z_2 \\
-   x_2 & y_3 & z_3
-\end{vmatrix}</script><p>由式$(6\mathrm{b})$可知</p>
-<script type="math/tex; mode=display">
+   x_1 &amp; y_1 &amp; z_1 \\
+   x_2 &amp; y_2 &amp; z_2 \\
+   x_2 &amp; y_3 &amp; z_3
+\end{vmatrix}
+\]</span></p>
+<p>由式<span class="math inline">\((6\mathrm{b})\)</span>可知 <span class="math display">\[
 \tag{11}
-x_c=-\frac{B}{2A}, \quad y_c=-\frac{C}{2A}, \quad z_c=-\frac{D}{2A}</script><p>考虑到圆心$~(x_c,y_c,z_c)~$也在平面$~\pi~$上，于是将式$(11)$代入式$(8)$可得</p>
-<script type="math/tex; mode=display">
+x_c=-\frac{B}{2A}, \quad y_c=-\frac{C}{2A}, \quad z_c=-\frac{D}{2A}
+\]</span></p>
+<p>考虑到圆心<span class="math inline">\(~(x_c,y_c,z_c)~\)</span>也在平面<span class="math inline">\(~\pi~\)</span>上，于是将式<span class="math inline">\((11)\)</span>代入式<span class="math inline">\((8)\)</span>可得 <span class="math display">\[
 \tag{12}
-2qA-mB-nC-pD=0</script><p>将式$(12)$与式$(7)$结合，可得</p>
-<script type="math/tex; mode=display">
+2qA-mB-nC-pD=0
+\]</span></p>
+<p>将式<span class="math inline">\((12)\)</span>与式<span class="math inline">\((7)\)</span>结合，可得 <span class="math display">\[
 \tag{13}
 \begin{bmatrix}
-   x^2+y^2+z^2 & x & y & z & 1 \\[3pt]
-   x^2_1+y^2_1+z^2_1 & x_1 & y_1 & z_1 & 1 \\[3pt]
-   x^2_2+y^2_2+z^2_2 & x_2 & y_2 & z_2 & 1 \\[3pt]
-   x^2_3+y^2_3+z^2_3 & x_3 & y_3 & z_3 & 1 \\[3pt]
-   2q & -m & -n & -p & 0
+   x^2+y^2+z^2 &amp; x &amp; y &amp; z &amp; 1 \\[3pt]
+   x^2_1+y^2_1+z^2_1 &amp; x_1 &amp; y_1 &amp; z_1 &amp; 1 \\[3pt]
+   x^2_2+y^2_2+z^2_2 &amp; x_2 &amp; y_2 &amp; z_2 &amp; 1 \\[3pt]
+   x^2_3+y^2_3+z^2_3 &amp; x_3 &amp; y_3 &amp; z_3 &amp; 1 \\[3pt]
+   2q &amp; -m &amp; -n &amp; -p &amp; 0
 \end{bmatrix}_{5\times5} \cdot 
 \begin{bmatrix}
 A\\ B\\ C\\ D\\ E
 \end{bmatrix} =
 \begin{bmatrix}
 0\\ 0\\ 0\\ 0\\ 0
-\end{bmatrix}</script><p>这样，在三点不共线的前提下，该齐次线性方程组有非零解，其等价于系数矩阵不满秩。于是将其系数矩阵的行列式展开，并与式$(6)$对比可得五个系数，即</p>
-<script type="math/tex; mode=display">
+\end{bmatrix}
+\]</span></p>
+<p>这样，在三点不共线的前提下，该齐次线性方程组有非零解，其等价于系数矩阵不满秩。于是将其系数矩阵的行列式展开，并与式<span class="math inline">\((6)\)</span>对比可得五个系数，即 <span class="math display">\[
 \tag{14a}
 A=+\begin{vmatrix}
-   x_1 & y_1 & z_1 & 1 \\
-   x_2 & y_2 & z_2 & 1 \\
-   x_3 & y_3 & z_3 & 1 \\
-   -m & -n & -p & 0
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   x_1 &amp; y_1 &amp; z_1 &amp; 1 \\
+   x_2 &amp; y_2 &amp; z_2 &amp; 1 \\
+   x_3 &amp; y_3 &amp; z_3 &amp; 1 \\
+   -m &amp; -n &amp; -p &amp; 0
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{14b}
 B=-\begin{vmatrix}
-   x^2_1+y^2_1+z^2_1 & y_1 & z_1 & 1 \\[3pt]
-   x^2_2+y^2_2+z^2_2 & y_2 & z_2 & 1 \\[3pt]
-   x^2_3+y^2_3+z^2_3 & y_3 & z_3 & 1 \\[3pt]
-   2q & -n & -p & 0
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   x^2_1+y^2_1+z^2_1 &amp; y_1 &amp; z_1 &amp; 1 \\[3pt]
+   x^2_2+y^2_2+z^2_2 &amp; y_2 &amp; z_2 &amp; 1 \\[3pt]
+   x^2_3+y^2_3+z^2_3 &amp; y_3 &amp; z_3 &amp; 1 \\[3pt]
+   2q &amp; -n &amp; -p &amp; 0
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{14c}
 C=+\begin{vmatrix}
-   x^2_1+y^2_1+z^2_1 & x_1 & z_1 & 1 \\[3pt]
-   x^2_2+y^2_2+z^2_2 & x_2 & z_2 & 1 \\[3pt]
-   x^2_3+y^2_3+z^2_3 & x_3 & z_3 & 1 \\[3pt]
-   2q & -m & -p & 0
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   x^2_1+y^2_1+z^2_1 &amp; x_1 &amp; z_1 &amp; 1 \\[3pt]
+   x^2_2+y^2_2+z^2_2 &amp; x_2 &amp; z_2 &amp; 1 \\[3pt]
+   x^2_3+y^2_3+z^2_3 &amp; x_3 &amp; z_3 &amp; 1 \\[3pt]
+   2q &amp; -m &amp; -p &amp; 0
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{14d}
 D=-\begin{vmatrix}
-   x^2_1+y^2_1+z^2_1 & x_1 & y_1 & 1 \\[3pt]
-   x^2_2+y^2_2+z^2_2 & x_2 & y_2 & 1 \\[3pt]
-   x^2_3+y^2_3+z^2_3 & x_3 & y_3 & 1 \\[3pt]
-   2q & -m & -n & 0
-\end{vmatrix}</script><script type="math/tex; mode=display">
+   x^2_1+y^2_1+z^2_1 &amp; x_1 &amp; y_1 &amp; 1 \\[3pt]
+   x^2_2+y^2_2+z^2_2 &amp; x_2 &amp; y_2 &amp; 1 \\[3pt]
+   x^2_3+y^2_3+z^2_3 &amp; x_3 &amp; y_3 &amp; 1 \\[3pt]
+   2q &amp; -m &amp; -n &amp; 0
+\end{vmatrix}
+\]</span></p>
+<p><span class="math display">\[
 \tag{14e}
 E=+\begin{vmatrix}
-   x^2_1+y^2_1+z^2_1 & x_1 & y_1 & z_1 \\[3pt]
-   x^2_2+y^2_2+z^2_2 & x_2 & y_2 & z_2 \\[3pt]
-   x^2_3+y^2_3+z^2_3 & x_3 & y_3 & z_3 \\[3pt]
-   2q & -m & -n & -p
-\end{vmatrix}</script><p>综上，由式$(10)$得到$~m$、$n$、$p$、$q~$，并由式$(14)$得到$~A$、$B$、$C$、$D$、$E~$后，可得圆心坐标$~(x_c,y_c,z_c)~$和半径$~r$，即</p>
-<script type="math/tex; mode=display">
+   x^2_1+y^2_1+z^2_1 &amp; x_1 &amp; y_1 &amp; z_1 \\[3pt]
+   x^2_2+y^2_2+z^2_2 &amp; x_2 &amp; y_2 &amp; z_2 \\[3pt]
+   x^2_3+y^2_3+z^2_3 &amp; x_3 &amp; y_3 &amp; z_3 \\[3pt]
+   2q &amp; -m &amp; -n &amp; -p
+\end{vmatrix}
+\]</span></p>
+<p>综上，由式<span class="math inline">\((10)\)</span>得到<span class="math inline">\(~m\)</span>、<span class="math inline">\(n\)</span>、<span class="math inline">\(p\)</span>、<span class="math inline">\(q~\)</span>，并由式<span class="math inline">\((14)\)</span>得到<span class="math inline">\(~A\)</span>、<span class="math inline">\(B\)</span>、<span class="math inline">\(C\)</span>、<span class="math inline">\(D\)</span>、<span class="math inline">\(E~\)</span>后，可得圆心坐标<span class="math inline">\(~(x_c,y_c,z_c)~\)</span>和半径<span class="math inline">\(~r\)</span>，即 <span class="math display">\[
 \tag{15}
 \begin{cases}
-x_c &=~ -\displaystyle\frac{B}{2A} \\[8pt]
-y_c &=~ -\displaystyle\frac{C}{2A} \\[8pt]
-z_c &=~ -\displaystyle\frac{D}{2A} \\[8pt]
-r &=~ \sqrt{\displaystyle\frac{B^2+C^2+D^2-4AE}{4A^2}}
-\end{cases}</script><blockquote>
-<p>$A~$可能是负数</p>
+x_c &amp;=~ -\displaystyle\frac{B}{2A} \\[8pt]
+y_c &amp;=~ -\displaystyle\frac{C}{2A} \\[8pt]
+z_c &amp;=~ -\displaystyle\frac{D}{2A} \\[8pt]
+r &amp;=~ \sqrt{\displaystyle\frac{B^2+C^2+D^2-4AE}{4A^2}}
+\end{cases}
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(A~\)</span>可能是负数</p>
 </blockquote>
-<hr>
-<h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><h3 id="MATLAB代码"><a href="#MATLAB代码" class="headerlink" title="MATLAB代码"></a>MATLAB代码</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% 由圆上三点确定圆心和半径</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% INPUT</span></span><br><span class="line"><span class="comment">% p1   :  - 第一个点坐标, 行向量 1x3</span></span><br><span class="line"><span class="comment">% p2   :  - 第二个点坐标, 行向量 1x3</span></span><br><span class="line"><span class="comment">% p3   :  - 第三个点坐标, 行向量 1x3</span></span><br><span class="line"><span class="comment">% 若输入1x2的行向量, 末位自动补0, 变为1x3的行向量</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% OUTPUT</span></span><br><span class="line"><span class="comment">% pc   :  - 圆心坐标, 行向量 1x3</span></span><br><span class="line"><span class="comment">% r    :  - 半径, 标量</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% 调用示例1 - 平面上三个点</span></span><br><span class="line"><span class="comment">% [pc1,r1]=points2circle([1,2],[-2,1],[0,-3])</span></span><br><span class="line"><span class="comment">% 调用示例2 - 空间中三个点</span></span><br><span class="line"><span class="comment">% [pc2,r2]=points2circle([1,2,-1],[-2,1,2],[0,-3,-3])</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[pc,r]</span>=<span class="title">points2circle</span><span class="params">(p1,p2,p3)</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">% 输入检查</span></span><br><span class="line">    validateattributes(p1,&#123;<span class="string">&#x27;numeric&#x27;</span>&#125;,&#123;<span class="string">&#x27;row&#x27;</span>&#125;,<span class="number">1</span>);<span class="comment">% 行向量</span></span><br><span class="line">    validateattributes(p2,&#123;<span class="string">&#x27;numeric&#x27;</span>&#125;,&#123;<span class="string">&#x27;row&#x27;</span>&#125;,<span class="number">2</span>);</span><br><span class="line">    validateattributes(p3,&#123;<span class="string">&#x27;numeric&#x27;</span>&#125;,&#123;<span class="string">&#x27;row&#x27;</span>&#125;,<span class="number">3</span>);</span><br><span class="line">    num1=<span class="built_in">length</span>(p1);num2=<span class="built_in">length</span>(p2);num3=<span class="built_in">length</span>(p3);</span><br><span class="line">    <span class="keyword">if</span> (num1 == num2) &amp;&amp; (num2 == num3)</span><br><span class="line">        <span class="keyword">if</span> num1 == <span class="number">2</span></span><br><span class="line">            p1=[p1,<span class="number">0</span>];p2=[p2,<span class="number">0</span>];p3=[p3,<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">elseif</span> num1 ~= <span class="number">3</span></span><br><span class="line">            error(<span class="string">&#x27;仅支持二维或三维坐标输入&#x27;</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        error(<span class="string">&#x27;输入坐标的维数不一致&#x27;</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">% 共线检查</span></span><br><span class="line">    temp01=p1-p2;temp02=p3-p2;</span><br><span class="line">    temp03=<span class="built_in">cross</span>(temp01,temp02);</span><br><span class="line">    temp=(temp03*temp03&#x27;)/(temp01*temp01&#x27;)/(temp02*temp02&#x27;);</span><br><span class="line">    <span class="keyword">if</span> temp &lt; <span class="number">10</span>^<span class="number">-6</span></span><br><span class="line">        error(<span class="string">&#x27;三点共线, 无法确定圆&#x27;</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    mat1=[p1,<span class="number">1</span>;p2,<span class="number">1</span>;p3,<span class="number">1</span>];<span class="comment">% size = 3x4</span></span><br><span class="line"></span><br><span class="line">    m=+det(mat1(:,<span class="number">2</span>:<span class="number">4</span>));</span><br><span class="line">    n=-det([mat1(:,<span class="number">1</span>),mat1(:,<span class="number">3</span>:<span class="number">4</span>)]);</span><br><span class="line">    p=+det([mat1(:,<span class="number">1</span>:<span class="number">2</span>),mat1(:,<span class="number">4</span>)]);</span><br><span class="line">    q=-det(mat1(:,<span class="number">1</span>:<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">    mat2=[[p1*p1&#x27;;p2*p2&#x27;;p3*p3&#x27;],mat1;<span class="number">2</span>*q,[-m,-n,-p,<span class="number">0</span>]];<span class="comment">% size = 4x5</span></span><br><span class="line"></span><br><span class="line">    A=+det(mat2(:,<span class="number">2</span>:<span class="number">5</span>));</span><br><span class="line">    B=-det([mat2(:,<span class="number">1</span>),mat2(:,<span class="number">3</span>:<span class="number">5</span>)]);</span><br><span class="line">    C=+det([mat2(:,<span class="number">1</span>:<span class="number">2</span>),mat2(:,<span class="number">4</span>:<span class="number">5</span>)]);</span><br><span class="line">    D=-det([mat2(:,<span class="number">1</span>:<span class="number">3</span>),mat2(:,<span class="number">5</span>)]);</span><br><span class="line">    E=+det(mat2(:,<span class="number">1</span>:<span class="number">4</span>));</span><br><span class="line"></span><br><span class="line">    pc=-[B,C,D]/<span class="number">2</span>/A;</span><br><span class="line">    r=<span class="built_in">sqrt</span>(B^<span class="number">2</span>+C^<span class="number">2</span>+D^<span class="number">2</span><span class="number">-4</span>*A*E)/<span class="number">2</span>/<span class="built_in">abs</span>(A);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment"># 由圆上三点确定圆心和半径</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment"># INPUT</span></span><br><span class="line"><span class="comment"># p1   :  - 第一个点坐标, list或者array 1x3</span></span><br><span class="line"><span class="comment"># p2   :  - 第二个点坐标, list或者array 1x3</span></span><br><span class="line"><span class="comment"># p3   :  - 第三个点坐标, list或者array 1x3</span></span><br><span class="line"><span class="comment"># 若输入1x2的行向量, 末位自动补0, 变为1x3的行向量</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment"># OUTPUT</span></span><br><span class="line"><span class="comment"># pc   :  - 圆心坐标, array 1x3</span></span><br><span class="line"><span class="comment"># r    :  - 半径, 标量</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment"># 调用示例1 - 平面上三个点</span></span><br><span class="line"><span class="comment"># pc1, r1 = points2circle([1, 2], [-2, 1], [0, -3])</span></span><br><span class="line"><span class="comment"># 调用示例2 - 空间中三个点</span></span><br><span class="line"><span class="comment"># pc2, r2 = points2circle([1, 2, -1], [-2, 1, 2], [0, -3, -3])</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> numpy.linalg <span class="keyword">import</span> det</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">points2circle</span>(<span class="params">p1, p2, p3</span>):</span></span><br><span class="line">    p1 = np.array(p1)</span><br><span class="line">    p2 = np.array(p2)</span><br><span class="line">    p3 = np.array(p3)</span><br><span class="line">    num1 = len(p1)</span><br><span class="line">    num2 = len(p2)</span><br><span class="line">    num3 = len(p3)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 输入检查</span></span><br><span class="line">    <span class="keyword">if</span> (num1 == num2) <span class="keyword">and</span> (num2 == num3):</span><br><span class="line">        <span class="keyword">if</span> num1 == <span class="number">2</span>:</span><br><span class="line">            p1 = np.append(p1, <span class="number">0</span>)</span><br><span class="line">            p2 = np.append(p2, <span class="number">0</span>)</span><br><span class="line">            p3 = np.append(p3, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> num1 != <span class="number">3</span>:</span><br><span class="line">            print(<span class="string">&#x27;\t仅支持二维或三维坐标输入&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&#x27;\t输入坐标的维数不一致&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 共线检查</span></span><br><span class="line">    temp01 = p1 - p2</span><br><span class="line">    temp02 = p3 - p2</span><br><span class="line">    temp03 = np.cross(temp01, temp02)</span><br><span class="line">    temp = (temp03 @ temp03) / (temp01 @ temp01) / (temp02 @ temp02)</span><br><span class="line">    <span class="keyword">if</span> temp &lt; <span class="number">10</span>**<span class="number">-6</span>:</span><br><span class="line">        print(<span class="string">&#x27;\t三点共线, 无法确定圆&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    temp1 = np.vstack((p1, p2, p3))</span><br><span class="line">    temp2 = np.ones((<span class="number">3</span>, <span class="number">1</span>))</span><br><span class="line">    mat1 = np.hstack((temp1, temp2))  <span class="comment"># size = 3x4</span></span><br><span class="line"></span><br><span class="line">    m = +det(mat1[:, <span class="number">1</span>:])</span><br><span class="line">    n = -det(np.delete(mat1, <span class="number">1</span>, axis=<span class="number">1</span>))</span><br><span class="line">    p = +det(np.delete(mat1, <span class="number">2</span>, axis=<span class="number">1</span>))</span><br><span class="line">    q = -det(temp1)</span><br><span class="line"></span><br><span class="line">    temp3 = np.array([p1 @ p1, p2 @ p2, p3 @ p3]).reshape(<span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">    temp4 = np.hstack((temp3, mat1))</span><br><span class="line">    temp5 = np.array([<span class="number">2</span> * q, -m, -n, -p, <span class="number">0</span>])</span><br><span class="line">    mat2 = np.vstack((temp4, temp5))  <span class="comment"># size = 4x5</span></span><br><span class="line"></span><br><span class="line">    A = +det(mat2[:, <span class="number">1</span>:])</span><br><span class="line">    B = -det(np.delete(mat2, <span class="number">1</span>, axis=<span class="number">1</span>))</span><br><span class="line">    C = +det(np.delete(mat2, <span class="number">2</span>, axis=<span class="number">1</span>))</span><br><span class="line">    D = -det(np.delete(mat2, <span class="number">3</span>, axis=<span class="number">1</span>))</span><br><span class="line">    E = +det(mat2[:, :<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line">    pc = -np.array([B, C, D]) / <span class="number">2</span> / A</span><br><span class="line">    r = np.sqrt(B * B + C * C + D * D - <span class="number">4</span> * A * E) / <span class="number">2</span> / abs(A)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pc, r</span><br></pre></td></tr></table></figure>
-<hr>
+<hr />
+<h2 id="程序">程序</h2>
+<h3 id="matlab代码">MATLAB代码</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% 由圆上三点确定圆心和半径</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% INPUT</span></span><br><span class="line"><span class="comment">% p1   :  - 第一个点坐标, 行向量 1x3</span></span><br><span class="line"><span class="comment">% p2   :  - 第二个点坐标, 行向量 1x3</span></span><br><span class="line"><span class="comment">% p3   :  - 第三个点坐标, 行向量 1x3</span></span><br><span class="line"><span class="comment">% 若输入1x2的行向量, 末位自动补0, 变为1x3的行向量</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% OUTPUT</span></span><br><span class="line"><span class="comment">% pc   :  - 圆心坐标, 行向量 1x3</span></span><br><span class="line"><span class="comment">% r    :  - 半径, 标量</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"><span class="comment">% 调用示例1 - 平面上三个点</span></span><br><span class="line"><span class="comment">% [pc1,r1]=points2circle([1,2],[-2,1],[0,-3])</span></span><br><span class="line"><span class="comment">% 调用示例2 - 空间中三个点</span></span><br><span class="line"><span class="comment">% [pc2,r2]=points2circle([1,2,-1],[-2,1,2],[0,-3,-3])</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[pc,r]</span>=<span class="title">points2circle</span><span class="params">(p1,p2,p3)</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">% 输入检查</span></span><br><span class="line">    validateattributes(p1,&#123;<span class="string">&#x27;numeric&#x27;</span>&#125;,&#123;<span class="string">&#x27;row&#x27;</span>&#125;,<span class="number">1</span>);<span class="comment">% 行向量</span></span><br><span class="line">    validateattributes(p2,&#123;<span class="string">&#x27;numeric&#x27;</span>&#125;,&#123;<span class="string">&#x27;row&#x27;</span>&#125;,<span class="number">2</span>);</span><br><span class="line">    validateattributes(p3,&#123;<span class="string">&#x27;numeric&#x27;</span>&#125;,&#123;<span class="string">&#x27;row&#x27;</span>&#125;,<span class="number">3</span>);</span><br><span class="line">    num1=<span class="built_in">length</span>(p1);num2=<span class="built_in">length</span>(p2);num3=<span class="built_in">length</span>(p3);</span><br><span class="line">    <span class="keyword">if</span> (num1 == num2) &amp;&amp; (num2 == num3)</span><br><span class="line">        <span class="keyword">if</span> num1 == <span class="number">2</span></span><br><span class="line">            p1=[p1,<span class="number">0</span>];p2=[p2,<span class="number">0</span>];p3=[p3,<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">elseif</span> num1 ~= <span class="number">3</span></span><br><span class="line">            error(<span class="string">&#x27;仅支持二维或三维坐标输入&#x27;</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        error(<span class="string">&#x27;输入坐标的维数不一致&#x27;</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">% 共线检查</span></span><br><span class="line">    temp01=p1-p2;temp02=p3-p2;</span><br><span class="line">    temp03=<span class="built_in">cross</span>(temp01,temp02);</span><br><span class="line">    temp=(temp03*temp03&#x27;)/(temp01*temp01&#x27;)/(temp02*temp02&#x27;);</span><br><span class="line">    <span class="keyword">if</span> temp &lt; <span class="number">10</span>^<span class="number">-6</span></span><br><span class="line">        error(<span class="string">&#x27;三点共线, 无法确定圆&#x27;</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    mat1=[p1,<span class="number">1</span>;p2,<span class="number">1</span>;p3,<span class="number">1</span>];<span class="comment">% size = 3x4</span></span><br><span class="line"></span><br><span class="line">    m=+det(mat1(:,<span class="number">2</span>:<span class="number">4</span>));</span><br><span class="line">    n=-det([mat1(:,<span class="number">1</span>),mat1(:,<span class="number">3</span>:<span class="number">4</span>)]);</span><br><span class="line">    p=+det([mat1(:,<span class="number">1</span>:<span class="number">2</span>),mat1(:,<span class="number">4</span>)]);</span><br><span class="line">    q=-det(mat1(:,<span class="number">1</span>:<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">    mat2=[[p1*p1&#x27;;p2*p2&#x27;;p3*p3&#x27;],mat1;<span class="number">2</span>*q,[-m,-n,-p,<span class="number">0</span>]];<span class="comment">% size = 4x5</span></span><br><span class="line"></span><br><span class="line">    A=+det(mat2(:,<span class="number">2</span>:<span class="number">5</span>));</span><br><span class="line">    B=-det([mat2(:,<span class="number">1</span>),mat2(:,<span class="number">3</span>:<span class="number">5</span>)]);</span><br><span class="line">    C=+det([mat2(:,<span class="number">1</span>:<span class="number">2</span>),mat2(:,<span class="number">4</span>:<span class="number">5</span>)]);</span><br><span class="line">    D=-det([mat2(:,<span class="number">1</span>:<span class="number">3</span>),mat2(:,<span class="number">5</span>)]);</span><br><span class="line">    E=+det(mat2(:,<span class="number">1</span>:<span class="number">4</span>));</span><br><span class="line"></span><br><span class="line">    pc=-[B,C,D]/<span class="number">2</span>/A;</span><br><span class="line">    r=<span class="built_in">sqrt</span>(B^<span class="number">2</span>+C^<span class="number">2</span>+D^<span class="number">2</span><span class="number">-4</span>*A*E)/<span class="number">2</span>/<span class="built_in">abs</span>(A);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="python代码">Python代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment"># 由圆上三点确定圆心和半径</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment"># INPUT</span></span><br><span class="line"><span class="comment"># p1   :  - 第一个点坐标, list或者array 1x3</span></span><br><span class="line"><span class="comment"># p2   :  - 第二个点坐标, list或者array 1x3</span></span><br><span class="line"><span class="comment"># p3   :  - 第三个点坐标, list或者array 1x3</span></span><br><span class="line"><span class="comment"># 若输入1x2的行向量, 末位自动补0, 变为1x3的行向量</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment"># OUTPUT</span></span><br><span class="line"><span class="comment"># pc   :  - 圆心坐标, array 1x3</span></span><br><span class="line"><span class="comment"># r    :  - 半径, 标量</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment"># 调用示例1 - 平面上三个点</span></span><br><span class="line"><span class="comment"># pc1, r1 = points2circle([1, 2], [-2, 1], [0, -3])</span></span><br><span class="line"><span class="comment"># 调用示例2 - 空间中三个点</span></span><br><span class="line"><span class="comment"># pc2, r2 = points2circle([1, 2, -1], [-2, 1, 2], [0, -3, -3])</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> numpy.linalg <span class="keyword">import</span> det</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">points2circle</span>(<span class="params">p1, p2, p3</span>):</span></span><br><span class="line">    p1 = np.array(p1)</span><br><span class="line">    p2 = np.array(p2)</span><br><span class="line">    p3 = np.array(p3)</span><br><span class="line">    num1 = len(p1)</span><br><span class="line">    num2 = len(p2)</span><br><span class="line">    num3 = len(p3)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 输入检查</span></span><br><span class="line">    <span class="keyword">if</span> (num1 == num2) <span class="keyword">and</span> (num2 == num3):</span><br><span class="line">        <span class="keyword">if</span> num1 == <span class="number">2</span>:</span><br><span class="line">            p1 = np.append(p1, <span class="number">0</span>)</span><br><span class="line">            p2 = np.append(p2, <span class="number">0</span>)</span><br><span class="line">            p3 = np.append(p3, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> num1 != <span class="number">3</span>:</span><br><span class="line">            print(<span class="string">&#x27;\t仅支持二维或三维坐标输入&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&#x27;\t输入坐标的维数不一致&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 共线检查</span></span><br><span class="line">    temp01 = p1 - p2</span><br><span class="line">    temp02 = p3 - p2</span><br><span class="line">    temp03 = np.cross(temp01, temp02)</span><br><span class="line">    temp = (temp03 @ temp03) / (temp01 @ temp01) / (temp02 @ temp02)</span><br><span class="line">    <span class="keyword">if</span> temp &lt; <span class="number">10</span>**<span class="number">-6</span>:</span><br><span class="line">        print(<span class="string">&#x27;\t三点共线, 无法确定圆&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    temp1 = np.vstack((p1, p2, p3))</span><br><span class="line">    temp2 = np.ones((<span class="number">3</span>, <span class="number">1</span>))</span><br><span class="line">    mat1 = np.hstack((temp1, temp2))  <span class="comment"># size = 3x4</span></span><br><span class="line"></span><br><span class="line">    m = +det(mat1[:, <span class="number">1</span>:])</span><br><span class="line">    n = -det(np.delete(mat1, <span class="number">1</span>, axis=<span class="number">1</span>))</span><br><span class="line">    p = +det(np.delete(mat1, <span class="number">2</span>, axis=<span class="number">1</span>))</span><br><span class="line">    q = -det(temp1)</span><br><span class="line"></span><br><span class="line">    temp3 = np.array([p1 @ p1, p2 @ p2, p3 @ p3]).reshape(<span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">    temp4 = np.hstack((temp3, mat1))</span><br><span class="line">    temp5 = np.array([<span class="number">2</span> * q, -m, -n, -p, <span class="number">0</span>])</span><br><span class="line">    mat2 = np.vstack((temp4, temp5))  <span class="comment"># size = 4x5</span></span><br><span class="line"></span><br><span class="line">    A = +det(mat2[:, <span class="number">1</span>:])</span><br><span class="line">    B = -det(np.delete(mat2, <span class="number">1</span>, axis=<span class="number">1</span>))</span><br><span class="line">    C = +det(np.delete(mat2, <span class="number">2</span>, axis=<span class="number">1</span>))</span><br><span class="line">    D = -det(np.delete(mat2, <span class="number">3</span>, axis=<span class="number">1</span>))</span><br><span class="line">    E = +det(mat2[:, :<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line">    pc = -np.array([B, C, D]) / <span class="number">2</span> / A</span><br><span class="line">    r = np.sqrt(B * B + C * C + D * D - <span class="number">4</span> * A * E) / <span class="number">2</span> / abs(A)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pc, r</span><br></pre></td></tr></table></figure>
+<hr />
 
     </div>
 
@@ -557,7 +603,7 @@ r &=~ \sqrt{\displaystyle\frac{B^2+C^2+D^2-4AE}{4A^2}}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E4%B8%89%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">平面三点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E4%B8%89%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">空间三点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MATLAB%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.</span> <span class="nav-text">MATLAB代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python%E4%BB%A3%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">Python代码</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E4%B8%89%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">平面三点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E4%B8%89%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">空间三点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#matlab%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.</span> <span class="nav-text">MATLAB代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E4%BB%A3%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">Python代码</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

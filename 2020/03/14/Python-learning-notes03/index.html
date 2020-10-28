@@ -257,8 +257,9 @@
 <p>资料：<a target="_blank" rel="noopener" href="https://www.enthought.com/wp-content/uploads/Enthought-MATLAB-to-Python-White-Paper.pdf">White Paper: MATLAB to Python</a></p>
 </blockquote>
 <a id="more"></a>
-<h4 id="Python与MATLAB之间的差异"><a href="#Python与MATLAB之间的差异" class="headerlink" title="Python与MATLAB之间的差异"></a>Python与MATLAB之间的差异</h4><p>大致有6点：</p>
-<ol>
+<h4 id="python与matlab之间的差异">Python与MATLAB之间的差异</h4>
+<p>大致有6点：</p>
+<ol type="1">
 <li>基本数据类型</li>
 <li>Package的组织形式</li>
 <li>语法</li>
@@ -267,32 +268,34 @@
 <li>面向对象与面向过程</li>
 </ol>
 <p>这里主要针对后面三点进行说明。</p>
-<h5 id="索引与切片"><a href="#索引与切片" class="headerlink" title="索引与切片"></a>索引与切片</h5><p>为什么Python中采用从零开始的索引方式？</p>
+<h5 id="索引与切片">索引与切片</h5>
+<p>为什么Python中采用从零开始的索引方式？</p>
 <p>比对Python和MATLAB的索引方法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br><span class="line">low, high = <span class="number">2</span>, <span class="number">4</span></span><br><span class="line">a == a[<span class="number">0</span>:low] + a[low:high] + a[high:<span class="number">7</span>]  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% MATLAB</span></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>];</span><br><span class="line">low = <span class="number">2</span>;high = <span class="number">4</span>;</span><br><span class="line">all(a == [a(<span class="number">1</span>:low), a(low+<span class="number">1</span>:high), a(high+<span class="number">1</span>:<span class="keyword">end</span>)])  <span class="comment">% logical 1</span></span><br></pre></td></tr></table></figure>
 <p>简单来说，MATLAB采用的从一开始的索引方式会带来<code>+1</code>或<code>-1</code>的影响，而Python则没有。</p>
-<h5 id="NumPy的Array结构"><a href="#NumPy的Array结构" class="headerlink" title="NumPy的Array结构"></a>NumPy的Array结构</h5><ol>
-<li><p>Array可以是多维列阵（包括矩阵），且按行主顺序存储的，而MATLAB则是按列主顺序存储；</p>
-</li>
+<h5 id="numpy的array结构">NumPy的Array结构</h5>
+<ol type="1">
+<li><p>Array可以是多维列阵（包括矩阵），且按行主顺序存储的，而MATLAB则是按列主顺序存储；</p></li>
 <li><p>三维Array的形状是<code>(D, R, C)</code>，等价于MATLAB中三维矩阵<code>(R, C, D)</code>，例如</p>
 <blockquote>
 <p>R: row, C: column, D: depth</p>
-</blockquote>
-</li>
+</blockquote></li>
 </ol>
-<h5 id="面向对象与面向过程"><a href="#面向对象与面向过程" class="headerlink" title="面向对象与面向过程"></a>面向对象与面向过程</h5><p>对比Python和MATLAB的字符串处理：</p>
+<h5 id="面向对象与面向过程">面向对象与面向过程</h5>
+<p>对比Python和MATLAB的字符串处理：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python: Object oriented</span></span><br><span class="line">sentence = <span class="string">&#x27;the quick brown fox &#x27;</span></span><br><span class="line">sentence.strip().upper().replace(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;_&#x27;</span>)  <span class="comment"># &#x27;THE_QUICK_BROWN_FOX&#x27;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% MATLAB: Procedural</span></span><br><span class="line">sentence = <span class="string">&#x27;the quick brown fox &#x27;</span>;</span><br><span class="line">replace(upper(strip(sentence)), <span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;_&#x27;</span>)  <span class="comment">% &#x27;THE_QUICK_BROWN_FOX&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>面向对象的编程方式会让程序的逻辑层次比较清楚，且便于管理。</p>
-<h4 id="转变策略"><a href="#转变策略" class="headerlink" title="转变策略"></a>转变策略</h4><ol>
+<h4 id="转变策略">转变策略</h4>
+<ol type="1">
 <li>由下至上：在Python中重构代码</li>
 <li>由上至下：<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/call-python-libraries.html">在MATLAB中调用Python</a></li>
 </ol>
-<hr>
+<hr />
 <p>ps. 刚上大一的时候，《大学计算机基础》这门课上老师讲的就是Python（没有教材，也没有考试），这应该是我学的第一门编程语言。当时也是浅藏辄止，后来也没再用过。记得有一个编程作业：求<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%98%BF%E5%A7%86%E6%96%AF%E7%89%B9%E6%9C%97%E6%95%B0/7070382#1">阿姆斯特朗数</a>，当时我就知道<code>int</code>可以取整，靠着一个<code>int</code>函数把程序给写了出来：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L</span>(<span class="params">x</span>):</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> int(x / (<span class="number">10</span> ** i)) &gt;= <span class="number">10</span>:</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> i</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Am</span>(<span class="params">x</span>):</span></span><br><span class="line">    l = L(x)</span><br><span class="line">    y = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> x &gt;= <span class="number">10</span>:</span><br><span class="line">        a = int(x / (<span class="number">10</span> ** L(x)))</span><br><span class="line">        y = y + a ** (l + <span class="number">1</span>)</span><br><span class="line">        x = x - a * <span class="number">10</span> ** L(x)</span><br><span class="line">    y = y + x ** (l + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>, <span class="number">10000</span>):</span><br><span class="line">    <span class="keyword">if</span> x == Am(x):</span><br><span class="line">        print(<span class="string">&#x27;阿姆斯特朗数：&#x27;</span>, x)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;\tEND&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<hr>
+<hr />
 
     </div>
 
@@ -378,7 +381,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python%E4%B8%8EMATLAB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-number">1.</span> <span class="nav-text">Python与MATLAB之间的差异</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E4%B8%8E%E5%88%87%E7%89%87"><span class="nav-number">1.1.</span> <span class="nav-text">索引与切片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NumPy%E7%9A%84Array%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">NumPy的Array结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">面向对象与面向过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%8F%98%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text">转变策略</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#python%E4%B8%8Ematlab%E4%B9%8B%E9%97%B4%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-number">1.</span> <span class="nav-text">Python与MATLAB之间的差异</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E4%B8%8E%E5%88%87%E7%89%87"><span class="nav-number">1.1.</span> <span class="nav-text">索引与切片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy%E7%9A%84array%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">NumPy的Array结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">面向对象与面向过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%8F%98%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text">转变策略</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -254,49 +254,53 @@
       
         <p>对称二阶张量与非对称二阶张量的不变量。</p>
 <a id="more"></a>
-<h3 id="非对称二阶张量"><a href="#非对称二阶张量" class="headerlink" title="非对称二阶张量"></a>非对称二阶张量</h3><p>矩阵 $\boldsymbol{A}<em>{3\times3}$ 的元素记为 $a</em>{ij}$ ，三个特征值记为 $\lambda_1$ 、$\lambda_2$ 、$\lambda_3$ 。</p>
-<p>矩阵 $\boldsymbol{A}$ 的三个不变量记为 $I_1$ 、$I_2$ 、$I_3$ ：</p>
-<ol>
-<li>第一不变量 $I_1$ <script type="math/tex; mode=display">
-I_1=\lambda_1+\lambda_2+\lambda_3=\mathrm{tr}\boldsymbol{A}=a_{ii}</script></li>
-</ol>
-<ol>
-<li>第二不变量 $I_2$ <script type="math/tex; mode=display">
-I_2=\lambda_1\lambda_2+\lambda_2\lambda_3+\lambda_3\lambda_1=\frac{1}{2}(\mathrm{tr}^2\boldsymbol{A}-\boldsymbol{A}:\boldsymbol{A}^\mathrm{T})=\frac{1}{2}(a_{ii}a_{jj}-a_{ij}a_{ji})</script></li>
-</ol>
-<ol>
-<li>第三不变量 $I_3$ <script type="math/tex; mode=display">
+<h3 id="非对称二阶张量">非对称二阶张量</h3>
+<p>矩阵 <span class="math inline">\(\boldsymbol{A}_{3\times3}\)</span> 的元素记为 <span class="math inline">\(a_{ij}\)</span> ，三个特征值记为 <span class="math inline">\(\lambda_1\)</span> 、<span class="math inline">\(\lambda_2\)</span> 、<span class="math inline">\(\lambda_3\)</span> 。</p>
+<p>矩阵 <span class="math inline">\(\boldsymbol{A}\)</span> 的三个不变量记为 <span class="math inline">\(I_1\)</span> 、<span class="math inline">\(I_2\)</span> 、<span class="math inline">\(I_3\)</span> ：</p>
+<ol type="1">
+<li><p>第一不变量 <span class="math inline">\(I_1\)</span> <span class="math display">\[
+I_1=\lambda_1+\lambda_2+\lambda_3=\mathrm{tr}\boldsymbol{A}=a_{ii}
+\]</span></p></li>
+<li><p>第二不变量 <span class="math inline">\(I_2\)</span> <span class="math display">\[
+I_2=\lambda_1\lambda_2+\lambda_2\lambda_3+\lambda_3\lambda_1=\frac{1}{2}(\mathrm{tr}^2\boldsymbol{A}-\boldsymbol{A}:\boldsymbol{A}^\mathrm{T})=\frac{1}{2}(a_{ii}a_{jj}-a_{ij}a_{ji})
+\]</span></p></li>
+<li><p>第三不变量 <span class="math inline">\(I_3\)</span> <span class="math display">\[
 I_3=\lambda_1\lambda_2\lambda_3=\det\boldsymbol{A}=
 \begin{vmatrix}
-a_{11}&a_{12}&a_{13}\\
-a_{21}&a_{22}&a_{23}\\
-a_{31}&a_{32}&a_{33}
-\end{vmatrix} = \epsilon_{ijk}a_{i1}a_{j2}a_{k3}</script></li>
+a_{11}&amp;a_{12}&amp;a_{13}\\
+a_{21}&amp;a_{22}&amp;a_{23}\\
+a_{31}&amp;a_{32}&amp;a_{33}
+\end{vmatrix} = \epsilon_{ijk}a_{i1}a_{j2}a_{k3}
+\]</span></p></li>
 </ol>
 <blockquote>
-<p>无论 $a<em>{ij}=a</em>{ji}$ 或 $a<em>{ij}\neq a</em>{ji}$ ， $I_1$ 、$I_2$ 、$I_3$ 三个表达式均成立</p>
+<p>无论 <span class="math inline">\(a_{ij}=a_{ji}\)</span> 或 <span class="math inline">\(a_{ij}\neq a_{ji}\)</span> ， <span class="math inline">\(I_1\)</span> 、<span class="math inline">\(I_2\)</span> 、<span class="math inline">\(I_3\)</span> 三个表达式均成立</p>
 </blockquote>
-<h3 id="对称二阶张量"><a href="#对称二阶张量" class="headerlink" title="对称二阶张量"></a>对称二阶张量</h3><p>对称矩阵 $\boldsymbol{\sigma}<em>{3\times3}$ 的元素记为 $\sigma</em>{ij}$ （满足 $\sigma<em>{ij}=\sigma</em>{ji}$ ），其偏量记为 $\boldsymbol{s}=\boldsymbol{\sigma}-\mathrm{tr}(\boldsymbol{\sigma})\boldsymbol{I}/3$ ，偏量的三个特征值记为 $s_1$ 、$s_2$ 、$s_3$ 。</p>
-<p>偏量 $\boldsymbol{s}$ 的三个不变量记为 $J_1$ 、$J_2$ 、$J_3$ ：</p>
-<ol>
-<li><p>第一不变量 $J_1$ </p>
-<script type="math/tex; mode=display">
-J_1=s_1+s_2+s_3=\mathrm{tr}\boldsymbol{s}=s_{ii}=0</script></li>
-<li><p>第二不变量 $J_2$ </p>
-<script type="math/tex; mode=display">
+<h3 id="对称二阶张量">对称二阶张量</h3>
+<p>对称矩阵 <span class="math inline">\(\boldsymbol{\sigma}_{3\times3}\)</span> 的元素记为 <span class="math inline">\(\sigma_{ij}\)</span> （满足 <span class="math inline">\(\sigma_{ij}=\sigma_{ji}\)</span> ），其偏量记为 <span class="math inline">\(\boldsymbol{s}=\boldsymbol{\sigma}-\mathrm{tr}(\boldsymbol{\sigma})\boldsymbol{I}/3\)</span> ，偏量的三个特征值记为 <span class="math inline">\(s_1\)</span> 、<span class="math inline">\(s_2\)</span> 、<span class="math inline">\(s_3\)</span> 。</p>
+<p>偏量 <span class="math inline">\(\boldsymbol{s}\)</span> 的三个不变量记为 <span class="math inline">\(J_1\)</span> 、<span class="math inline">\(J_2\)</span> 、<span class="math inline">\(J_3\)</span> ：</p>
+<ol type="1">
+<li><p>第一不变量 <span class="math inline">\(J_1\)</span></p>
+<p><span class="math display">\[
+J_1=s_1+s_2+s_3=\mathrm{tr}\boldsymbol{s}=s_{ii}=0
+\]</span></p></li>
+<li><p>第二不变量 <span class="math inline">\(J_2\)</span></p>
+<p><span class="math display">\[
 \begin{aligned}
-J_2=s_1s_2+s_2s_3+s_3s_1=&-\frac{1}{2}\boldsymbol{s}:\boldsymbol{s}
+J_2=s_1s_2+s_2s_3+s_3s_1=&amp;-\frac{1}{2}\boldsymbol{s}:\boldsymbol{s}
 =-\frac{1}{2}s_{ij}s_{ij}\\[5pt]
-=&-\frac{1}{2}\bigg(\boldsymbol{\sigma}:\boldsymbol{\sigma}-\frac{1}{3}\mathrm{tr}^2\boldsymbol{\sigma}\bigg)=-\frac{1}{2}\bigg(\sigma_{ij}\sigma_{ij}-\frac{1}{3}\sigma_{ii}\sigma_{jj}\bigg)
-\end{aligned}</script><p>特别地，有</p>
-<script type="math/tex; mode=display">
-\sigma_\mathrm{eq}=\sqrt{\frac{3}{2}\boldsymbol{s}:\boldsymbol{s}}</script><blockquote>
-<p>应力乘 $3/2$，应变乘 $2/3$ </p>
-</blockquote>
-</li>
-<li><p>第三不变量 $J_3$ </p>
-<script type="math/tex; mode=display">
-J_3=s_1s_2s_3=\det\boldsymbol{s}</script></li>
+=&amp;-\frac{1}{2}\bigg(\boldsymbol{\sigma}:\boldsymbol{\sigma}-\frac{1}{3}\mathrm{tr}^2\boldsymbol{\sigma}\bigg)=-\frac{1}{2}\bigg(\sigma_{ij}\sigma_{ij}-\frac{1}{3}\sigma_{ii}\sigma_{jj}\bigg)
+\end{aligned}
+\]</span></p>
+<p>特别地，有 <span class="math display">\[
+\sigma_\mathrm{eq}=\sqrt{\frac{3}{2}\boldsymbol{s}:\boldsymbol{s}}
+\]</span></p>
+<blockquote>
+<p>应力乘 <span class="math inline">\(3/2\)</span>，应变乘 <span class="math inline">\(2/3\)</span></p>
+</blockquote></li>
+<li><p>第三不变量 <span class="math inline">\(J_3\)</span> <span class="math display">\[
+J_3=s_1s_2s_3=\det\boldsymbol{s}
+\]</span></p></li>
 </ol>
 
     </div>
@@ -316,8 +320,8 @@ J_3=s_1s_2s_3=\det\boldsymbol{s}</script></li>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/09/29/Report-Generator/" rel="prev" title="MATLAB Report Generator">
-      <i class="fa fa-chevron-left"></i> MATLAB Report Generator
+    <a href="/2020/09/29/arrow/" rel="prev" title="MATLAB 绘制标注箭头">
+      <i class="fa fa-chevron-left"></i> MATLAB 绘制标注箭头
     </a></div>
       <div class="post-nav-item">
     <a href="/2020/10/27/ellipse-enclosing01/" rel="next" title="点集的最小外包围椭圆01">

@@ -335,7 +335,7 @@
 
       
           <p>分享两个常用的绘图速查表：</p>
-<ol>
+<ol type="1">
 <li><a target="_blank" rel="noopener" href="https://github.com/Pjer-zhang/matlabPlotCheatsheet">MATLAB Plot Cheat Sheet</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/rougier/matplotlib-cheatsheet">Python Matplotlib Cheat Sheet</a></li>
 </ol>
@@ -425,7 +425,7 @@
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appdesigner</span><br></pre></td></tr></table></figure>
 <p>即可启动App designer。</p>
 <blockquote>
-<p>Mathworks在R2016a中正式推出了GUIDE的替代产品：AppDesigner，这是在MATLAB<br>图形系统转向使⽤⾯向对象系统之后(2014b)，⼀个重要的后续产品，它旨在顺应Web<br>的潮流, 帮助⽤户利⽤新的图形系统方便的设计更加美观的GUI。</p>
+<p>Mathworks在R2016a中正式推出了GUIDE的替代产品：AppDesigner，这是在MATLAB 图形系统转向使⽤⾯向对象系统之后(2014b)，⼀个重要的后续产品，它旨在顺应Web 的潮流, 帮助⽤户利⽤新的图形系统方便的设计更加美观的GUI。</p>
 <p>相关教程：<a target="_blank" rel="noopener" href="https://lifeinplaintextblog.wordpress.com/matlab-app-designer-tutorial-1/">MATLAB App Designer Tutorial</a>、<a target="_blank" rel="noopener" href="http://book.ucdrs.superlib.net/views/specific/2929/bookDetail.jsp?dxNumber=000016826183&amp;d=59632BB501052D41AEAAD8B5DEA67413&amp;fenlei=1817040307">《MATLAB面向对象编程 第2版》</a></p>
 </blockquote>
           <!--noindex-->
@@ -678,10 +678,10 @@
       
           <p>各向同性材料常数：</p>
 <ul>
-<li>拉梅常数：$\lambda~$、$\mu$</li>
-<li>体积模量：$K$</li>
-<li>杨氏模量：$E$</li>
-<li>泊松比：$\nu$</li>
+<li>拉梅常数：<span class="math inline">\(\lambda~\)</span>、<span class="math inline">\(\mu\)</span></li>
+<li>体积模量：<span class="math inline">\(K\)</span></li>
+<li>杨氏模量：<span class="math inline">\(E\)</span></li>
+<li>泊松比：<span class="math inline">\(\nu\)</span></li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -765,10 +765,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>如何计算曲线$~y(x)~$上的曲率，而曲线是由若干离散点构成。我的第一反应是根据离散点差分得到一阶导数$~y’~$和二阶导数$~y’’~$，然后由下式计算</p>
-<script type="math/tex; mode=display">
+          <h2 id="背景">背景</h2>
+<p>如何计算曲线<span class="math inline">\(~y(x)~\)</span>上的曲率，而曲线是由若干离散点构成。我的第一反应是根据离散点差分得到一阶导数<span class="math inline">\(~y&#39;~\)</span>和二阶导数<span class="math inline">\(~y&#39;&#39;~\)</span>，然后由下式计算 <span class="math display">\[
 \tag{0a}
-k=\frac{|y''|}{(1+y'^2)^{3/2}}</script><p>曲线的凹凸方向则由$~y’’~$的符号确定。</p>
+k=\frac{|y&#39;&#39;|}{(1+y&#39;^2)^{3/2}}
+\]</span></p>
+<p>曲线的凹凸方向则由<span class="math inline">\(~y&#39;&#39;~\)</span>的符号确定。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/03/05/points2circle/#more" rel="contents">
